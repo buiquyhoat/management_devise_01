@@ -1,0 +1,2 @@
+class ReturnDevice < ApplicationRecord
+end
