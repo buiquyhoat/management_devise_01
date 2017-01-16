@@ -1,0 +1,2 @@
+class DeviceGroup < ApplicationRecord
+end
