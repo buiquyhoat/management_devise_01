@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170116032401) do
+ActiveRecord::Schema.define(version: 20170117071344) do
 
   create_table "assignment_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "device_id", null: false
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20170116032401) do
   end
 
   create_table "departments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
     t.string   "description", limit: 4000
     t.integer  "manager_id"
     t.integer  "created_by"
@@ -59,9 +60,13 @@ ActiveRecord::Schema.define(version: 20170116032401) do
   end
 
   create_table "device_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string  "name",            limit: 100, null: false
-    t.string  "template_code",   limit: 100
-    t.integer "device_group_id",             null: false
+    t.string   "name",            limit: 100, null: false
+    t.string   "template_code",   limit: 100
+    t.integer  "created_by"
+    t.integer  "updated_by"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "device_group_id",             null: false
     t.index ["device_group_id"], name: "index_device_categories_on_device_group_id", using: :btree
   end
 
@@ -218,6 +223,8 @@ ActiveRecord::Schema.define(version: 20170116032401) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.integer  "department_id"
+    t.string   "remember_digest"
+    t.string   "avatar"
     t.index ["department_id"], name: "index_users_on_department_id", using: :btree
   end
 

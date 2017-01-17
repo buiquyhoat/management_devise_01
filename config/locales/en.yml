@@ -5,6 +5,7 @@ en:
     not_activated: "Account not activated. Check your email for the activation link."
     forgot_password: "Forgot password"
     require_logged: "Please log in."
+    max_image_size: "should be less than 5MB"
   session:
     invalid_user: "Account is not actived or not exits"
     invalid_login: "Invalid email/password combination"

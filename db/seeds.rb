@@ -1,11 +1,9 @@
 User.create!(first_name: "Example user",
   last_name: "admin",
-  email: "example@railstutorial.org",
+  email: "admin@framgia.com",
   address: "193 Nguyen Luong bang st",
-  password: "foobar",
-  password_confirmation: "foobar",
-  activated: true,
-  activated_at: Time.zone.now)
+  password: "framgia",
+  password_confirmation: "framgia")
 
 #Roles
 Role.create!(name: "admin",
