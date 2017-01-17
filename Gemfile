@@ -5,11 +5,14 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem "bcrypt", "3.1.11"
 gem "rails", "~> 5.0.1"
 gem "mysql2", ">= 0.3.18", "< 0.5"
 gem "puma", "~> 3.0"
 gem "sass-rails", "~> 5.0"
 gem "uglifier", ">= 1.3.0"
+gem "carrierwave", "0.11.2"
+gem "mini_magick", "4.5.1"
 gem "coffee-rails", "~> 4.2"
 gem "rubocop"
 gem "jquery-rails"
@@ -19,6 +22,7 @@ gem "will_paginate", "3.1.0"
 gem "bootstrap-will_paginate", "0.0.10"
 gem "bootstrap-sass", "3.3.6"
 gem "config"
+
 
 group :development, :test do
   gem "byebug", platform: :mri
