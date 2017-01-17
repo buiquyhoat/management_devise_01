@@ -1,6 +1,7 @@
 class CreateDepartments < ActiveRecord::Migration[5.0]
   def change
     create_table :departments do |t|
+      t.string  :name
       t.column :description, "Varchar(4000)"
       t.integer :manager_id
       t.integer :created_by
