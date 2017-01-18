@@ -19,8 +19,6 @@ module SessionsHelper
         log_in user
         @current_user = user
       end
-    else
-      redirect_to root_url
     end
   end
 

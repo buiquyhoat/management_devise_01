@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
 
-  def new; end
+  def new;end
 
   def create
     @user = User.find_by email: params[:session][:email].downcase
@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       log_in @user
       params[:session][:remember_me] == Settings.remember ? remember(@user) :
         forget(@user)
-      redirect_back_or @user
+      redirect_to root_url
     else
       flash.now[:danger] = t "session.invalid_login"
       render :new
