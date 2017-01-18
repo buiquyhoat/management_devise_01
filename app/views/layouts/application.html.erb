@@ -5,18 +5,28 @@
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag "application", media: "all",
       "data-turbolinks-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbolinks-track": "reload" %>
+    <%= javascript_include_tag "application",
+      "data-turbolinks-track": "reload" %>
     <%= render "layouts/shim" %>
   </head>
-  <body>
-    <%= render "layouts/header" %>
-    <div class="container">
-      <% flash.each do |message_type, message| %>
-        <%= content_tag :div, message, class: "alert alert-#{message_type}" %>
-      <% end %>
-      <%= yield %>
-      <%= render "layouts/footer" %>
-      <%=debug(params) if Rails.env.development? %>
+  <body class="nav-md">
+   <div class="container body col-lg-12">
+      <div class="main_container">
+        <div class="col-lg-3 left_col" >
+          <%= render "layouts/left_menu" %>
+        </div>
+        <%= render "layouts/header" %>
+        <div class="right_col col-lg-9">
+          <% flash.each do |message_type, message| %>
+            <%= content_tag :div, message,
+              class: "alert alert-#{message_type}" %>
+          <% end %>
+          <%= yield %>
+        </div>
+        <%= render "layouts/footer" %>
+      </div>
     </div>
   </body>
+ <!--   <%=debug(params) if Rails.env.development? %> -->
+
 </html>

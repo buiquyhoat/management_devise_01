@@ -15,5 +15,6 @@
 //= require jquery-ui
 //= require turbolinks
 //= require bootstrap
-//= require_tree
-//= Dialog
+//= require Dialog
+//= require dms
+//= require_tree .
