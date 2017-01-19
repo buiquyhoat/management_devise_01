@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :user_roles, dependent: :destroy
   attr_accessor :remember_token, :reset_token, :name
   before_save :downcase_email
-  before_create :create_another
+  after_initialize :create_another
   validates :first_name, presence: true,
     length: {maximum: Settings.max_length_name}
   validates :last_name, presence: true,

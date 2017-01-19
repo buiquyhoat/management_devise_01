@@ -5,7 +5,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   process resize_to_limit: [100, 100]
 
 
-  def default_url(*args)
+  def default_url(*)
     ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join("_"))
   end
 
