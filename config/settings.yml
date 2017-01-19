@@ -3,3 +3,18 @@ max_length_name: 128
 max_length_email: 255
 min_length_password: 6
 remember: "1"
+
+department:
+  division_1: 1
+  division_2: 2
+  division_3: 3
+  back_officer: 4
+  human_resource: 5
+  internal_comunicator: 6
+  education: 7
+
+device_status:
+  using: 1
+  available: 2
+  broken: 3
+all : "All"

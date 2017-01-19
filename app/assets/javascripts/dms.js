@@ -123,3 +123,7 @@ $(document).on('turbolinks:load', function() {
     }
   });
 })
+
+function changeSearchDataDevice(){
+  $('#form-submit').submit();
+}

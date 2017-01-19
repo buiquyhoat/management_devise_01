@@ -1,6 +1,7 @@
 en:
   title: "Devises manager system"
   dms_app_title: "Device Manage Systems"
+  button_update_text: "Update"
   user:
     not_activated: "Account not activated. Check your email for the activation link."
     forgot_password: "Forgot password"
@@ -53,3 +54,46 @@ en:
     general: "General"
   nav:
     user_profile: "Profile"
+    logout: "Log out"
+  device_manager:
+    title: "Device Manager"
+    new:
+      title: "Create New Device"
+    button_submit_text:
+      edit: "Update"
+      new: "Add New"
+      save_change: "Save changes"
+    button_close_text: "Close"
+    title_add_new: "Add New Device"
+    delete_action:
+      success: "Delete Device Sucess!"
+      fail: "Delete Device Failed!"
+    message_delete_confirm: "Do you want to delete %{device}"
+    message_device_not_exist: "Device not found"
+    field_label:
+      device_status: "Device Status"
+      device_category: "Device Categories"
+      invoice: "Invoice Number"
+      device_code: "Device Code"
+      production_name: "Production Name"
+      seria_number: "Seria Number"
+      device_category: "Device Category"
+      model: "Model Number"
+      device_status: "Device Status"
+      invoice_number: "Invoice Number"
+      createed_by: "Created By"
+    table:
+      header:
+        production: "Production"
+        model: "Model"
+        status: "Status"
+        category: "Category"
+        invoice_number: "Invoice Number"
+        action: "Action"
+    action_message:
+      create_fail: "Create Failed!"
+      update_success: "Update Success!"
+      update_fail: "Update Failed!"
+  errors:
+    first: "Errors:"
+
