@@ -16,15 +16,18 @@ device_status:
   using: 1
   available: 2
   broken: 3
+
+user_role:
+  admin: 1
+  manager: 2
+  staff: 3
+all : "All"
+
 request_status:
   waiting_approve: 1
   approved: 2
-  canceled: 3
+  cancelled: 3
   done: 4
-admin_role: 1
-manager_role: 2
-staff: 3
-all : "All"
 
 device_code:
   max_length: 4

@@ -33,12 +33,12 @@ class User < ApplicationRecord
   scope :manage_list_staffs, ->user do
     where "department_id= ? || id in (select u.id from users as u left join
       user_roles as ur on ur.user_id = u.id where ur.role_id = ?)",
-      user.department_id, UserRole.role_ids[:manager]
+      user.department_id, Settings.user_role.manager
   end
   scope :normal_list_staffs, ->user do
     where "department_id = ? && id in (select u.id from users as u left join
       user_roles as ur on ur.user_id = u.id where ur.role_id = ?)",
-      user.department_id, UserRole.role_ids[:manager]
+      user.department_id, Settings.user_role.manager
   end
 
   class << self
@@ -68,15 +68,15 @@ class User < ApplicationRecord
   end
 
   def is_admin?
-    user_role.any?{|ur| ur.role_id == UserRole.role_ids[:admin]}
+    user_role.any?{|ur| ur.role_id == Settings.user_role.admin}
   end
 
   def is_manager?
-    user_role.any?{|ur| ur.role_id == UserRole.role_ids[:manager]}
+    user_role.any?{|ur| ur.role_id == Settings.user_role.manager}
   end
 
   def is_staff?
-    is_manager? || user_role.any?{|ur| ur.role_id == UserRole.role_ids[:staff]}
+    is_manager? || user_role.any?{|ur| ur.role_id == Settings.user_role.staff}
   end
 
   private

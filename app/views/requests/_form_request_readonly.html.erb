@@ -10,19 +10,19 @@
 
   <div class="input-field col s6 disabled">
     <%= f.label t "request.table.request_type" %>
-    <%= f.collection_select :request_type_id, @request_types, :id, :name, {},
+    <%= f.collection_select :request_type_id, @support.request_types, :id, :name, {},
       {class: "form-control", disabled: "disabled"} %>
   </div>
 
   <div class="input-field col s6">
     <%= f.label t "request.table.request_status" %>
-    <%= f.collection_select :request_status_id, @request_statuses, :id, :name,
+    <%= f.collection_select :request_status_id, @support.request_statuses, :id, :name,
       {}, {class: "form-control", disabled: "disabled"} %>
   </div>
 
   <div class="input-field col s6">
     <%= f.label t "request.table.assignee" %>
-    <%= f.collection_select :assignee_id, @staffs, :id, :name, {},
+    <%= f.collection_select :assignee_id, @support.staffs, :id, :name, {},
       {class: "form-control", disabled: "disabled"} %>
   </div>
 

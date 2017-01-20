@@ -3,7 +3,6 @@ class Supports::User
   def initialize user
     @user = user
   end
-
   def created_by user_id
     all_users
     created = @all_users.find_by id: user_id
@@ -45,4 +44,40 @@ class Supports::User
   def derpartment_user department_id
     @derpartment_user ||= User.of_department department_id
   end
+  def staffs_search
+    @staffs_search ||= User.all
+  end
+
+  def request_statuses
+     @request_statuses ||= @user.is_manager? ? RequestStatus.all : RequestStatus.staff_request_status
+  end
+
+  def available_assign_staff
+    @user.is_admin? || @user.is_manager? ? User.manage_list_staffs(@user) : User.normal_list_staffs(@user)
+  end
+
+  def staffs
+    @staffs ||= available_assign_staff
+  end
+
+  def request_types
+    @request_types ||= RequestType.all
+  end
+
+  def device_categories
+    @device_categories ||= DeviceCategory.all
+  end
+
+  def request_statuses_search
+    @request_statuses_search ||= RequestStatus.all
+  end
+
+  def request_types_search
+    @request_types_search ||= RequestType.all
+  end
+
+  def device_categories_search
+    @device_categories_search ||= DeviceCategory.all
+  end
+
 end

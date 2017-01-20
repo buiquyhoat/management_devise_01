@@ -173,9 +173,6 @@ UserRole.create!(user_id: 9,
   role_id: 3,
   created_by: 1,
   updated_by: 1)
-  created_at: Time.zone.now,
-  updated_by: 1,
-  updated_at: Time.zone.now)
 
 #device group
 DeviceGroup.create!(name: "thiết bị máy tính",
@@ -605,7 +602,7 @@ DeviceStatus.create!(name: "broken",
   updated_by: 1)
 
 #Request Status
-RequestStatus.create!(name: "Waiting approve",
+RequestStatus.create!(name: "waiting approve",
   value: 1,
   created_by: 1,
   updated_by: 1)
@@ -613,7 +610,7 @@ RequestStatus.create!(name: "approved",
   value: 2,
   created_by: 1,
   updated_by: 1)
-RequestStatus.create!(name: "canceled",
+RequestStatus.create!(name: "cancelled",
   value: 3,
   created_by: 1,
   updated_by: 1)

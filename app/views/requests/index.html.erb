@@ -6,7 +6,7 @@
       <%= t "request_manager.search.relative_to" %>
     </div>
     <div class="col-lg-3 text-center">
-      <%= select_tag( :relative_id, options_for_select(@staffs
+      <%= select_tag( :relative_id, options_for_select(@support.staffs_search
         .collect{ |staff| [staff.name, staff.id]},
         params[:relative_id]), include_blank: Settings.all,
         class: "form-control", onChange: "changeSearchForm()") %>
@@ -15,7 +15,7 @@
       <%= t "request_manager.search.request_type" %>
     </div>
     <div class="col-lg-3 text-center">
-      <%= select_tag( :request_type_id, options_for_select(@request_types
+      <%= select_tag( :request_type_id, options_for_select(@support.request_types_search
         .collect{ |request_type| [request_type.name, request_type.id]},
         params[:request_type_id]), include_blank: Settings.all,
         class: "form-control", onChange: "changeSearchForm()") %>
@@ -24,7 +24,7 @@
       <%= t "request_manager.search.request_status" %>
     </div>
     <div class="col-lg-3 text-center">
-      <%= select_tag( :request_status_id, options_for_select(@request_statuses
+      <%= select_tag( :request_status_id, options_for_select(@support.request_statuses_search
         .collect{ |request_status| [request_status.name, request_status.id]},
         params[:request_status_id]), include_blank: Settings.all,
         class: "form-control", onChange: "changeSearchForm()") %>
