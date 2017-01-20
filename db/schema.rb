@@ -162,8 +162,8 @@ ActiveRecord::Schema.define(version: 20170117071344) do
 
   create_table "requests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "assignee_id",                    null: false
-    t.string   "title",             limit: 500
-    t.string   "description",       limit: 4000
+    t.string   "title",             limit: 500,  null: false
+    t.string   "description",       limit: 4000, null: false
     t.integer  "created_by"
     t.integer  "updated_by"
     t.datetime "created_at",                     null: false

@@ -1,12 +1,12 @@
 class User < ApplicationRecord
+  attr_accessor :remember_token, :reset_token, :name
+
   has_many :return_devices, dependent: :destroy
   has_many :assignments, dependent: :destroy
   has_many :devises, through: :assignments
   has_many :requests, dependent: :destroy
-  has_many :user_roles, dependent: :destroy
-  attr_accessor :remember_token, :reset_token, :name
-  before_save :downcase_email
-  after_initialize :create_another
+  has_many :user_role, dependent: :destroy
+
   validates :first_name, presence: true,
     length: {maximum: Settings.max_length_name}
   validates :last_name, presence: true,
@@ -20,10 +20,13 @@ class User < ApplicationRecord
   validates :password, presence: true,
     length: {minimum: Settings.min_length_password}
   mount_uploader :avatar, AvatarUploader
+
+  before_save :downcase_email
+  after_initialize :create_another
+
   class << self
     def digest string
-      cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-        BCrypt::Engine.cost
+      cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
       BCrypt::Password.create string, cost: cost
     end
 
@@ -46,7 +49,6 @@ class User < ApplicationRecord
     return false unless digest
     BCrypt::Password.new(digest).is_password? token
   end
-
 
   private
 

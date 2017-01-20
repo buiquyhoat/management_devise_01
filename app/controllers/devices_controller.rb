@@ -56,7 +56,7 @@ class DevicesController < ApplicationController
 
   def init_device
     @device = Device.find_by id: params[:id]
-    unless @device.present?
+    unless @device
       flash[:danger] = t "device_manager.message_device_not_exist"
       redirect_to devices_path
     end

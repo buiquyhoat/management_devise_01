@@ -15,6 +15,6 @@ class Supports::Device
   end
 
   def device_status
-     @device_status ||= @device.device_status_id
+    @device_status ||= @device.device_status_id
   end
 end

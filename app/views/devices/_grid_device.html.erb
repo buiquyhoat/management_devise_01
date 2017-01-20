@@ -13,7 +13,9 @@
       <tbody>
         <% @devices.each do |device| %>
           <tr>
-            <td><%= link_to device.production_name, device_path(device.id) %></td>
+            <td>
+              <%= link_to device.production_name, device_path(device) %>
+            </td>
             <td><%= device.model_number %></td>
             <td><%= device.device_status.name %></td>
             <td><%= device.device_category.name %></td>

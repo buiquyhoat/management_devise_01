@@ -16,14 +16,13 @@
           <%= render "layouts/left_menu" %>
         </div>
         <%= render "layouts/header" %>
-        <div class="right_col col-lg-9">
+        <div class="col-lg-9 right_col ">
           <% flash.each do |message_type, message| %>
             <%= content_tag :div, message,
               class: "alert alert-#{message_type}" %>
           <% end %>
           <%= yield %>
         </div>
-        <%= render "layouts/footer" %>
       </div>
     </div>
   </body>
