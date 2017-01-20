@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20170117071344) do
   end
 
   create_table "departments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "value"
     t.string   "name"
     t.string   "description", limit: 4000
     t.integer  "manager_id"

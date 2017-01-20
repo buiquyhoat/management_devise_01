@@ -55,12 +55,10 @@ class User < ApplicationRecord
   end
 
   def create_another
-    self.name = self.first_name + self.last_name
+    self.name = first_name + last_name
   end
 
   def avatar_size
-    if avatar.size >5.megabytes
-      errors.add :avatar, t("user.max_image_size")
-    end
+    errors.add :avatar, t("user.max_image_size") if avatar.size > 5.megabytes
   end
 end

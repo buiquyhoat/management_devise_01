@@ -5,6 +5,81 @@ User.create!(first_name: "Example user",
   password: "framgia",
   password_confirmation: "framgia")
 
+#departments
+Department.create!(name: "division 1",
+  value: 1,
+  description: "division 1",
+  manager_id: 1,
+  created_by: 1,
+  created_at: Time.zone.now,
+  updated_by: 1,
+  updated_at: Time.zone.now)
+
+Department.create!(name: "division 2",
+  value: 2,
+  description: "division 2",
+  manager_id: 1,
+  created_by: 1,
+  created_at: Time.zone.now,
+  updated_by: 1,
+  updated_at: Time.zone.now)
+Department.create!(name: "division 3",
+  value: 3,
+  description: "division 3",
+  manager_id: 1,
+  created_by: 1,
+  created_at: Time.zone.now,
+  updated_by: 1,
+  updated_at: Time.zone.now)
+Department.create!(name: "back Officer",
+  value: 4,
+  description: "back Officer",
+  manager_id: 1,
+  created_by: 1,
+  created_at: Time.zone.now,
+  updated_by: 1,
+  updated_at: Time.zone.now)
+Department.create!(name: "Human Resource",
+  value: 5,
+  description: "Human Resource",
+  manager_id: 1,
+  created_by: 1,
+  created_at: Time.zone.now,
+  updated_by: 1,
+  updated_at: Time.zone.now)
+Department.create!(name: "internal comunicator",
+  value: 6,
+  description: "internal comunicator",
+  manager_id: 1,
+  created_by: 1,
+  created_at: Time.zone.now,
+  updated_by: 1,
+  updated_at: Time.zone.now)
+Department.create!(name: "Education",
+  value: 7,
+  description: "Education",
+  manager_id: 1,
+  created_by: 1,
+  created_at: Time.zone.now,
+  updated_by: 1,
+  updated_at: Time.zone.now)
+
+User.create!(first_name: "Div",
+  last_name: "manager 3",
+  email: "div3_manager@framgia.com",
+  address: "Framgia",
+  password: "framgia",
+  password_confirmation: "framgia",
+  department_id: 3 )
+
+User.create!(first_name: "BO",
+  last_name: "manager",
+  email: "bo@framgia.com",
+  address: "Framgia",
+  password: "framgia",
+  password_confirmation: "framgia",
+  department_id: 4 )
+
 #Roles
 Role.create!(name: "admin",
   value: 1,
@@ -25,50 +100,7 @@ Role.create!(name: "Staff",
   updated_by: 1,
   updated_at: Time.zone.now)
 
-#departments
-Department.create!(name: "division 1",
-  description: "division 1",
-  manager_id: 1,
-  created_by: 1,
-  created_at: Time.zone.now,
-  updated_by: 1,
-  updated_at: Time.zone.now)
 
-Department.create!(name: "division 2",
-  description: "division 2",
-  manager_id: 1,
-  created_by: 1,
-  created_at: Time.zone.now,
-  updated_by: 1,
-  updated_at: Time.zone.now)
-Department.create!(name: "division 3",
-  description: "division 3",
-  manager_id: 1,
-  created_by: 1,
-  created_at: Time.zone.now,
-  updated_by: 1,
-  updated_at: Time.zone.now)
-Department.create!(name: "back Officer",
-  description: "back Officer",
-  manager_id: 1,
-  created_by: 1,
-  created_at: Time.zone.now,
-  updated_by: 1,
-  updated_at: Time.zone.now)
-Department.create!(name: "Human Resource",
-  description: "Human Resource",
-  manager_id: 1,
-  created_by: 1,
-  created_at: Time.zone.now,
-  updated_by: 1,
-  updated_at: Time.zone.now)
-Department.create!(name: "internal comunicator",
-  description: "internal comunicator",
-  manager_id: 1,
-  created_by: 1,
-  created_at: Time.zone.now,
-  updated_by: 1,
-  updated_at: Time.zone.now)
 
 UserRole.create!(user_id: 1,
   role_id: 1,
