@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170117071344) do
+ActiveRecord::Schema.define(version: 20170121024025) do
 
   create_table "assignment_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "device_id", null: false
@@ -139,6 +139,7 @@ ActiveRecord::Schema.define(version: 20170117071344) do
     t.string  "description",        limit: 4000
     t.integer "request_id",                      null: false
     t.integer "device_category_id",              null: false
+    t.integer "number"
     t.index ["device_category_id"], name: "index_request_details_on_device_category_id", using: :btree
     t.index ["request_id"], name: "index_request_details_on_request_id", using: :btree
   end

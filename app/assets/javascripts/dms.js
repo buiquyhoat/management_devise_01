@@ -125,5 +125,5 @@ $(document).on('turbolinks:load', function() {
 })
 
 function changeSearchForm(){
-    $('#form-submit').submit();
-}
+  $('#form-submit').submit();
+};

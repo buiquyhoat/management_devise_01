@@ -4,14 +4,16 @@ class Request < ApplicationRecord
   belongs_to :request_type
   belongs_to :request_status
   belongs_to :assignee, class_name: User.name
-  has_many :request_details, dependent: :destroy
+  has_many :request_details, dependent: :destroy, inverse_of: :request
   has_many :devices, through: :request_details
 
   validates :title, :description, presence: true
 
+  accepts_nested_attributes_for :request_details,
+    reject_if: proc{|attributes| attributes[:description].blank?}
+
   after_initialize :create_extend_data
 
-  default_scope ->{order created_at: :desc}
   scope :find_by_actor, ->(user_id) do
     where "id in (select r.id from requests as r
     where r.assignee_id = ? or r.created_by = ? or r.updated_by= ?)", user_id,

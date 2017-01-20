@@ -1,6 +1,6 @@
 en:
-  title: "Devises manager system"
-  dms_app_title: "Device Manage Systems"
+  title: "Devices manager system"
+  dms_app_title: "Devices Manage System"
   button_update_text: "Update"
   user:
     not_activated: "Account not activated. Check your email for the activation link."
@@ -109,6 +109,15 @@ en:
       assignee: "Assign to"
       created_by": "Create By"
       updated_by: "Updated By"
+    add_request_detail: "Add Request Detail"
+    confirm: "This data will be delete now! Are you sure?"
+  request_detail:
+    description: "Description"
+    device_category: "Device Category"
+    number: "Number"
+    cant_delete: "Cant destroy request detail"
+    delete_success: "Delete success"
+    not_exist: "Request details is not exists"
   action_message:
     create_success: "Create Success!"
     create_fail: "Create Failed!"

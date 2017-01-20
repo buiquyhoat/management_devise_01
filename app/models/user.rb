@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   attr_accessor :remember_token, :reset_token, :name
 
+  belongs_to :department, optional: true
+
   has_many :return_devices, dependent: :destroy
   has_many :assignments, dependent: :destroy
   has_many :devises, through: :assignments
@@ -23,6 +25,17 @@ class User < ApplicationRecord
 
   before_save :downcase_email
   after_initialize :create_another
+
+  scope :manage_list_staffs, ->user do
+    where "department_id= ? || id in (select u.id from users as u left join
+      user_roles as ur on ur.user_id = u.id where ur.role_id = ?)",
+      user.department_id, UserRole.role_ids[:manager]
+  end
+  scope :normal_list_staffs, ->user do
+    where "department_id = ? && id in (select u.id from users as u left join
+      user_roles as ur on ur.user_id = u.id where ur.role_id = ?)",
+      user.department_id, UserRole.role_ids[:manager]
+  end
 
   class << self
     def digest string
@@ -48,6 +61,18 @@ class User < ApplicationRecord
     digest = send "#{attribute}_digest"
     return false unless digest
     BCrypt::Password.new(digest).is_password? token
+  end
+
+  def is_admin?
+    user_role.any?{|ur| ur.role_id == UserRole.role_ids[:admin]}
+  end
+
+  def is_manager?
+    user_role.any?{|ur| ur.role_id == UserRole.role_ids[:manager]}
+  end
+
+  def is_staff?
+    is_manager? || user_role.any?{|ur| ur.role_id == UserRole.role_ids[:staff]}
   end
 
   private
