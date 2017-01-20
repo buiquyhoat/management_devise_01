@@ -1,9 +1,10 @@
 class Device < ApplicationRecord
-  has_many :return_device_details, dependent: :destroy
-  has_many :assignment_details, dependent: :destroy
   belongs_to :device_category
   belongs_to :invoice
   belongs_to :device_status
+  has_many :return_device_details, dependent: :destroy
+  has_many :assignment_details, dependent: :destroy
+
   validates :device_code, :production_name, :model_number, :serial_number, presence: true
 
   default_scope ->{order created_at: :desc}

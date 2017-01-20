@@ -108,6 +108,30 @@ UserRole.create!(user_id: 1,
   created_at: Time.zone.now,
   updated_by: 1,
   updated_at: Time.zone.now)
+UserRole.create!(user_id: 2,
+  role_id: 2,
+  created_by: 1,
+  created_at: Time.zone.now,
+  updated_by: 1,
+  updated_at: Time.zone.now)
+UserRole.create!(user_id: 2,
+  role_id: 3,
+  created_by: 1,
+  created_at: Time.zone.now,
+  updated_by: 1,
+  updated_at: Time.zone.now)
+UserRole.create!(user_id: 3,
+  role_id: 2,
+  created_by: 1,
+  created_at: Time.zone.now,
+  updated_by: 1,
+  updated_at: Time.zone.now)
+UserRole.create!(user_id: 3,
+  role_id: 3,
+  created_by: 1,
+  created_at: Time.zone.now,
+  updated_by: 1,
+  updated_at: Time.zone.now)
 #device group
 DeviceGroup.create!(name: "thiết bị máy tính",
   description: "thiết bị máy tính",

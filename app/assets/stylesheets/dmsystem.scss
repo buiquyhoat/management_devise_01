@@ -1,11 +1,20 @@
 .container {
-  padding: 0px
+  padding: 0px;
+  background: #F7F7F7;
 }
 body {
   font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
     font-size: 13px;
-
+  .container.body .right_col {
+    background: #F7F7F7;
+  }
 }
+footer {
+  background: #EDEDED;
+  border-bottom: 1px solid #D9DEE4;
+  padding: 15px 20px;
+  margin-left: 230px;
+  display: block; }
 .nav_menu {
   float: left;
   background: #EDEDED;
@@ -332,3 +341,13 @@ a.user-profile {
   color: rgba(255, 255, 255, 0.75);
   font-size: 12px;
   padding: 9px; }
+
+.pagination {
+  float: right;
+}
+.content {
+  padding: 10px;
+  .btn.btn-primary {
+    margin-left: 10px;
+  }
+}

@@ -35,6 +35,9 @@ en:
       remember_account: "Remember me on this computer"
     full_screen: "Full Screen"
     lock: "Lock"
+  about:
+    title: "About"
+    framgia: "We make it anwsome"
   menu:
     hone: "Home"
     admin: "Admin"
@@ -96,4 +99,31 @@ en:
       update_fail: "Update Failed!"
   errors:
     first: "Errors:"
+  request:
+    title: "Manager Requests"
+    table:
+      title: "Title"
+      description: "Description"
+      request_type: "Request Type"
+      request_status: "Request Status"
+      assignee: "Assign to"
+      created_by": "Create By"
+      updated_by: "Updated By"
+  action_message:
+    create_success: "Create Success!"
+    create_fail: "Create Failed!"
+    update_success: "Update Success!"
+    update_fail: "Update Failed!"
+  action:
+    close: "Close"
+    edit: "Update"
+    save: "Save Changes"
+    new: "Add New"
+  request_manager:
+    title_add_new: "Add New Request"
+    not_exist: "Request is not exists"
+    search:
+      relative_to: "Relative To"
+      request_type: "Request Type"
+      request_status: "Request Status"
 

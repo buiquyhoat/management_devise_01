@@ -3,7 +3,6 @@ max_length_name: 128
 max_length_email: 255
 min_length_password: 6
 remember: "1"
-
 department:
   division_1: 1
   division_2: 2
@@ -17,4 +16,7 @@ device_status:
   using: 1
   available: 2
   broken: 3
+admin_role: 1
+manager_role: 2
+staff: 3
 all : "All"

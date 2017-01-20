@@ -124,6 +124,6 @@ $(document).on('turbolinks:load', function() {
   });
 })
 
-function changeSearchDataDevice(){
-  $('#form-submit').submit();
+function changeSearchForm(){
+    $('#form-submit').submit();
 }
