@@ -6,6 +6,7 @@ class Device < ApplicationRecord
   has_many :assignment_details, dependent: :destroy
 
   validates :device_code, :production_name, :model_number, :serial_number, presence: true
+  validates :device_code, uniqueness: {case_sensitive: false}
 
   default_scope ->{order created_at: :desc}
   scope :find_assigne_device, ->(user_id){where "id in (select d.id from
@@ -21,4 +22,7 @@ class Device < ApplicationRecord
   scope :of_invoice, ->invoice_id do
     where invoice_id: invoice_id if invoice_id.present?
   end
+
+  scope :can_assign, -> {where device_status_id: Settings.device_status.available}
+
 end

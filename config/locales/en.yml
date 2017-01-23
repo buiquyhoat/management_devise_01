@@ -123,6 +123,8 @@ en:
     create_fail: "Create Failed!"
     update_success: "Update Success!"
     update_fail: "Update Failed!"
+    result_not_match: "No results matched"
+    assignment_details_total_error: "Error: 1"
   action:
     close: "Close"
     edit: "Update"
@@ -135,4 +137,26 @@ en:
       relative_to: "Relative To"
       request_type: "Request Type"
       request_status: "Request Status"
-
+  assignment:
+    label:
+      request_title: "Request Title"
+      process_by: "Process By"
+      assignee: "Staff"
+      description: "Description"
+      request: "Request"
+      add_new_device: "Add New Device"
+      edit_assign_device: "Edit Assign Device"
+      create_ticket_by: "Created Ticket By"
+      staff_name: "Staff Name"
+      created_by: "Created By"
+      created_date: "Created Date"
+      action: "Action Date"
+    table:
+      column_header:
+        device_category: "Device Category"
+        device: "Device"
+        group_device: "Group Device"
+    message:
+      device_duplicate: "Assignment details device must exist"
+      assignee_not_exist: "Assignment ticket not exist"
+      assignment_detail_duplicate: "Assignment Details Is Duplicate"

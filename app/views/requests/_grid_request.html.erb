@@ -26,6 +26,11 @@
             <%= link_to "",  edit_request_path(request), remote: true,
               class: "glyphicon glyphicon-pencil",
               data: {toggle: "modal", target: "#dms-popup"} %>
+            <% if request.request_status_id == Settings.request_status.approved %>
+              <%= link_to "",  new_assignment_path(request_id: request.id), remote: true,
+              class: "glyphicon glyphicon-plus",
+              data: {toggle: "modal", target: "#dms-popup"} %>
+            <% end %>
           </td>
         </tr>
       <% end %>

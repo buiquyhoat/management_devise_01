@@ -1,3 +1,4 @@
 $('.modal-body').html('<%= j render "devices/form_device" %>')
 $('#header').text('<%= t "device_manager.new.title" %>')
-$('#device_device_code').focus()
+set_up_chosen();
+$('.device-category').change();

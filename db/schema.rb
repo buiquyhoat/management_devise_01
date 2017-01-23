@@ -10,10 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170121024025) do
+ActiveRecord::Schema.define(version: 20170122070755) do
 
   create_table "assignment_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "device_id", null: false
+    t.integer "device_id",     null: false
+    t.integer "assignment_id"
+    t.index ["assignment_id"], name: "index_assignment_details_on_assignment_id", using: :btree
+    t.index ["device_id", "assignment_id"], name: "index_assignment_details_on_device_id_and_assignment_id", unique: true, using: :btree
     t.index ["device_id"], name: "index_assignment_details_on_device_id", using: :btree
   end
 
@@ -163,8 +166,8 @@ ActiveRecord::Schema.define(version: 20170121024025) do
 
   create_table "requests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "assignee_id",                    null: false
-    t.string   "title",             limit: 500,  null: false
-    t.string   "description",       limit: 4000, null: false
+    t.string   "title",             limit: 500
+    t.string   "description",       limit: 4000
     t.integer  "created_by"
     t.integer  "updated_by"
     t.datetime "created_at",                     null: false
@@ -230,6 +233,7 @@ ActiveRecord::Schema.define(version: 20170121024025) do
     t.index ["department_id"], name: "index_users_on_department_id", using: :btree
   end
 
+  add_foreign_key "assignment_details", "assignments"
   add_foreign_key "assignment_details", "devices"
   add_foreign_key "assignments", "requests"
   add_foreign_key "assignments", "users", column: "assignee_id"

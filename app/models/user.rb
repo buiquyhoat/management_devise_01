@@ -9,6 +9,10 @@ class User < ApplicationRecord
   has_many :requests, dependent: :destroy
   has_many :user_role, dependent: :destroy
 
+  scope :of_department, ->department_id do
+    where department_id: department_id if department_id.present?
+  end
+
   validates :first_name, presence: true,
     length: {maximum: Settings.max_length_name}
   validates :last_name, presence: true,

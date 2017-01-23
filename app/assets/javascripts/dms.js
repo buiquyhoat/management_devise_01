@@ -1,3 +1,4 @@
+
 (function($,sr){
   // debouncing function from John Hann
   // http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
@@ -114,6 +115,7 @@ $(document).on('turbolinks:load', function() {
 });
 
 $(document).on('turbolinks:load', function() {
+  set_up_chosen();
   $('#show_form_login').on('click',function(){
     if($('#form_login').css('display') === 'block'){
       $('#form_login').slideUp();
@@ -127,3 +129,95 @@ $(document).on('turbolinks:load', function() {
 function changeSearchForm(){
   $('#form-submit').submit();
 };
+
+function groupChange(url, source_dropdow_id, target_dropdow_id) {
+  var source_id = $('#'+source_dropdow_id).val()
+  $.ajax({
+    url: url + '?id=' + source_id,
+    type: 'get',
+    dataType: 'json',
+    success: function(data) {
+      var options = $('#' + target_dropdow_id);
+      $(options).html('')
+      $.each(data, function () {
+        options.append($('<option />').val(this.id).text(this.name));
+      });
+      options.trigger('chosen:updated');
+      options.change()
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      alert(thrownError);
+    }
+  });
+}
+
+function set_up_chosen(){
+  $('.chosen-select').chosen({
+    allow_single_deselect: true,
+    no_results_text: I18n.t("action_message.result_not_match"),
+    width: '100%'
+  });
+}
+
+function assignmentDropChange(url, source, class_target){
+  var idDropSource = $(source).attr('id')
+  var idTarget = $(source).closest('tr').find('.'+ class_target).attr('id')
+  if (idDropSource !== undefined && idTarget !== undefined) {
+     groupChange(url,idDropSource,idTarget);
+  }
+}
+
+function removeAssignmentDevice(button){
+  $(button).closest('tr').remove();
+  resetIndexAssignmentDetail();
+}
+
+function resetIndexAssignmentDetail(){
+  $('#tbl-assignment-detail tbody tr').each(function(index) {
+    var groupCategoryDropdown = $(this).find('.device-group')
+    var deviceCategoryDropdown = $(this).find('.device-caterory')
+    var devideDropdown = $(this).find('.device')
+
+    $(groupCategoryDropdown).attr('id', 'group_id_' + index)
+    $(deviceCategoryDropdown).attr('id', 'device_category_id_' + index)
+    $(devideDropdown).attr('id', 'device_id_' + index)
+
+    $(devideDropdown).attr('name', 'assignment[assignment_details_attributes][' + index + '][device_id]')
+  });
+}
+
+function submitForm(){
+  var isValid = true
+  $('.device').each(function(index) {
+    var deviceId = $(this).val()
+    if (deviceId === null || deviceId === undefined) {
+      isValid = false;
+    }
+  });
+
+  if (isValid) {
+    $('#new_assignment').submit();
+  }
+  else {
+    $('#error').html('')
+    $('#error').append('<div id="error_explanation">' +
+      '<div class="alert alert-danger">' + I18n.t("action_message.assignment_details_total_error") + ' </div>' +
+      '<ul><li>' + I18n.t("assignment.message.device_duplicate") + '</li></ul>' +
+      '</div>')
+  }
+};
+
+function getDeviceCode(url) {
+  var device_category_id =  $('.device-category').val()
+  $.ajax({
+    url: url + '?device_category_id=' + device_category_id,
+    type:'get',
+    dataType: 'json',
+    success: function(data) {
+      $('.device-code').val(data.device_code)
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      alert(thrownError);
+    }
+  });
+}

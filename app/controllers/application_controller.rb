@@ -11,4 +11,17 @@ class ApplicationController < ActionController::Base
       redirect_to login_url
     end
   end
+
+  def set_created_by object
+    object.created_by = current_user.id
+    object.updated_by = current_user.id
+  end
+
+  def set_updated_by object
+    object.updated_by = current_user.id
+  end
+
+  def is_number? string
+    true if Float(string) rescue false
+  end
 end

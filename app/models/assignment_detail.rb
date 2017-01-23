@@ -1,4 +1,6 @@
 class AssignmentDetail < ApplicationRecord
-  belongs_to :assignments
-  belongs_to :devices
+  attr_accessor :device_category_id, :device_category_group_id
+
+  belongs_to :assignment, inverse_of: :assignment_details
+  belongs_to :device
 end
