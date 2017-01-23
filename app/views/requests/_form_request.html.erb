@@ -9,7 +9,7 @@
     </div>
     <div class="input-field col s6">
       <%= f.label :description %>
-      <%= f.text_field :description, class: "form-control" %>
+      <%= f.text_area :description, class: "form-control" %>
     </div>
 
     <div class="input-field col s6">
@@ -29,6 +29,42 @@
       <%= f.collection_select :assignee_id, @staffs, :id, :name, {},
         {class: "form-control"} %>
     </div>
+
+    <div class="row" style="padding-left: 3%">
+      <%= link_to t("request.add_request_detail"),
+        requests_add_request_detail_path,
+        class: "btn btn-primary", remote: true %>
+    </div>
+
+    <input id="request_details" name="request_details" type="hidden" />
+
+    <table id="tbl_request_details" class="table table-hover">
+      <thead>
+        <tr>
+          <th><%= t "request_detail.description" %></th>
+          <th><%= t "request_detail.device_category" %></th>
+          <th><%= t "request_detail.number" %></th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+         <%= f.fields_for :request_details do |request_detail| %>
+          <tr>
+            <td> <%= request_detail.text_area :description, class: "form-control" %> </td>
+            <td> <%= request_detail.collection_select :device_category_id, @device_categories, :id, :name, {},
+              {class: "form-control"} %>
+            </td>
+            <td><%= request_detail.text_field :number, class: "form-control" %></td>
+            <td>
+              <a class="glyphicon glyphicon-remove padding-top-component"
+                onclick="remove_request_detail(this, 'tbl_request_details', 'request','request_detail')">
+              </a>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
     <div class="modal-footer">
       <button type="button" class="btn btn-default" data-dismiss="modal">

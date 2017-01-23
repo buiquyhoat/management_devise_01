@@ -1,9 +1,7 @@
 class RequestsController < ApplicationController
-  before_action :init_request, except: [:index, :new, :create]
+  before_action :init_request, only: [:edit, :update, :show]
   before_action :init_dropdown, except: [:destroy, :update, :create]
   before_action :logged_in_user
-  before_action :update_before_save, only: [:update, :create]
-
   def index
     get_requests
   end
@@ -16,8 +14,9 @@ class RequestsController < ApplicationController
   end
 
   def create
-    update_before_save
+    @request = Request.new request_params
     respond_to do |format|
+      update_before_save
       if @request.save
         flash[:success] = t "action_message.create_success"
       else
@@ -35,6 +34,7 @@ class RequestsController < ApplicationController
   end
 
   def update
+    update_before_save
     @request.update_attributes request_params
     respond_to do |format|
       format.js
@@ -54,21 +54,26 @@ class RequestsController < ApplicationController
     end
   end
 
+  def add_request_detail
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def destroy; end
 
   private
 
   def update_before_save
     @request = Request.new request_params unless @request
-    unless @request.id
-      @request.created_by = current_user.id
-    end
+    @request.created_by = current_user.id unless @request.id
     @request.updated_by = current_user.id
   end
 
   def request_params
     params.require(:request).permit :title, :description, :request_type_id,
-      :request_status_id, :assignee_id
+      :request_status_id, :assignee_id, request_details_attributes: [:id,
+        :description, :device_category_id, :number]
   end
 
   def get_requests
@@ -81,7 +86,12 @@ class RequestsController < ApplicationController
   def init_dropdown
     @request_statuses = RequestStatus.all
     @request_types = RequestType.all
-    @staffs = User.all
+    @device_categories = DeviceCategory.all
+    @staffs = available_assign_staff
+  end
+
+  def available_assign_staff
+    current_user.is_admin? || current_user.is_manager? ? User.manage_list_staffs(current_user) : User.normal_list_staffs(current_user)
   end
 
   def init_request

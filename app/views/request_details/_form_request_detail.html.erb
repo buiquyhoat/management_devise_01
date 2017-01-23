@@ -1,0 +1,17 @@
+<tr>
+  <td><%= text_area :request_detail, :description,
+    class: "form-control request_detail_description" %></td>
+  <td>
+    <%= select_tag("", options_for_select(@device_categories
+      .collect{|category| [category.name, category.id]}),
+      include_blank: Settings.all, class: "form-control chosen-select device-caterory") %>
+  </td>
+  <td>
+    <%= text_field :request_detail, :number, class: "form-control request_detail_number" %>
+  </td>
+  <td>
+     <a class="glyphicon glyphicon-remove padding-top-component"
+      onclick="remove_request_detail(this, 'tbl_request_details', 'request','request_detail')">
+     </a>
+  </td>
+</tr>

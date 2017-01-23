@@ -15,4 +15,9 @@
 //= require turbolinks
 //= require bootstrap
 //= require dms
+//= require request
+//= require i18n
+//= require i18n/translations
 //= require_tree .
+I18n.defaultLocale = <%= I18n.default_locale %>;
+I18n.locale = <%= I18n.locale %>;
