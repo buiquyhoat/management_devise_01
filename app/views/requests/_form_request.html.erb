@@ -55,7 +55,7 @@
             <td> <%= request_detail.collection_select :device_category_id, @support.device_categories, :id, :name, {},
               {class: "form-control"} %>
             </td>
-            <td><%= request_detail.text_field :number, class: "form-control" %></td>
+            <td><%= request_detail.text_field :number, {class: "form-control", type: "number"} %></td>
             <td>
               <a class="glyphicon glyphicon-remove padding-top-component"
                 onclick="remove_request_detail(this, 'tbl_request_details', 'request','request_detail')">

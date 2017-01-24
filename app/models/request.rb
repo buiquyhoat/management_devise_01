@@ -19,9 +19,11 @@ class Request < ApplicationRecord
     where r.assignee_id = ? or r.created_by = ? or r.updated_by= ?)", user_id,
     user_id, user_id if user_id.present?
   end
+
   scope :of_request_type, ->request_type_id do
     where request_type_id: request_type_id if request_type_id.present?
   end
+
   scope :of_request_status, ->request_status_id do
     where request_status_id: request_status_id if request_status_id.present?
   end

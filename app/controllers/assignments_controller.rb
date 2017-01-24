@@ -10,9 +10,13 @@ class AssignmentsController < ApplicationController
 
   def new
     @asignment = Assignment.new request_id: @request.id
-    @request.request_details.each do |detail|
-      @asignment.assignment_details.build device_category_id: detail.device_category.id,
-        device_category_group_id: detail.device_category.device_group.id
+    @request.request_details.includes(:device_category).each do |detail|
+      if detail.number.present? && detail.number > 0
+        for i in 1..detail.number
+          @asignment.assignment_details.build device_category_id: detail.device_category.id,
+          device_category_group_id: detail.device_category.device_group.id
+        end
+      end
     end
     respond_to do |format|
       format.js

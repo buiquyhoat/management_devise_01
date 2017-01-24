@@ -21,7 +21,7 @@ class Assignment < ApplicationRecord
     assignment_details.each do |detail|
       devices = assignment_details.select{|device| device.device_id == detail.device_id}
       if devices.present? && devices.count > 1
-        errors[:base] << t("assignment.message.assignment_detail_duplicate")
+        errors[:base] << i18n.t("assignment.message.assignment_detail_duplicate")
         return true
       end
     end
@@ -39,7 +39,7 @@ class Assignment < ApplicationRecord
     assignment_details.each do |detail|
       detail.device.device_status_id = Settings.device_status.using
       unless detail.device.save
-        flash[:danger] = t "action_message.update_fail"
+        flash[:danger] = i18n.t("action_message.update_fail")
         break
       end
     end
