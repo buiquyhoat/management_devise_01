@@ -14,16 +14,16 @@
   <div class="input-field col s6">
     <%= f.label t "device_manager.field_label.device_category" %>
     <%= f.collection_select :device_category_id, @device_categories, :id, :name,
-      {}, {class: "form-control"} %>
+      {}, {class: "chosen-select form-control device-category", onchange: "getDeviceCode('" + device_code_show_path + "')"} %>
   </div>
   <div class="input-field col s6">
     <%= f.label t "device_manager.field_label.invoice" %>
     <%= f.collection_select :invoice_id, @device_invoices, :id, :invoice_number,
-      {}, {class: "form-control"} %>
+      {}, {class: "chosen-select form-control"} %>
   </div>
   <div class="input-field col s6">
     <%= f.label :device_code %>
-    <%= f.text_field :device_code, class: "form-control" %>
+    <%= f.text_field :device_code, class: "form-control device-code" %>
   </div>
   <div class="input-field col s6">
     <%= f.label :production_name %>

@@ -1,3 +1,4 @@
+
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
@@ -15,9 +16,9 @@
 //= require turbolinks
 //= require bootstrap
 //= require dms
-//= require request
+//= require chosen-jquery
 //= require i18n
 //= require i18n/translations
 //= require_tree .
-I18n.defaultLocale = <%= I18n.default_locale %>;
-I18n.locale = <%= I18n.locale %>;
+I18n.defaultLocale = I18n.default_locale ;
+I18n.locale = I18n.locale;

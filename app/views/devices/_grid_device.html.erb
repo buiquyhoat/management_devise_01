@@ -23,7 +23,7 @@
             <td>
               <%= link_to "",  edit_device_path(device), remote: true,
                 class: "glyphicon glyphicon-pencil",
-                data: { toggle: "modal", target: "#dms-popup" } %>
+                data: { toggle: "modal", target: "#dms-popup", backdrop: "static" } %>
               <%= unless device.device_status_id == Settings.device_status.using
                 link_to "", device , method: :delete, remote: true,
                   data: {confirm: t("device_manager.message_delete_confirm",

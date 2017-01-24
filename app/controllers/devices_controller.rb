@@ -22,11 +22,9 @@ class DevicesController < ApplicationController
     set_created_by @device
     save_success = @device.save
     respond_to do |format|
+    format.js
       if save_success
         get_devices
-        format.js
-      else
-        format.js render "error"
       end
     end
   end
@@ -60,7 +58,7 @@ class DevicesController < ApplicationController
       flash[:danger] = t "device_manager.message_device_not_exist"
       redirect_to devices_path
     end
-    @support = Supports::Device.new @device
+    @support = Supports::User.new current_user
   end
 
   def init_dropdown

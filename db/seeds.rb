@@ -104,6 +104,13 @@ User.create!(first_name: "Staff 3",
   password: "framgia",
   password_confirmation: "framgia",
   department_id: 1 )
+User.create!(first_name: "Div3",
+  last_name: " staff",
+  email: "staff3_div3@framgia.com",
+  address: "Framgia",
+  password: "framgia",
+  password_confirmation: "framgia",
+  department_id: 3 )
 
 #Roles
 Role.create!(name: "admin",
@@ -111,11 +118,11 @@ Role.create!(name: "admin",
   created_by: 1,
   updated_by: 1)
 Role.create!(name: "manager",
-  value: 1,
+  value: 2,
   created_by: 1,
   updated_by: 1)
 Role.create!(name: "Staff",
-  value: 1,
+  value: 3,
   created_by: 1,
   updated_by: 1)
 
@@ -123,7 +130,6 @@ UserRole.create!(user_id: 1,
   role_id: 1,
   created_by: 1,
   updated_by: 1)
-
 
 UserRole.create!(user_id: 1,
   role_id: 1,
@@ -163,10 +169,13 @@ UserRole.create!(user_id: 8,
   created_by: 1,
   updated_by: 1)
 
-UserRole.create!(user_id: 4,
+UserRole.create!(user_id: 9,
   role_id: 3,
   created_by: 1,
   updated_by: 1)
+  created_at: Time.zone.now,
+  updated_by: 1,
+  updated_at: Time.zone.now)
 
 #device group
 DeviceGroup.create!(name: "thiết bị máy tính",
@@ -622,4 +631,12 @@ RequestType.create!(name: "Return",
   updated_by: 1)
 RequestType.create!(name: "borrow",
   created_by: 1,
-  updated_by: 1)
+  created_at: Time.zone.now,
+  updated_by: 1,
+  updated_at: Time.zone.now)
+
+Invoice.create!(invoice_number: "invoice1",
+  created_by: 1,
+  created_at: Time.zone.now,
+  updated_by: 1,
+  updated_at: Time.zone.now)
