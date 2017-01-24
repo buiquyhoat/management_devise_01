@@ -26,6 +26,10 @@ class Request < ApplicationRecord
     where request_status_id: request_status_id if request_status_id.present?
   end
 
+  def allow_edit? user
+    user.id == created_by || user.id == updated_by || user.id == assignee_id
+  end
+
   private
 
   def create_extend_data

@@ -13,19 +13,21 @@
     </thead>
     <tbody>
       <% @requests.each do |request| %>
-        <tr>
+        <tr class="<%= generate_tag_color request %>" >
           <td><%= link_to request.title, request_path(request.id), remote: true,
             data: {toggle: "modal", target: "#dms-popup"} %></td>
           <td><%= request.description %></td>
           <td><%= request.request_type.name %></td>
-          <td><%= request.request_status.name %></td>
+          <td class="request_status"><%= request.request_status.name%></td>
           <td><%= request.assignee.name if request.assignee.present? %></td>
           <td><%= request.creater.name if request.creater.present? %></td>
           <td><%= request.updater.name if request.updater.present? %></td>
           <td>
-            <%= link_to "",  edit_request_path(request), remote: true,
-              class: "glyphicon glyphicon-pencil",
-              data: {toggle: "modal", target: "#dms-popup"} %>
+            <% if request.allow_edit?(current_user) %>
+              <%= link_to "",  edit_request_path(request), remote: true,
+                class: "glyphicon glyphicon-pencil dark",
+                data: {toggle: "modal", target: "#dms-popup"} %>
+            <% end %>
             <% if request.request_status_id == Settings.request_status.approved %>
               <%= link_to "",  new_assignment_path(request_id: request.id), remote: true,
               class: "glyphicon glyphicon-plus",

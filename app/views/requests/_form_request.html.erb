@@ -14,26 +14,26 @@
 
     <div class="input-field col s6">
       <%= f.label t "request.table.request_type" %>
-      <%= f.collection_select :request_type_id, @request_types, :id, :name, {},
+      <%= f.collection_select :request_type_id, @support.request_types, :id, :name, {},
         {class: "form-control"} %>
     </div>
 
     <div class="input-field col s6">
       <%= f.label t "request.table.request_status" %>
-      <%= f.collection_select :request_status_id, @request_statuses, :id, :name,
+      <%= f.collection_select :request_status_id, @support.request_statuses, :id, :name,
         {}, {class: "form-control"} %>
     </div>
 
     <div class="input-field col s6">
       <%= f.label t "request.table.assignee" %>
-      <%= f.collection_select :assignee_id, @staffs, :id, :name, {},
+      <%= f.collection_select :assignee_id, @support.staffs, :id, :name, {},
         {class: "form-control"} %>
     </div>
 
-    <div class="row" style="padding-left: 3%">
+    <div class="row line_top">
       <%= link_to t("request.add_request_detail"),
         requests_add_request_detail_path,
-        class: "btn btn-primary", remote: true %>
+        class: "btn btn-primary btn_add_detail", remote: true %>
     </div>
 
     <input id="request_details" name="request_details" type="hidden" />
@@ -52,7 +52,7 @@
          <%= f.fields_for :request_details do |request_detail| %>
           <tr>
             <td> <%= request_detail.text_area :description, class: "form-control" %> </td>
-            <td> <%= request_detail.collection_select :device_category_id, @device_categories, :id, :name, {},
+            <td> <%= request_detail.collection_select :device_category_id, @support.device_categories, :id, :name, {},
               {class: "form-control"} %>
             </td>
             <td><%= request_detail.text_field :number, class: "form-control" %></td>

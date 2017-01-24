@@ -2,6 +2,7 @@ class RequestsController < ApplicationController
   before_action :init_request, only: [:edit, :update, :show]
   before_action :init_dropdown, except: [:destroy, :update, :create]
   before_action :logged_in_user
+
   def index
     get_requests
   end
@@ -84,14 +85,7 @@ class RequestsController < ApplicationController
   end
 
   def init_dropdown
-    @request_statuses = RequestStatus.all
-    @request_types = RequestType.all
-    @device_categories = DeviceCategory.all
-    @staffs = available_assign_staff
-  end
-
-  def available_assign_staff
-    current_user.is_admin? || current_user.is_manager? ? User.manage_list_staffs(current_user) : User.normal_list_staffs(current_user)
+    @support = Supports::User.new current_user
   end
 
   def init_request

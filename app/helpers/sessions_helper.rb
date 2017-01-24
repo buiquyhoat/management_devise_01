@@ -50,4 +50,17 @@ module SessionsHelper
   def store_location
     session[:forwarding_url] = request.original_url if request.get?
   end
+
+  def generate_tag_color request
+    case request.request_status_id
+    when Settings.request_status.done
+      "request_status done"
+    when Settings.request_status.approved
+      "request_status approved"
+    when Settings.request_status.waiting_approve
+      "request_status waitting_approve"
+    when Settings.request_status.cancelled
+      "request_status cancelled"
+    end
+  end
 end
