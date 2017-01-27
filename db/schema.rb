@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170122070755) do
+ActiveRecord::Schema.define(version: 20170129005311) do
 
   create_table "assignment_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "device_id",     null: false
@@ -117,6 +117,16 @@ ActiveRecord::Schema.define(version: 20170122070755) do
     t.datetime "updated_at",              null: false
   end
 
+  create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string  "name"
+    t.integer "company_id"
+    t.string  "description",       limit: 4000
+    t.integer "closest_parent_id"
+    t.string  "parent_path"
+    t.integer "group_type"
+    t.string  "image"
+  end
+
   create_table "invoices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "invoice_number", limit: 100
     t.integer  "created_by"
@@ -126,16 +136,10 @@ ActiveRecord::Schema.define(version: 20170122070755) do
   end
 
   create_table "permissions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.boolean  "is_create"
-    t.boolean  "is_update"
-    t.boolean  "is_get"
-    t.boolean  "is_delete"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.integer  "dms_object_id"
-    t.integer  "role_id"
-    t.index ["dms_object_id"], name: "index_permissions_on_dms_object_id", using: :btree
-    t.index ["role_id"], name: "index_permissions_on_role_id", using: :btree
+    t.string  "entry"
+    t.string  "optional"
+    t.integer "group_id"
+    t.index ["group_id"], name: "index_permissions_on_group_id", using: :btree
   end
 
   create_table "request_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -205,6 +209,14 @@ ActiveRecord::Schema.define(version: 20170122070755) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.boolean "is_default_group"
+    t.integer "user_id"
+    t.integer "group_id"
+    t.index ["group_id"], name: "index_user_groups_on_group_id", using: :btree
+    t.index ["user_id"], name: "index_user_groups_on_user_id", using: :btree
+  end
+
   create_table "user_roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "created_by"
     t.integer  "updated_by"
@@ -243,8 +255,7 @@ ActiveRecord::Schema.define(version: 20170122070755) do
   add_foreign_key "devices", "device_categories"
   add_foreign_key "devices", "device_statuses"
   add_foreign_key "devices", "invoices"
-  add_foreign_key "permissions", "dms_objects"
-  add_foreign_key "permissions", "roles"
+  add_foreign_key "permissions", "groups"
   add_foreign_key "request_details", "device_categories"
   add_foreign_key "request_details", "requests"
   add_foreign_key "requests", "request_statuses"
@@ -253,6 +264,8 @@ ActiveRecord::Schema.define(version: 20170122070755) do
   add_foreign_key "return_device_details", "devices"
   add_foreign_key "return_device_details", "return_devices"
   add_foreign_key "return_devices", "users", column: "returnee_id"
+  add_foreign_key "user_groups", "groups"
+  add_foreign_key "user_groups", "users"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
   add_foreign_key "users", "departments"

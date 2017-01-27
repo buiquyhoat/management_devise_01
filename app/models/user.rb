@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :devises, through: :assignments
   has_many :requests, dependent: :destroy
   has_many :user_role, dependent: :destroy
+  has_many :user_group, dependent: :destroy
 
   scope :of_department, ->department_id do
     where department_id: department_id if department_id.present?
@@ -82,6 +83,13 @@ class User < ApplicationRecord
 
   def is_staff?
     is_manager? || user_role.any?{|ur| ur.role_id == Settings.user_role.staff}
+  end
+
+  def highest_permission entry, action
+    user_group.each do |ug|
+      return true if ug.group.highest_permission entry, action
+    end
+    false
   end
 
   private
