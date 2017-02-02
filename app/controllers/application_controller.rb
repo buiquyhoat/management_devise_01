@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
+  before_action :load_notification
+
 
   private
 
@@ -23,5 +25,14 @@ class ApplicationController < ActionController::Base
 
   def is_number? string
     true if Float(string) rescue false
+  end
+
+  private
+
+  def load_notification
+    if logged_in?
+      @notifications = Notification.by_current_user(current_user.id)
+        .limit(Settings.notification.max_display).reverse
+    end
   end
 end

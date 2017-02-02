@@ -19,6 +19,7 @@
 //= require chosen-jquery
 //= require i18n
 //= require i18n/translations
+//= require jquery.transit.min
 //= require_tree .
 I18n.defaultLocale = I18n.default_locale ;
 I18n.locale = I18n.locale;

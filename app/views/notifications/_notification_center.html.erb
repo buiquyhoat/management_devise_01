@@ -1,0 +1,14 @@
+<ul class="notificator">
+  <%= link_to render("notifications/counter", counter: notifications.present? ? Notification.un_read(current_user.id).count : 0), "#", {id: "open_notification"} %>
+  <div id="notificationContainer">
+    <div id="notificationTitle"><%= t "notification.label.header" %></div>
+    <div id="notificationsBody" class="notifications">
+      <ul id="notificationList">
+        <%= render notifications %>
+      </ul>
+    </div>
+    <div id="notificationFooter">
+      <%= link_to t("notification.label.view_all"), notifications_path %>
+    </div>
+  </div>
+</ul>

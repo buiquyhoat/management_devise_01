@@ -20,4 +20,7 @@ Rails.application.routes.draw do
   resources :requests
   resources :request_details
   resources :assignments
+  resources :notifications
+
+  mount ActionCable.server => '/cable'
 end

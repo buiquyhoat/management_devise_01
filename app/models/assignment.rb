@@ -3,7 +3,7 @@ class Assignment < ApplicationRecord
   belongs_to :request
   has_many :assignment_details, inverse_of: :assignment
   accepts_nested_attributes_for :assignment_details
-  after_create :update_request, :update_device
+  after_create :update_request, :update_device, :create_notification
 
   validates :assignment_details, presence: true
 
@@ -21,7 +21,7 @@ class Assignment < ApplicationRecord
     assignment_details.each do |detail|
       devices = assignment_details.select{|device| device.device_id == detail.device_id}
       if devices.present? && devices.count > 1
-        errors[:base] << i18n.t("assignment.message.assignment_detail_duplicate")
+        errors[:base] << I18n.t("assignment.message.assignment_detail_duplicate")
         return true
       end
     end
@@ -39,9 +39,22 @@ class Assignment < ApplicationRecord
     assignment_details.each do |detail|
       detail.device.device_status_id = Settings.device_status.using
       unless detail.device.save
-        flash[:danger] = i18n.t("action_message.update_fail")
+        flash[:danger] = I18n.t("action_message.update_fail")
         break
       end
     end
+  end
+
+  def create_notification
+    message = ""
+    if assignment_details.count == 1
+      message = I18n.t("notification.message.single_device_assigned",
+        device: assignment_details.first.device.device_code )
+    else
+      message = I18n.t("notification.message.multil_device_assigned",
+        total_device: assignment_details.count)
+    end
+    create_notify created_by, assignee_id,
+      message, Rails.application.routes.url_helpers.devices_path
   end
 end
