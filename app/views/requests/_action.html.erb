@@ -8,22 +8,24 @@
         <label class="done_label btn btn-default
           <%= request.request_status_id == Settings.request_status.done ? "active" : "" %>">
           <%= radio_button("post", "options #{request.id}", Settings.request_status.done) %>
-            <%= t "request.action.done" %>
+          <%= t "request.action.done" %>
         </label>
       <% else %>
-        <% if request.show_cancel %>
+        <% if request.show_cancel? %>
+            <label class="btn btn-default
+              <%= request.request_status_id == Settings.request_status.cancelled ? "active" : "" %>">
+              <%= radio_button("post", "options #{request.id}", Settings.request_status.cancelled) %>
+              <%= t "request.action.cancel" %>
+            </label>
+        <% end %>
+        <% if request.show_send? @current_user %>
           <label class="btn btn-default
-            <%= request.request_status_id == Settings.request_status.cancelled ? "active" : "" %>">
-            <%= radio_button("post", "options #{request.id}", Settings.request_status.cancelled) %>
-            <%= t "request.action.cancel" %>
+            <%= request.request_status_id == Settings.request_status.waiting_approve ? "active" : "" %>">
+            <%= radio_button("post", "options #{request.id}", Settings.request_status.waiting_approve) %>
+            <%= t "request.action.send" %>
           </label>
         <% end %>
-        <label class="btn btn-default
-          <%= request.request_status_id == Settings.request_status.waiting_approve ? "active" : "" %>">
-          <%= radio_button("post", "options #{request.id}", Settings.request_status.waiting_approve) %>
-          <%= t "request.action.send" %>
-        </label>
-        <% if request.show_approve @current_user %>
+        <% if request.show_approve? @current_user %>
           <label class="btn btn-default
             <%= request.request_status_id == Settings.request_status.approved ? "active" : "" %>">
             <%= radio_button("post", "options #{request.id}", Settings.request_status.approved) %>

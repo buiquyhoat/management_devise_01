@@ -17,6 +17,10 @@ class Assignment < ApplicationRecord
     where assignee_id: assignee_id if assignee_id.present?
   end
 
+  scope :find_by_request, ->request_id do
+    where request_id: request_id if request_id.present?
+  end
+
   scope :of_created_by, ->created_by do
     where created_by: created_by if created_by.present?
   end

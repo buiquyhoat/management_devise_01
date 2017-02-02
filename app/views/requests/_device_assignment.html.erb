@@ -1,0 +1,43 @@
+<table class="table table-hover" style="table-layout: fixed;">
+  <thead>
+    <tr>
+      <th class="width-30"><%= t "request.device_assignment.id" %></th>
+      <th class="width-30"><%= t "request.device_assignment.product_name" %></th>
+      <th class="width-30"><%= t "request.device_assignment.device_code" %></th>
+      <th class="width-30"><%= t "request.device_assignment.image" %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @assignment.present? && @assignment.assignment_details.any? %>
+      <% @assignment.assignment_details.each do |asign_detail| %>
+        <tr>
+          <td>
+            <%= link_to asign_detail.id, device_path(asign_detail.device_id, request_id: @request.id), remote: true,
+              data:{target: "#dms-popup", backdrop: "static"} %>
+          </td>
+          <td>
+            <%= asign_detail.device.production_name %>
+          </td>
+          <td>
+            <%= asign_detail.device.device_code %>
+          </td>
+          <td>
+            <% if asign_detail.device.picture? %>
+              <%= image_tag asign_detail.device.picture.url, id: "logo-icon",
+                class: "img_grid" %>
+            <% else %>
+              <%= image_tag "default_device.png", id: "logo-icon",
+                class: "img_grid" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="3" class="taC">
+          <%= t "request.device_assignment.empty" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

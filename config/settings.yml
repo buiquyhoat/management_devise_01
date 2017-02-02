@@ -49,6 +49,7 @@ dms_history_data:
 entry:
   request: "Request"
   assignment: "Assignment"
+  admin: "Admin"
 action:
   create: "Create"
   read: "Read"

@@ -11,6 +11,8 @@ class DevicesController < ApplicationController
   def show
     @using_histories = AssignmentDetail.by_device(@device.id).includes(:device)
     @device_histories = DmsHistory.of_object @device.id, Settings.history_type.device
+    @request = Request.find_by id: params[:request_id] if params[:request_id].present?
+    byebug
     respond_to do |format|
       format.js
     end

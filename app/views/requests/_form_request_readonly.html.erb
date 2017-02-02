@@ -1,61 +1,26 @@
-<%= form_for @request, remote: true do |f| %>
-  <div class="input-field col s6">
-    <%= f.label :title %>
-    <%= f.text_field :title, readonly: true , class: "form-control" %>
+<div>
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active">
+      <a href="#device_detail" aria-controls="request_info"
+        role="tab" data-toggle="tab"><%= t "request.tab.request_info" %></a>
+    </li>
+    <li role="presentation">
+      <a href="#device_assignment" aria-controls="device_assignment"
+        role="tab" data-toggle="tab"><%= t "request.tab.device_assignment" %></a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="request_info">
+      <%= render "request_info" %>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="device_assignment">
+      <%= render "device_assignment" %>
+    </div>
   </div>
-  <div class="input-field col s6">
-    <%= f.label :description %>
-    <%= f.text_field :description, readonly: true, class: "form-control" %>
-  </div>
-
-  <div class="input-field col s6 disabled">
-    <%= f.label t "request.table.request_type" %>
-    <%= f.collection_select :request_type_id, @support.request_types, :id, :name, {},
-      class: "form-control", disabled: "disabled" %>
-  </div>
-
-  <div class="input-field col s6">
-    <%= f.label t "request.table.request_status" %>
-    <%= f.collection_select :request_status_id, @support.request_statuses, :id,
-      :name, {}, class: "form-control", disabled: "disabled" %>
-  </div>
-
-  <div class="input-field col s6">
-    <%= f.label t "request.table.assignee" %>
-    <%= f.collection_select :assignee_id, @support.staffs, :id, :name, {},
-      class: "form-control", disabled: "disabled" %>
-  </div>
-
-  <table id="tbl_request_details" class="table table-hover">
-    <thead>
-      <tr>
-        <th><%= t "request_detail.description" %></th>
-        <th><%= t "request_detail.device_category" %></th>
-        <th><%= t "request_detail.number" %></th>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-       <%= f.fields_for :request_details do |request_detail| %>
-        <tr>
-          <td> <%= request_detail.text_area :description,
-            class: "form-control", disabled: "disabled" %></td>
-          <td>
-            <%= request_detail.collection_select :device_category_id,
-              @support.device_categories, :id, :name, {},
-              class: "form-control", disabled: "disabled" %>
-          </td>
-          <td><%= request_detail.text_field :number,
-            class: "form-control", disabled: "disabled" %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
 
   <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal">
-      <%= t "action.close" %>
+      <%= t "device_manager.button_close_text" %>
     </button>
-  </div>
-<% end %>
+   </div>
+</div>

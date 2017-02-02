@@ -1,4 +1,4 @@
-User.create!(first_name: "Example user",
+User.create!(first_name: "Framgia",
   last_name: "admin",
   email: "admin@framgia.com",
   address: "193 Nguyen Luong bang st",
@@ -832,7 +832,14 @@ Group.create!(
   parent_path: "/1/6/7/12/15/17",
   group_type: 1,
   image: "")
-
+Group.create!(
+  name: "Admin Framgia",
+  company_id: 1,
+  description: "Admin Framgia",
+  closest_parent_id: 1,
+  parent_path: "/1",
+  group_type: 1,
+  image: "")
 Permission.create!(
   entry: "Request",
   group_id: 1,
@@ -870,6 +877,11 @@ Permission.create!(
   entry: "Assignment",
   group_id: 14,
   optional: "{\"Create\":true,\"Read\":true,\"Update\":true,\"Delete\":true}")
+
+Permission.create!(
+  entry: "Admin",
+  group_id: 1,
+  optional: "{\"Create\":true}")
 
 UserGroup.create!(
   user_id: 1,
@@ -996,4 +1008,8 @@ UserGroup.create!(
 UserGroup.create!(
   user_id: 10,
   group_id: 11,
+is_default_group: true)
+UserGroup.create!(
+  user_id: 1,
+  group_id: 19,
 is_default_group: true)

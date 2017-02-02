@@ -4,7 +4,7 @@
   <td>
     <%= select_tag("", options_for_select(@support.device_categories
       .collect{|category| [category.name, category.id]}),
-      include_blank: Settings.all, class: "form-control chosen-select device-caterory") %>
+      class: "form-control chosen-select device-caterory") %>
   </td>
   <td>
     <%= text_field :request_detail, :number, {class: "form-control request_detail_number", type: "number"} %>
