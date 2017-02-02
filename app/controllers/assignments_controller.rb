@@ -71,8 +71,7 @@ class AssignmentsController < ApplicationController
   def get_assignments
     @assignments = Assignment.of_assignee(params[:assignee_id])
       .of_created_by(params[:created_by])
-      .default_sort
-      .paginate page: params[:page]
+      .default_sort.paginate page: params[:page]
   end
 
   def init_assignment

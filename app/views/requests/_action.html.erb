@@ -1,0 +1,36 @@
+<div class="row">
+  <%= form_for request_status_path(request), remote: true, html: {id: "form-submit-action"} do |f| %>
+    <%= f.hidden_field :request_status_id %>
+    <%= f.hidden_field :id %>
+    <div class="btn-group done_center" data-toggle="buttons"
+      onchange="update_request(this,<%= request.id %>, '<%= request_status_path(request) %>')">
+      <% if request.request_status_id == Settings.request_status.done %>
+        <label class="done_label btn btn-default
+          <%= request.request_status_id == Settings.request_status.done ? "active" : "" %>">
+          <%= radio_button("post", "options #{request.id}", Settings.request_status.done) %>
+            <%= t "request.action.done" %>
+        </label>
+      <% else %>
+        <% if request.show_cancel %>
+          <label class="btn btn-default
+            <%= request.request_status_id == Settings.request_status.cancelled ? "active" : "" %>">
+            <%= radio_button("post", "options #{request.id}", Settings.request_status.cancelled) %>
+            <%= t "request.action.cancel" %>
+          </label>
+        <% end %>
+        <label class="btn btn-default
+          <%= request.request_status_id == Settings.request_status.waiting_approve ? "active" : "" %>">
+          <%= radio_button("post", "options #{request.id}", Settings.request_status.waiting_approve) %>
+          <%= t "request.action.send" %>
+        </label>
+        <% if request.show_approve @current_user %>
+          <label class="btn btn-default
+            <%= request.request_status_id == Settings.request_status.approved ? "active" : "" %>">
+            <%= radio_button("post", "options #{request.id}", Settings.request_status.approved) %>
+            <%= t "request.action.approve" %>
+          </label>
+        <% end %>
+      <% end %>
+    </div>
+    <%end %>
+</div>

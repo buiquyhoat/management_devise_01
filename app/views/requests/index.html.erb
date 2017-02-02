@@ -6,18 +6,9 @@
       <%= t "request_manager.search.relative_to" %>
     </div>
     <div class="col-lg-3 text-center">
-      <%= select_tag( :relative_id, options_for_select(@support.staffs_search
+      <%= select_tag( :relative_id, options_for_select(@support.below_staffs
         .collect{ |staff| [staff.name, staff.id]},
         params[:relative_id]), include_blank: Settings.all,
-        class: "form-control", onChange: "changeSearchForm()") %>
-    </div>
-    <div class="col-lg-1 text-center">
-      <%= t "request_manager.search.request_type" %>
-    </div>
-    <div class="col-lg-3 text-center">
-      <%= select_tag( :request_type_id, options_for_select(@support.request_types_search
-        .collect{ |request_type| [request_type.name, request_type.id]},
-        params[:request_type_id]), include_blank: Settings.all,
         class: "form-control", onChange: "changeSearchForm()") %>
     </div>
     <div class="col-lg-1 text-center">
@@ -39,5 +30,14 @@
   </div>
   <div id="grid-device", class="grid_table">
     <%= render "grid_request" %>
+  </div>
+</div>
+
+<h1> <%= t "request.my_title" %> </h1>
+<div class="row">
+  <div class="content">
+    <div id="grid_my_request", class="grid_table">
+      <%= render "grid_my_request" %>
+    </div>
   </div>
 </div>

@@ -1,4 +1,4 @@
-<% if @requests.any? %>
+<% if @my_requests.any? %>
   <table class="table table-hover">
     <thead>
       <tr>
@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @requests.each do |request| %>
+      <% @my_requests.each do |request| %>
         <tr class="<%= generate_tag_color request %>" >
           <td><%= link_to request.title, request_path(request.id), remote: true,
             data: {toggle: "modal", target: "#dms-popup"} %></td>
@@ -39,5 +39,5 @@
       <% end %>
     </tbody>
   </table>
-  <%= will_paginate @requests %>
+  <%= will_paginate @my_requests %>
 <% end %>

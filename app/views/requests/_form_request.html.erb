@@ -11,25 +11,37 @@
       <%= f.label :description %>
       <%= f.text_area :description, class: "form-control" %>
     </div>
-
     <div class="input-field col s6">
-      <%= f.label t "request.table.request_type" %>
-      <%= f.collection_select :request_type_id, @support.request_types, :id, :name, {},
-        {class: "form-control"} %>
+      <%= f.label t "request.table.request_for" %>
+      <% if @request.owner? @current_user %>
+        <%= f.collection_select :for_user_id, @support.below_staffs, :id, :name,
+          {}, {class: "form-control"} %>
+      <% else %>
+        <%= f.collection_select :for_user_id, @support.all_users, :id, :name,
+          {}, {class: "form-control",disabled: "disabled"} %>
+      <% end %>
     </div>
-
-    <div class="input-field col s6">
-      <%= f.label t "request.table.request_status" %>
-      <%= f.collection_select :request_status_id, @support.request_statuses, :id, :name,
-        {}, {class: "form-control"} %>
-    </div>
-
-    <div class="input-field col s6">
-      <%= f.label t "request.table.assignee" %>
-      <%= f.collection_select :assignee_id, @support.staffs, :id, :name, {},
-        {class: "form-control"} %>
-    </div>
-
+    <% if @current_user.highest_permission(Settings.entry.request, Settings.action.approve) %>
+      <div class="input-field col s6">
+        <%= f.label t "request.table.assignee" %>
+        <%= f.collection_select :assignee_id, @support.user_can_assignment, :id, :name,
+          {include_blank: Settings.none}, {class: "form-control"} %>
+      </div>
+    <% end %>
+    <% if @request.allow_change_status @current_user %>
+      <div class="input-field col s6">
+        <% if @current_user.can_approve && @request.is_need_approve? %>
+          <%= f.label t "request.table.request_status" %>
+          <%= f.collection_select :request_status_id, @support.request_status_approve, :id, :name,
+            {}, {class: "form-control"} %>
+        <% end %>
+        <% if @current_user.can_assignment && @request.is_approved? %>
+          <%= f.label t "request.table.request_status" %>
+          <%= f.collection_select :request_status_id, @support.request_status_assigment, :id, :name,
+            {}, {class: "form-control"} %>
+        <% end %>
+      </div>
+    <% end %>
     <div class="row line_top">
       <%= link_to t("request.add_request_detail"),
         requests_add_request_detail_path,

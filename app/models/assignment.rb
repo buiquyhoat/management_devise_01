@@ -53,7 +53,7 @@ class Assignment < ApplicationRecord
     message = ""
     if assignment_details.count == 1
       message = I18n.t("notification.message.single_device_assigned",
-        device: assignment_details.first.device.device_code )
+        device: assignment_details.first.device.device_code)
     else
       message = I18n.t("notification.message.multil_device_assigned",
         total_device: assignment_details.count)

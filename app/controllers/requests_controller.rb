@@ -5,6 +5,7 @@ class RequestsController < ApplicationController
 
   def index
     get_requests
+    get_my_requests
   end
 
   def new
@@ -15,9 +16,9 @@ class RequestsController < ApplicationController
   end
 
   def create
-    @request = Request.new request_params
+    update_before_save
     respond_to do |format|
-      update_before_save
+      update_create_request @request
       if @request.save
         flash[:success] = t "action_message.create_success"
       else
@@ -75,14 +76,32 @@ class RequestsController < ApplicationController
 
   def request_params
     params.require(:request).permit :title, :description, :request_type_id,
-      :request_status_id, :assignee_id, request_details_attributes: [:id,
-        :description, :device_category_id, :number]
+      :request_status_id, :for_user_id, :assignee_id,
+      request_details_attributes: [:id, :description, :device_category_id,
+        :number]
+  end
+
+  def request_status_params
+    params.require(:request).permit :request_status_id, :id
   end
 
   def get_requests
-    @requests = Request.find_by_actor(params[:relative_id])
-      .of_request_type(params[:request_type_id])
+    if @current_user.highest_permission(Settings.entry.assignment,
+      Settings.action.create)
+      @requests = Request.request_can_access(@current_user.default_parent_path,
+        @current_user.id)
+
+    else
+      @requests = Request.request_of_below_staff(@current_user.default_parent_path,
+        @current_user.id)
+    end
+    @requests = @requests.find_by_actor(params[:relative_id])
       .of_request_status(params[:request_status_id])
+      .order_by.paginate page: params[:page]
+  end
+
+  def get_my_requests
+    @my_requests = Request.find_for_user(@current_user.id).order_by
       .paginate page: params[:page]
   end
 
@@ -95,6 +114,15 @@ class RequestsController < ApplicationController
     unless @request
       flash[:danger] = t "request_manager.not_exist"
       redirect_to requests_path
+    end
+  end
+
+  def update_create_request request
+    request.request_type_id = Settings.type.request
+    if @current_user.highest_permission(Settings.entry.request, Settings.action.approve)
+      request.request_status_id = Settings.request_status.approved
+    else
+      request.request_status_id = Settings.request_status.waiting_approve
     end
   end
 end

@@ -22,17 +22,18 @@ user_role:
   manager: 2
   staff: 3
 all : "All"
+none: "None"
 
 request_status:
-  waiting_approve: 1
-  approved: 2
-  cancelled: 3
+  cancelled: 1
+  waiting_approve: 2
+  approved: 3
   done: 4
-
+type:
+  request: 1
 device_code:
   max_length: 4
   append_character: "0"
-
 notification:
   max_display: 20
 email:
@@ -41,10 +42,18 @@ email:
 history_type:
   request: 1
   device: 2
-action:
-  created: "Created"
-  updated: "Updated"
 dms_history_data:
   field:
     content: "content"
     status: "status"
+entry:
+  request: "Request"
+  assignment: "Assignment"
+action:
+  create: "Create"
+  read: "Read"
+  update: "Update"
+  delete: "Delete"
+  approve: "Approve"
+  created: "Created"
+  updated: "Updated"

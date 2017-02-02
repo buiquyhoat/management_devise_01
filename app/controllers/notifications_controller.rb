@@ -8,8 +8,7 @@ class NotificationsController < ApplicationController
       .created_from_date(params[:from_date])
       .created_to_date(params[:to_date])
       .sender_by(params[:sender_id])
-      .default_sort
-      .paginate page: params[:page]
+      .default_sort.paginate page: params[:page]
   end
 
   def show

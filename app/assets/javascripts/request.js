@@ -60,3 +60,29 @@ function remove_request_detail(button, table_name, parent_model, model){
     resetIndex(table_name,parent_model,model);
   }
 }
+
+function update_request(button,request_id, url){
+
+  if (request_id !== undefined)
+  {
+    $.ajax({
+      type: 'PUT',
+      url: url,
+      dataType: 'json',
+      data: {"request_id": request_id, "request_status_id": $(button).find("label.active input").val()},
+      success: function(data){
+        if (data.success === false)
+        {
+          alert(data.message);
+        }
+        else
+        {
+          $('#form-submit').submit();
+        }
+      },
+      error: function (error_message){
+        alert(error_message);
+      }
+    });
+  }
+}

@@ -43,6 +43,12 @@ class User < ApplicationRecord
       user.department_id, Settings.user_role.manager
   end
 
+  scope :below_staff, ->parent_path do
+    where "id in (select u.id from users as u left join user_groups as ug on ug.user_id = u.id
+    left join groups as g on g.id = ug.group_id where g.parent_path LIKE ?)",
+    parent_path + "%"
+  end
+
   class << self
     def digest string
       cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
@@ -74,7 +80,7 @@ class User < ApplicationRecord
   end
 
   def is_back_officer?
-    department_id.present? && department_id === Settings.department.back_officer
+    department_id.present? && department_id == Settings.department.back_officer
   end
 
   def is_manager?
@@ -90,6 +96,19 @@ class User < ApplicationRecord
       return true if ug.group.highest_permission entry, action
     end
     false
+  end
+
+  def can_approve
+    highest_permission Settings.entry.request, Settings.action.approve
+  end
+
+  def can_assignment
+    highest_permission Settings.entry.assignment, Settings.action.create
+  end
+  
+  def default_parent_path
+    group = user_group.default_parent_path.first.group
+    group.present? ? group.parent_path + "/" + group.id.to_s : ""
   end
 
   private
