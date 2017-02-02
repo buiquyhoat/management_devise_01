@@ -1,9 +1,6 @@
 class Request < ApplicationRecord
   attr_accessor :creater, :updater, :readonly, :assignee
 
-  after_create_commit :create_hitory_for_create
-  after_update_commit :create_hitory_for_update
-
   belongs_to :request_type
   belongs_to :request_status
   belongs_to :for_user, class_name: User.name
@@ -17,7 +14,11 @@ class Request < ApplicationRecord
   accepts_nested_attributes_for :request_details,
     reject_if: proc{|attributes| attributes[:description].blank?}
 
+  after_create_commit :create_hitory_for_create
+  after_update_commit :create_hitory_for_update
   after_initialize :create_extend_data
+  after_save :create_notification
+
   scope :order_by, ->{order created_at: :desc, updated_at: :desc}
   scope :find_by_actor, ->user_id do
     if user_id.present?
@@ -78,7 +79,7 @@ class Request < ApplicationRecord
 
   def show_send? user
     request_status_id != Settings.request_status.approved &&
-    request_status_id != Settings.request_status.done && !show_approve(user)
+    request_status_id != Settings.request_status.done && !show_approve?(user)
   end
   def show_assignment user
     user.can_assignment && request_status_id == Settings.request_status.approved
@@ -89,8 +90,9 @@ class Request < ApplicationRecord
   end
   def allow_edit? user
     staff = User.below_staff(user.default_parent_path).find_by id: created_by
-    user.id == created_by || user.id == updated_by || user.id == assignee_id ||
-    user.can_assignment || (staff.present? && user.can_approve)
+    request_status_id != Settings.request_status.done &&
+    (user.id == created_by || user.id == updated_by || user.id == assignee_id ||
+    user.can_assignment || (staff.present? && user.can_approve))
   end
 
   def owner? user
@@ -110,5 +112,17 @@ class Request < ApplicationRecord
     content = I18n.t("history.request",action: action, name: user_name)
     history_data = {"content": content, "status": request_status_name}
     create_hitory id, history_data.to_json, Settings.history_type.request
+  end
+
+  def create_notification
+    if created_at == updated_at
+      message = I18n.t("notification.message.request_message",
+        request_id: id, action: I18n.t("notification.action.created"))
+    else
+      message = I18n.t("notification.message.request_message",
+        request_id: id, action: I18n.t("notification.action.updated"))
+    end
+    create_notify updated_by, for_user_id,
+      message, Rails.application.routes.url_helpers.devices_path
   end
 end

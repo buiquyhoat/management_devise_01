@@ -227,6 +227,10 @@ en:
       notification_not_found: "Notification not found"
       single_device_assigned: "%{device} has been assigned to you"
       multil_device_assigned: "%{total_device} devices have been assigned to you"
+      request_message: "Request %{request_id} is %{action}"
+    action:
+      updated: "Updated"
+      created: "Created"
     label:
       header: "Notifications"
       view_all: "View all Notifications"
