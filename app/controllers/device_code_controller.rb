@@ -42,7 +42,6 @@ class DeviceCodeController < ApplicationController
     total_char_append = Settings.device_code.max_length - max_code.to_s.mb_chars.length
     if total_char_append > 0
       for i in 1..total_char_append
-        new_code = new_code + "0"
         new_code = new_code + Settings.device_code.append_character
       end
     end

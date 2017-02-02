@@ -31,12 +31,13 @@ class User < ApplicationRecord
   after_initialize :create_another
 
   scope :manage_list_staffs, ->user do
-    where "department_id= ? || id in (select u.id from users as u left join
+    where "department_id= ? OR id in (select u.id from users as u left join
       user_roles as ur on ur.user_id = u.id where ur.role_id = ?)",
       user.department_id, Settings.user_role.manager
   end
+
   scope :normal_list_staffs, ->user do
-    where "department_id = ? && id in (select u.id from users as u left join
+    where "department_id = ? AND id in (select u.id from users as u left join
       user_roles as ur on ur.user_id = u.id where ur.role_id = ?)",
       user.department_id, Settings.user_role.manager
   end
@@ -69,6 +70,10 @@ class User < ApplicationRecord
 
   def is_admin?
     user_role.any?{|ur| ur.role_id == Settings.user_role.admin}
+  end
+
+  def is_back_officer?
+    department_id.present? && department_id === Settings.department.back_officer
   end
 
   def is_manager?

@@ -28,7 +28,8 @@
                 class: "glyphicon glyphicon-pencil dark",
                 data: {toggle: "modal", target: "#dms-popup"} %>
             <% end %>
-            <% if request.request_status_id == Settings.request_status.approved %>
+            <% if request.request_status_id == Settings.request_status.approved &&
+              current_user.department_id === Settings.department.back_officer %>
               <%= link_to "",  new_assignment_path(request_id: request.id), remote: true,
               class: "glyphicon glyphicon-plus",
               data: {toggle: "modal", target: "#dms-popup"} %>
