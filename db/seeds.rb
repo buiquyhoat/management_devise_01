@@ -637,3 +637,54 @@ Invoice.create!(invoice_number: "invoice1",
   created_at: Time.zone.now,
   updated_by: 1,
   updated_at: Time.zone.now)
+
+Group.create!(
+  name: "Root Framgia",
+  company_id: 1,
+  description: "Root Framgia",
+  closest_parent_id: 0,
+  parent_path: "",
+  group_type: 1,
+  image: "")
+Group.create!(
+  name: "Manager Framgia",
+  company_id: 1,
+  description: "Manager Framgia",
+  closest_parent_id: 1,
+  parent_path: "/1",
+  group_type: 1,
+  image: "")
+Group.create!(
+  name: "Staff Framgia",
+  company_id: 1,
+  description: "Staff Framgia",
+  closest_parent_id: 1,
+  parent_path: "/1",
+  group_type: 1,
+  image: "")
+
+UserGroup.create!(
+  user_id: 1,
+  group_id: 1,
+  is_default_group: true)
+UserGroup.create!(
+  user_id: 1,
+  group_id: 2,
+  is_default_group: false)
+UserGroup.create!(
+  user_id: 1,
+  group_id: 3,
+  is_default_group: false)
+
+Permission.create!(
+  entry: "request",
+  group_id: 1,
+  optional: "{\"C\":false,\"R\":false,\"U\":false,\"D\":false}")
+Permission.create!(
+  entry: "request",
+  group_id: 2,
+  optional: "{\"C\":true,\"R\":true,\"U\":true,\"D\":true}")
+Permission.create!(
+  entry: "request",
+  group_id: 3,
+  optional: "{\"C\":false,\"R\":true,\"U\":false,\"D\":false}")
