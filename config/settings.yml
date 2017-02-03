@@ -32,3 +32,6 @@ request_status:
 device_code:
   max_length: 4
   append_character: "0"
+
+notification:
+  max_display: 20

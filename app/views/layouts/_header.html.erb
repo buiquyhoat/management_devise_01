@@ -1,3 +1,4 @@
+<%= hidden_field_tag 'user_id', logged_in? ? current_user.id : 0 %>
 <div class="top_nav">
   <div class="nav_menu">
     <nav>
@@ -5,8 +6,8 @@
         <a id="menu_toggle"><i class="fa fa-bars"></i></a>
       </div>
       <ul class="nav navbar-nav navbar-right">
-        <li class="">
-          <% if logged_in? %>
+        <% if logged_in? %>
+          <li class="">
             <%= link_to "javascript:;", {
               class: "user-profile dropdown-toggle",
               data: {toggle: "dropdown", placement: "top"},
@@ -26,12 +27,18 @@
                 <% end %>
               </li>
             </ul>
-          <% else %>
+          </li>
+          <li class="line-height-55">
+            <%= render "notifications/notification_center", notifications: @notifications %>
+          </li>
+        <% else %>
+          <li class="">
             <%= render "layouts/login" %>
-          <% end %>
-        </li>
+          </li>
+        <% end %>
       </ul>
     </nav>
   </div>
 </div>
+
 

@@ -1,0 +1,5 @@
+<% if notification %>
+    <li class="<%= notification.checked? ? '' : 'un-read' %>">
+      <%= link_to notification.body, notification %>
+    </li>
+<% end %>

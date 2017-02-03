@@ -163,3 +163,11 @@ en:
       device_duplicate: "Assignment details device must exist"
       assignee_not_exist: "Assignment ticket not exist"
       assignment_detail_duplicate: "Assignment Details Is Duplicate"
+  notification:
+    message:
+      notification_not_found: "Notification not found"
+      single_device_assigned: "%{device} has been assigned to you"
+      multil_device_assigned: "%{total_device} devices have been assigned to you"
+    label:
+      header: "Notifications"
+      view_all: "View all Notifications"
