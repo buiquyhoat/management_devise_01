@@ -27,6 +27,8 @@ gem "bootstrap-sass", "3.3.6"
 gem "config"
 gem "chosen-rails"
 gem "i18n-js", "~> 3.0.0.rc11"
+gem "bootstrap-datepicker-rails"
+gem "figaro"
 group :development, :test do
   gem "byebug", platform: :mri
 end

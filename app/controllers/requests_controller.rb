@@ -50,8 +50,10 @@ class RequestsController < ApplicationController
 
   def show
     @request.readonly = true
-    respond_to do |format|
-      format.js
+    unless params[:from_app].present?
+      respond_to do |format|
+        format.js
+      end
     end
   end
 

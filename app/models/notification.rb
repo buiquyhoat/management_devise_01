@@ -11,6 +11,20 @@ class Notification < ApplicationRecord
     where reciver_id: user_id
   end
 
+  scope :created_from_date, ->(from_date) do
+    where "DATE_FORMAT(created_at,'%Y/%m/%d') >= DATE_FORMAT(?,'%Y/%m/%d')",
+     from_date if from_date.present?
+  end
+
+  scope :created_to_date, ->(to_date) do
+    where "DATE_FORMAT(created_at,'%Y/%m/%d') <= DATE_FORMAT(?,'%Y/%m/%d')",
+     to_date if to_date.present?
+  end
+
+  scope :sender_by, ->user_id do
+    where sender_id: user_id if user_id.present?
+  end
+
   private
 
   def raise_notification

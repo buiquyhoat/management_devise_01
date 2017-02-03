@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
   def load_notification
     if logged_in?
       @notifications = Notification.by_current_user(current_user.id)
-        .limit(Settings.notification.max_display).reverse
+        .limit(Settings.notification.max_display).default_sort
     end
   end
 end

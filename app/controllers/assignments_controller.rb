@@ -14,7 +14,7 @@ class AssignmentsController < ApplicationController
       if detail.number.present? && detail.number > 0
         for i in 1..detail.number
           @asignment.assignment_details.build device_category_id: detail.device_category.id,
-          device_category_group_id: detail.device_category.device_group.id
+            device_category_group_id: detail.device_category.device_group.id
         end
       end
     end
@@ -47,7 +47,9 @@ class AssignmentsController < ApplicationController
   end
 
   def show
-    respond_js
+    unless params[:from_app].present?
+      respond_js
+    end
   end
 
   private
@@ -59,7 +61,7 @@ class AssignmentsController < ApplicationController
   def assign_params
     params.require(:assignment).permit :request_id, :assignee_id, :description,
       assignment_details_attributes: [:id, :device_id, :device_category_id,
-        :device_category_group_id]
+      :device_category_group_id]
   end
 
   def assign_params_edit

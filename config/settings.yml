@@ -35,3 +35,6 @@ device_code:
 
 notification:
   max_display: 20
+email:
+  parameter:
+    from_email: "email"

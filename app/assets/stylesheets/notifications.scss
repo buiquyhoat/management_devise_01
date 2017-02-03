@@ -2,6 +2,7 @@ ul.notificator {
   display: inline-block;
   float:right;
   margin: 0;
+  padding-right: 10px;
   liNotification
   {
     position: relative;
@@ -106,3 +107,12 @@ ul #notificationList
   font-weight: bold;
   border-top: 1px solid #dddddd;
 }
+
+.notification-header{
+  font-weight: bold;
+  padding-left: 8px;
+  font-size: 20px;
+  border-bottom: 1px solid #d44e03;
+  color: #d44e03;
+}
+
