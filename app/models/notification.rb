@@ -4,7 +4,7 @@ class Notification < ApplicationRecord
   scope :default_sort, ->{order created_at: :desc}
 
   scope :un_read, ->user_id do
-    where "checked = 0 AND reciver_id = ?", user_id
+    where "checked = false AND reciver_id = ?", user_id
   end
 
   scope :by_current_user, ->user_id do
