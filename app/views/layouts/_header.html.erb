@@ -1,4 +1,5 @@
 <%= hidden_field_tag 'user_id', logged_in? ? current_user.id : 0 %>
+<%= audio_tag "notification.mp3", {id: "notification_sound"} %>
 <div class="top_nav">
   <div class="nav_menu">
     <nav>

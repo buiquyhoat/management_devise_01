@@ -6,5 +6,6 @@ Bundler.require(*Rails.groups)
 
 module ManagementDevise01
   class Application < Rails::Application
+    config.assets.precompile << "audios/*"
   end
 end

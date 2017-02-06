@@ -1,4 +1,7 @@
 en:
+  time:
+    formats:
+      date_format: "%d-%m-%Y %H:%M:%S"
   title: "Devices manager system"
   dms_app_title: "Devices Manage System"
   button_update_text: "Update"
@@ -154,15 +157,21 @@ en:
       created_by: "Created By"
       created_date: "Created Date"
       action: "Action Date"
+      title_popup_view_assignment: "Detail Assign Device"
     table:
       column_header:
         device_category: "Device Category"
         device: "Device"
         group_device: "Group Device"
     message:
-      device_duplicate: "Assignment details device must exist"
-      assignee_not_exist: "Assignment ticket not exist"
-      assignment_detail_duplicate: "Assignment Details Is Duplicate"
+      device_duplicate: "Assignment details must be exist"
+      assignee_not_exist: "Assignment ticket do not exist"
+      assignment_detail_duplicate: "Assignment details are duplicated"
+    email:
+      header: "New device has been assigned"
+      link_content: "Please follow link to view details"
+      link_devices_manager_text: "Device Manage Systems"
+      request_done: "Request: %{request_title} has done"
   notification:
     message:
       notification_not_found: "Notification not found"
@@ -171,3 +180,12 @@ en:
     label:
       header: "Notifications"
       view_all: "View all Notifications"
+      from: "From: "
+      at: "At: "
+    table_header:
+      notification: "Notifications"
+    index:
+      label_sender: "Sender:"
+      label_created_from: "Created From:"
+      label_created_to: "Created To:"
+      button_search: "Get Notifications"

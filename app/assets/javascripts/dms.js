@@ -115,6 +115,7 @@ $(document).on('turbolinks:load', function() {
 });
 
 $(document).on('turbolinks:load', function() {
+  setup_date_picker();
   set_up_chosen();
   $('#show_form_login').on('click',function(){
     if($('#form_login').css('display') === 'block'){
@@ -219,5 +220,11 @@ function getDeviceCode(url) {
     error: function (xhr, ajaxOptions, thrownError) {
       alert(thrownError);
     }
+  });
+}
+
+function setup_date_picker(){
+  $('.datepicker').datepicker({
+    format: 'yyyy/mm/dd'
   });
 }

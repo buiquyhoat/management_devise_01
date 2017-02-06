@@ -8,3 +8,77 @@
     </div>
   </div>
 </ul>
+<div class="notification-header">
+  <%= t "notification.table_header.notification" %>
+</div>
+<br/>
+<div class="row">
+  <%= form_tag "", id: "form-submit", method: :get do %>
+    <div class="row">
+      <div class="col-lg-1 text-right"></div>
+      <div class="col-lg-2 text-right">
+        <label class="form-control"><%= t "notification.index.label_sender" %></label>
+      </div>
+      <div class="col-lg-8">
+        <%= select_tag(:sender_id, options_for_select(@support.all_users
+          .collect{|user|[user.name, user.id]},
+          params[:sender_id]), include_blank: Settings.all,
+          class: "chosen-select") %>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="col-lg-1 text-right"></div>
+      <div class="col-lg-2 text-right">
+        <label class="form-control"><%= t "notification.index.label_created_from" %></label>
+      </div>
+      <div class="col-lg-3">
+        <%= text_field_tag :from_date, params[:from_date],
+          {class: "datepicker form-control" } %>
+      </div>
+       <div class="col-lg-2 text-right">
+         <label class="form-control"><%= t "notification.index.label_created_to" %></label>
+      </div>
+      <div class="col-lg-3">
+        <%= text_field_tag :to_date, params[:to_date],
+          {class: "datepicker form-control" } %>
+      </div>
+    </div>
+    <br/>
+    <div class="row taR">
+      <div class="col-lg-1 text-right"></div>
+      <div class="col-lg-10">
+        <button type="button" class="btn btn-primary" onclick="changeSearchForm();">
+          <%= t "notification.index.button_search" %></button>
+      </div>
+    </div>
+  <% end %>
+
+</div>
+<br/>
+<% if @notifications.any? %>
+    <table class="table table-hover" style="table-layout: fixed;">
+      <tbody>
+        <% @notifications.each do |notification| %>
+          <tr>
+            <td class="<%= notification.checked? ? '' : 'un-read' %>">
+              <%= link_to notification.body, notification, {class: "font-size-20"} %>
+              <div class="padding-left-1">
+                <span>
+                  <%= t "notification.label.from "%>
+                  <b>
+                    <%= @support.created_by notification.sender_id %>
+                  </b
+                  <%= t "notification.label.at "%>
+                  <b>
+                    <%= l notification.created_at, format: :date_format %>
+                  </b>
+                </span>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <%= will_paginate %>
+<% end %>
