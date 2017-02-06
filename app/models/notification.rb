@@ -12,12 +12,12 @@ class Notification < ApplicationRecord
   end
 
   scope :created_from_date, ->(from_date) do
-    where "DATE_FORMAT(created_at,'%Y/%m/%d') >= DATE_FORMAT(?,'%Y/%m/%d')",
+    where "CAST(created_at AS DATE) >= CAST(? AS DATE)",
      from_date if from_date.present?
   end
 
   scope :created_to_date, ->(to_date) do
-    where "DATE_FORMAT(created_at,'%Y/%m/%d') <= DATE_FORMAT(?,'%Y/%m/%d')",
+    where "CAST(created_at AS DATE) <= CAST(? AS DATE)",
      to_date if to_date.present?
   end
 
