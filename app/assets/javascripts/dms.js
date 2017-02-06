@@ -125,6 +125,11 @@ $(document).on('turbolinks:load', function() {
       $('#form_login').slideDown();
     }
   });
+
+  $('#notificationContainer li').click(function(){
+    window.location.href = $(this).find('a').first().attr('href');
+  });
+
 })
 
 function changeSearchForm(){
