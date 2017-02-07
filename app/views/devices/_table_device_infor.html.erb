@@ -1,0 +1,58 @@
+<table id="table-show" class="table" style="table-layout: fixed;">
+  <tr>
+    <td class="width-30" rowspan="4">
+      <div class="profile_pic">
+        <% if @device.picture? %>
+          <%= image_tag @device.picture.url, id: "logo-icon" %>
+        <% else %>
+          <%= image_tag "default_device.png", id: "logo-icon" %>
+        <% end %>
+      </div>
+    </td>
+    <td colspan="4">
+       <h1><%= @device.production_name %></h1>
+    </td>
+  </tr>
+  <tr>
+    <td class="taR">
+      <%= t "device_manager.field_label.device_code" %>
+    </td>
+     <th>
+      <label class="form-control"> <%= @device.device_code %></label>
+    </th>
+    <td class="taR">
+      <%= t "device_manager.field_label.model" %>
+    </td>
+    <td>
+      <label class="form-control"> <%= @device.model_number %></label>
+    </td>
+  </tr>
+  <tr>
+    <td class="taR">
+      <%= t "device_manager.field_label.device_status" %>
+    </td>
+    <td>
+      <label class="form-control"> <%= @device.device_status_name %></label>
+    </td>
+    <td class="taR">
+      <%= t "device_manager.field_label.device_category" %>
+    </td>
+    <td>
+      <label class="form-control"> <%= @device.device_category_name %></label>
+    </td>
+  </tr>
+  <tr>
+    <td class="taR">
+       <%= t "device_manager.field_label.invoice_number" %>
+    </td>
+    <td>
+      <label class="form-control"> <%= @device.invoice_invoice_number %></label>
+    </td>
+    <td class="taR">
+      <%= t "device_manager.field_label.createed_by" %>
+    </td>
+    <td>
+    <label class="form-control"> </label>
+    </td>
+  </tr>
+</table>

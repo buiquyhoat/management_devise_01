@@ -14,7 +14,8 @@
         <% @devices.each do |device| %>
           <tr>
             <td>
-              <%= link_to device.production_name, device_path(device) %>
+              <%= link_to link_to device.production_name, device_path(device), remote: true,
+                data:{toggle: "modal", target: "#dms-popup", backdrop: "static"} %>
             </td>
             <td><%= device.model_number %></td>
             <td><%= device.device_status.name %></td>

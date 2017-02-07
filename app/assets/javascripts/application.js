@@ -21,6 +21,7 @@
 //= require i18n/translations
 //= require jquery.transit.min
 //= require bootstrap-datepicker
+//= require jquery.remotipart
 //= require_tree .
 I18n.defaultLocale = I18n.default_locale ;
 I18n.locale = I18n.locale;

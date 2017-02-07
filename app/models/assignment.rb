@@ -2,7 +2,11 @@ class Assignment < ApplicationRecord
   belongs_to :assignee, class_name: User.name
   belongs_to :request
   has_many :assignment_details, inverse_of: :assignment
+
+  delegate :name, to: :assignee, prefix: true
+
   accepts_nested_attributes_for :assignment_details
+
   after_create :update_request, :update_device, :create_notification
 
   validates :assignment_details, presence: true

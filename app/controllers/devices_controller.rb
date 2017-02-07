@@ -8,7 +8,12 @@ class DevicesController < ApplicationController
     get_devices
   end
 
-  def show; end
+  def show
+    @using_histories = AssignmentDetail.by_device(@device.id).includes(:device)
+    respond_to do |format|
+      format.js
+    end
+  end
 
   def new
     @device = Device.new
@@ -22,10 +27,11 @@ class DevicesController < ApplicationController
     set_created_by @device
     save_success = @device.save
     respond_to do |format|
-    format.js
-      if save_success
-        get_devices
-      end
+      format.html
+      format.js
+        if save_success
+          get_devices
+        end
     end
   end
 
@@ -75,7 +81,7 @@ class DevicesController < ApplicationController
 
   def device_params
     params.require(:device).permit :device_code, :production_name, :model_number,
-      :device_status_id, :device_category_id, :invoice_id, :serial_number
+      :device_status_id, :device_category_id, :invoice_id, :serial_number, :picture
   end
 
   def set_created_by device
@@ -89,11 +95,16 @@ class DevicesController < ApplicationController
 
   def get_devices
     if current_user.department_id == Settings.department.back_officer
-      @devices = Device.of_category(params[:category_id])
+      @devices = Device.includes(:device_category)
+      .includes(:device_status)
+      .includes(:invoice)
+      .of_category(params[:category_id])
       .of_status(params[:status_id]).of_invoice(params[:invoice_number])
       .paginate page: params[:page]
     else
-      @devices = Device.find_assigne_device(current_user.id)
+      @devices = Device.includes(:device_category)
+      .includes(:device_status)
+      .find_assigne_device(current_user.id)
       .of_category(params[:category_id]).of_status(params[:status_id])
       .of_invoice(params[:invoice_number]).paginate page: params[:page]
     end

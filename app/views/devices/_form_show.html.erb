@@ -1,0 +1,44 @@
+<div>
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active">
+      <a href="#device-detail" aria-controls="device-detail"
+        role="tab" data-toggle="tab"><%= t "device_manager.tab.device_infor" %></a>
+    </li>
+    <li role="presentation">
+      <a href="#device-history" aria-controls="device-history"
+        role="tab" data-toggle="tab"><%= t "device_manager.tab.device_history" %></a>
+    </li>
+    <li role="presentation">
+      <a href="#using-history" aria-controls="using-history"
+        role="tab" data-toggle="tab">
+        <%= t "device_manager.tab.device_using_history" %>
+      </a>
+    </li>
+    <li role="presentation">
+      <a href="#invoice-infor" aria-controls="invoice-infor"
+        role="tab" data-toggle="tab">
+        <%= t "device_manager.tab.device_invoice_history" %>
+      </a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="device-detail">
+      <%= render "table_device_infor" %>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="device-history">
+      <%= render "grid_device_history" %>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="using-history">
+      <%= render "grid_device_using_history" %>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="invoice-infor">
+      <%= render "table_invoice_infor"%>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">
+      <%= t "device_manager.button_close_text" %>
+    </button>
+   </div>
+</div>

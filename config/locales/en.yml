@@ -1,4 +1,18 @@
 en:
+  errors:
+    messages:
+      carrierwave_processing_error: failed to be processed
+      carrierwave_integrity_error: is not of an allowed file type
+      carrierwave_download_error: could not be downloaded
+      extension_whitelist_error: ": Your file type is not allowed to upload. Allowed types are jpg, jpeg, gif, png"
+      extension_blacklist_error: "You are not allowed to upload %{extension} files, prohibited types: %{prohibited_types}"
+      content_type_whitelist_error: "You are not allowed to upload %{content_type} files"
+      content_type_blacklist_error: "You are not allowed to upload %{content_type} files"
+      rmagick_processing_error: "Failed to manipulate with rmagick, maybe it is not an image?"
+      mini_magick_processing_error: "This File is not image."
+      min_size_error: "File size should be greater than %{min_size}"
+      max_size_error: "File size should be less than %{max_size}"
+      first: "Errors:"
   time:
     formats:
       date_format: "%d-%m-%Y %H:%M:%S"
@@ -91,6 +105,7 @@ en:
       device_status: "Device Status"
       invoice_number: "Invoice Number"
       createed_by: "Created By"
+      created_date: "Created Date"
     table:
       header:
         production: "Production"
@@ -99,12 +114,22 @@ en:
         category: "Category"
         invoice_number: "Invoice Number"
         action: "Action"
+        description: "Description"
+        date_time: "Date Time"
+        staff: "Staff"
+        from_date: "From Date"
+        to_date: "To Date"
+      message:
+        device_not_exist_using_history: "Device do not exist using history."
     action_message:
       create_fail: "Create Failed!"
       update_success: "Update Success!"
       update_fail: "Update Failed!"
-  errors:
-    first: "Errors:"
+    tab:
+      device_infor: "Device Information"
+      device_history: "Device History"
+      device_using_history: "Using History"
+      device_invoice_history: "Invoice Infomation"
   request:
     title: "Manager Requests"
     table:
