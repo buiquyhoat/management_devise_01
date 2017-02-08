@@ -189,7 +189,7 @@ ActiveRecord::Schema.define(version: 20170208041432) do
   end
 
   create_table "requests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "assignee_id",                    null: false
+    t.integer  "assignee_id"
     t.string   "title",             limit: 500,  null: false
     t.string   "description",       limit: 4000, null: false
     t.integer  "created_by"
@@ -198,7 +198,8 @@ ActiveRecord::Schema.define(version: 20170208041432) do
     t.datetime "updated_at",                     null: false
     t.integer  "request_type_id",                null: false
     t.integer  "request_status_id",              null: false
-    t.index ["assignee_id"], name: "fk_rails_bb7befbc8d", using: :btree
+    t.integer  "for_user_id"
+    t.index ["for_user_id"], name: "fk_rails_93cd3e20f6", using: :btree
     t.index ["request_status_id"], name: "index_requests_on_request_status_id", using: :btree
     t.index ["request_type_id"], name: "index_requests_on_request_type_id", using: :btree
   end
@@ -280,7 +281,7 @@ ActiveRecord::Schema.define(version: 20170208041432) do
   add_foreign_key "request_details", "requests"
   add_foreign_key "requests", "request_statuses"
   add_foreign_key "requests", "request_types"
-  add_foreign_key "requests", "users", column: "assignee_id"
+  add_foreign_key "requests", "users", column: "for_user_id"
   add_foreign_key "return_device_details", "devices"
   add_foreign_key "return_device_details", "return_devices"
   add_foreign_key "return_devices", "users", column: "returnee_id"

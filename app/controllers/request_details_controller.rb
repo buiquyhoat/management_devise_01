@@ -10,16 +10,4 @@ class RequestDetailsController < ApplicationController
     end
   end
 
-  private
-
-  def json_response success, message
-    respond_to do |format|
-      format.json do
-        render json: {
-          sucess: success,
-          message: message
-        }
-      end
-    end
-  end
 end

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get "requests/new"
   get "requests/add_request_detail"
   root "static_pages#home"
+
   delete "/requestdetails", to: "request_details#destroy"
 
   get    "/home",    to: "static_pages#home"
@@ -21,6 +22,6 @@ Rails.application.routes.draw do
   resources :request_details
   resources :assignments
   resources :notifications
-
+  resources :request_status
   mount ActionCable.server => '/cable'
 end

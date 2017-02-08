@@ -17,7 +17,6 @@ class Device < ApplicationRecord
   validates :device_code, :production_name, :model_number, :serial_number, presence: true
   validates :device_code, uniqueness: {case_sensitive: false}
 
-  default_scope ->{order created_at: :desc}
   scope :find_assigne_device, ->(user_id){where "id in (select d.id from
     devices as d join assignment_details asd on d.id = asd.device_id
     join assignments as a on a.id = asd.device_id where a.assignee_id = ?)",

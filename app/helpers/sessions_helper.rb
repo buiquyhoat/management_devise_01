@@ -63,4 +63,15 @@ module SessionsHelper
       "request_status cancelled"
     end
   end
+
+  def json_response success, message
+    respond_to do |format|
+      format.json do
+        render json: {
+          sucess: success,
+          message: message
+        }
+      end
+    end
+  end
 end

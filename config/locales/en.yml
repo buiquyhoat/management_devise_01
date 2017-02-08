@@ -74,7 +74,7 @@ en:
     welcome: "Welcome,"
     general: "General"
     manager_device: "Manage Device"
-    manager_assigment: "Manage Assignment"
+    manager_assignment: "Manage Assignment"
   nav:
     user_profile: "Profile"
     logout: "Log out"
@@ -134,6 +134,9 @@ en:
       device_invoice_history: "Invoice Infomation"
   request:
     title: "Manager Requests"
+    my_title: "Your Requests"
+    update_success: "Update Success"
+    update_unsuccess: "Update Unsuccess"
     table:
       title: "Title"
       description: "Description"
@@ -142,8 +145,18 @@ en:
       assignee: "Assign to"
       created_by": "Create By"
       updated_by: "Updated By"
+      request_for: "Request For"
+      for_user: "Request For"
+      time_ago: "Time Ago"
+    action:
+      done: "Done"
+      cancel: "Cancel"
+      send: "Send"
+      approve: "Approve"
     add_request_detail: "Add Request Detail"
     confirm: "This data will be delete now! Are you sure?"
+    request_detail:
+      not_empty: "Need request detail"
   request_detail:
     description: "Description"
     device_category: "Device Category"

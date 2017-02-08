@@ -40,10 +40,20 @@ table tbody tr td :focus {
 .grid_table {
   font-size: 14px;
 }
-.request_status.done {background-color: #77cc6d;}
-.request_status.approved { background-color: #ef2828;}
-.request_status.waitting_approve { background-color: #337ab7;  }
-.request_status.cancelled { background-color: #356f64;}
+.request_status.done {background-color: #ffffff;}
+.request_status.approved { background-color: #6af76c;}
+.request_status.waitting_approve { background-color: #45bef7;  }
+.request_status.cancelled { background-color: #b1ddb2;}
 .dark, .dark a {
   color: #521a1a;
+}
+label.done_label {
+  margin-left: 23% !important;
+}
+div.done_center {
+  width: 100%;
+}
+.btn-group {
+  padding: 0px 5px;
+  margin: 0px 5px;
 }

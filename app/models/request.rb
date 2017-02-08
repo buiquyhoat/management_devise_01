@@ -1,12 +1,12 @@
 class Request < ApplicationRecord
-  attr_accessor :creater, :updater, :readonly
+  attr_accessor :creater, :updater, :readonly, :assignee
 
   after_create_commit :create_hitory_for_create
   after_update_commit :create_hitory_for_update
 
   belongs_to :request_type
   belongs_to :request_status
-  belongs_to :assignee, class_name: User.name
+  belongs_to :for_user, class_name: User.name
   has_many :request_details, dependent: :destroy, inverse_of: :request
   has_many :devices, through: :request_details
 
@@ -18,11 +18,37 @@ class Request < ApplicationRecord
     reject_if: proc{|attributes| attributes[:description].blank?}
 
   after_initialize :create_extend_data
+  scope :order_by, ->{order created_at: :desc, updated_at: :desc}
+  scope :find_by_actor, ->user_id do
+    if user_id.present?
+      where "id in (select r.id from requests as r
+        where r.assignee_id = ? or r.created_by = ? or r.updated_by = ?
+        or r.for_user_id = ?)", user_id, user_id, user_id, user_id
+    end
+  end
 
-  scope :find_by_actor, ->(user_id) do
-    where "id in (select r.id from requests as r
-    where r.assignee_id = ? or r.created_by = ? or r.updated_by= ?)", user_id,
-    user_id, user_id if user_id.present?
+  class << self
+    def convert_like param
+      "#{param}%"
+    end
+  end
+
+  scope :find_for_user, ->current_id do
+    where for_user_id: current_id if current_id.present?
+  end
+  scope :request_of_below_staff, ->parent_path, current_id do
+    where "for_user_id in (select u.id from users as u left join user_groups as
+      ug on ug.user_id = u.id left join groups as g on g.id = ug.group_id where
+      g.parent_path LIKE ?) OR id in (select r.id from requests as r where
+      r.assignee_id = ?)", convert_like(parent_path), current_id
+  end
+
+  scope :request_can_access, ->parent_path, current_id do
+    where "for_user_id in (select u.id from users as u left join user_groups as
+      ug on ug.user_id = u.id left join groups as g on g.id = ug.group_id where
+      g.parent_path LIKE ?) OR id in (select r.id from requests as r where
+      r.assignee_id = ?) OR request_status_id != 1",
+      convert_like(parent_path), current_id
   end
 
   scope :of_request_type, ->request_type_id do
@@ -33,15 +59,47 @@ class Request < ApplicationRecord
     where request_status_id: request_status_id if request_status_id.present?
   end
 
-  def allow_edit? user
-    user.id == created_by || user.id == updated_by || user.id == assignee_id
+  def is_approved?
+    request_status_id == Settings.request_status.approved
   end
 
+  def is_need_approve?
+    request_status_id == Settings.request_status.waiting_approve ||
+    request_status_id == Settings.request_status.cancelled
+  end
+
+  def show_approve user
+    user.can_approve && request_status_id == Settings.request_status.waiting_approve ||
+    request_status_id == Settings.request_status.approved
+  end
+
+  def show_cancel
+    request_status_id != Settings.request_status.done
+  end
+
+  def show_assignment user
+    user.can_assignment && request_status_id == Settings.request_status.approved
+  end
+
+  def allow_change_status user
+    user.can_approve || user.can_assignment
+  end
+  def allow_edit? user
+    staff = User.below_staff(user.default_parent_path).find_by id: created_by
+    user.id == created_by || user.id == updated_by || user.id == assignee_id ||
+    user.can_assignment || (staff.present? && user.can_approve)
+  end
+
+  def owner? user
+    return false if created_by.present? && created_by != user.id
+    true
+  end
   private
 
   def create_extend_data
     self.creater = User.find_by id: created_by
     self.updater = User.find_by id: updated_by
+    self.assignee = User.find_by id: assignee_id if assignee_id.present?
   end
 
   def create_history action
