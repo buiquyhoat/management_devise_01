@@ -215,3 +215,6 @@ en:
       label_created_from: "Created From:"
       label_created_to: "Created To:"
       button_search: "Get Notifications"
+  history:
+    request: "Request has been %{action} by %{name}"
+    device: "Device has been %{action} by %{name}"

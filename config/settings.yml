@@ -38,3 +38,9 @@ notification:
 email:
   parameter:
     from_email: "email"
+history_type:
+  request: 1
+  device: 2
+action:
+  created: "created"
+  updated: "updated"
