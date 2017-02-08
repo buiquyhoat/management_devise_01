@@ -9,6 +9,8 @@ class Device < ApplicationRecord
   delegate :name, to: :device_category, prefix: true
   delegate :invoice_number, to: :invoice, prefix: true
 
+  after_create_commit :create_hitory_for_create
+  after_update_commit :create_hitory_for_update
 
   mount_uploader :picture, AvatarUploader
 
@@ -31,4 +33,13 @@ class Device < ApplicationRecord
   end
 
   scope :can_assign, -> {where device_status_id: Settings.device_status.available}
+
+  private
+
+  def create_history action
+    user_name = get_created_name created_by
+    content = I18n.t("history.device",action: action, name: user_name)
+    history_data = {"content": content, "status": device_status_name}
+    create_hitory id, history_data.to_json, Settings.history_type.device
+  end
 end

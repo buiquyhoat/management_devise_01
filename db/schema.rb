@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170208022946) do
+ActiveRecord::Schema.define(version: 20170208041432) do
 
   create_table "assignment_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "device_id",     null: false
@@ -109,6 +109,14 @@ ActiveRecord::Schema.define(version: 20170208022946) do
     t.index ["device_category_id"], name: "index_devices_on_device_category_id", using: :btree
     t.index ["device_status_id"], name: "index_devices_on_device_status_id", using: :btree
     t.index ["invoice_id"], name: "index_devices_on_invoice_id", using: :btree
+  end
+
+  create_table "dms_histories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "dms_object_id"
+    t.string   "dms_history_data"
+    t.integer  "dms_object_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "dms_objects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
