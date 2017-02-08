@@ -3,7 +3,7 @@ class Assignment < ApplicationRecord
   belongs_to :request
   has_many :assignment_details, inverse_of: :assignment
 
-  delegate :name, :id, to: :assignee, prefix: true
+  delegate :name, :id, to: :assignee, prefix: true, allow_nil: true
 
   accepts_nested_attributes_for :assignment_details
 

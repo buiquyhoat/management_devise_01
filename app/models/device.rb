@@ -5,9 +5,9 @@ class Device < ApplicationRecord
   has_many :return_device_details, dependent: :destroy
   has_many :assignment_details, dependent: :destroy
 
-  delegate :name, to: :device_status, prefix: true
-  delegate :name, to: :device_category, prefix: true
-  delegate :invoice_number, to: :invoice, prefix: true
+  delegate :name, to: :device_status, prefix: true, allow_nil: true
+  delegate :name, to: :device_category, prefix: true, allow_nil: true
+  delegate :invoice_number, to: :invoice, prefix: true, allow_nil: true
 
   after_create_commit :create_hitory_for_create
   after_update_commit :create_hitory_for_update
