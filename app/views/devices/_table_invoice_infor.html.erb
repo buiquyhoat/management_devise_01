@@ -1,0 +1,22 @@
+<table id="table-show" class="table table-hover" style="table-layout: fixed;">
+  <tbody>
+    <tr>
+       <td class="taR">
+        <%= t "device_manager.field_label.invoice_number" %>
+      </td>
+      <td>
+        <label class="form-control"> <%= @device.invoice_invoice_number %></label>
+      </td>
+      <td class="taR">
+         <%= t "device_manager.field_label.created_date" %>
+      </td>
+       <td>
+        <label class="form-control">
+          <%= l @device.invoice.created_at, format: :date_format %>
+        </label>
+      </td>
+      <td class="width-20">
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -5,6 +5,13 @@ class Device < ApplicationRecord
   has_many :return_device_details, dependent: :destroy
   has_many :assignment_details, dependent: :destroy
 
+  delegate :name, to: :device_status, prefix: true
+  delegate :name, to: :device_category, prefix: true
+  delegate :invoice_number, to: :invoice, prefix: true
+
+
+  mount_uploader :picture, AvatarUploader
+
   validates :device_code, :production_name, :model_number, :serial_number, presence: true
   validates :device_code, uniqueness: {case_sensitive: false}
 
@@ -24,5 +31,4 @@ class Device < ApplicationRecord
   end
 
   scope :can_assign, -> {where device_status_id: Settings.device_status.available}
-
 end
