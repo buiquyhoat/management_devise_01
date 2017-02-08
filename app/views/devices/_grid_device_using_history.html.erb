@@ -17,6 +17,13 @@
             <%= l using_history.assignment.created_at, format: :date_format %>
           </td>
           <td>
+            <% if using_history.return_date? %>
+              <%= l using_history.assignment.return_date, format: :date_format %>
+            <% else %>
+              <span class="label badge">
+                <%= t "device_manager.field_label.now"%>
+              </span>
+            <% end %>
           </td>
         </tr>
       <% end %>

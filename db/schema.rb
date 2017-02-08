@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170207031611) do
+ActiveRecord::Schema.define(version: 20170208022946) do
 
   create_table "assignment_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "device_id",     null: false
     t.integer "assignment_id"
+    t.date    "return_date"
     t.index ["assignment_id"], name: "index_assignment_details_on_assignment_id", using: :btree
     t.index ["device_id", "assignment_id"], name: "index_assignment_details_on_device_id_and_assignment_id", unique: true, using: :btree
     t.index ["device_id"], name: "index_assignment_details_on_device_id", using: :btree

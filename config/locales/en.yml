@@ -106,6 +106,7 @@ en:
       invoice_number: "Invoice Number"
       createed_by: "Created By"
       created_date: "Created Date"
+      now: "Now"
     table:
       header:
         production: "Production"
