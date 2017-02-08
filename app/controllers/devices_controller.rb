@@ -10,6 +10,7 @@ class DevicesController < ApplicationController
 
   def show
     @using_histories = AssignmentDetail.by_device(@device.id).includes(:device)
+    @device_histories = DmsHistory.of_object @device.id, Settings.history_type.device
     respond_to do |format|
       format.js
     end

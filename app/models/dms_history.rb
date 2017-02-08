@@ -8,6 +8,6 @@ class DmsHistory < ApplicationRecord
   end
 
   def get_object
-    optional_hash = JSON.parse dms_history_data
+    self.optional_hash = JSON.parse dms_history_data
   end
 end

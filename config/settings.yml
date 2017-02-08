@@ -42,5 +42,9 @@ history_type:
   request: 1
   device: 2
 action:
-  created: "created"
-  updated: "updated"
+  created: "Created"
+  updated: "Updated"
+dms_history_data:
+  field:
+    content: "content"
+    status: "status"

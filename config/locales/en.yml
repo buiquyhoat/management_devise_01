@@ -122,6 +122,7 @@ en:
         to_date: "To Date"
       message:
         device_not_exist_using_history: "Device do not exist using history."
+        device_not_exist_history: "Device do not exist history."
     action_message:
       create_fail: "Create Failed!"
       update_success: "Update Success!"

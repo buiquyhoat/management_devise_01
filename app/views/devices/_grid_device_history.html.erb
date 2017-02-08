@@ -3,6 +3,30 @@
     <tr>
       <th class="width-30"><%= t "device_manager.header.date_time" %></th>
       <th><%= t "device_manager.header.description" %></th>
+      <th><%= t "device_manager.field_label.device_status" %></th>
     </tr>
   </thead>
+  <tbody>
+    <% if @device_histories.any? %>
+      <% @device_histories.each do |device_history| %>
+        <tr>
+          <td>
+            <%= l device_history.created_at, format: :date_format %>
+          </td>
+          <td>
+            <%= device_history.optional_hash[Settings.dms_history_data.field.content] %>
+          </td>
+          <td>
+            <%= device_history.optional_hash[Settings.dms_history_data.field.status] %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="3" class="taC">
+          <%= t "device_manager.table.message.device_not_exist_history" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
