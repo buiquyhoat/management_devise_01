@@ -1,0 +1,38 @@
+<h1> <%= t "device_manager.my_device_title" %> </h1>
+<% if @devices.any? %>
+  <table class="table table-hover" style="table-layout: fixed;">
+    <thead>
+      <tr>
+        <th><%= t "device_manager.table.header.device_code" %></th>
+        <th><%= t "device_manager.table.header.production" %></th>
+        <th><%= t "device_manager.table.header.category" %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @devices.each do |device| %>
+        <tr>
+          <td>
+             <%= link_to link_to device.device_code, device_path(device), remote: true,
+              data:{toggle: "modal", target: "#dms-popup", backdrop: "static"} %>
+          </td>
+          <td>
+            <%= link_to link_to device.production_name, device_path(device), remote: true,
+              data:{toggle: "modal", target: "#dms-popup", backdrop: "static"} %>
+          </td>
+          <td><%= device.device_category_name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @devices %>
+<% else %>
+  <table class="table table-hover" style="table-layout: fixed;">
+    <thead>
+      <tr>
+        <th><%= t "device_manager.table.header.device_code" %></th>
+        <th><%= t "device_manager.table.header.production" %></th>
+        <th><%= t "device_manager.table.header.category" %></th>
+      </tr>
+    </thead>
+  </table>
+<% end %>

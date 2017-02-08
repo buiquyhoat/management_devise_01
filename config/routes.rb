@@ -23,5 +23,7 @@ Rails.application.routes.draw do
   resources :assignments
   resources :notifications
   resources :request_status
+  resources :my_devices, only: :index
+
   mount ActionCable.server => '/cable'
 end

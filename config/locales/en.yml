@@ -44,6 +44,7 @@ en:
     users: "Users"
     profile: "Profile"
     settings: "Settings"
+    my_devices: "My Devices"
     login: "Log in"
     remember_account: "Remember me"
     placeholder:
@@ -80,6 +81,7 @@ en:
     logout: "Log out"
   device_manager:
     title: "Device Manager"
+    my_device_title: "My Devices"
     new:
       title: "Create New Device"
     button_submit_text:
@@ -110,6 +112,7 @@ en:
     table:
       header:
         production: "Production"
+        device_code: "Device Code"
         model: "Model"
         status: "Status"
         category: "Category"

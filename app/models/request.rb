@@ -10,7 +10,7 @@ class Request < ApplicationRecord
   has_many :request_details, dependent: :destroy, inverse_of: :request
   has_many :devices, through: :request_details
 
-  delegate :name, to: :request_status, prefix: true
+  delegate :name, to: :request_status, prefix: true, allow_nil: true
 
   validates :title, :description, presence: true
 
