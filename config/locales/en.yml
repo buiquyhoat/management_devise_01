@@ -244,3 +244,9 @@ en:
     device: "Device has been %{action} by %{name}"
   btn:
     back: "Back"
+  user_setting:
+    title: "User Settings"
+    table:
+      header:
+        setting: "Setting Name"
+        action: "Enable/Disable"

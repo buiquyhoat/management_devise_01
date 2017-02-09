@@ -1,0 +1,32 @@
+<%= form_tag(user_setting, id: "form-submit", method: :put) do %>
+  <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h1>
+                <%= t "user_setting.title" %>
+              </h1>
+            </div>
+            <% if user_setting.present? %>
+              <ul class="list-group">
+                <% user_setting.optional_hash.each do |setting_name,seting_value| %>
+                  <li class="list-group-item">
+                      <%= setting_name.titleize %>
+                      <div class="material-switch pull-right">
+                        <%= check_box_tag "setting_params[]",
+                         setting_name, seting_value, {id: setting_name} %>
+                        <label for="<%= setting_name %>" class="label-default"></label>
+                      </div>
+                  </li>
+                <% end %>
+              </ul>
+            <% end %>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">
+              <%= t "device_manager.button_submit_text.save_change" %>
+            </button>
+          </div>
+      </div>
+  </div>
+<% end %>

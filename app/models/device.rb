@@ -19,7 +19,7 @@ class Device < ApplicationRecord
 
   scope :find_assigne_device, ->(user_id){where "id in (select d.id from
     devices as d join assignment_details asd on d.id = asd.device_id
-    join assignments as a on a.id = asd.device_id where a.assignee_id = ?)",
+    join assignments as a on a.id = asd.assignment_id where a.assignee_id = ?)",
     user_id}
   scope :of_category, ->device_category_id do
     where device_category_id: device_category_id if device_category_id.present?

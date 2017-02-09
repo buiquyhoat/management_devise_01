@@ -59,3 +59,5 @@ action:
   created: "Created"
   updated: "Updated"
 mailer_host: "localhost:3000"
+user_setting:
+  send_mail_notification: "send_mail_notification"
