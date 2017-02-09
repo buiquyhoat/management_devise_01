@@ -63,6 +63,6 @@ class Assignment < ApplicationRecord
         total_device: assignment_details.count)
     end
     create_notify created_by, assignee_id,
-      message, Rails.application.routes.url_helpers.devices_path
+      message, Rails.application.routes.url_helpers.my_devices_path
   end
 end

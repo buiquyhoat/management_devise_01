@@ -12,7 +12,6 @@ class DevicesController < ApplicationController
     @using_histories = AssignmentDetail.by_device(@device.id).includes(:device)
     @device_histories = DmsHistory.of_object @device.id, Settings.history_type.device
     @request = Request.find_by id: params[:request_id] if params[:request_id].present?
-    byebug
     respond_to do |format|
       format.js
     end
@@ -97,19 +96,11 @@ class DevicesController < ApplicationController
   end
 
   def get_devices
-    if current_user.department_id == Settings.department.back_officer
-      @devices = Device.includes(:device_category)
+    @devices = Device.includes(:device_category)
       .includes(:device_status)
       .includes(:invoice)
       .of_category(params[:category_id])
       .of_status(params[:status_id]).of_invoice(params[:invoice_number])
       .paginate page: params[:page]
-    else
-      @devices = Device.includes(:device_category)
-      .includes(:device_status)
-      .find_assigne_device(current_user.id)
-      .of_category(params[:category_id]).of_status(params[:status_id])
-      .of_invoice(params[:invoice_number]).paginate page: params[:page]
-    end
   end
 end

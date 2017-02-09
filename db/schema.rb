@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170208041432) do
+ActiveRecord::Schema.define(version: 20170209031347) do
 
   create_table "assignment_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "device_id",     null: false
@@ -249,6 +249,14 @@ ActiveRecord::Schema.define(version: 20170208041432) do
     t.index ["user_id"], name: "index_user_roles_on_user_id", using: :btree
   end
 
+  create_table "user_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "user_settings_data"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "user_id",            null: false
+    t.index ["user_id"], name: "index_user_settings_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "first_name",      null: false
     t.string   "last_name",       null: false
@@ -289,5 +297,6 @@ ActiveRecord::Schema.define(version: 20170208041432) do
   add_foreign_key "user_groups", "users"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
+  add_foreign_key "user_settings", "users"
   add_foreign_key "users", "departments"
 end

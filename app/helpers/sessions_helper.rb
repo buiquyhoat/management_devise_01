@@ -22,6 +22,12 @@ module SessionsHelper
     end
   end
 
+  def user_setting
+    if logged_in?
+      @user_setting ||= UserSetting.find_by user_id: current_user.id
+    end
+  end
+
   def current_user? user
     user == current_user
   end

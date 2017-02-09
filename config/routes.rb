@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get "device_code/show"
   get "get_device_code/show"
   get "assignment_device/show"
@@ -24,6 +25,7 @@ Rails.application.routes.draw do
   resources :notifications
   resources :request_status
   resources :my_devices, only: :index
+  resources :user_setting, only: [:index, :update], collection: {update: :put}
 
   mount ActionCable.server => '/cable'
 end
