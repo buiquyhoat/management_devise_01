@@ -51,6 +51,9 @@ class RequestsController < ApplicationController
 
   def show
     @request.readonly = true
+    if @request.request_status_id == Settings.request_status.done
+      @assignment = Assignment.find_by request_id: @request.id
+    end
     unless params[:from_app].present?
       respond_to do |format|
         format.js

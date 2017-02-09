@@ -10,7 +10,8 @@
     <div class="input-field col s6">
       <%= f.label t "assignment.label.assignee" %>
       <%= f.collection_select :assignee_id, @support.all_users,:id,:name,
-        {},{class: "chosen-select"} %>
+        {}, {class: "form-control", disabled: "disabled"} %>
+      <%= f.hidden_field :assignee_id%>
     </div>
     <div class="input-field col s6">
       <%= f.label t "assignment.label.description" %>
@@ -28,7 +29,7 @@
           <tr>
             <th><%= t "assignment.label.request" %></th>
             <th><%= t "assignment.label.device_category" %></th>
-            <th><%= t "assignment.label.device" %></th>
+            <th><%= t "assignment.label.device_id" %></th>
             <th></th>
           </tr>
         </thead>
@@ -51,8 +52,8 @@
                 </td>
                 <td class="width-37">
                 <%= ff.collection_select :device_id, @support.device_can_assign,
-                  :id, :production_name, {},{class: "chosen-select device",
-                  id: "device_id_" + ff.options[:child_index].to_s} %>
+                  :id, :id, {},
+                  {class: "chosen-select device", id: "device_id_" + ff.options[:child_index].to_s} %>
                 </td>
                 <td class="padding-left-3 width-3">
                 </td>

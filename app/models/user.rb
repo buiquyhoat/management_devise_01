@@ -105,7 +105,11 @@ class User < ApplicationRecord
   def can_assignment
     highest_permission Settings.entry.assignment, Settings.action.create
   end
-  
+
+  def is_admin
+    highest_permission Settings.entry.admin, Settings.action.create
+  end
+
   def default_parent_path
     group = user_group.default_parent_path.first.group
     group.present? ? group.parent_path + "/" + group.id.to_s : ""

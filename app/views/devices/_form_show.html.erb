@@ -37,6 +37,10 @@
   </div>
 
   <div class="modal-footer">
+    <% if @request.present? %>
+      <%= link_to t("btn.back"), request_path(@request.id), remote: true,
+        data:{target: "#dms-popup", backdrop: "static"}, class: "btn btn-default" %>
+    <% end %>
     <button type="button" class="btn btn-default" data-dismiss="modal">
       <%= t "device_manager.button_close_text" %>
     </button>

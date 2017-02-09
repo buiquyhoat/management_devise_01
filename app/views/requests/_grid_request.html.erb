@@ -5,6 +5,7 @@
         <th><%= t "request.table.title" %></th>
         <th><%= t "request.table.description" %></th>
         <th><%= t "request.table.request_status" %></th>
+        <th><%= t "request.table.request_action" %></th>
         <th><%= t "request.table.assignee" %></th>
         <th><%= t "request.table.for_user" %></th>
         <th><%= t "request.table.time_ago" %></th>
@@ -15,8 +16,9 @@
       <% @requests.each do |request| %>
         <tr class="<%= generate_tag_color request %>" >
           <td><%= link_to request.title, request_path(request.id), remote: true,
-            data: {toggle: "modal", target: "#dms-popup"} %></td>
+            data: {toggle: "modal", target: "#dms-popup", backdrop: "static"} %></td>
           <td><%= request.description %></td>
+          <td><%= request.request_status.name %></td>
           <td class="request_status action">
             <%= render "action", request: request %>
           </td>

@@ -68,15 +68,18 @@ class Request < ApplicationRecord
     request_status_id == Settings.request_status.cancelled
   end
 
-  def show_approve user
-    user.can_approve && request_status_id == Settings.request_status.waiting_approve ||
-    request_status_id == Settings.request_status.approved
+  def show_approve? user
+    user.can_approve
   end
 
-  def show_cancel
+  def show_cancel?
     request_status_id != Settings.request_status.done
   end
 
+  def show_send? user
+    request_status_id != Settings.request_status.approved &&
+    request_status_id != Settings.request_status.done && !show_approve(user)
+  end
   def show_assignment user
     user.can_assignment && request_status_id == Settings.request_status.approved
   end

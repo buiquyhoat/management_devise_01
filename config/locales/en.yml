@@ -140,6 +140,9 @@ en:
     my_title: "Your Requests"
     update_success: "Update Success"
     update_unsuccess: "Update Unsuccess"
+    tab:
+      request_info: "Request Info"
+      device_assignment: "Device Assignment"
     table:
       title: "Title"
       description: "Description"
@@ -151,6 +154,7 @@ en:
       request_for: "Request For"
       for_user: "Request For"
       time_ago: "Time Ago"
+      request_action: "Action"
     action:
       done: "Done"
       cancel: "Cancel"
@@ -167,6 +171,7 @@ en:
     cant_delete: "Cant destroy request detail"
     delete_success: "Delete success"
     not_exist: "Request details is not exists"
+    device: "Device"
   action_message:
     create_success: "Create Success!"
     create_fail: "Create Failed!"
@@ -201,6 +206,7 @@ en:
       created_date: "Created Date"
       action: "Action Date"
       title_popup_view_assignment: "Detail Assign Device"
+      device_id: "Device Id"
     table:
       column_header:
         device_category: "Device Category"
@@ -215,6 +221,7 @@ en:
       link_content: "Please follow link to view details"
       link_devices_manager_text: "Device Manage Systems"
       request_done: "Request: %{request_title} has done"
+    choice_device: "Select device"
   notification:
     message:
       notification_not_found: "Notification not found"
@@ -235,3 +242,5 @@ en:
   history:
     request: "Request has been %{action} by %{name}"
     device: "Device has been %{action} by %{name}"
+  btn:
+    back: "Back"
