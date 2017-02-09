@@ -9,13 +9,15 @@ class Device < ApplicationRecord
   delegate :name, to: :device_category, prefix: true, allow_nil: true
   delegate :invoice_number, to: :invoice, prefix: true, allow_nil: true
 
-  after_create_commit :create_hitory_for_create
-  after_update_commit :create_hitory_for_update
+  after_commit :create_history
 
   mount_uploader :picture, AvatarUploader
 
   validates :device_code, :production_name, :model_number, :serial_number, presence: true
   validates :device_code, uniqueness: {case_sensitive: false}
+  validates :production_name, uniqueness: {case_sensitive: false}
+  validates :model_number, uniqueness: {case_sensitive: false}
+  validates :serial_number, uniqueness: {case_sensitive: false}
 
   scope :find_assigne_device, ->(user_id){where "id in (select d.id from
     devices as d join assignment_details asd on d.id = asd.device_id
@@ -35,8 +37,17 @@ class Device < ApplicationRecord
 
   private
 
-  def create_history action
-    user_name = get_created_name created_by
+  def create_history
+    action_id = 0
+    if created_at === updated_at
+      action_id = created_by
+      action = Settings.action.created
+    else
+      action_id = updated_by
+      action = Settings.action.updated
+    end
+
+    user_name = get_created_name action_id
     content = I18n.t("history.device",action: action, name: user_name)
     history_data = {"content": content, "status": device_status_name}
     create_hitory id, history_data.to_json, Settings.history_type.device

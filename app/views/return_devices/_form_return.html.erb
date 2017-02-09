@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-lg-1"></div>
+  <div class="col-lg-10">
+    <%= form_tag(show_path, id: "search-device-form", method: :get, remote: true) do %>
+      <%= select_tag(:staff_id, options_for_select(@support.all_users
+        .collect{|user|[user.name, user.id]},
+        params[:staff_id]),class: "chosen-select", onChange: "$('#search-device-form').submit()") %>
+    <% end %>
+  </div>
+  <div class="col-lg-1"></div>
+</div>
+<br/>
+<%= form_tag(update_path, id: "form-submit", method: :put, remote: true) do %>
+  <table id="list-device" class="table table-hover" style="table-layout: fixed;">
+    <thead>
+      <th class="taC"><%= t "return_device.table.header.select_device" %></th>
+      <th><%= t "device_manager.field_label.device_code" %></th>
+      <th><%= t "device_manager.field_label.production_name" %></th>
+      <th><%= t "device_manager.field_label.device_category" %></th>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary">
+      <%= t "device_manager.button_submit_text.save_change" %>
+    </button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">
+      <%= t "device_manager.button_close_text" %>
+    </button>
+  </div>
+<% end %>

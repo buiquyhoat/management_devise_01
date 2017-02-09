@@ -7,7 +7,9 @@
           <th><%= t "device_manager.table.header.status" %></th>
           <th><%= t "device_manager.table.header.category" %></th>
           <th><%= t "device_manager.table.header.invoice_number" %></th>
-          <th><%= t "device_manager.table.header.action" %></th>
+          <% if current_user.can_assignment %>
+            <th><%= t "device_manager.table.header.action" %></th>
+          <% end %>
         </tr>
       </thead>
       <tbody>
@@ -21,8 +23,8 @@
             <td><%= device.device_status.name %></td>
             <td><%= device.device_category.name %></td>
             <td><%= device.invoice.invoice_number %></td>
-            <td>
-              <% if current_user.is_back_officer?  %>
+            <% if current_user.can_assignment %>
+              <td>
                 <%= link_to "", edit_device_path(device), remote: true,
                   class: "glyphicon glyphicon-pencil",
                   data:{toggle: "modal", target: "#dms-popup", backdrop: "static"} %>
@@ -32,8 +34,8 @@
                     device: device.production_name)},
                     class: "glyphicon glyphicon-remove"
                 end %>
-              <% end %>
-            </td>
+              </td>
+            <% end %>
           </tr>
         <% end %>
       </tbody>

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   get "device_code/show"
   get "get_device_code/show"
   get "assignment_device/show"
@@ -17,6 +16,10 @@ Rails.application.routes.draw do
   get    "/login",   to: "sessions#new"
   post   "/login",   to: "sessions#create"
   delete "/logout",  to: "sessions#destroy"
+  get "show", to: :show, controller: "return_devices"
+  put "update", to: :update, controller: "return_devices",
+   collection: {update: :put}
+
   resources :users
   resources :devices
   resources :requests
@@ -26,6 +29,7 @@ Rails.application.routes.draw do
   resources :request_status
   resources :my_devices, only: :index
   resources :user_setting, only: [:index, :update], collection: {update: :put}
+  resources :return_devices, only: :index
 
-  mount ActionCable.server => '/cable'
+  mount ActionCable.server => "/cable"
 end
