@@ -57,3 +57,4 @@ action:
   approve: "Approve"
   created: "Created"
   updated: "Updated"
+mailer_host: "localhost:3000"

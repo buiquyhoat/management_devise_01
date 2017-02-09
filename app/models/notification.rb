@@ -29,5 +29,6 @@ class Notification < ApplicationRecord
 
   def raise_notification
     NotificationBroadcastJob.perform_later(reciver_id, Notification.un_read(reciver_id).count, self)
+    NotificationMailer.notification_mail id
   end
 end

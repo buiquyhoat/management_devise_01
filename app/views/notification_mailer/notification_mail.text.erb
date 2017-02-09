@@ -1,0 +1,6 @@
+<%= t "notification.label.header" %>
+
+<%= @notification.body %>
+
+<%= link_to t("assignment.email.link_content"),
+  request.host + "/" + @notification.link %>

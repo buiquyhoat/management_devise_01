@@ -1,0 +1,10 @@
+<h1><%= t "notification.label.header" %></h1>
+
+<p>
+  <%= @notification.body %>
+</p>
+
+<p>
+  <%= link_to t("assignment.email.link_content"),
+   request.host + "/" + @notification.link %>
+</p>
