@@ -30,16 +30,9 @@
     <% end %>
     <% if @request.allow_change_status @current_user %>
       <div class="input-field col s6">
-        <% if @current_user.can_approve && @request.is_need_approve? %>
-          <%= f.label t "request.table.request_status" %>
-          <%= f.collection_select :request_status_id, @support.request_status_approve, :id, :name,
-            {}, {class: "form-control"} %>
-        <% end %>
-        <% if @current_user.can_waiting_done && @request.is_approved? %>
-          <%= f.label t "request.table.request_status" %>
-          <%= f.collection_select :request_status_id, @support.request_status_waiting_done, :id, :name,
-            {}, {class: "form-control"} %>
-        <% end %>
+        <%= f.label t "request.table.request_status" %>
+        <%= f.collection_select :request_status_id, @support.lst_request_status(@current_user, @request), :id, :name,
+          {}, {class: "form-control"} %>
       </div>
     <% end %>
     <div class="row line_top">

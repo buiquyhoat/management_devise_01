@@ -81,6 +81,7 @@ class User < ApplicationRecord
     return Settings.action.approve if can_approve
     return Settings.action.waiting_done if can_waiting_done
     return Settings.action.done if can_done
+    return Settings.action.create if can_make_request
   end
 
   def can_assign_to?

@@ -1,54 +1,64 @@
-<%= form_for @request, remote: true do |f| %>
-  <div class="input-field col s6">
-    <%= f.label :title %>
-    <%= f.text_field :title, readonly: true , class: "form-control" %>
-  </div>
-  <div class="input-field col s6">
-    <%= f.label :description %>
-    <%= f.text_field :description, readonly: true, class: "form-control" %>
-  </div>
+<div class="input-field col s6">
+  <%= label_tag t "request.table.description", {class: "form-control"} %>
+  <%= text_field_tag @request.description, @request.description,
+    {class: "form-control", disabled: "disabled"} %>
+</div>
 
-  <div class="input-field col s6 disabled">
-    <%= f.label t "request.table.request_type" %>
-    <%= f.collection_select :request_type_id, @support.request_types, :id, :name, {},
-      {class: "form-control", disabled: "disabled"} %>
-  </div>
+<div class="input-field col s6">
+  <%= label_tag t "request.table.title", {class: "form-control"} %>
+  <%= text_area_tag @request.title, @request.title,
+    {class: "form-control", disabled: "disabled"} %>
+</div>
 
-  <div class="input-field col s6">
-    <%= f.label t "request.table.request_status" %>
-    <%= f.collection_select :request_status_id, @support.request_statuses, :id,
-      :name, {}, {class: "form-control", disabled: "disabled"} %>
-  </div>
-  <% if @request.assignee_id.present? %>
-    <div class="input-field col s6">
-    <%= f.label t "request.table.assignee" %>
-    <%= f.collection_select :assignee_id, @support.all_users, :id, :name, {},
-      {class: "form-control", disabled: "disabled"} %>
-    </div>
-  <% end %>
-  <table id="tbl_request_details" class="table table-hover">
-    <thead>
+<div class="input-field col s6">
+  <%= label_tag t "request.table.request_status", {class: "form-control"} %>
+  <%= text_field_tag @request.request_status.name, @request.request_status.name,
+    {class: "form-control", disabled: "disabled"} %>
+</div>
+
+<div class="input-field col s6">
+  <%= label_tag t "request.table.request_for", {class: "form-control"} %>
+  <%= text_field_tag @request.for_user.name, @request.for_user.name,
+    {class: "form-control", disabled: "disabled"} %>
+</div>
+
+<div class="input-field col s6">
+  <%= label_tag t "request.table.created_by", {class: "form-control"} %>
+  <%= text_field_tag @request.creater.name, @request.creater.name,
+    {class: "form-control", disabled: "disabled"} %>
+</div>
+
+<div class="input-field col s6">
+  <%= label_tag t "request.table.updated_by", {class: "form-control"} %>
+  <%= text_field_tag @request.updater.name, @request.updater.name,
+    {class: "form-control", disabled: "disabled"} %>
+</div>
+
+<table id="tbl_request_details" class="table table-hover">
+  <thead>
+    <tr>
+      <th><%= t "request_detail.description" %></th>
+      <th><%= t "request_detail.device_category" %></th>
+      <th><%= t "request_detail.number" %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @request.request_details.each do |request_detail| %>
       <tr>
-        <th><%= t "request_detail.description" %></th>
-        <th><%= t "request_detail.device_category" %></th>
-        <th><%= t "request_detail.number" %></th>
+        <td>
+          <%=text_area_tag  request_detail.description,
+            request_detail.description, {class: "form-control",
+              disabled: "disabled"} %></td>
+        <td>
+          <%=text_field_tag  request_detail.device_category.name,
+            request_detail.device_category.name, {class: "form-control",
+              disabled: "disabled"} %></td>
+        <td> <%=text_field_tag  request_detail.number, request_detail.number,
+          {class: "form-control", disabled: "disabled"} %></td>
       </tr>
-    </thead>
+    <% end %>
+  </tbody>
+</table>
 
-    <tbody>
-       <%= f.fields_for :request_details do |request_detail| %>
-        <tr>
-          <td> <%= request_detail.text_area :description,
-            {class: "form-control", disabled: "disabled"} %></td>
-          <td>
-            <%= request_detail.collection_select :device_category_id,
-              @support.device_categories, :id, :name, {},
-              {class: "form-control", disabled: "disabled"} %>
-          </td>
-          <td><%= request_detail.text_field :number,
-            {class: "form-control", disabled: "disabled"} %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
+
