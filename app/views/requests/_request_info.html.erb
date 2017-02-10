@@ -19,13 +19,13 @@
     <%= f.collection_select :request_status_id, @support.request_statuses, :id,
       :name, {}, {class: "form-control", disabled: "disabled"} %>
   </div>
-
-  <div class="input-field col s6">
+  <% if @request.assignee_id.present? %>
+    <div class="input-field col s6">
     <%= f.label t "request.table.assignee" %>
-    <%= f.collection_select :assignee_id, @support.staffs, :id, :name, {},
+    <%= f.collection_select :assignee_id, @support.all_users, :id, :name, {},
       {class: "form-control", disabled: "disabled"} %>
-  </div>
-
+    </div>
+  <% end %>
   <table id="tbl_request_details" class="table table-hover">
     <thead>
       <tr>

@@ -20,5 +20,6 @@ module ApplicationHelper
         users << u
       end
     end
+    users
   end
 end
