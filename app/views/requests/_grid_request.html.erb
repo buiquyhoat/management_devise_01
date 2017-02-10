@@ -8,6 +8,7 @@
         <th><%= t "request.table.request_action" %></th>
         <th><%= t "request.table.assignee" %></th>
         <th><%= t "request.table.for_user" %></th>
+        <th><%= t "request.table.updated_by" %></th>
         <th><%= t "request.table.time_ago" %></th>
         <th></th>
       </tr>
@@ -24,6 +25,7 @@
           </td>
           <td><%= request.assignee.name if request.assignee.present? %></td>
           <td><%= request.for_user.name if request.for_user.present? %></td>
+          <td><%= request.updater.name if request.updater.present? %></td>
           <td><%= time_ago_in_words(request.created_at) %></td>
           <td>
             <% if request.show_assignment_request? @current_user %>

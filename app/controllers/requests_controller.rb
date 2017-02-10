@@ -37,18 +37,20 @@ class RequestsController < ApplicationController
 
   def update
     update_before_save
-    request_form = RequestForm.new(request_params)
-    if request_form.check_logic
+    request_form = RequestForm.new request_params
+    if request_form.check_logic_request request_params, @request
       @request.update_attributes request_params
-    end
-    respond_to do |format|
-      format.js
-      if @request.errors.empty?
-        flash.now[:success] = t "action_message.update_success"
-      else
-        flash[:danger] = t "action_message.update_fail"
+      respond_to do |format|
+        format.js
+        if @request.errors.empty?
+          flash.now[:success] = t "action_message.update_success"
+        else
+          flash[:danger] = t "action_message.update_fail"
+        end
+        render "requests/research"
       end
-      render "requests/research"
+    else
+      flash[:danger] = t "request.update_conflict"
     end
   end
 
@@ -119,7 +121,7 @@ class RequestsController < ApplicationController
 
   def update_create_request request
     request.request_type_id = Settings.type.request
-    if @current_user.highest_permission(Settings.entry.request, Settings.action.approve)
+    if @current_user.can_approve
       request.request_status_id = Settings.request_status.approved
     else
       request.request_status_id = Settings.request_status.waiting_approve

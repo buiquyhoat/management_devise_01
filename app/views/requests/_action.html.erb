@@ -1,31 +1,36 @@
 <div class="row">
-  <%= form_for request_status_path(request), remote: true, html: {id: "form-submit-action"} do |f| %>
+  <%= form_for request_status_path(request), remote: true,
+    html: {id: "form-submit-action"} do |f| %>
     <%= f.hidden_field :request_status_id %>
     <%= f.hidden_field :id %>
     <div class="btn-group done_center" data-toggle="buttons"
-      onchange="update_request(this,<%= request.id %>, '<%= request_status_path(request) %>')">
-      <% if request.show_send_request? @current_user %>
-          <label class="btn btn-default %>">
-            <%= radio_button("post", "options #{request.id}", Settings.request_status.waiting_approve) %>
-            <%= t "request.action.send" %>
-          </label>
-      <% end %>
-
+      onchange="update_request(this,<%= request.id %>,
+        '<%= request_status_path(request) %>')">
       <% if request.show_cancel_request? @current_user %>
           <label class="btn btn-default">
-            <%= radio_button("post", "options #{request.id}", Settings.request_status.cancelled) %>
+            <%= radio_button("post", "options #{request.id}",
+              Settings.request_status.cancelled) %>
             <%= t "request.action.cancel" %>
+          </label>
+      <% end %>
+      <% if request.show_reupdate? @current_user %>
+          <label class="btn btn-default %>">
+            <%= radio_button("post", "options #{request.id}",
+              request.status_reupdate(current_user)) %>
+            <%= request.title_update current_user %>
           </label>
       <% end %>
       <% if request.show_approve_request? @current_user %>
         <label class="btn btn-default">
-          <%= radio_button("post", "options #{request.id}", Settings.request_status.approved) %>
+          <%= radio_button("post", "options #{request.id}",
+            Settings.request_status.approved) %>
           <%= t "request.action.approve" %>
         </label>
       <% end %>
       <% if request.show_waiting_done? @current_user %>
         <label class="btn btn-default">
-          <%= radio_button("post", "options #{request.id}", Settings.request_status.waiting_done) %>
+          <%= radio_button("post", "options #{request.id}",
+            Settings.request_status.waiting_done) %>
           <%= t "request.action.waiting_done" %>
         </label>
       <% end %>

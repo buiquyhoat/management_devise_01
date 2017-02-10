@@ -62,16 +62,43 @@ class Supports::User
       Settings.action.done
   end
 
-  def request_statuses
-    @request_statuses ||= RequestStatus.all
+  def lst_request_status user, request
+    case user.current_permission
+    when Settings.action.create
+      lst_request_status_staff
+    when Settings.action.approve
+      if request.request_status_id == Settings.request_status.cancelled
+        lst_request_status_manager_cancelled
+      else
+        lst_request_status_manager_waiting_approve
+      end
+    when Settings.action.waiting_done
+      if request.request_status_id == Settings.request_status.cancelled
+        lst_request_status_bomanager_cancelled
+      else
+        lst_request_status_bomanager_waiting_done
+      end
+    end
   end
 
-  def request_status_approve
-    @request_status_approve ||= RequestStatus.request_status_approve
+  def lst_request_status_staff
+    @lst_request_status_staff ||= RequestStatus.request_status_staff_waiting_approve
   end
 
-  def request_status_waiting_done
-    @request_status_waiting_done ||= RequestStatus.request_status_waiting_done
+  def lst_request_status_manager_cancelled
+    @lst_request_status_manager_cancelled ||= RequestStatus.request_status_manager_cancelled
+  end
+
+  def lst_request_status_manager_waiting_approve
+    @lst_request_status_manager_waiting_approve ||= RequestStatus.request_status_manager_waiting_approve
+  end
+
+  def lst_request_status_bomanager_cancelled
+    @lst_request_status_bomanager_cancelled ||= RequestStatus.request_status_bomanager_cancelled
+  end
+
+  def lst_request_status_bomanager_waiting_done
+    @lst_request_status_bomanager_waiting_done ||= RequestStatus.request_status_bomanager_waiting_done
   end
 
   def available_assign_staff
@@ -113,10 +140,11 @@ class Supports::User
 
   def lst_assignee user, request
     if request.id.present?
-      if user.can_approve
+      case user.current_permission
+      when Settings.action.approve
         user_can_waitting_done
-      else
-        user_can_approve
+      when Settings.action.waiting_done
+        user_can_done
       end
     else
       user_can_waitting_done
