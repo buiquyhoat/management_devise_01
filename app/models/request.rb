@@ -37,11 +37,25 @@ class Request < ApplicationRecord
   scope :find_for_user, ->current_id do
     where for_user_id: current_id if current_id.present?
   end
+
   scope :request_of_below_staff, ->parent_path, current_id do
     where "for_user_id in (select u.id from users as u left join user_groups as
       ug on ug.user_id = u.id left join groups as g on g.id = ug.group_id where
-      g.parent_path LIKE ?) OR id in (select r.id from requests as r where
-      r.assignee_id = ?)", convert_like(parent_path), current_id
+      g.parent_path LIKE ?)", convert_like(parent_path)
+  end
+
+  scope :request_manage, ->parent_path, user do
+    case user.current_permission
+    when Settings.action.approve
+      where "for_user_id in (select u.id from users as u left join user_groups as
+        ug on ug.user_id = u.id left join groups as g on g.id = ug.group_id where
+        g.parent_path LIKE ?)", convert_like(parent_path)
+    when Settings.action.waiting_done
+      where "request_status_id >= ? or (request_status_id= ? && updated_by = ?)",
+        Settings.request_status.approved, Settings.request_status.cancelled, user.id
+    when Settings.action.done
+      where request_status_id: [Settings.request_status.waiting_done, Settings.request_status.done]
+    end
   end
 
   scope :request_can_access, ->parent_path, current_id do
@@ -69,35 +83,53 @@ class Request < ApplicationRecord
     request_status_id == Settings.request_status.cancelled
   end
 
-  def show_approve? user
-    user.can_approve
+  def show_approve_request? user
+    user.can_approve && request_status_id == Settings.request_status.waiting_approve
   end
 
-  def show_cancel?
-    request_status_id != Settings.request_status.done
+  def show_cancel_request? user
+    case request_status_id
+    when Settings.request_status.waiting_approve
+      user.can_make_request && created_by == user.id || user.can_approve
+    when Settings.request_status.approved
+      user.can_approve && updated_by == user.id || user.can_waiting_done
+    when Settings.request_status.waiting_done
+      user.can_waiting_done && updated_by == user.id
+    else
+      false
+    end
   end
 
-  def show_send? user
-    request_status_id != Settings.request_status.approved &&
-    request_status_id != Settings.request_status.done && !show_approve?(user)
+  def show_send_request? user
+    user.can_make_request && request_status_id == Settings.request_status.cancelled && !user.can_approve
   end
-  def show_assignment user
-    user.can_assignment && request_status_id == Settings.request_status.approved
+
+  def show_appove_request? user
+    user.can_approve && request_status_id == Settings.request_status.waiting_approve
+  end
+
+  def show_waiting_done? user
+    user.can_waiting_done && request_status_id == Settings.request_status.approved
+  end
+
+  def show_assignment_request? user
+    user.can_done && request_status_id == Settings.request_status.waiting_done
   end
 
   def allow_change_status user
-    user.can_approve || user.can_assignment
+    user.can_approve || user.can_waiting_done
   end
+
   def allow_edit? user
     staff = User.below_staff(user.default_parent_path).find_by id: created_by
     request_status_id != Settings.request_status.done &&
     (user.id == created_by || user.id == updated_by || user.id == assignee_id ||
-    user.can_assignment || (staff.present? && user.can_approve))
+    user.can_waiting_done || (staff.present? && user.can_approve))
   end
 
   def owner? user
-    return false if created_by.present? && created_by != user.id
-    true
+    return true if id.nil? || created_by.present? && created_by == user.id
+    false
   end
   private
 

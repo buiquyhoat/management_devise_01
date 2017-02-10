@@ -4,34 +4,30 @@
     <%= f.hidden_field :id %>
     <div class="btn-group done_center" data-toggle="buttons"
       onchange="update_request(this,<%= request.id %>, '<%= request_status_path(request) %>')">
-      <% if request.request_status_id == Settings.request_status.done %>
-        <label class="done_label btn btn-default
-          <%= request.request_status_id == Settings.request_status.done ? "active" : "" %>">
-          <%= radio_button("post", "options #{request.id}", Settings.request_status.done) %>
-          <%= t "request.action.done" %>
-        </label>
-      <% else %>
-        <% if request.show_cancel? %>
-            <label class="btn btn-default
-              <%= request.request_status_id == Settings.request_status.cancelled ? "active" : "" %>">
-              <%= radio_button("post", "options #{request.id}", Settings.request_status.cancelled) %>
-              <%= t "request.action.cancel" %>
-            </label>
-        <% end %>
-        <% if request.show_send? @current_user %>
-          <label class="btn btn-default
-            <%= request.request_status_id == Settings.request_status.waiting_approve ? "active" : "" %>">
+      <% if request.show_send_request? @current_user %>
+          <label class="btn btn-default %>">
             <%= radio_button("post", "options #{request.id}", Settings.request_status.waiting_approve) %>
             <%= t "request.action.send" %>
           </label>
-        <% end %>
-        <% if request.show_approve? @current_user %>
-          <label class="btn btn-default
-            <%= request.request_status_id == Settings.request_status.approved ? "active" : "" %>">
-            <%= radio_button("post", "options #{request.id}", Settings.request_status.approved) %>
-            <%= t "request.action.approve" %>
+      <% end %>
+
+      <% if request.show_cancel_request? @current_user %>
+          <label class="btn btn-default">
+            <%= radio_button("post", "options #{request.id}", Settings.request_status.cancelled) %>
+            <%= t "request.action.cancel" %>
           </label>
-        <% end %>
+      <% end %>
+      <% if request.show_approve_request? @current_user %>
+        <label class="btn btn-default">
+          <%= radio_button("post", "options #{request.id}", Settings.request_status.approved) %>
+          <%= t "request.action.approve" %>
+        </label>
+      <% end %>
+      <% if request.show_waiting_done? @current_user %>
+        <label class="btn btn-default">
+          <%= radio_button("post", "options #{request.id}", Settings.request_status.waiting_done) %>
+          <%= t "request.action.waiting_done" %>
+        </label>
       <% end %>
     </div>
     <%end %>

@@ -31,18 +31,6 @@ class User < ApplicationRecord
   before_save :downcase_email
   after_initialize :create_another
 
-  scope :manage_list_staffs, ->user do
-    where "department_id= ? OR id in (select u.id from users as u left join
-      user_roles as ur on ur.user_id = u.id where ur.role_id = ?)",
-      user.department_id, Settings.user_role.manager
-  end
-
-  scope :normal_list_staffs, ->user do
-    where "department_id = ? AND id in (select u.id from users as u left join
-      user_roles as ur on ur.user_id = u.id where ur.role_id = ?)",
-      user.department_id, Settings.user_role.manager
-  end
-
   scope :below_staff, ->parent_path do
     where "id in (select u.id from users as u left join user_groups as ug on ug.user_id = u.id
     left join groups as g on g.id = ug.group_id where g.parent_path LIKE ?)",
@@ -75,22 +63,6 @@ class User < ApplicationRecord
     BCrypt::Password.new(digest).is_password? token
   end
 
-  def is_admin?
-    user_role.any?{|ur| ur.role_id == Settings.user_role.admin}
-  end
-
-  def is_back_officer?
-    department_id.present? && department_id == Settings.department.back_officer
-  end
-
-  def is_manager?
-    user_role.any?{|ur| ur.role_id == Settings.user_role.manager}
-  end
-
-  def is_staff?
-    is_manager? || user_role.any?{|ur| ur.role_id == Settings.user_role.staff}
-  end
-
   def highest_permission entry, action
     user_group.each do |ug|
       return true if ug.group.highest_permission entry, action
@@ -98,16 +70,56 @@ class User < ApplicationRecord
     false
   end
 
-  def can_approve
-    highest_permission Settings.entry.request, Settings.action.approve
+  def permission_default_group entry, action
+    user_group.each do |ug|
+      return true if (ug.group.highest_permission(entry, action) && ug.is_default_group)
+    end
+    false
   end
 
-  def can_assignment
-    highest_permission Settings.entry.assignment, Settings.action.create
+  def current_permission
+    return Settings.action.approve if can_approve
+    return Settings.action.waiting_done if can_waiting_done
+    return Settings.action.done if can_done
+  end
+
+  def can_assign_to?
+    can_approve || can_waiting_done
+  end
+
+  def can_manage_request
+    can_approve || can_waiting_done || can_done
+  end
+
+  def can_make_request
+    permission_default_group Settings.entry.request, Settings.action.create
+  end
+
+  def permission_default_group entry, action
+    user_group.each do |ug|
+      return true if (ug.group.highest_permission(entry, action) && ug.is_default_group)
+    end
+    false
+  end
+
+  def can_manage_device
+    permission_default_group Settings.entry.device, Settings.action.create
+  end
+
+  def can_approve
+    permission_default_group Settings.entry.request, Settings.action.approve
+  end
+
+  def can_waiting_done
+    permission_default_group Settings.entry.request, Settings.action.waiting_done
+  end
+
+  def can_done
+    permission_default_group Settings.entry.request, Settings.action.done
   end
 
   def is_admin
-    highest_permission Settings.entry.admin, Settings.action.create
+    permission_default_group Settings.entry.admin, Settings.action.create
   end
 
   def default_parent_path

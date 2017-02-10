@@ -37,7 +37,10 @@ class RequestsController < ApplicationController
 
   def update
     update_before_save
-    @request.update_attributes request_params
+    request_form = RequestForm.new(request_params)
+    if request_form.check_logic
+      @request.update_attributes request_params
+    end
     respond_to do |format|
       format.js
       if @request.errors.empty?
@@ -89,23 +92,17 @@ class RequestsController < ApplicationController
   end
 
   def get_requests
-    if @current_user.highest_permission(Settings.entry.assignment,
-      Settings.action.create)
-      @requests = Request.request_can_access(@current_user.default_parent_path,
-        @current_user.id)
-
-    else
-      @requests = Request.request_of_below_staff(@current_user.default_parent_path,
-        @current_user.id)
-    end
-    @requests = @requests.find_by_actor(params[:relative_id])
+    @requests = Request.request_manage(@current_user.default_parent_path, @current_user)
+      .find_by_actor(params[:relative_id])
       .of_request_status(params[:request_status_id])
       .order_by.paginate page: params[:page]
   end
 
   def get_my_requests
     @my_requests = Request.find_for_user(@current_user.id).order_by
-      .paginate page: params[:page]
+      .find_by_actor(params[:relative_id])
+      .of_request_status(params[:request_status_id])
+      .order_by.paginate page: params[:page]
   end
 
   def init_dropdown

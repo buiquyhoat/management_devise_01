@@ -74,7 +74,7 @@ module SessionsHelper
     respond_to do |format|
       format.json do
         render json: {
-          sucess: success,
+          success: success,
           message: message
         }
       end
