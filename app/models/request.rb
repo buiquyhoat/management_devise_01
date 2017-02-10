@@ -123,6 +123,6 @@ class Request < ApplicationRecord
         request_id: id, action: I18n.t("notification.action.updated"))
     end
     create_notify updated_by, for_user_id,
-      message, Rails.application.routes.url_helpers.devices_path
+      message, Rails.application.routes.url_helpers.requests_path
   end
 end

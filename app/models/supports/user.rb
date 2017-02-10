@@ -46,8 +46,7 @@ class Supports::User
   end
 
   def user_can_assignment
-    @user_can_assignment ||= user_have_permission Settings.entry.assignment,
-      Settings.action.create
+    @user_can_assignment ||= user_have_permission Settings.entry.assignment, Settings.action.create
   end
 
   def user_can_approve
