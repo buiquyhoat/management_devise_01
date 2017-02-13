@@ -6,7 +6,7 @@ class AssignmentDetail < ApplicationRecord
   belongs_to :assignment, inverse_of: :assignment_details
   belongs_to :device
 
-  delegate :assignee_name, :assignee_id,
+  delegate :assignee_name, :assignee_id,:assignee_email, :assignee_name,
    to: :assignment, prefix: true, allow_nil: true
   delegate :device_code, :production_name, :device_category_name,
    to: :device, prefix: true, allow_nil: true

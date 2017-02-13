@@ -1,0 +1,76 @@
+<% if @using_histories.any? %>
+  <table class="table table-hover table-fixed">
+    <thead>
+      <tr>
+        <th class="width-30"><%= t "device_manager.table.header.device_code" %></th>
+        <th class="width-30"><%= t "device_manager.table.header.category" %></th>
+        <th class="width-30"><%= t "device_manager.table.header.from_date" %></th>
+        <th class="width-30"><%= t "device_manager.table.header.to_date" %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @using_histories.each do |using_history| %>
+        <% if @curent_assignee.nil? || @curent_assignee != using_history.assignment_assignee_id %>
+          <tr class="success">
+            <td colspan="4">
+              <%= t "device_manager.field_label.using_by" %>
+              <%= link_to using_history.assignment_assignee_name,
+                device_history_index_path(q:{assignment_assignee_email_or_device_device_code_cont:
+                using_history.assignment_assignee_email}),
+                title: t("device_manager.field_label.history_tooltip",
+                name: using_history.assignment_assignee_name) %>
+            </td>
+          </tr>
+        <% @curent_assignee = using_history.assignment_assignee_id %>
+        <% end %>
+        <tr>
+          <td class="padding-left-3">
+            <%= link_to "", device_history_index_path(q:
+              {assignment_assignee_email_or_device_device_code_cont:
+              using_history.device_device_code}),
+              class: "glyphicon glyphicon-search",
+              title: t("device_manager.field_label.history_tooltip",
+              name: using_history.device_device_code) %>
+            <%= link_to using_history.device_device_code, device_path(using_history.device_id), remote: true,
+              data:{toggle: "modal", target: "#dms-popup", backdrop: "static"},
+              title: t("device_manager.field_label.view_detail_device_tooltip",
+              name: using_history.device_device_code) %>
+          </td>
+          <td>
+            <%= using_history.device_device_category_name %>
+          </td>
+          <td>
+            <%= l using_history.assignment.created_at, format: :date_format %>
+          </td>
+          <td>
+            <% if using_history.return_date? %>
+              <%= l using_history.return_date, format: :date_format %>
+            <% else %>
+              <span class="label badge">
+                <%= t "device_manager.field_label.now"%>
+              </span>
+            <% end %>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @using_histories %>
+<% else %>
+  <table class="table table-hover table-fixed">
+    <thead>
+      <tr>
+        <th class="width-30"><%= t "device_manager.table.header.staff" %></th>
+        <th class="width-30"><%= t "device_manager.table.header.from_date" %></th>
+        <th class="width-30"><%= t "device_manager.table.header.to_date" %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="3" class="taC">
+          <%= t "device_manager.table.message.device_not_exist_using_history" %>
+        </td>
+      </tr>
+      </tbody>
+  </table>
+<% end %>

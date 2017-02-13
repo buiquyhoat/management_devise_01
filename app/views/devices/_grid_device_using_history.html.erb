@@ -11,7 +11,9 @@
       <% @using_histories.each do |using_history| %>
         <tr>
           <td>
-            <%= using_history.assignment_assignee_name %>
+            <%= link_to using_history.assignment_assignee_name,
+              device_history_index_path(q:{assignment_assignee_email_or_device_device_code_cont:
+              using_history.assignment_assignee_email}) %>
           </td>
           <td>
             <%= l using_history.assignment.created_at, format: :date_format %>
