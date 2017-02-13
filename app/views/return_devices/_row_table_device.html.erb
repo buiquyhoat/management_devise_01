@@ -1,0 +1,18 @@
+<% if @list_device.any? %>
+  <% @list_device.each do |device| %>
+    <tr>
+      <td class="taC">
+        <%= check_box_tag "assigment_detail_ids[]", device.id, false %>
+      </td>
+      <td>
+        <%= device.device_device_code %>
+      </td>
+      <td>
+        <%= device.device_production_name %>
+      </td>
+      <td>
+        <%= device.device_device_category_name %>
+      </td>
+    </tr>
+  <% end %>
+<% end %>

@@ -3,13 +3,15 @@ class DevicesController < ApplicationController
   before_action :init_dropdown, only: :index
   before_action :init_dropdown_add_new, only: [:new, :edit]
   before_action :logged_in_user
+  before_action :check_permision, except: :show
 
   def index
     get_devices
   end
 
   def show
-    @using_histories = AssignmentDetail.by_device(@device.id).includes(:device)
+    @using_histories = AssignmentDetail.by_device(@device.id)
+      .return_date_sort_asc.includes(:device)
     @device_histories = DmsHistory.of_object @device.id, Settings.history_type.device
     @request = Request.find_by id: params[:request_id] if params[:request_id].present?
     respond_to do |format|
@@ -44,8 +46,8 @@ class DevicesController < ApplicationController
   end
 
   def update
-    @device.update_attributes device_params
     set_updated_by @device
+    @device.update_attributes device_params
     respond_to do |format|
       format.js
         render "devices/create"
@@ -102,5 +104,11 @@ class DevicesController < ApplicationController
       .of_category(params[:category_id])
       .of_status(params[:status_id]).of_invoice(params[:invoice_number])
       .paginate page: params[:page]
+  end
+
+  def check_permision
+    unless current_user.can_assignment
+      redirect_to root_url
+    end
   end
 end

@@ -1,4 +1,7 @@
 en:
+  time:
+    formats:
+      date_format: "%d-%m-%Y %H:%M:%S"
   errors:
     messages:
       carrierwave_processing_error: failed to be processed
@@ -13,9 +16,6 @@ en:
       min_size_error: "File size should be greater than %{min_size}"
       max_size_error: "File size should be less than %{max_size}"
       first: "Errors:"
-  time:
-    formats:
-      date_format: "%d-%m-%Y %H:%M:%S"
   title: "Devices manager system"
   dms_app_title: "Devices Manage System"
   button_update_text: "Update"
@@ -90,6 +90,7 @@ en:
       save_change: "Save changes"
     button_close_text: "Close"
     title_add_new: "Add New Device"
+    title_return: "Return Device"
     delete_action:
       success: "Delete Device Sucess!"
       fail: "Delete Device Failed!"
@@ -109,6 +110,7 @@ en:
       createed_by: "Created By"
       created_date: "Created Date"
       now: "Now"
+      using: "Using"
     table:
       header:
         production: "Production"
@@ -123,6 +125,7 @@ en:
         staff: "Staff"
         from_date: "From Date"
         to_date: "To Date"
+        return_date: "Return Date"
       message:
         device_not_exist_using_history: "Device do not exist using history."
         device_not_exist_history: "Device do not exist history."
@@ -254,3 +257,10 @@ en:
       header:
         setting: "Setting Name"
         action: "Enable/Disable"
+  return_device:
+    title: "Return Device"
+    message:
+      device_has_returned: "Your devices has been returned"
+    table:
+      header:
+        select_device: "Select Device"

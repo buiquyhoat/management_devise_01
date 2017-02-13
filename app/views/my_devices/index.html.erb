@@ -6,20 +6,30 @@
         <th><%= t "device_manager.table.header.device_code" %></th>
         <th><%= t "device_manager.table.header.production" %></th>
         <th><%= t "device_manager.table.header.category" %></th>
+        <th><%= t "device_manager.table.header.return_date" %></th>
       </tr>
     </thead>
     <tbody>
       <% @devices.each do |device| %>
         <tr>
           <td>
-             <%= link_to link_to device.device_code, device_path(device), remote: true,
+             <%= link_to link_to device.device_device_code, device_path(device.device_id), remote: true,
               data:{toggle: "modal", target: "#dms-popup", backdrop: "static"} %>
           </td>
           <td>
-            <%= link_to link_to device.production_name, device_path(device), remote: true,
+            <%= link_to link_to device.device_production_name, device_path(device.device_id), remote: true,
               data:{toggle: "modal", target: "#dms-popup", backdrop: "static"} %>
           </td>
-          <td><%= device.device_category_name %></td>
+          <td><%= device.device_device_category_name %></td>
+          <td>
+            <% if device.return_date? %>
+              <%= l device.return_date, format: :date_format %>
+            <% else %>
+              <span class="label badge">
+                <%= t "device_manager.field_label.using"%>
+              </span>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>
@@ -32,6 +42,7 @@
         <th><%= t "device_manager.table.header.device_code" %></th>
         <th><%= t "device_manager.table.header.production" %></th>
         <th><%= t "device_manager.table.header.category" %></th>
+        <th><%= t "device_manager.table.header.return_date" %></th>
       </tr>
     </thead>
   </table>

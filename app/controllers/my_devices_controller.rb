@@ -1,6 +1,7 @@
 class MyDevicesController < ApplicationController
   def index
-    @devices = Device.find_assigne_device(current_user.id)
+    @devices = AssignmentDetail.by_user(current_user.id)
+      .return_date_sort_asc
       .paginate page: params[:page]
   end
 end
