@@ -23,8 +23,8 @@
             <td><%= device.device_status.name %></td>
             <td><%= device.device_category.name %></td>
             <td><%= device.invoice.invoice_number %></td>
-            <% if current_user.can_assignment %>
-              <td>
+            <td>
+              <% if current_user.can_manage_device %>
                 <%= link_to "", edit_device_path(device), remote: true,
                   class: "glyphicon glyphicon-pencil",
                   data:{toggle: "modal", target: "#dms-popup", backdrop: "static"} %>

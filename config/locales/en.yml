@@ -140,12 +140,14 @@ en:
       device_invoice_history: "Invoice Infomation"
   request:
     title: "Manager Requests"
-    my_title: "Your Requests"
     update_success: "Update Success"
     update_unsuccess: "Update Unsuccess"
+    update_conflict: "Maybe data is empty or updated by another member"
     tab:
       request_info: "Request Info"
       device_assignment: "Device Assignment"
+      my_title: "Your requests"
+      another_request: "Manager Requests"
     table:
       title: "Title"
       description: "Description"
@@ -163,6 +165,7 @@ en:
       cancel: "Cancel"
       send: "Send"
       approve: "Approve"
+      waiting_done: "Receive"
     add_request_detail: "Add Request Detail"
     confirm: "This data will be delete now! Are you sure?"
     request_detail:

@@ -23,12 +23,6 @@ user_role:
   staff: 3
 all : "All"
 none: "None"
-
-request_status:
-  cancelled: 1
-  waiting_approve: 2
-  approved: 3
-  done: 4
 type:
   request: 1
 device_code:
@@ -50,12 +44,22 @@ entry:
   request: "Request"
   assignment: "Assignment"
   admin: "Admin"
+  device: "Device"
+request_status:
+  cancelled: 1
+  waiting_approve: 2
+  approved: 3
+  waiting_done: 4
+  done: 5
+
 action:
   create: "Create"
   read: "Read"
   update: "Update"
   delete: "Delete"
   approve: "Approve"
+  waiting_done: "Waiting Done"
+  done: "Done"
   created: "Created"
   updated: "Updated"
 mailer_host: "localhost:3000"

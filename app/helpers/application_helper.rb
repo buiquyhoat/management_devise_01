@@ -22,4 +22,14 @@ module ApplicationHelper
     end
     users
   end
+
+  def user_have_permission_default entry, action
+    users = []
+    User.all.each do |u|
+      if u.permission_default_group entry, action
+        users << u
+      end
+    end
+    users
+  end
 end

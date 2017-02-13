@@ -26,7 +26,7 @@
           <td><%= request.for_user.name if request.for_user.present? %></td>
           <td><%= time_ago_in_words(request.created_at) %></td>
           <td>
-            <% if request.show_assignment @current_user %>
+            <% if request.show_assignment_request? @current_user %>
               <%= link_to "",  new_assignment_path(request_id: request.id), remote: true,
               class: "glyphicon glyphicon-plus",
               data: {toggle: "modal", target: "#dms-popup"} %>

@@ -1,8 +1,10 @@
 class Supports::User
   include ApplicationHelper
+
   def initialize user
     @user = user
   end
+
   def created_by user_id
     all_users
     created = @all_users.find_by id: user_id
@@ -45,13 +47,19 @@ class Supports::User
     @derpartment_user ||= User.of_department department_id
   end
 
-  def user_can_assignment
-    @user_can_assignment ||= user_have_permission Settings.entry.assignment, Settings.action.create
+  def user_can_waitting_done
+    @user_can_waitting_done ||= user_have_permission_default Settings.entry.request,
+      Settings.action.waiting_done
   end
 
   def user_can_approve
-    @user_can_approve ||= user_have_permission Settings.entry.request,
+    @user_can_approve ||= user_have_permission_default Settings.entry.request,
       Settings.action.approve
+  end
+
+  def user_can_done
+    @user_can_done ||= user_have_permission_default Settings.entry.request,
+      Settings.action.done
   end
 
   def request_statuses
@@ -62,8 +70,8 @@ class Supports::User
     @request_status_approve ||= RequestStatus.request_status_approve
   end
 
-  def request_status_assigment
-    @request_status_assigment ||= RequestStatus.request_status_assigment
+  def request_status_waiting_done
+    @request_status_waiting_done ||= RequestStatus.request_status_waiting_done
   end
 
   def available_assign_staff
@@ -75,11 +83,12 @@ class Supports::User
   end
 
   def below_staffs
-    if @user.highest_permission(Settings.entry.request, Settings.action.approve)
+    if @user.can_approve
       @below_staffs ||= User.below_staff @user.default_parent_path
     else
       @below_staffs = [@user]
     end
+
   end
 
   def request_types
@@ -100,5 +109,17 @@ class Supports::User
 
   def device_categories_search
     @device_categories_search ||= DeviceCategory.all
+  end
+
+  def lst_assignee user, request
+    if request.id.present?
+      if user.can_approve
+        user_can_waitting_done
+      else
+        user_can_approve
+      end
+    else
+      user_can_waitting_done
+    end
   end
 end

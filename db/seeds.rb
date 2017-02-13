@@ -652,8 +652,12 @@ RequestStatus.create!(name: "approved",
   value: 3,
   created_by: 1,
   updated_by: 1)
-RequestStatus.create!(name: "done",
+RequestStatus.create!(name: "waiting done",
   value: 4,
+  created_by: 1,
+  updated_by: 1)
+RequestStatus.create!(name: "done",
+  value: 5,
   created_by: 1,
   updated_by: 1)
 
@@ -757,8 +761,8 @@ Group.create!(
   name: "BO Framgia",
   company_id: 1,
   description: "BO Framgia",
-  closest_parent_id: 7,
-  parent_path: "/1/6/7",
+  closest_parent_id: 6,
+  parent_path: "/1/6",
   group_type: 1,
   image: "")
 Group.create!(
@@ -783,8 +787,8 @@ Group.create!(
   name: "BO Framgia Ha Noi",
   company_id: 1,
   description: "BO Framgia",
-  closest_parent_id: 7,
-  parent_path: "/1/6/7/10",
+  closest_parent_id: 10,
+  parent_path: "/1/6/10",
   group_type: 1,
   image: "")
 
@@ -792,8 +796,8 @@ Group.create!(
   name: "BO Framgia Da Nang",
   company_id: 1,
   description: "BO Framgia",
-  closest_parent_id: 7,
-  parent_path: "/1/6/7/10",
+  closest_parent_id: 10,
+  parent_path: "/1/6/10",
   group_type: 1,
   image: "")
 
@@ -840,42 +844,38 @@ Group.create!(
   parent_path: "/1",
   group_type: 1,
   image: "")
+
+Group.create!(
+  name: "BO Manage Devie Da Nang",
+  company_id: 1,
+  description: "BO Manage Devie Framgia",
+  closest_parent_id: 14,
+  parent_path: "/1/6/10/14",
+  group_type: 1,
+  image: "")
 Permission.create!(
   entry: "Request",
   group_id: 1,
   optional: "{\"Create\":false,\"Read\":false,\"Update\":false,\"Delete\":false,\"Approve\":false}")
-
 Permission.create!(
   entry: "Request",
-  group_id: 2,
+  group_id: 7,
   optional: "{\"Create\":true,\"Read\":true,\"Update\":true,\"Delete\":true,\"Approve\":true}")
-
 Permission.create!(
   entry: "Request",
-  group_id: 3,
-  optional: "{\"Create\":true,\"Read\":true,\"Update\":true,\"Delete\":true,\"Approve\":true}")
-
-Permission.create!(
-  entry: "Request",
-  group_id: 6,
-  optional: "{\"Create\":true,\"Read\":true,\"Update\":true,\"Delete\":true,\"Approve\":false}")
-
-Permission.create!(
-  entry: "Assignment",
-  group_id: 6,
-  optional: "{\"Create\":false,\"Read\":false,\"Update\":false,\"Delete\":false}")
-
-Permission.create!(
-  entry: "Assignment",
   group_id: 10,
-  optional: "{\"Create\":true,\"Read\":true,\"Update\":true,\"Delete\":true}")
+  optional: "{\"Waiting Done\":true}")
 Permission.create!(
-  entry: "Assignment",
+  entry: "Request",
   group_id: 13,
-  optional: "{\"Create\":true,\"Read\":true,\"Update\":true,\"Delete\":true}")
+  optional: "{\"Waiting Done\":false, \"Done\":true}")
 Permission.create!(
-  entry: "Assignment",
+  entry: "Request",
   group_id: 14,
+  optional: "{\"Waiting Done\":false, \"Done\":true}")
+Permission.create!(
+  entry: "Device",
+  group_id: 19,
   optional: "{\"Create\":true,\"Read\":true,\"Update\":true,\"Delete\":true}")
 
 Permission.create!(
@@ -980,7 +980,7 @@ UserGroup.create!(
 
 UserGroup.create!(
   user_id: 8,
-  group_id: 14,
+  group_id: 19,
   is_default_group: true)
 UserGroup.create!(
   user_id: 9,
