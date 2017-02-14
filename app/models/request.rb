@@ -19,8 +19,8 @@ class Request < ApplicationRecord
   after_initialize :create_extend_data
   after_save :create_notification
 
-  scope :order_by, ->{order created_at: :desc, updated_at: :desc}
-  scope :find_by_actor, ->user_id do
+  scope :order_by, ->{order request_status_id: :asc, created_at: :desc, updated_at: :desc}
+  scope :of_actor, ->user_id do
     if user_id.present?
       where "id in (select r.id from requests as r
         where r.assignee_id = ? or r.created_by = ? or r.updated_by = ?
@@ -34,8 +34,12 @@ class Request < ApplicationRecord
     end
   end
 
-  scope :find_for_user, ->current_id do
-    where for_user_id: current_id if current_id.present?
+  scope :of_for_user, ->user_id do
+    where for_user_id: user_id if user_id.present?
+  end
+
+  scope :with_status, ->request_status_id do
+    where request_status_id: request_status_id if request_status_id.present?
   end
 
   scope :request_of_below_staff, ->parent_path, current_id do
