@@ -1,6 +1,5 @@
 class UserSettingController < ApplicationController
   def index
-
   end
 
   def update
@@ -18,10 +17,32 @@ class UserSettingController < ApplicationController
 
   private
 
-  def update_new_settings current_setting, new_setting
+  def update_new_settings current_setting, setting_params
+    new_setting = extra_parameter setting_params
     current_setting.optional_hash.each do |k, v|
-      current_setting.optional_hash[k] = new_setting.index(k).present?
+      if new_setting.has_key? k
+        current_setting.optional_hash[k] = new_setting[k]
+      else
+        if type_boolean(v)
+          current_setting.optional_hash[k] = false
+        else
+          current_setting.optional_hash[k] = ""
+        end
+      end
     end
+  end
+
+  def extra_parameter new_setting
+    hash_setting = {}
+    new_setting.each do |setting_value|
+      value_split = setting_value.split(":")
+      if value_split.count > 1
+        hash_setting[value_split[0]]= value_split[1]
+      else
+        hash_setting[setting_value] = true
+      end
+    end
+    hash_setting
   end
 
   def save_setting update_setting
@@ -35,7 +56,11 @@ class UserSettingController < ApplicationController
 
   def disable_all_setting update_setting
     update_setting.optional_hash.each do |k, v|
-      update_setting.optional_hash[k] = false
+      if type_boolean v
+        update_setting.optional_hash[k] = false
+      else
+        update_setting.optional_hash[k] = ""
+      end
     end
   end
 end

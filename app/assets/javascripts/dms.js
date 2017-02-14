@@ -130,6 +130,11 @@ $(document).on('turbolinks:load', function() {
     window.location.href = $(this).find('a').first().attr('href');
   });
 
+  $('#list-setting .user-setting').change(function() {
+    var setting_name = $(this).attr('id')
+    $('#hd-'+ setting_name).val(setting_name + ':' + $(this).val())
+  })
+
 })
 
 function changeSearchForm(){
