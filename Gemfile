@@ -29,6 +29,8 @@ gem "bootstrap-datepicker-rails"
 gem "figaro"
 gem "remotipart", "~> 1.2"
 gem "carrierwave"
+gem "ransack"
+
 group :development, :test do
   gem "byebug", platform: :mri
 end

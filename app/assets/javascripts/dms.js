@@ -233,3 +233,7 @@ function setup_date_picker(){
     format: 'yyyy/mm/dd'
   });
 }
+
+function clear_text_box_search(){
+  $('#key_search').val(''); changeSearchForm();
+}

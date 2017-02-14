@@ -65,3 +65,5 @@ action:
 mailer_host: "localhost:3000"
 user_setting:
   send_mail_notification: "send_mail_notification"
+paging:
+  page_size: 15

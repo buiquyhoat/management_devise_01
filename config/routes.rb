@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   resources :my_devices, only: :index
   resources :user_setting, only: [:index, :update], collection: {update: :put}
   resources :return_devices, only: :index
+  resources :device_history
 
   mount ActionCable.server => "/cable"
 end
