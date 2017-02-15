@@ -1,5 +1,7 @@
 class UserSettingController < ApplicationController
   def index
+    @user_group = UserGroup.find_by is_default_group: true, user_id: current_user.id
+    @list_group = UserGroup.by_user current_user.id
   end
 
   def update

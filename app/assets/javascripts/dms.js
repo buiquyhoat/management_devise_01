@@ -242,3 +242,8 @@ function setup_date_picker(){
 function clear_text_box_search(){
   $('#key_search').val(''); changeSearchForm();
 }
+
+function user_setting_submit(){
+  $('#form-user-setting').submit();
+  $('#form-user-group').submit();
+}
