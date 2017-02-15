@@ -162,7 +162,7 @@ en:
       request_type: "Request Type"
       request_status: "Request Status"
       assignee: "Assign to"
-      created_by": "Create By"
+      created_by: "Create By"
       updated_by: "Updated By"
       request_for: "Request For"
       for_user: "Request For"
@@ -174,6 +174,8 @@ en:
       send: "Send"
       approve: "Approve"
       waiting_done: "Receive"
+      re_approve: "Re-approve"
+      re_send: "Re-send"
     add_request_detail: "Add Request Detail"
     confirm: "This data will be delete now! Are you sure?"
     request_detail:

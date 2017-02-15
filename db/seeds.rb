@@ -150,6 +150,21 @@ User.create!(first_name: "Hong Nguyen",
   password: "framgia",
   password_confirmation: "framgia",
   department_id: 3 )
+User.create!(first_name: "Div 1",
+  last_name: "Manager",
+  email: "div1manager@framgia.com",
+  address: "Framgia",
+  password: "framgia",
+  password_confirmation: "framgia",
+  department_id: 4 )
+User.create!(first_name: "BO",
+  last_name: "Manager",
+  email: "bomanager@framgia.com",
+  address: "Framgia",
+  password: "framgia",
+  password_confirmation: "framgia",
+  department_id: 4 )
+
 #Roles
 Role.create!(name: "admin",
   value: 1,
@@ -863,6 +878,14 @@ Permission.create!(
   optional: "{\"Create\":true,\"Read\":true,\"Update\":true,\"Delete\":true,\"Approve\":true}")
 Permission.create!(
   entry: "Request",
+  group_id: 17,
+  optional: "{\"Create\":true,\"Read\":true,\"Update\":true,\"Delete\":true}")
+Permission.create!(
+  entry: "Request",
+  group_id: 18,
+  optional: "{\"Create\":true,\"Read\":true,\"Update\":true,\"Delete\":true}")
+Permission.create!(
+  entry: "Request",
   group_id: 10,
   optional: "{\"Waiting Done\":true}")
 Permission.create!(
@@ -974,7 +997,17 @@ UserGroup.create!(
   is_default_group: true)
 
 UserGroup.create!(
+  user_id: 15,
+  group_id: 7,
+  is_default_group: true)
+
+UserGroup.create!(
   user_id: 3,
+  group_id: 10,
+  is_default_group: true)
+
+UserGroup.create!(
+  user_id: 16,
   group_id: 10,
   is_default_group: true)
 

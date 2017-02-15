@@ -92,22 +92,26 @@ class Request < ApplicationRecord
     when Settings.request_status.waiting_approve
       user.can_make_request && created_by == user.id || user.can_approve
     when Settings.request_status.approved
-      user.can_approve && updated_by == user.id || user.can_waiting_done
-    when Settings.request_status.waiting_done
-      user.can_waiting_done && updated_by == user.id
+      user.can_waiting_done
     else
       false
     end
   end
 
-  def show_send_request? user
-    user.can_make_request && request_status_id == Settings.request_status.cancelled && !user.can_approve
+  def show_reupdate? user
+    user.current_permission.present? && user.id == created_by &&
+    request_status_id == Settings.request_status.cancelled &&
+    (user.current_permission == Settings.action.create ||
+    user.current_permission == Settings.action.approve)
   end
 
-  def show_appove_request? user
+  def show_approve_request? user
     user.can_approve && request_status_id == Settings.request_status.waiting_approve
   end
 
+  def show_waiting_approve? user
+    user.can_make_request && request_status_id == Settings.request_status.cancelled
+  end
   def show_waiting_done? user
     user.can_waiting_done && request_status_id == Settings.request_status.approved
   end
@@ -116,20 +120,52 @@ class Request < ApplicationRecord
     user.can_done && request_status_id == Settings.request_status.waiting_done
   end
 
-  def allow_change_status user
-    user.can_approve || user.can_waiting_done
+  def allow_change_status? user
+    id.present? && (user.can_approve || allow_edit?(user))
   end
 
   def allow_edit? user
+    user_staff_edit_request?(user) || user_manager_edit_request?(user) ||
+    user_manager_bo_edit_request?(user)
+  end
+
+  def user_staff_edit_request? user
+    user.can_make_request && user.id == created_by &&
+    request_status_id <= Settings.request_status.waiting_approve
+  end
+
+  def user_manager_edit_request? user
     staff = User.below_staff(user.default_parent_path).find_by id: created_by
-    request_status_id != Settings.request_status.done &&
-    (user.id == created_by || user.id == updated_by || user.id == assignee_id ||
-    user.can_waiting_done || (staff.present? && user.can_approve))
+    user.can_approve && (user.id == created_by || staff.present?) &&
+    (request_status_id == Settings.request_status.waiting_approve ||
+    request_status_id == Settings.request_status.cancelled && created_by == user.id)
+  end
+
+  def user_manager_bo_edit_request? user
+    user.can_waiting_done && request_status_id == Settings.request_status.approved
   end
 
   def owner? user
     return true if id.nil? || created_by.present? && created_by == user.id
     false
+  end
+
+  def status_reupdate user
+    case user.current_permission
+    when Settings.action.create
+      Settings.request_status.waiting_approve
+    when Settings.action.approve
+      Settings.request_status.approved
+    end
+  end
+
+  def title_update user
+    case user.current_permission
+    when Settings.action.approve
+      I18n.t("request.action.re_approve")
+    when Settings.action.create
+      I18n.t("request.action.re_send")
+    end
   end
   private
 
