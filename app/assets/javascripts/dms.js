@@ -117,6 +117,7 @@ $(document).on('turbolinks:load', function() {
 $(document).on('turbolinks:load', function() {
   setup_date_picker();
   set_up_chosen();
+  setup_chart();
   $('#show_form_login').on('click',function(){
     if($('#form_login').css('display') === 'block'){
       $('#form_login').slideUp();
@@ -237,3 +238,79 @@ function setup_date_picker(){
 function clear_text_box_search(){
   $('#key_search').val(''); changeSearchForm();
 }
+
+function setup_chart(){
+  if ($("#request_cycle").length > 0) {
+  var options = {
+    legend: false,
+    responsive: false
+  };
+  $.ajax({
+    type: 'GET',
+    url: '/dashboard_chart/',
+    dataType: 'json',
+    success: function(data){
+      if (data.success === false)
+      {}
+      else
+      {
+        chartobj= JSON.parse(data.message)
+        new Chart(document.getElementById("canvas1"), {
+          type: chartobj.type,
+          tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+          data: {
+            labels: chartobj.labels,
+            datasets: [{
+              data: chartobj.data,
+              backgroundColor: chartobj.backgroundColor,
+              hoverBackgroundColor: chartobj.hoverBackgroundColor
+            }]
+          },
+          options: options
+        });
+      }
+    },
+    error: function (error_message){
+    }
+  });
+}
+
+}
+
+// $("#request_cycle").ready(function(){
+//   var options = {
+//     legend: false,
+//     responsive: false
+//   };
+
+//   $.ajax({
+//     type: 'GET',
+//     url: '/dashboard_chart/',
+//     dataType: 'json',
+//     success: function(data){
+//       if (data.success === false)
+//       {
+
+//       }
+//       else
+//       {
+//         chartobj= JSON.parse(data.message)
+//         new Chart(document.getElementById("canvas1"), {
+//           type: chartobj.type,
+//           tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+//           data: {
+//             labels: chartobj.labels,
+//             datasets: [{
+//               data: chartobj.data,
+//               backgroundColor: chartobj.backgroundColor,
+//               hoverBackgroundColor: chartobj.hoverBackgroundColor
+//             }]
+//           },
+//           options: options
+//         });
+//       }
+//     },
+//     error: function (error_message){
+//     }
+//   });
+// });

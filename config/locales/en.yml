@@ -57,6 +57,7 @@ en:
     title: "About"
     framgia: "We make it anwsome"
   menu:
+    dashboard: "Dashboard"
     hone: "Home"
     admin: "Admin"
     manager: "Manager"
@@ -168,6 +169,7 @@ en:
       for_user: "Request For"
       time_ago: "Time Ago"
       request_action: "Action"
+      check: "Check"
     action:
       done: "Done"
       cancel: "Cancel"
@@ -277,3 +279,7 @@ en:
     table:
       header:
         select_device: "Select Device"
+  dashboard:
+    request_overview: "Request Overview"
+    request:
+      check: "check now"

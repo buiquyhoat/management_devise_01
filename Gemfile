@@ -21,7 +21,7 @@ gem "turbolinks", "~> 5"
 gem "jbuilder", "~> 2.5"
 gem "will_paginate", "3.1.0"
 gem "bootstrap-will_paginate", "0.0.10"
-gem "bootstrap-sass", "3.3.6"
+gem "bootstrap-sass", "~>3.3.6"
 gem "config"
 gem "chosen-rails"
 gem "i18n-js", "~> 3.0.0.rc11"
@@ -30,7 +30,6 @@ gem "figaro"
 gem "remotipart", "~> 1.2"
 gem "carrierwave"
 gem "ransack"
-
 group :development, :test do
   gem "byebug", platform: :mri
 end

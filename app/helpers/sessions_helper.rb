@@ -70,6 +70,17 @@ module SessionsHelper
     end
   end
 
+  def json_request_chart_response success, chartobj
+    respond_to do |format|
+      format.json do
+        render json: {
+          success: success,
+          message: chartobj.to_json
+        }
+      end
+    end
+  end
+
   def json_response success, message
     respond_to do |format|
       format.json do
