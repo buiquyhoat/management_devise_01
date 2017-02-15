@@ -264,6 +264,8 @@ en:
     back: "Back"
   user_setting:
     title: "User Settings"
+    label:
+      user_grroup: "User Group Default"
     table:
       header:
         setting: "Setting Name"

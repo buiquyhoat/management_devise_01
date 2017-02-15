@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get "device_code/show"
   get "get_device_code/show"
   get "assignment_device/show"
@@ -31,6 +32,7 @@ Rails.application.routes.draw do
   resources :user_setting, only: [:index, :update], collection: {update: :put}
   resources :return_devices, only: :index
   resources :device_history
+  resources :user_groups
 
   mount ActionCable.server => "/cable"
 end
