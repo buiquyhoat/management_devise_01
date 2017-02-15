@@ -42,8 +42,19 @@ group :development do
   gem "spring-watcher-listen", "~> 2.0.0"
 end
 
+group :test do
+  gem "rspec-activemodel-mocks"
+  gem "simplecov", require: false
+  gem "shoulda-matchers", "3.1"
+end
+
 group :production do
   gem "pg", "0.18.4"
+end
+
+group :development, :test do
+  gem "rspec-rails", "3.5"
+  gem "factory_girl_rails", require: false
 end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
