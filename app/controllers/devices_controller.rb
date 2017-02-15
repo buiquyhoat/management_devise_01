@@ -107,7 +107,7 @@ class DevicesController < ApplicationController
   end
 
   def check_permision
-    unless current_user.can_assignment
+    unless current_user.can_manage_device
       redirect_to root_url
     end
   end
