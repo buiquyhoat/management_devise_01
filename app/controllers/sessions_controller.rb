@@ -31,6 +31,9 @@ class SessionsController < ApplicationController
   def default_user_setting
     seting = {}
     seting[Settings.user_setting.send_mail_notification] = true
+    seting[Settings.user_setting.order_by_unread_notification] = true
+    seting[Settings.user_setting.quantity_load_notification] =
+      Settings.paging.max_page_size
     seting[Settings.user_setting.page_size] = Settings.paging.page_size
     seting[Settings.user_setting.user_signal] = ""
     seting

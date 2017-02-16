@@ -33,9 +33,17 @@ module ApplicationHelper
     users
   end
 
+  def render_text_box setting_name, setting_value
+    "<input id=\"#{setting_name}\"
+      value=\"#{setting_value}\"
+      #{get_setting_type(setting_name)}
+      class=\"form-control taR user-setting\">"
+  end
+
   def get_setting_type setting
     setting_type =  Settings.user_setting.setting_type["#{setting}"]
     setting_type = Settings.user_setting.setting_type.default if setting_type.nil?
     setting_type
   end
+
 end

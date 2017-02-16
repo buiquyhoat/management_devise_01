@@ -4,7 +4,7 @@ class NotificationsController < ApplicationController
   before_action :init_data
 
   def index
-    @notifications = Notification.by_current_user(current_user.id)
+    @list_notifications = Notification.by_current_user(current_user.id)
       .created_from_date(params[:from_date])
       .created_to_date(params[:to_date])
       .sender_by(params[:sender_id])

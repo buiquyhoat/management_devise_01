@@ -400,6 +400,10 @@ a.user-profile {
   margin-left: 0
 }
 
+.margin-left-1 {
+  margin-left: 1%
+}
+
 .line-height-55{
   line-height: 55px;
 }
@@ -694,7 +698,7 @@ body .modal {
 
 #searchclear {
   position: absolute;
-  right: 5%;
+  right: 20px;
   top: 0;
   bottom: 0;
   height: 14px;
@@ -710,6 +714,12 @@ body .modal {
 
 .list-group-item{
   line-height: 35px;
+}
+
+.popup-max-height{
+  max-height: 700px;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 /** jQuery Smart Wizard  **/
 

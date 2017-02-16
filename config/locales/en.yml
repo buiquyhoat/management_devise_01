@@ -90,6 +90,7 @@ en:
       edit: "Update"
       new: "Add New"
       save_change: "Save changes"
+      return_device: "Return Devices"
     button_close_text: "Close"
     title_add_new: "Add New Device"
     title_return: "Return Device"
@@ -197,6 +198,8 @@ en:
     update_fail: "Update Failed!"
     result_not_match: "No results matched"
     assignment_details_total_error: "Error: 1"
+    max_value: "Max value allow is %{value}"
+    min_value: "Min value allow is %{value}"
   action:
     close: "Close"
     edit: "Update"
