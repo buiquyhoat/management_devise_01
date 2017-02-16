@@ -19,6 +19,7 @@
           params[:request_status_id]), include_blank: Settings.all,
           class: "form-control", onChange: "changeSearchForm()") %>
       </div>
+
     <% end %>
   </div>
   <% if @current_user.can_make_request %>

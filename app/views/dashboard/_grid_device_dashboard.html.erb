@@ -1,0 +1,30 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th><%= t "dashboard.device.check" %></th>
+      <th><%= t "dashboard.device.name" %></th>
+      <th class="horizital_progress"><%= t "dashboard.device.status" %></th>
+      <th><%= t "dashboard.device.table.summary_title" %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @device_categories.each do |category| %>
+      <tr>
+        <td><%= link_to t("dashboard.device.view"),
+          devices_path(category_id: category.id) %></td>
+        <td><%= category.name %></td>
+        <td class="project_progress">
+          <div class="progress progress_sm">
+            <div class="progress-bar bg-green" role="progressbar"
+              data-transitiongoal="<%= category.using_percent%>"
+              aria-valuenow="<%= category.using_percent%>"
+              style="width: <%= category.using_percent%>%;"></div>
+          </div>
+          <small><%= category.using_percent %>% Using</small>
+        </td>
+        <td><%= t("dashboard.device.table.summary", assignment: category.device_assignment,
+          available: category.device_avalible, total: category.device_total) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

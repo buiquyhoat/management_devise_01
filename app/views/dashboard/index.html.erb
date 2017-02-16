@@ -1,6 +1,10 @@
 <% if logged_in? %>
-  <%= render "request_cycle" %>
-  <%= render "grid_request_dashboard" %>
+  <div class="row">
+  <%= render "chart_overview" %>
+  </div>
+  <div class="row">
+  <%= render "top_overview" %>
+  </div>
 <% else %>
   <div class="center jumbotron">
     <h1><%= t "home.title" %></h1>

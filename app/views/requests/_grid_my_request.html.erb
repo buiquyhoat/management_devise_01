@@ -19,7 +19,7 @@
           <td><%= link_to request.title, request_path(request.id), remote: true,
             data: {toggle: "modal", target: "#dms-popup"} %></td>
           <td><%= request.description %></td>
-          <td><%= request.request_status.name %></td>
+          <td><%= request.request_status_name %></td>
           <td class="request_status action">
             <%= render "action", request: request %>
           </td>

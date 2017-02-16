@@ -262,6 +262,22 @@ function user_setting_submit(){
 }
 
 function setup_chart(){
+  request_chart();
+  device_chart();
+}
+
+String.prototype.format = function (){
+    var args = arguments;
+    return this.replace(/\{\{|\}\}|\{(\d+)\}/g, function (curlyBrack, index) {
+        return ((curlyBrack == "{{") ? "{" : ((curlyBrack == "}}") ? "}" : args[index]));
+    });
+};
+
+function chart_url(type){
+  return "/dashboard_chart?type={0}".format(type);
+}
+
+function request_chart(){
   if ($("#request_cycle").length > 0) {
     var options = {
       legend: false,
@@ -269,11 +285,13 @@ function setup_chart(){
     };
     $.ajax({
       type: 'GET',
-      url: '/dashboard_chart/',
+      url: chart_url(1),
       dataType: 'json',
       success: function(data){
         if (data.success === false)
-        {}
+        {
+          alert(I18n.t("dashboard.request.chart_error"));
+        }
         else
         {
           chartobj= JSON.parse(data.message)
@@ -293,11 +311,51 @@ function setup_chart(){
         }
       },
       error: function (error_message){
+        alert(error_message);
       }
     });
   }
 }
 
+function device_chart(){
+  if ($("#device_cycle").length > 0) {
+    var options = {
+      legend: false,
+      responsive: false
+    };
+    $.ajax({
+      type: 'GET',
+      url: chart_url(2),
+      dataType: 'json',
+      success: function(data){
+        if (data.success === false)
+        {
+          alert(I18n.t("dashboard.device.chart_error"));
+        }
+        else
+        {
+          chartobj= JSON.parse(data.message)
+          new Chart(document.getElementById("device_canvas"), {
+            type: chartobj.type,
+            tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+            data: {
+              labels: chartobj.labels,
+              datasets: [{
+                data: chartobj.data,
+                backgroundColor: chartobj.backgroundColor,
+                hoverBackgroundColor: chartobj.hoverBackgroundColor
+              }]
+            },
+            options: options
+          });
+        }
+      },
+      error: function (error_message){
+        alert(error_message);
+      }
+    });
+  }
+}
 function minmax(obj, min, max){
   var value = parseInt($(obj).val())
   if(value < min || isNaN(value)){

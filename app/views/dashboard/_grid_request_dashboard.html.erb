@@ -1,27 +1,23 @@
-<div class="col-md-8 col-sm-8 col-xs-12">
-  <% if @requests.present? && @requests.any? %>
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th><%= t "request.table.check" %></th>
-          <th><%= t "request.table.title" %></th>
-          <th><%= t "request.table.request_status" %></th>
-          <th><%= t "request.table.for_user" %></th>
-          <th><%= t "request.table.time_ago" %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @requests.each do |request| %>
-          <tr class="<%= generate_tag_color request %>" >
-            <td><%= link_to t("dashboard.request.check"),
-              requests_path(request_status_id: request.request_status.id) %></td>
-            <td><%= request.title %></td>
-            <td><%= request.request_status.name %></td>
-            <td><%= request.for_user.name if request.for_user.present? %></td>
-            <td><%= time_ago_in_words(request.created_at) %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  <% end %>
-</div>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th><%= t "request.table.title" %></th>
+      <th><%= t "request.table.description" %></th>
+      <th><%= t "request.table.request_status" %></th>
+      <th><%= t "request.table.for_user" %></th>
+      <th><%= t "request.table.time_ago" %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @requests.each do |request| %>
+      <tr class="<%= generate_tag_color request %>" >
+        <td><%= request.title %></td>
+        <td><%= request.description %></td>
+        <td><%= request.request_status_name %><%= link_to t("dashboard.request.check"),
+          requests_path(request_status_id: request.request_status_id) %></td>
+        <td><%= request.for_user.name if request.for_user.present? %></td>
+        <td><%= time_ago_in_words(request.created_at) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

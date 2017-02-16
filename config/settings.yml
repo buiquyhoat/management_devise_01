@@ -77,6 +77,7 @@ paging:
   page_size: 15
   min_page_size: 10
   max_page_size: 30
+  page_size_dashboard: 6
 top_dashboard: 5
 dashboard:
   request:
@@ -84,4 +85,11 @@ dashboard:
     hoverBackgroundColor: ['#CFD4D8', '#B370CF', '#E95E4F', '#36CAAB', '#49A9EA']
     colors: ["aero", "purple",  "red", "green", "blue"]
     type: "doughnut"
-
+  device:
+    backgroundColor: ['#BDC3C7', '#9B59B6', '#E74C3C']
+    hoverBackgroundColor: ['#CFD4D8', '#B370CF', '#E95E4F']
+    colors: ["aero", "purple",  "red"]
+    type: "doughnut"
+chart_type:
+  request: "1"
+  device: "2"

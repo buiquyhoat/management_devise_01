@@ -1,0 +1,59 @@
+<div id="device_cycle">
+  <div class="x_panel tile fixed_height_320 overflow_hidden">
+    <div class="x_title">
+      <h3>
+        <%= t "dashboard.device.device_overview" %>
+        <%= link_to t("dashboard.device.to_device"),  devices_path %>
+      </h3>
+      <ul class="nav navbar-right panel_toolbox">
+        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+        </li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+    <% if @device_chartobj.present? && @device_chartobj[:have_data] %>
+      <table class="chart w-100">
+        <tr>
+          <th class="w-37">
+            <p><%= t "dashboard.device.chart" %></p>
+          </th>
+          <th>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+              <p class=""><%= t "dashboard.device.status" %></p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+              <p class=""><%= t "dashboard.device.summary" %></p>
+            </div>
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <canvas id="device_canvas"></canvas>
+          </td>
+          <td>
+            <table class="tile_info">
+              <% @device_chartobj[:labels].count.times do |i| %>
+                <tr>
+                  <td>
+                    <p>
+                      <i class="fa fa-square <%= @device_chartobj[:colors][i]%>"></i>
+                      <%= link_to @device_chartobj[:labels][i],
+                        devices_path(status_id: @device_chartobj[:device_status][i]) %>
+                    </p>
+                  </td>
+                  <td><%= @device_chartobj[:datapercent][i] %>%</td>
+                </tr>
+              <% end %>
+            </table>
+          </td>
+        </tr>
+      </table>
+    <% else %>
+      <div class="tile_info">
+        <%= link_to t("dashboard.request.go_to_device"),  devices_path %>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>
