@@ -70,22 +70,22 @@ $(document).on('turbolinks:load', function() {
     }
   });
 
-  // toggle small or large menu
-  $MENU_TOGGLE.on('click', function() {
-    if ($BODY.hasClass('nav-md')) {
-      $SIDEBAR_MENU.find('li.active ul').hide();
-      $SIDEBAR_MENU.find('li.active').addClass('active-sm')
-        .removeClass('active');
-    } else {
-      $SIDEBAR_MENU.find('li.active-sm ul').show();
-      $SIDEBAR_MENU.find('li.active-sm').addClass('active')
-        .removeClass('active-sm');
-    }
+  // // toggle small or large menu
+  // $MENU_TOGGLE.on('click', function() {
+  //   if ($BODY.hasClass('nav-md')) {
+  //     $SIDEBAR_MENU.find('li.active ul').hide();
+  //     $SIDEBAR_MENU.find('li.active').addClass('active-sm')
+  //       .removeClass('active');
+  //   } else {
+  //     $SIDEBAR_MENU.find('li.active-sm ul').show();
+  //     $SIDEBAR_MENU.find('li.active-sm').addClass('active')
+  //       .removeClass('active-sm');
+  //   }
 
-    $BODY.toggleClass('nav-md nav-sm');
+  //   $BODY.toggleClass('nav-md nav-sm');
 
-    setContentHeight();
-  });
+  //   setContentHeight();
+  // });
 
     // check active menu
   $SIDEBAR_MENU.find('a[href="' + CURRENT_URL + '"]').parent('li')
@@ -117,6 +117,7 @@ $(document).on('turbolinks:load', function() {
 $(document).on('turbolinks:load', function() {
   setup_date_picker();
   set_up_chosen();
+  setup_chart();
   $('#show_form_login').on('click',function(){
     if($('#form_login').css('display') === 'block'){
       $('#form_login').slideUp();
@@ -254,4 +255,40 @@ function clear_text_box_search(){
 function user_setting_submit(){
   $('#form-user-setting').submit();
   $('#form-user-group').submit();
+}
+function setup_chart(){
+  if ($("#request_cycle").length > 0) {
+    var options = {
+      legend: false,
+      responsive: false
+    };
+    $.ajax({
+      type: 'GET',
+      url: '/dashboard_chart/',
+      dataType: 'json',
+      success: function(data){
+        if (data.success === false)
+        {}
+        else
+        {
+          chartobj= JSON.parse(data.message)
+          new Chart(document.getElementById("canvas1"), {
+            type: chartobj.type,
+            tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+            data: {
+              labels: chartobj.labels,
+              datasets: [{
+                data: chartobj.data,
+                backgroundColor: chartobj.backgroundColor,
+                hoverBackgroundColor: chartobj.hoverBackgroundColor
+              }]
+            },
+            options: options
+          });
+        }
+      },
+      error: function (error_message){
+      }
+    });
+  }
 }

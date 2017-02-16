@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :posts
+  get 'dashboard/index'
 
   get "device_code/show"
   get "get_device_code/show"
@@ -7,7 +9,7 @@ Rails.application.routes.draw do
   get "device_assign/show"
   get "requests/new"
   get "requests/add_request_detail"
-  root "static_pages#home"
+  root "dashboard#index"
 
   delete "/requestdetails", to: "request_details#destroy"
 
@@ -21,6 +23,7 @@ Rails.application.routes.draw do
   put "update", to: :update, controller: "return_devices",
    collection: {update: :put}
 
+   get "/dashboard_chart", to: "dashboard#request_chart"
   resources :users
   resources :devices
   resources :requests
@@ -33,6 +36,6 @@ Rails.application.routes.draw do
   resources :return_devices, only: :index
   resources :device_history
   resources :user_groups
-
+  resources :dashboard
   mount ActionCable.server => "/cable"
 end

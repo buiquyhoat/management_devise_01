@@ -1,4 +1,6 @@
 class UserSettingController < ApplicationController
+  before_action :logged_in_user
+
   def index
     @user_group = UserGroup.find_by is_default_group: true, user_id: current_user.id
     @list_group = UserGroup.by_user current_user.id

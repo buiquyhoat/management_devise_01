@@ -95,14 +95,14 @@ class RequestsController < ApplicationController
 
   def get_requests
     @requests = Request.request_manage(@current_user.default_parent_path, @current_user)
-      .find_by_actor(params[:relative_id])
+      .of_actor(params[:relative_id])
       .of_request_status(params[:request_status_id])
       .order_by.paginate page: params[:page]
   end
 
   def get_my_requests
-    @my_requests = Request.find_for_user(@current_user.id).order_by
-      .find_by_actor(params[:relative_id])
+    @my_requests = Request.of_for_user(@current_user.id).order_by
+      .of_actor(params[:relative_id])
       .of_request_status(params[:request_status_id])
       .order_by.paginate page: params[:page]
   end

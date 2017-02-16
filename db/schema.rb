@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170209031347) do
+ActiveRecord::Schema.define(version: 20170215005846) do
 
   create_table "assignment_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "device_id",     null: false
@@ -160,6 +160,13 @@ ActiveRecord::Schema.define(version: 20170209031347) do
     t.string  "optional"
     t.integer "group_id"
     t.index ["group_id"], name: "index_permissions_on_group_id", using: :btree
+  end
+
+  create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "title"
+    t.string   "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "request_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

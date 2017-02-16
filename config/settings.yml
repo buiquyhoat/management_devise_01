@@ -74,3 +74,11 @@ paging:
   page_size: 15
   min_page_size: 10
   max_page_size: 30
+top_dashboard: 5
+dashboard:
+  request:
+    backgroundColor: ['#BDC3C7', '#9B59B6', '#E74C3C', '#26B99A', '#3498DB']
+    hoverBackgroundColor: ['#CFD4D8', '#B370CF', '#E95E4F', '#36CAAB', '#49A9EA']
+    colors: ["aero", "purple",  "red", "green", "blue"]
+    type: "doughnut"
+
