@@ -137,6 +137,14 @@ $(document).on('turbolinks:load', function() {
 
 })
 
+$(document).ajaxStart(function(){
+  $('button[type="submit"]').prop('disabled', 'disabled')
+});
+
+$(document).ajaxStop(function(){
+  $('button[type="submit"]').prop('disabled', null)
+});
+
 function changeSearchForm(){
   $('#form-submit').submit();
 };

@@ -72,3 +72,5 @@ user_setting:
     page_size: "number"
 paging:
   page_size: 15
+  min_page_size: 10
+  max_page_size: 30

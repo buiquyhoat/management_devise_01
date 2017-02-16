@@ -51,7 +51,7 @@ class Request < ApplicationRecord
         ug on ug.user_id = u.id left join groups as g on g.id = ug.group_id where
         g.parent_path LIKE ?)", convert_like(parent_path)
     when Settings.action.waiting_done
-      where "request_status_id >= ? or (request_status_id= ? && updated_by = ?)",
+      where "request_status_id >= ? or (request_status_id = ? && updated_by = ?)",
         Settings.request_status.approved, Settings.request_status.cancelled, user.id
     when Settings.action.done
       where request_status_id: [Settings.request_status.waiting_done, Settings.request_status.done]

@@ -7,7 +7,7 @@
           <th><%= t "device_manager.table.header.status" %></th>
           <th><%= t "device_manager.table.header.category" %></th>
           <th><%= t "device_manager.table.header.invoice_number" %></th>
-          <% if current_user.can_assignment %>
+          <% if current_user.can_manage_device %>
             <th><%= t "device_manager.table.header.action" %></th>
           <% end %>
         </tr>

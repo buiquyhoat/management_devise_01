@@ -30,6 +30,8 @@ gem "figaro"
 gem "remotipart", "~> 1.2"
 gem "carrierwave"
 gem "ransack"
+gem "delayed_job"
+gem "delayed_job_active_record"
 
 group :development, :test do
   gem "byebug", platform: :mri
