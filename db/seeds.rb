@@ -60,13 +60,6 @@ User.create!(first_name: "Xuan Dung",
   password_confirmation: "framgia",
   department_id: 4 )
 
-User.create!(first_name: "Minh Ngoc",
-  last_name: "Nguyen Thi",
-  email: "nguyen.thi.minh.ngoc@framgia.com",
-  address: "Framgia",
-  password: "framgia",
-  password_confirmation: "framgia",
-  department_id: 4 )
 User.create!(first_name: "Xuan Son",
   last_name: "Nguyen",
   email: "nguyen.xuan.son@framgia.com",
@@ -74,6 +67,7 @@ User.create!(first_name: "Xuan Son",
   password: "framgia",
   password_confirmation: "framgia",
   department_id: 4 )
+
 User.create!(first_name: "Ngoc Tuan",
   last_name: "Nguyen",
   email: "nguyen.ngoc.tuan@framgia.com",
@@ -81,6 +75,15 @@ User.create!(first_name: "Ngoc Tuan",
   password: "framgia",
   password_confirmation: "framgia",
   department_id: 3 )
+
+User.create!(first_name: "Minh Ngoc",
+  last_name: "Nguyen Thi",
+  email: "nguyen.thi.minh.ngoc@framgia.com",
+  address: "Framgia",
+  password: "framgia",
+  password_confirmation: "framgia",
+  department_id: 4 )
+
 User.create!(first_name: "Minh Thanh",
   last_name: "Ta",
   email: "ta.minh.thanh@framgia.com",
@@ -88,45 +91,15 @@ User.create!(first_name: "Minh Thanh",
   password: "framgia",
   password_confirmation: "framgia",
   department_id: 3 )
-User.create!(first_name: "Huy",
-  last_name: "Cong Chua",
-  email: "huy.cong.chua@framgia.com",
+
+User.create!(first_name: "Nguyen Thi",
+  last_name: "Thanh Ly",
+  email: "nguyen.thi.thanh.ly@framgia.com",
   address: "Framgia",
   password: "framgia",
   password_confirmation: "framgia",
   department_id: 3 )
 
-User.create!(first_name: "Hong Thuy",
-  last_name: "Dang",
-  email: "dang.hong.thuy@framgia.com",
-  address: "Framgia",
-  password: "framgia",
-  password_confirmation: "framgia",
-  department_id: 3 )
-
-User.create!(first_name: "Tuong Vi",
-  last_name: "Nguyen Thi",
-  email: "nguyen.thi.tuong.vi@framgia.com",
-  address: "Framgia",
-  password: "framgia",
-  password_confirmation: "framgia",
-  department_id: 3 )
-
-User.create!(first_name: "Diem Quynh",
-  last_name: "Phan Thi",
-  email: "phan.thi.diem.quynh@framgia.com",
-  address: "Framgia",
-  password: "framgia",
-  password_confirmation: "framgia",
-  department_id: 3 )
-
-User.create!(first_name: "Nguyen Vu",
-  last_name: "Le",
-  email: "le.vu.nguyen@framgia.com",
-  address: "Framgia",
-  password: "framgia",
-  password_confirmation: "framgia",
-  department_id: 3 )
 User.create!(first_name: "Nguyen Long",
   last_name: "Tran",
   email: "tran.nguyen.long@framgia.com",
@@ -135,6 +108,30 @@ User.create!(first_name: "Nguyen Long",
   password_confirmation: "framgia",
   department_id: 3 )
 
+User.create!(first_name: "Hoang Vi",
+  last_name: "Pham Thi",
+  email: "pham.thi.hoang.vi@framgia.com",
+  address: "Framgia",
+  password: "framgia",
+  password_confirmation: "framgia",
+  department_id: 3 )
+
+User.create!(first_name: "Hong Thuy",
+  last_name: "Le Thi",
+  email: "le.thi.hong.thuy@framgia.com",
+  address: "Framgia",
+  password: "framgia",
+  password_confirmation: "framgia",
+  department_id: 3 )
+
+User.create!(first_name: "Cong Chua",
+  last_name: "Huy",
+  email: "huy.cong.chua@framgia.com",
+  address: "Framgia",
+  password: "framgia",
+  password_confirmation: "framgia",
+  department_id: 3 )
+# extend
 User.create!(first_name: "Xuan Dat",
   last_name: "Tran",
   email: "tran.xuan.dat@framgia.com",
@@ -143,27 +140,21 @@ User.create!(first_name: "Xuan Dat",
   password_confirmation: "framgia",
   department_id: 3 )
 
-User.create!(first_name: "Hong Nguyen",
-  last_name: "Nguyen",
-  email: "nguyen.hong.nguyen@framgia.com",
+User.create!(first_name: "Anh Duong",
+  last_name: "Le",
+  email: "le.anh.duong@framgia.com",
   address: "Framgia",
   password: "framgia",
   password_confirmation: "framgia",
   department_id: 3 )
-User.create!(first_name: "Div 1",
-  last_name: "Manager",
-  email: "div1manager@framgia.com",
+
+User.create!(first_name: "Vu Nguyen",
+  last_name: "Le",
+  email: "le.vu.nguyen@framgia.com",
   address: "Framgia",
   password: "framgia",
   password_confirmation: "framgia",
-  department_id: 4 )
-User.create!(first_name: "BO",
-  last_name: "Manager",
-  email: "bomanager@framgia.com",
-  address: "Framgia",
-  password: "framgia",
-  password_confirmation: "framgia",
-  department_id: 4 )
+  department_id: 3 )
 
 #Roles
 Role.create!(name: "admin",
@@ -424,7 +415,7 @@ DeviceCategory.create!(name: "máy quẹt thẻ kiểm soát ra vào",
   device_group_id: 6,
   created_by: 1,
   updated_by: 1)
-DeviceCategory.create!(name: "cắt giấy (máy cắt giấy + bàn cắt giấy)",
+DeviceCategory.create!(name: "cắt giấy (máy cắt giấy bàn cắt giấy)",
   template_code: "607_",
   device_group_id: 6,
   created_by: 1,
@@ -524,12 +515,12 @@ DeviceCategory.create!(name: "máy hút bụi",
   device_group_id: 6,
   created_by: 1,
   updated_by: 1)
-DeviceCategory.create!(name: "Loa kéo di động + mic",
+DeviceCategory.create!(name: "Loa kéo di động mic",
   template_code: "627_",
   device_group_id: 6,
   created_by: 1,
   updated_by: 1)
-DeviceCategory.create!(name: "Loa morning speech + mic",
+DeviceCategory.create!(name: "Loa morning speech mic",
   template_code: "628_",
   device_group_id: 6,
   created_by: 1,
@@ -549,7 +540,7 @@ DeviceCategory.create!(name: "bàn họp",
   device_group_id: 6,
   created_by: 1,
   updated_by: 1)
-DeviceCategory.create!(name: "cửa gỗ + khung ngoại - Wooden door",
+DeviceCategory.create!(name: "cửa gỗ  khung ngoại - Wooden door",
   template_code: "632_",
   device_group_id: 6,
   created_by: 1,
@@ -696,7 +687,7 @@ Invoice.create!(invoice_number: "invoice1",
   updated_at: Time.zone.now)
 
 Group.create!(
-  name: "Framgia",
+  name: "Staff",
   company_id: 1,
   description: "Root Framgia",
   closest_parent_id: 0,
@@ -704,201 +695,131 @@ Group.create!(
   group_type: 1,
   image: "")
 Group.create!(
-  name: "Manager Framgia",
+  name: "Div 1 Manager",
   company_id: 1,
-  description: "Manager Framgia",
+  description: "Div 1 Manager",
   closest_parent_id: 1,
   parent_path: "/1",
   group_type: 1,
   image: "")
+
 Group.create!(
-  name: "Section Framgia",
+  name: "Div 2 Manager",
   company_id: 1,
-  description: "Section Framgia",
+  description: "Div 2 Manager",
+  closest_parent_id: 1,
+  parent_path: "/1",
+  group_type: 1,
+  image: "")
+
+Group.create!(
+  name: "Div 3 Manager",
+  company_id: 1,
+  description: "Div 3 Manager",
+  closest_parent_id: 1,
+  parent_path: "/1",
+  group_type: 1,
+  image: "")
+
+Group.create!(
+  name: "BO Manager",
+  company_id: 1,
+  description: "BO Manager",
   closest_parent_id: 2,
   parent_path: "/1/2",
   group_type: 1,
   image: "")
 
 Group.create!(
-  name: "Group Leader Framgia",
+  name: "Div 1 Dev",
   company_id: 1,
-  description: "Group Leader Framgia",
+  description: "Div 1 Dev",
+  closest_parent_id: 2,
+  parent_path: "/1/2",
+  group_type: 1,
+  image: "")
+
+Group.create!(
+  name: "Div 2 Dev",
+  company_id: 1,
+  description: "Div 2 Dev",
   closest_parent_id: 3,
-  parent_path: "/1/2/3",
+  parent_path: "/1/3",
   group_type: 1,
   image: "")
 
 Group.create!(
-  name: "Leader Framgia",
+  name: "Div 3 Dev",
   company_id: 1,
-  description: "Leader Framgia",
+  description: "Div 3 Dev",
   closest_parent_id: 4,
-  parent_path: "/1/2/3/4",
+  parent_path: "/1/4",
   group_type: 1,
   image: "")
 
 Group.create!(
-  name: "Framgia Staff",
+  name: "BO Excute Request",
   company_id: 1,
-  description: "Framgia Staff",
-  closest_parent_id: 1,
-  parent_path: "/1",
-  group_type: 1,
-  image: "")
-Group.create!(
-  name: "Div 1 Framgia",
-  company_id: 1,
-  description: "Div 1 Framgia",
-  closest_parent_id: 6,
-  parent_path: "/1/6",
-  group_type: 1,
-  image: "")
-Group.create!(
-  name: "Div 2 Framgia",
-  company_id: 1,
-  description: "Div 2 Framgia",
-  closest_parent_id: 6,
-  parent_path: "/1/6",
+  description: "BO Excute Request",
+  closest_parent_id: 5,
+  parent_path: "/1/2/5",
   group_type: 1,
   image: "")
 
 Group.create!(
-  name: "Div 3 Framgia",
+  name: "BO Manage Device",
   company_id: 1,
-  description: "Div 3 Framgia",
-  closest_parent_id: 6,
-  parent_path: "/1/6",
+  description: "BO Manage Device",
+  closest_parent_id: 5,
+  parent_path: "/1/2/5",
   group_type: 1,
   image: "")
 
-Group.create!(
-  name: "BO Framgia",
-  company_id: 1,
-  description: "BO Framgia",
-  closest_parent_id: 6,
-  parent_path: "/1/6",
-  group_type: 1,
-  image: "")
-Group.create!(
-  name: "HR Framgia",
-  company_id: 1,
-  description: "HR Framgia",
-  closest_parent_id: 7,
-  parent_path: "/1/6/7",
-  group_type: 1,
-  image: "")
-
-Group.create!(
-  name: "Develop Div 1 Framgia",
-  company_id: 1,
-  description: "Dev Div 1 Framgia",
-  closest_parent_id: 7,
-  parent_path: "/1/6/7",
-  group_type: 1,
-  image: "")
-
-Group.create!(
-  name: "BO Framgia Ha Noi",
-  company_id: 1,
-  description: "BO Framgia",
-  closest_parent_id: 10,
-  parent_path: "/1/6/10",
-  group_type: 1,
-  image: "")
-
-Group.create!(
-  name: "BO Framgia Da Nang",
-  company_id: 1,
-  description: "BO Framgia",
-  closest_parent_id: 10,
-  parent_path: "/1/6/10",
-  group_type: 1,
-  image: "")
-
-Group.create!(
-  name: "Sec 1 Div 1 Framgia",
-  company_id: 1,
-  description: "Dev Sec 1 Div 1 Framgia",
-  closest_parent_id: 12,
-  parent_path: "/1/6/7/12",
-  group_type: 1,
-  image: "")
-
-Group.create!(
-  name: "Sec 2 Div 1 Framgia",
-  company_id: 1,
-  description: "Dev Sec 2 Div 1 Framgia",
-  closest_parent_id: 12,
-  parent_path: "/1/6/7/12",
-  group_type: 1,
-  image: "")
-
-Group.create!(
-  name: "Group 1 Sec 1 Div 1 Framgia",
-  company_id: 1,
-  description: "Group 1 Sec 1 Div 1 Framgia",
-  closest_parent_id: 15,
-  parent_path: "/1/6/7/12/15",
-  group_type: 1,
-  image: "")
-
-Group.create!(
-  name: "Dev Group 1 Sec 1 Div 1 Framgia",
-  company_id: 1,
-  description: "Dev Group 1 Sec 1 Div 1 Framgia",
-  closest_parent_id: 17,
-  parent_path: "/1/6/7/12/15/17",
-  group_type: 1,
-  image: "")
-Group.create!(
-  name: "Admin Framgia",
-  company_id: 1,
-  description: "Admin Framgia",
-  closest_parent_id: 1,
-  parent_path: "/1",
-  group_type: 1,
-  image: "")
-
-Group.create!(
-  name: "BO Manage Devie Da Nang",
-  company_id: 1,
-  description: "BO Manage Devie Framgia",
-  closest_parent_id: 14,
-  parent_path: "/1/6/10/14",
-  group_type: 1,
-  image: "")
 Permission.create!(
   entry: "Request",
   group_id: 1,
   optional: "{\"Create\":false,\"Read\":false,\"Update\":false,\"Delete\":false,\"Approve\":false}")
 Permission.create!(
   entry: "Request",
-  group_id: 7,
+  group_id: 2,
   optional: "{\"Create\":true,\"Read\":true,\"Update\":true,\"Delete\":true,\"Approve\":true}")
 Permission.create!(
   entry: "Request",
-  group_id: 17,
-  optional: "{\"Create\":true,\"Read\":true,\"Update\":true,\"Delete\":true}")
+  group_id: 3,
+  optional: "{\"Create\":true,\"Read\":true,\"Update\":true,\"Delete\":true,\"Approve\":true}")
 Permission.create!(
   entry: "Request",
-  group_id: 18,
-  optional: "{\"Create\":true,\"Read\":true,\"Update\":true,\"Delete\":true}")
+  group_id: 4,
+  optional: "{\"Create\":true,\"Read\":true,\"Update\":true,\"Delete\":true,\"Approve\":true}")
+
 Permission.create!(
   entry: "Request",
-  group_id: 10,
+  group_id: 5,
   optional: "{\"Waiting Done\":true}")
+
 Permission.create!(
   entry: "Request",
-  group_id: 13,
-  optional: "{\"Waiting Done\":false, \"Done\":true}")
+  group_id: 6,
+  optional: "{\"Create\":true,\"Read\":true,\"Update\":true,\"Delete\":true}")
+
 Permission.create!(
   entry: "Request",
-  group_id: 14,
-  optional: "{\"Waiting Done\":false, \"Done\":true}")
+  group_id: 7,
+  optional: "{\"Create\":true,\"Read\":true,\"Update\":true,\"Delete\":true}")
+
+Permission.create!(
+  entry: "Request",
+  group_id: 8,
+  optional: "{\"Create\":true,\"Read\":true,\"Update\":true,\"Delete\":true}")
+
+Permission.create!(
+  entry: "Request",
+  group_id: 9,
+  optional: "{\"Done\":true}")
+
 Permission.create!(
   entry: "Device",
-  group_id: 19,
+  group_id: 10,
   optional: "{\"Create\":true,\"Read\":true,\"Update\":true,\"Delete\":true}")
 
 Permission.create!(
@@ -913,136 +834,65 @@ UserGroup.create!(
 UserGroup.create!(
   user_id: 2,
   group_id: 2,
-  is_default_group: false)
+  is_default_group: true)
 UserGroup.create!(
   user_id: 3,
-  group_id: 2,
-  is_default_group: false)
-UserGroup.create!(
-  user_id: 4,
-  group_id: 2,
-  is_default_group: false)
-UserGroup.create!(
-  user_id: 5,
-  group_id: 2,
-  is_default_group: false)
-
-UserGroup.create!(
-  user_id: 6,
   group_id: 3,
-  is_default_group: false)
-
-UserGroup.create!(
-  user_id: 7,
-  group_id: 4,
-  is_default_group: false)
-
-UserGroup.create!(
-  user_id: 2,
-  group_id: 6,
-  is_default_group: false)
-
-UserGroup.create!(
-  user_id: 3,
-  group_id: 6,
-  is_default_group: false)
+  is_default_group: true)
 UserGroup.create!(
   user_id: 4,
-  group_id: 6,
-  is_default_group: false)
+  group_id: 4,
+  is_default_group: true)
 UserGroup.create!(
   user_id: 5,
-  group_id: 6,
-  is_default_group: false)
+  group_id: 5,
+  is_default_group: true)
 UserGroup.create!(
   user_id: 6,
   group_id: 6,
   is_default_group: false)
 UserGroup.create!(
   user_id: 7,
-  group_id: 6,
-  is_default_group: false)
+  group_id: 7,
+  is_default_group: true)
 UserGroup.create!(
   user_id: 8,
-  group_id: 6,
-  is_default_group: false)
+  group_id: 8,
+  is_default_group: true)
 UserGroup.create!(
   user_id: 9,
-  group_id: 6,
-  is_default_group: false)
+  group_id: 9,
+  is_default_group: true)
 UserGroup.create!(
   user_id: 10,
-  group_id: 6,
+  group_id: 10,
+  is_default_group: true)
+ # extend change group default
+ UserGroup.create!(
+  user_id: 6,
+  group_id: 2,
+  is_default_group: true)
+UserGroup.create!(
+  user_id: 10,
+  group_id: 9,
   is_default_group: false)
 UserGroup.create!(
   user_id: 11,
+  group_id: 6,
+  is_default_group: true)
+UserGroup.create!(
+  user_id: 8,
   group_id: 6,
   is_default_group: false)
 UserGroup.create!(
   user_id: 12,
-  group_id: 6,
-  is_default_group: false)
+  group_id: 8,
+  is_default_group: true)
 UserGroup.create!(
   user_id: 13,
-  group_id: 6,
-  is_default_group: false)
-UserGroup.create!(
-  user_id: 14,
-  group_id: 6,
-  is_default_group: false)
-
-UserGroup.create!(
-  user_id: 2,
-  group_id: 7,
-  is_default_group: true)
-
-UserGroup.create!(
-  user_id: 15,
-  group_id: 7,
-  is_default_group: true)
-
-UserGroup.create!(
-  user_id: 3,
-  group_id: 10,
-  is_default_group: true)
-
-UserGroup.create!(
-  user_id: 16,
-  group_id: 10,
-  is_default_group: true)
-
-UserGroup.create!(
-  user_id: 8,
-  group_id: 19,
-  is_default_group: true)
-UserGroup.create!(
-  user_id: 9,
-  group_id: 14,
-  is_default_group: true)
-
-UserGroup.create!(
-  user_id: 6,
-  group_id: 15,
-  is_default_group: true)
-
-UserGroup.create!(
-  user_id: 7,
-  group_id: 17,
-  is_default_group: true)
-UserGroup.create!(
-  user_id: 11,
-  group_id: 18,
+  group_id: 8,
   is_default_group: true)
 UserGroup.create!(
   user_id: 14,
-  group_id: 18,
+  group_id: 8,
   is_default_group: true)
-
-UserGroup.create!(
-  user_id: 10,
-  group_id: 11,
-is_default_group: true)
-UserGroup.create!(
-  user_id: 1,
-  group_id: 19,
-is_default_group: true)

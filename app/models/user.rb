@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  attr_accessor :remember_token, :reset_token, :name
+  attr_accessor :remember_token, :reset_token, :name, :default_parent_path
 
   belongs_to :department, optional: true
 
@@ -33,7 +33,8 @@ class User < ApplicationRecord
 
   scope :below_staff, ->parent_path do
     where "id in (select u.id from users as u left join user_groups as ug on ug.user_id = u.id
-    left join groups as g on g.id = ug.group_id where g.parent_path LIKE ?)",
+    left join groups as g on g.id = ug.group_id where g.parent_path LIKE ? and
+    ug.is_default_group = true)",
     parent_path + "%"
   end
 
@@ -104,28 +105,38 @@ class User < ApplicationRecord
   end
 
   def can_manage_device
-    permission_default_group Settings.entry.device, Settings.action.create
+    highest_permission Settings.entry.device, Settings.action.create
   end
 
   def can_approve
-    permission_default_group Settings.entry.request, Settings.action.approve
+    highest_permission Settings.entry.request, Settings.action.approve
   end
 
   def can_waiting_done
-    permission_default_group Settings.entry.request, Settings.action.waiting_done
+    highest_permission Settings.entry.request, Settings.action.waiting_done
   end
 
   def can_done
-    permission_default_group Settings.entry.request, Settings.action.done
+    highest_permission Settings.entry.request, Settings.action.done
   end
 
   def is_admin
-    permission_default_group Settings.entry.admin, Settings.action.create
+    highest_permission Settings.entry.admin, Settings.action.create
   end
 
-  def default_parent_path
-    group = user_group.default_parent_path.first.group
-    group.present? ? group.parent_path + "/" + group.id.to_s : ""
+  def get_default_parent_path
+    highest_group = nil
+    user_group.each do |ug|
+      if self.default_parent_path.nil? ||
+        self.default_parent_path.length > ug.group.parent_path.length
+        highest_group = ug.group
+        self.default_parent_path = ug.group.parent_path
+      end
+    end
+    if highest_group.present?
+      self.default_parent_path += "/" + highest_group.id.to_s
+    end
+
   end
 
   private
@@ -135,6 +146,7 @@ class User < ApplicationRecord
   end
 
   def create_another
+    get_default_parent_path
     self.name = first_name + last_name
   end
 
