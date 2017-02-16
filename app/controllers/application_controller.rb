@@ -80,11 +80,10 @@ class ApplicationController < ActionController::Base
   def update_init_settings
     default_setting = default_user_setting
     default_setting.each do |k, v|
-      unless user_setting.optional_hash[k].present?
+      if user_setting.optional_hash[k].nil?
         user_setting.optional_hash[k] = v
       end
     end
-
     user_setting.set_option
     user_setting.save
   end

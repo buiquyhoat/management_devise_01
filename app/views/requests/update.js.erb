@@ -1,0 +1,7 @@
+<% if @request.errors.any? %>
+  $('#error').html('<%= j render "shared/error_messages", object: @request %>')
+<% else %>
+  $('#dms-popup').modal('toggle');
+  $('#private_request').html("<%= j render partial: 'requests/grid_my_request' %>");
+  $('#another_request').html("<%= j render partial: 'requests/grid_request' %>");
+<% end %>

@@ -26,6 +26,10 @@ class RequestStatus < ApplicationRecord
       Settings.request_status.waiting_done, Settings.request_status.approved]
   end
 
+  scope :request_status_manager_approved, ->do
+    where id: [Settings.request_status.cancelled, Settings.request_status.approved]  
+  end
+
   class << self
 
     def calculate_request_dashboard user_id, current_user

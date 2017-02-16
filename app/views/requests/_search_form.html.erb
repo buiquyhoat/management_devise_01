@@ -1,6 +1,7 @@
 <div class="content">
   <div class="row">
-    <%= form_tag("", id: "form-submit", method: :get) do %>
+    <%= form_tag("", id: "form-submit", method: :get, remote: true) do %>
+      <%= hidden_field_tag "isAjax", true %>
       <div class="col-lg-1 text-center">
         <%= t "request_manager.search.relative_to" %>
       </div>
@@ -19,7 +20,6 @@
           params[:request_status_id]), include_blank: Settings.all,
           class: "form-control", onChange: "changeSearchForm()") %>
       </div>
-
     <% end %>
   </div>
   <% if @current_user.can_make_request %>

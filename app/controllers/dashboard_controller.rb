@@ -55,6 +55,7 @@ class DashboardController < ApplicationController
   def get_request_top
     @requests = Request.request_manage(@current_user.default_parent_path,
       @current_user)
+      .request_not_self(@current_user)
       .order_by_time
       .first(Settings.top_dashboard)
       .sort_by {|obj| obj.request_status_id}

@@ -1,28 +1,8 @@
 <% provide :title, t("request.title") %>
 <div>
   <%= render "search_form" %>
-  <ul class="nav nav-tabs" role="tablist">
-    <% if @current_user.can_manage_request %>
-      <li role="presentation" class= <%= @current_user.can_manage_request ? "active" : "" %>>
-        <a href="#another_request" aria-controls="another_request"
-          role="tab" data-toggle="tab"><%= t "request.tab.another_request" %></a>
-      </li>
-    <% end %>
-    <li role="presentation" class= <%= @current_user.can_manage_request ? "" : "active" %>>
-      <a href="#private_request" aria-controls="private_request"
-        role="tab" data-toggle="tab"><%= t "request.tab.my_title" %></a>
-    </li>
-  </ul>
-  <div class="tab-content">
-    <% if @current_user.can_manage_request %>
-      <div role="tabpanel" class="tab-pane <%= @current_user.can_manage_request ? "active" : "" %>" id="another_request">
-        <%= render "another_request" %>
-      </div>
-    <% end %>
-
-    <div role="tabpanel" class="tab-pane <%= @current_user.can_manage_request ? "" : "active" %>" id="private_request">
-      <%= render "private_request" %>
-    </div>
+  <div id="request_content_grid">
+    <%= render "grid_content" %>
   </div>
 </div>
 

@@ -687,7 +687,7 @@ Invoice.create!(invoice_number: "invoice1",
   updated_at: Time.zone.now)
 
 Group.create!(
-  name: "Staff",
+  name: "Admin",
   company_id: 1,
   description: "Root Framgia",
   closest_parent_id: 0,
@@ -775,6 +775,15 @@ Group.create!(
   group_type: 1,
   image: "")
 
+Group.create!(
+  name: "Staff",
+  company_id: 1,
+  description: "Framgia Staff",
+  closest_parent_id: 1,
+  parent_path: "/1",
+  group_type: 1,
+  image: "")
+
 Permission.create!(
   entry: "Request",
   group_id: 1,
@@ -795,7 +804,7 @@ Permission.create!(
 Permission.create!(
   entry: "Request",
   group_id: 5,
-  optional: "{\"Waiting Done\":true}")
+  optional: "{\"Create\":true,\"Read\":true,\"Update\":true,\"Delete\":true,\"Waiting Done\":true}")
 
 Permission.create!(
   entry: "Request",
@@ -820,6 +829,11 @@ Permission.create!(
 Permission.create!(
   entry: "Device",
   group_id: 10,
+  optional: "{\"Create\":true,\"Read\":true,\"Update\":true,\"Delete\":true}")
+
+Permission.create!(
+  entry: "Request",
+  group_id: 11,
   optional: "{\"Create\":true,\"Read\":true,\"Update\":true,\"Delete\":true}")
 
 Permission.create!(
@@ -897,6 +911,49 @@ UserGroup.create!(
   group_id: 8,
   is_default_group: true)
 
+#extend default permission
+UserGroup.create!(
+  user_id: 2,
+  group_id: 11,
+  is_default_group: false)
+UserGroup.create!(
+  user_id: 3,
+  group_id: 11,
+  is_default_group: false)
+UserGroup.create!(
+  user_id: 4,
+  group_id: 11,
+  is_default_group: false)
+UserGroup.create!(
+  user_id: 5,
+  group_id: 11,
+  is_default_group: false)
+UserGroup.create!(
+  user_id: 6,
+  group_id: 11,
+  is_default_group: false)
+UserGroup.create!(
+  user_id: 7,
+  group_id: 11,
+  is_default_group: false)
+UserGroup.create!(
+  user_id: 8,
+  group_id: 11,
+  is_default_group: false)
+UserGroup.create!(
+  user_id: 9,
+  group_id: 11,
+  is_default_group: false)
+UserGroup.create!(
+  user_id: 10,
+  group_id: 11,
+  is_default_group: false)
+UserGroup.create!(
+  user_id: 11,
+  group_id: 11,
+  is_default_group: false)
+
+
 20.times do |n|
   Device.create!(
     device_code: "device_#{n+1}",
@@ -939,24 +996,46 @@ end
 
 5.times do |n|
   Request.create!(
-    title: "request_title_#{n+1}",
-    description: "description_#{n+1}",
+    title: "request_title_#{n+1} for Huy By Dung",
+    description: "description_#{n+1} for Huy By Dung",
     created_by: 2 ,
     updated_by: 2,
     request_type_id: 1,
-    request_status_id: 2,
+    request_status_id: 3,
     for_user_id: 11)
 end
 
 5.times do |n|
   Request.create!(
-    title: "request_title_#{n+1}",
-    description: "description_#{n+1}",
+    title: "request_title_#{n+1} for Dung",
+    description: "description_#{n+1} for Dung",
     created_by: 2 ,
     updated_by: 2,
     request_type_id: 1,
+    request_status_id: 3,
+    for_user_id: 2)
+end
+
+5.times do |n|
+  Request.create!(
+    title: "request_title_#{n+1} for Ngoc By Dung",
+    description: "description_#{n+1} for Ngoc By Dung",
+    created_by: 2 ,
+    updated_by: 2,
+    request_type_id: 1,
+    request_status_id: 3,
+    for_user_id: 5)
+end
+
+5.times do |n|
+  Request.create!(
+    title: "request_title_#{n+1} for Ngoc",
+    description: "description_#{n+1} for Ngoc",
+    created_by: 5 ,
+    updated_by: 5,
+    request_type_id: 1,
     request_status_id: 2,
-    for_user_id: 11)
+    for_user_id: 5)
 end
 
 5.times do |n|
@@ -964,7 +1043,7 @@ end
     title: "request_title_#{n+1}",
     description: "description_#{n+1}",
     created_by: 13 ,
-    updated_by: 2,
+    updated_by: 13,
     request_type_id: 1,
     request_status_id: 2,
     for_user_id: 13)
@@ -975,7 +1054,7 @@ end
     title: "request_title_#{n+1}",
     description: "description_#{n+1}",
     created_by: 11 ,
-    updated_by: 2,
+    updated_by: 11,
     request_type_id: 1,
     request_status_id: 2,
     for_user_id: 11)
@@ -986,7 +1065,7 @@ end
     title: "request_title_#{n+1}",
     description: "description_#{n+1}",
     created_by: 14 ,
-    updated_by: 2,
+    updated_by: 14,
     request_type_id: 1,
     request_status_id: 2,
     for_user_id: 14)

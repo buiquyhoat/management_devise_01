@@ -31,14 +31,19 @@ class User < ApplicationRecord
   before_save :downcase_email
   after_initialize :create_another
 
-  scope :below_staff, ->parent_path do
+  scope :below_staff, ->parent_path, user_id do
     where "id in (select u.id from users as u left join user_groups as ug on ug.user_id = u.id
     left join groups as g on g.id = ug.group_id where g.parent_path LIKE ? and
-    ug.is_default_group = true)",
-    parent_path + "%"
+    ug.is_default_group = true) or id = ?",
+    convert_like(parent_path), user_id
   end
 
   class << self
+
+    def convert_like param
+      "#{param}%"
+    end
+
     def digest string
       cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
       BCrypt::Password.create string, cost: cost
@@ -94,7 +99,7 @@ class User < ApplicationRecord
   end
 
   def can_make_request
-    permission_default_group Settings.entry.request, Settings.action.create
+    highest_permission Settings.entry.request, Settings.action.create
   end
 
   def permission_default_group entry, action

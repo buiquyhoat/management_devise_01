@@ -20,6 +20,13 @@
             <%= request.title_update current_user %>
           </label>
       <% end %>
+      <% if request.show_revert_waiting? @current_user %>
+        <label class="btn btn-default %>">
+          <%= radio_button("post", "options #{request.id}",
+            request.status_reupdate(current_user)) %>
+          <%= request.title_update current_user %>
+        </label>
+      <% end %>
       <% if request.show_approve_request? @current_user %>
         <label class="btn btn-default">
           <%= radio_button("post", "options #{request.id}",

@@ -43,5 +43,5 @@
       <% end %>
     </tbody>
   </table>
-  <%= will_paginate @requests %>
+  <%= js_will_paginate @requests, params: {manager_request: 1} %>
 <% end %>

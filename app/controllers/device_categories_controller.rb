@@ -49,6 +49,7 @@ class DeviceCategoriesController < ApplicationController
 
   def init_dropdown
     @support = Supports::User.new current_user
+    @manage_tag_selected = @current_user.can_manage_device
   end
 
   def init_category

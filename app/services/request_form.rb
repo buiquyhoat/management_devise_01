@@ -28,7 +28,8 @@ class RequestForm
         new_status == Settings.request_status.approved
       when Settings.request_status.approved
         new_status == Settings.request_status.cancelled ||
-        new_status == Settings.request_status.waiting_done
+        new_status == Settings.request_status.waiting_done ||
+        new_status == Settings.request_status.waiting_approve
       when Settings.request_status.waiting_done
         new_status == Settings.request_status.cancelled ||
         new_status == Settings.request_status.done

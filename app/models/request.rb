@@ -59,7 +59,7 @@ class Request < ApplicationRecord
       when Settings.action.approve
         where "for_user_id in (select u.id from users as u left join user_groups as
           ug on ug.user_id = u.id left join groups as g on g.id = ug.group_id where
-          g.parent_path LIKE ? and ug.is_default_group = true)", convert_like(parent_path)
+          g.parent_path LIKE ? and ug.is_default_group = true) or for_user_id = ?", convert_like(parent_path), user.id
       when Settings.action.waiting_done
         where "request_status_id >= ? or (request_status_id = ? and updated_by = ?)",
           Settings.request_status.approved, Settings.request_status.cancelled, user.id
@@ -67,6 +67,10 @@ class Request < ApplicationRecord
         where request_status_id: [Settings.request_status.waiting_done, Settings.request_status.done]
       end
     end
+  end
+
+  scope :request_not_self, -> user do
+    where.not for_user_id: user.id
   end
 
   scope :request_manage_request_approve, ->parent_path, user do
@@ -118,7 +122,7 @@ class Request < ApplicationRecord
     when Settings.request_status.waiting_approve
       user.can_make_request && created_by == user.id || user.can_approve
     when Settings.request_status.approved
-      user.can_waiting_done
+      user.can_waiting_done || (user.can_approve && user.id == updated_by)
     else
       false
     end
@@ -127,10 +131,13 @@ class Request < ApplicationRecord
   def show_reupdate? user
     user.current_permission.present? && user.id == created_by &&
     request_status_id == Settings.request_status.cancelled &&
-    (user.current_permission == Settings.action.create ||
-    user.current_permission == Settings.action.approve)
+    (user.current_permission == Settings.action.create || user.current_permission == Settings.action.approve)
   end
 
+  def show_revert_waiting? user
+    user.current_permission == Settings.action.approve && user.id == updated_by &&
+    user.id != created_by && request_status_id == Settings.request_status.approved
+  end
   def show_approve_request? user
     user.can_approve && request_status_id == Settings.request_status.waiting_approve
   end
@@ -161,10 +168,12 @@ class Request < ApplicationRecord
   end
 
   def user_manager_edit_request? user
-    staff = User.below_staff(user.default_parent_path).find_by id: created_by
+    staff = User.below_staff(user.default_parent_path, user.id).find_by id: created_by
     user.can_approve && (user.id == created_by || staff.present?) &&
     (request_status_id == Settings.request_status.waiting_approve ||
-    request_status_id == Settings.request_status.cancelled && created_by == user.id)
+    request_status_id == Settings.request_status.cancelled && created_by == user.id ||
+    request_status_id == Settings.request_status.approved && for_user_id == user.id
+    )
   end
 
   def user_manager_bo_edit_request? user
@@ -181,18 +190,27 @@ class Request < ApplicationRecord
     when Settings.action.create
       Settings.request_status.waiting_approve
     when Settings.action.approve
-      Settings.request_status.approved
+      if request_status_id == Settings.request_status.approved
+        Settings.request_status.waiting_approve
+      else
+        Settings.request_status.approved
+      end
     end
   end
 
   def title_update user
     case user.current_permission
     when Settings.action.approve
-      I18n.t("request.action.re_approve")
+      if request_status_id == Settings.request_status.approved
+        I18n.t("request.action.re_back_waiting")
+      else
+        I18n.t("request.action.re_approve")
+      end
     when Settings.action.create
       I18n.t("request.action.re_send")
     end
   end
+
   private
 
   def create_extend_data
@@ -212,10 +230,10 @@ class Request < ApplicationRecord
   def create_notification
     if created_at == updated_at
       message = I18n.t("notification.message.request_message",
-        request_id: id, action: I18n.t("notification.action.created"))
+        request_title: title, action: I18n.t("notification.action.created"))
     else
-      message = I18n.t("notification.message.request_message",
-        request_id: id, action: I18n.t("notification.action.updated"))
+      message = I18n.t("notification.message.request_message_update",
+        request_title: title, action: I18n.t("notification.action.updated"), status: request_status.name)
     end
     create_notify updated_by, for_user_id,
       message, Rails.application.routes.url_helpers.requests_path

@@ -67,14 +67,21 @@ class Supports::User
     when Settings.action.create
       lst_request_status_staff
     when Settings.action.approve
-      if request.request_status_id == Settings.request_status.cancelled
+      case request.request_status_id
+      when Settings.request_status.cancelled
         lst_request_status_manager_cancelled
+      when Settings.request_status.approved
+        if request.for_user_id == user.id
+          lst_request_status_manager_approved
+        else
+          lst_request_status_manager_waiting_approve
+        end
       else
         lst_request_status_manager_waiting_approve
       end
     when Settings.action.waiting_done
       if request.request_status_id == Settings.request_status.cancelled
-        lst_request_status_bomanager_cancelled
+        lst_request_status_staff
       else
         lst_request_status_bomanager_waiting_done
       end
@@ -87,6 +94,10 @@ class Supports::User
 
   def lst_request_status_manager_cancelled
     @lst_request_status_manager_cancelled ||= RequestStatus.request_status_manager_cancelled
+  end
+
+  def lst_request_status_manager_approved
+    @lst_request_status_manager_approved ||= RequestStatus.request_status_manager_approved
   end
 
   def lst_request_status_manager_waiting_approve
@@ -111,7 +122,7 @@ class Supports::User
 
   def below_staffs
     if @user.can_approve
-      @below_staffs ||= User.below_staff @user.default_parent_path
+      @below_staffs ||= User.below_staff @user.default_parent_path, @user.id
     else
       @below_staffs = [@user]
     end
