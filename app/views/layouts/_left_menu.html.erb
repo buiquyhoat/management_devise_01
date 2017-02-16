@@ -36,7 +36,6 @@
               <li>
                 <%= link_to t("menu.dashboard"), dashboard_index_path %>
               </li>
-              <li><%= link_to t("home.title"), root_path %></li>
               <li><%= link_to t("help.title"), help_path %></li>
               <li><%= link_to t("about.title"), "#" %></li>
             </ul>
@@ -79,8 +78,7 @@
               <% if current_user.can_manage_device %>
                 <li><%= link_to t("menu.manager_device"),  devices_path %></li>
                 <li>
-                  <%= link_to t("menu.device_history"),
-                    device_history_index_path %>
+                  <%= link_to t("menu.device_history"), device_history_index_path %>
                 </li>
               <% else %>
                 <li><%= link_to t("header.my_devices"), my_devices_path %></li>
@@ -93,14 +91,9 @@
     </div>
   </div>
   <div class="sidebar-footer hidden-small">
-      <%= link_to "#", data: {toggle: "tooltip", placement: "top"} do %>
+      <%= link_to user_setting_index_path,
+        data: {toggle: "tooltip", placement: "top"} do %>
         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-      <% end %>
-      <%= link_to "#", data: {toggle: "tooltip", placement: "top"} do %>
-        <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-      <% end %>
-      <%= link_to "#", data: {toggle: "tooltip", placement: "top"} do %>
-        <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
       <% end %>
       <% if logged_in? %>
         <%= link_to logout_path, method: :delete,

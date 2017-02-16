@@ -28,7 +28,7 @@
           :name, {include_blank: Settings.none}, {class: "form-control"} %>
       </div>
     <% end %>
-    <% if @request.allow_change_status @current_user %>
+    <% if @request.allow_change_status? @current_user %>
       <div class="input-field col s6">
         <%= f.label t "request.table.request_status" %>
         <%= f.collection_select :request_status_id, @support.lst_request_status(@current_user, @request), :id, :name,

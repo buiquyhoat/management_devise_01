@@ -13,14 +13,14 @@
         <table class="" style="width:100%">
           <tr>
             <th style="width:37%;">
-              <p>Top 5</p>
+              <p><%= t "dashboard.request.chart" %></p>
             </th>
             <th>
               <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-                <p class="">Status</p>
+                <p class=""><%= t "dashboard.request.status" %></p>
               </div>
               <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
-                <p class="">Progress</p>
+                <p class=""><%= t "dashboard.request.summany" %></p>
               </div>
             </th>
           </tr>
@@ -49,6 +49,5 @@
     </div>
   </div>
 <% else %>
-
+  <%= render "make_request" %>
 <% end %>
-

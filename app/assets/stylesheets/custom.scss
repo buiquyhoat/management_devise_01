@@ -72,6 +72,25 @@ div.done_center {
   font-size: 12px;
   padding: 9px; }
 
+.toggle {
+  float: left;
+  margin: 0;
+  padding-top: 16px;
+  width: 70px; }
+
+.toggle a {
+  padding: 15px 15px 0;
+  margin: 0;
+  cursor: pointer; }
+
+.toggle a i {
+  font-size: 26px; }
+
+.nav.child_menu > li > a {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 12px;
+  padding: 9px; }
+
 .panel_toolbox {
   float: right;
   min-width: 70px; }

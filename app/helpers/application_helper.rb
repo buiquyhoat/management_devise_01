@@ -32,4 +32,10 @@ module ApplicationHelper
     end
     users
   end
+
+  def get_setting_type setting
+    setting_type =  Settings.user_setting.setting_type["#{setting}"]
+    setting_type = Settings.user_setting.setting_type.default if setting_type.nil?
+    setting_type
+  end
 end

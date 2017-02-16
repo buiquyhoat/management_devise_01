@@ -268,6 +268,8 @@ en:
     back: "Back"
   user_setting:
     title: "User Settings"
+    label:
+      user_grroup: "User Group Default"
     table:
       header:
         setting: "Setting Name"
@@ -283,3 +285,7 @@ en:
     request_overview: "Request Overview"
     request:
       check: "check now"
+      chart: "Chart"
+      status: "Status"
+      summany: "Summary"
+      go_to_request: "Go to Request"

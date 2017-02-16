@@ -20,7 +20,7 @@ class Request < ApplicationRecord
   after_save :create_notification
 
   scope :order_by, ->{order request_status_id: :asc, created_at: :desc, updated_at: :desc}
-  scope :find_by_actor, ->user_id do
+  scope :of_actor, ->user_id do
     if user_id.present?
       where "id in (select r.id from requests as r
         where r.assignee_id = ? or r.created_by = ? or r.updated_by = ?
@@ -34,11 +34,11 @@ class Request < ApplicationRecord
     end
   end
 
-  scope :find_for_user, ->user_id do
+  scope :of_for_user, ->user_id do
     where for_user_id: user_id if user_id.present?
   end
 
-  scope :find_by_status, ->request_status_id do
+  scope :with_status, ->request_status_id do
     where request_status_id: request_status_id if request_status_id.present?
   end
 
@@ -55,7 +55,7 @@ class Request < ApplicationRecord
         ug on ug.user_id = u.id left join groups as g on g.id = ug.group_id where
         g.parent_path LIKE ?)", convert_like(parent_path)
     when Settings.action.waiting_done
-      where "request_status_id >= ? or (request_status_id= ? && updated_by = ?)",
+      where "request_status_id >= ? or (request_status_id = ? && updated_by = ?)",
         Settings.request_status.approved, Settings.request_status.cancelled, user.id
     when Settings.action.done
       where request_status_id: [Settings.request_status.waiting_done, Settings.request_status.done]
@@ -124,7 +124,7 @@ class Request < ApplicationRecord
     user.can_done && request_status_id == Settings.request_status.waiting_done
   end
 
-  def allow_change_status user
+  def allow_change_status? user
     id.present? && (user.can_approve || allow_edit?(user))
   end
 

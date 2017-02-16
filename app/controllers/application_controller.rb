@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   before_action :load_notification
 
-
   private
 
   def logged_in_user
@@ -27,12 +26,25 @@ class ApplicationController < ActionController::Base
     true if Float(string) rescue false
   end
 
-  private
-
   def load_notification
     if logged_in?
       @notifications = Notification.by_current_user(current_user.id)
         .limit(Settings.notification.max_display).default_sort
     end
+  end
+
+  def config_page_size
+    page_size = Settings.paging.page_size
+    if user_setting.present?
+      setting_page_size = user_setting.optional_hash[Settings.user_setting.page_size]
+        if setting_page_size.to_i <  Settings.paging.min_page_size
+          page_size = Settings.paging.page_size
+        elsif setting_page_size.to_i >  Settings.paging.max_page_size
+          page_size = Settings.paging.max_page_size
+        else
+          page_size = setting_page_size.to_i
+        end
+    end
+    page_size
   end
 end

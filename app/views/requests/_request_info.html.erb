@@ -47,14 +47,14 @@
     <% @request.request_details.each do |request_detail| %>
       <tr>
         <td>
-          <%=text_area_tag  request_detail.description,
+          <%= text_area_tag  request_detail.description,
             request_detail.description, {class: "form-control",
               disabled: "disabled"} %></td>
         <td>
-          <%=text_field_tag  request_detail.device_category.name,
+          <%= text_field_tag  request_detail.device_category.name,
             request_detail.device_category.name, {class: "form-control",
               disabled: "disabled"} %></td>
-        <td> <%=text_field_tag  request_detail.number, request_detail.number,
+        <td> <%= text_field_tag  request_detail.number, request_detail.number,
           {class: "form-control", disabled: "disabled"} %></td>
       </tr>
     <% end %>

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get "device_assign/show"
   get "requests/new"
   get "requests/add_request_detail"
-  root "static_pages#home"
+  root "dashboard#index"
 
   delete "/requestdetails", to: "request_details#destroy"
 
@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   resources :user_setting, only: [:index, :update], collection: {update: :put}
   resources :return_devices, only: :index
   resources :device_history
+  resources :user_groups
   resources :dashboard
   mount ActionCable.server => "/cable"
 end
