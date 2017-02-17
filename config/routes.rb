@@ -37,5 +37,7 @@ Rails.application.routes.draw do
   resources :device_history
   resources :user_groups
   resources :dashboard
+  resources :device_categories
+
   mount ActionCable.server => "/cable"
 end

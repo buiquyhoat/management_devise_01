@@ -78,6 +78,7 @@ en:
     manager_device: "Manage Device"
     manager_assignment: "Manage Assignment"
     device_history: "Device Using History"
+    device_category: "Device Categories Manage"
   nav:
     user_profile: "Profile"
     logout: "Log out"
@@ -292,3 +293,15 @@ en:
       status: "Status"
       summany: "Summary"
       go_to_request: "Go to Request"
+  device_categories:
+    title_add_new: "Add New Device Category"
+    message_device_not_exist: "Device Category not found!."
+    field_label:
+      key_search: "Device Group Type"
+    table:
+      header:
+        name: "Category Name"
+        template_code: "Device Template Code"
+        group_type: "Group Type"
+        template_code: "Template Code"
+
