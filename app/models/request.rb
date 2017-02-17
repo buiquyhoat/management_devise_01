@@ -34,8 +34,12 @@ class Request < ApplicationRecord
     end
   end
 
-  scope :of_for_user, ->user_id do
-    where for_user_id: user_id if user_id.present?
+  scope :of_for_user, ->user_id, parent_path, user do
+    if user_id.present?
+      where for_user_id: user_id
+    else
+      request_manage parent_path, user
+    end
   end
 
   scope :with_status, ->request_status_id do
@@ -45,21 +49,38 @@ class Request < ApplicationRecord
   scope :request_of_below_staff, ->parent_path, current_id do
     where "for_user_id in (select u.id from users as u left join user_groups as
       ug on ug.user_id = u.id left join groups as g on g.id = ug.group_id where
-      g.parent_path LIKE ?)", convert_like(parent_path)
+      g.parent_path LIKE ? && ug.is_default_group = true )", convert_like(parent_path)
   end
 
   scope :request_manage, ->parent_path, user do
-    case user.current_permission
-    when Settings.action.approve
-      where "for_user_id in (select u.id from users as u left join user_groups as
-        ug on ug.user_id = u.id left join groups as g on g.id = ug.group_id where
-        g.parent_path LIKE ?)", convert_like(parent_path)
-    when Settings.action.waiting_done
-      where "request_status_id >= ? or (request_status_id = ? && updated_by = ?)",
-        Settings.request_status.approved, Settings.request_status.cancelled, user.id
-    when Settings.action.done
-      where request_status_id: [Settings.request_status.waiting_done, Settings.request_status.done]
+    if user.present?
+      case user.current_permission
+      when Settings.action.approve
+        where "for_user_id in (select u.id from users as u left join user_groups as
+          ug on ug.user_id = u.id left join groups as g on g.id = ug.group_id where
+          g.parent_path LIKE ? && ug.is_default_group = true)", convert_like(parent_path)
+      when Settings.action.waiting_done
+        where "request_status_id >= ? or (request_status_id = ? && updated_by = ?)",
+          Settings.request_status.approved, Settings.request_status.cancelled, user.id
+      when Settings.action.done
+        where request_status_id: [Settings.request_status.waiting_done, Settings.request_status.done]
+      end
     end
+  end
+
+  scope :request_manage_request_approve, ->parent_path, user do
+    where "for_user_id in (select u.id from users as u left join user_groups as
+      ug on ug.user_id = u.id left join groups as g on g.id = ug.group_id where
+      g.parent_path LIKE ?)", convert_like(parent_path)
+  end
+
+  scope :request_manage_request_waiting_done, ->parent_path, user do
+    where "request_status_id >= ? or (request_status_id = ? && updated_by = ?)",
+      Settings.request_status.approved, Settings.request_status.cancelled, user.id
+  end
+
+  scope :request_manage_request_done, ->parent_path, user do
+    where request_status_id: [Settings.request_status.waiting_done, Settings.request_status.done]
   end
 
   scope :request_can_access, ->parent_path, current_id do
