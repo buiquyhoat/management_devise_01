@@ -103,7 +103,7 @@ class DevicesController < ApplicationController
       .includes(:invoice)
       .of_category(params[:category_id])
       .of_status(params[:status_id]).of_invoice(params[:invoice_number])
-      .paginate page: params[:page]
+      .paginate page: params[:page], per_page: config_page_size
   end
 
   def check_permision

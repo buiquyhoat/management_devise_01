@@ -30,8 +30,7 @@
                                 setting_name, seting_value, {id: setting_name} %>
                               <label for="<%= setting_name %>" class="label-default"></label>
                             <% else %>
-                              <%= text_field_tag "", seting_value, id: setting_name,
-                                class: "form-control taR user-setting", type: get_setting_type(setting_name) %>
+                              <%= raw render_text_box setting_name, seting_value %>
                               <%= hidden_field_tag "setting_params[]", "#{setting_name}:#{seting_value}",
                                 id: "hd-#{setting_name}" %>
                             <% end %>

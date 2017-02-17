@@ -67,9 +67,12 @@ user_setting:
   send_mail_notification: "send_mail_notification"
   page_size: "page_size"
   user_signal: "user_signal"
+  order_by_unread_notification: "order_by_unread_notification"
+  quantity_load_notification: "quantity_load_notification"
   setting_type:
-    default: "text"
-    page_size: "number"
+    default: "type=\"text\""
+    page_size: "onblur=\"minmax(this, 5, 30)\""
+    quantity_load_notification: "onblur=\"minmax(this, 5, 30)\""
 paging:
   page_size: 15
   min_page_size: 10

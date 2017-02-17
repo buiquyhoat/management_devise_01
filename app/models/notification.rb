@@ -11,6 +11,10 @@ class Notification < ApplicationRecord
     where reciver_id: user_id
   end
 
+  scope :sort_by_checked, ->checked do
+    order checked: :asc if checked.present? && checked
+  end
+
   scope :created_from_date, ->(from_date) do
     where "CAST(created_at AS DATE) >= CAST(? AS DATE)",
      from_date if from_date.present?

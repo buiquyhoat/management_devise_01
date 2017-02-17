@@ -135,7 +135,6 @@ $(document).on('turbolinks:load', function() {
     var setting_name = $(this).attr('id')
     $('#hd-'+ setting_name).val(setting_name + ':' + $(this).val())
   })
-
 })
 
 $(document).ajaxStart(function(){
@@ -229,17 +228,22 @@ function submitForm(){
 
 function getDeviceCode(url) {
   var device_category_id =  $('.device-category').val()
-  $.ajax({
-    url: url + '?device_category_id=' + device_category_id,
-    type:'get',
-    dataType: 'json',
-    success: function(data) {
-      $('.device-code').val(data.device_code)
-    },
-    error: function (xhr, ajaxOptions, thrownError) {
-      alert(thrownError);
-    }
-  });
+  var current_category_id = $('#current_category_id').val()
+  if (current_category_id !== device_category_id) {
+    $.ajax({
+      url: url + '?device_category_id=' + device_category_id,
+      type:'get',
+      dataType: 'json',
+      success: function(data) {
+        $('.device-code').val(data.device_code)
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        alert(thrownError);
+      }
+    });
+  }else{
+    $('.device-code').val($('#current_code').val())
+  }
 }
 
 function setup_date_picker(){
@@ -256,6 +260,7 @@ function user_setting_submit(){
   $('#form-user-setting').submit();
   $('#form-user-group').submit();
 }
+
 function setup_chart(){
   if ($("#request_cycle").length > 0) {
     var options = {
@@ -291,4 +296,18 @@ function setup_chart(){
       }
     });
   }
+}
+
+function minmax(obj, min, max){
+  var value = parseInt($(obj).val())
+  if(value < min || isNaN(value)){
+    alert(I18n.t("action_message.min_value", {value: min}))
+    value = min;
+  }
+  else if(value > max){
+    alert(I18n.t("action_message.max_value", {value: max}))
+    value =  max;
+  }
+  $(obj).val('')
+  $(obj).val(value)
 }

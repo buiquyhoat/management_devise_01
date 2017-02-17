@@ -5,7 +5,7 @@ class DeviceHistoryController < ApplicationController
   def index
     @search = AssignmentDetail.search(params[:q])
     @search.sorts = ["assignment_assignee_email","return_date asc", "assignments.created_at desc"]
-    @using_histories = @search.result(distinct: true)
+    @using_histories = @search.result
       .paginate(page: params[:page], per_page: config_page_size)
   end
 

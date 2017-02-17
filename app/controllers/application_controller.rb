@@ -28,8 +28,13 @@ class ApplicationController < ActionController::Base
 
   def load_notification
     if logged_in?
+      limit =
+        user_setting.optional_hash[Settings.user_setting.quantity_load_notification]
+      limit ||= Settings.paging.page_size
+      checked =
+        user_setting.optional_hash[Settings.user_setting.order_by_unread_notification]
       @notifications = Notification.by_current_user(current_user.id)
-        .limit(Settings.notification.max_display).default_sort
+        .limit(limit).sort_by_checked(checked).default_sort
     end
   end
 
