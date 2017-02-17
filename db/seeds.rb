@@ -897,16 +897,6 @@ UserGroup.create!(
   group_id: 8,
   is_default_group: true)
 
-UserGroup.create!(
-  user_id: 10,
-  group_id: 11,
-  is_default_group: true)
-UserGroup.create!(
-  user_id: 1,
-  group_id: 19,
-  is_default_group: true)
-
-
 20.times do |n|
   Device.create!(
     device_code: "device_#{n+1}",

@@ -32,6 +32,7 @@ gem "carrierwave"
 gem "ransack"
 gem "delayed_job"
 gem "delayed_job_active_record"
+gem "devise"
 
 group :development, :test do
   gem "byebug", platform: :mri
@@ -57,6 +58,10 @@ end
 group :development, :test do
   gem "rspec-rails", "3.5"
   gem "factory_girl_rails", require: false
+  gem "database_cleaner", "~> 1.5"
+  gem "rspec-collection_matchers"
+  gem "rails-controller-testing"
+  gem "capybara"
 end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
