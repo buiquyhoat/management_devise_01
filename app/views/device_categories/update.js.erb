@@ -1,0 +1,6 @@
+<% if @device_category.errors.any? %>
+  $('#error').html("<%= j render 'shared/error_messages', object: @device_category %>")
+<% else %>
+  $('#dms-popup').modal('toggle');
+  $('#form-submit').submit();
+<% end %>

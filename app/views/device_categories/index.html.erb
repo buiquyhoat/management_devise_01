@@ -1,0 +1,20 @@
+<div class="row">
+  <%= search_form_for @search, id: "form-submit" do |f| %>
+    <div class="row padding-left-1">
+      <div class="col-lg-2 text-right">
+        <label class="form-control"><%= t "device_categories.field_label.key_search" %></label>
+      </div>
+      <div class="col-lg-4">
+        <%= f.collection_select :device_group_id_eq, @support.device_group_categories, :id, :name,
+          {}, {class: "form-control", onChange: "changeSearchForm()"} %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<br/>
+<div class="row margin-left-0">
+  <%= link_to t("device_categories.title_add_new"), new_device_category_path, class: "btn btn-primary",
+    remote: true, data:{toggle: "modal", target: "#dms-popup", backdrop: "static"} %>
+</div>
+<br />
+<%= render "grid_device_categories" %>
