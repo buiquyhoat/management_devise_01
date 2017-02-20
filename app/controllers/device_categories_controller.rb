@@ -1,6 +1,8 @@
 class DeviceCategoriesController < ApplicationController
   before_action :init_dropdown, except: [:create, :update]
   before_action :init_category, only: [:edit, :update]
+  before_action :logged_in_user
+  before_action :check_permision
 
   def index
     @search = DeviceCategory.search(params[:q])
@@ -54,6 +56,12 @@ class DeviceCategoriesController < ApplicationController
     unless @device_category
       flash[:danger] = t "device_categories.message_device_not_exist"
       redirect_to device_categories_path
+    end
+  end
+
+  def check_permision
+    unless current_user.is_admin
+      redirect_to root_url
     end
   end
 end

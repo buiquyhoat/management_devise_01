@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
-  before_action :load_notification
+  before_action :setup_user_seting, :load_notification
 
   private
 
@@ -51,5 +51,41 @@ class ApplicationController < ActionController::Base
         end
     end
     page_size
+  end
+
+  def setup_user_seting
+    if logged_in?
+      user_setting.present? ? update_init_settings : create_user_setting
+      user_setting
+    end
+  end
+
+  def create_user_setting
+    setting = default_user_setting
+    user_setting = UserSetting.create user_id: current_user.id,
+     user_settings_data: setting.to_json
+  end
+
+  def default_user_setting
+    seting = {}
+    seting[Settings.user_setting.send_mail_notification] = true
+    seting[Settings.user_setting.order_by_unread_notification] = true
+    seting[Settings.user_setting.quantity_load_notification] =
+      Settings.paging.max_page_size
+    seting[Settings.user_setting.page_size] = Settings.paging.page_size
+    seting[Settings.user_setting.user_signal] = ""
+    seting
+  end
+
+  def update_init_settings
+    default_setting = default_user_setting
+    default_setting.each do |k, v|
+      unless user_setting.optional_hash[k].present?
+        user_setting.optional_hash[k] = v
+      end
+    end
+
+    user_setting.set_option
+    user_setting.save
   end
 end
