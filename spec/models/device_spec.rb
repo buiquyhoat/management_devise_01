@@ -14,9 +14,6 @@ RSpec.describe DeviceGroup, type: :model do
     let!(:invalid_device) {FactoryGirl.build :invalid_device}
     subject {invalid_device}
     it {should validate_presence_of(:device_code)}
-    it {should validate_presence_of(:production_name)}
-    it {should validate_presence_of(:model_number)}
-    it {should validate_presence_of(:serial_number)}
   end
 
   context "validation uniqueness" do
@@ -26,6 +23,5 @@ RSpec.describe DeviceGroup, type: :model do
     subject {invalid_device}
 
     it {should validate_uniqueness_of(:device_code).case_insensitive}
-    it {should validate_uniqueness_of(:production_name).case_insensitive}
   end
 end

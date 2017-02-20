@@ -236,10 +236,10 @@ class Request < ApplicationRecord
         request_title: title, action: I18n.t("notification.action.updated"), status: request_status.name)
     end
     create_notify updated_by, for_user_id,
-      message, Rails.application.routes.url_helpers.requests_path
+      message, Settings.notification.request_path
     if assignee_id.present?
       create_notify updated_by, assignee_id,
-      message, Rails.application.routes.url_helpers.requests_path
+      message, Settings.notification.request_path
     end
   end
 

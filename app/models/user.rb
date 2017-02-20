@@ -152,7 +152,7 @@ class User < ApplicationRecord
 
   def create_another
     get_default_parent_path
-    self.name = first_name + last_name
+    self.name = "#{first_name} #{last_name}"
   end
 
   def avatar_size
