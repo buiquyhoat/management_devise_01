@@ -19,3 +19,19 @@ config/database.yml
 
 # Ignore application configuration
 /config/application.yml
+/coverage/
+/spec/tmp/*
+*.rbc
+*.sassc
+.sass-cache
+capybara-*.html
+.rspec
+.rvmrc
+.byebug_history
+/.bundle
+/vendor/bundle
+/log/*
+/tmp/*
+/test/*
+/public/uploads
+/bin/*
