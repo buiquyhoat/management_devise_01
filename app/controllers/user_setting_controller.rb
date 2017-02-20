@@ -52,6 +52,7 @@ class UserSettingController < ApplicationController
   def save_setting update_setting
     update_setting.set_option
     if update_setting.save
+      flash[:success] = t "action_message.create_success"
       redirect_to user_setting_index_path
     else
       flash[:danger] = t "action_message.update_fail"
