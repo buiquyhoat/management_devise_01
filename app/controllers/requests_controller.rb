@@ -97,14 +97,14 @@ class RequestsController < ApplicationController
     @requests = Request.request_manage(@current_user.default_parent_path, @current_user)
       .of_actor(params[:relative_id])
       .of_request_status(params[:request_status_id])
-      .order_by.paginate page: params[:page], per_page: config_page_size
+      .order_by_time.paginate page: params[:page], per_page: config_page_size
   end
 
   def get_my_requests
-    @my_requests = Request.of_for_user(@current_user.id, @current_user.default_parent_path, @current_user).order_by
+    @my_requests = Request.of_for_user(@current_user.id, @current_user.default_parent_path, @current_user).order_by_time
       .of_actor(params[:relative_id])
       .of_request_status(params[:request_status_id])
-      .order_by.paginate page: params[:page], per_page: config_page_size
+      .order_by_time.paginate page: params[:page], per_page: config_page_size
   end
 
   def init_dropdown

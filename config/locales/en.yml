@@ -107,7 +107,6 @@ en:
       device_code: "Device Code"
       production_name: "Production Name"
       seria_number: "Seria Number"
-      device_category: "Device Category"
       model: "Model Number"
       device_status: "Device Status"
       invoice_number: "Invoice Number"
@@ -286,13 +285,35 @@ en:
       header:
         select_device: "Select Device"
   dashboard:
+    latest_request: "Top Request"
+    hot_device_category: "Top Device Category"
+    not_supply: "Sorry- not supply"
     request_overview: "Request Overview"
+    device_overview: "Device Overview"
+    device_summary_status: "Status"
     request:
-      check: "check now"
+      chart_title: "To Requests"
+      check: "(check now)"
       chart: "Chart"
       status: "Status"
       summany: "Summary"
+      chart_error: "Can't get chart"
       go_to_request: "Go to Request"
+      to_request: "(to request)"
+    device:
+      chart_title: "To Devices"
+      table:
+        summary_title: "Summary (Need Assignt, Available, Total)"
+        summary: "(%{assignment},%{available},%{total})"
+      chart_error: "Can't get chart"
+      view: "view"
+      name: "Name"
+      check: "Check"
+      status: "Status"
+      chart: "Chart"
+      summary: "Summary"
+      go_to_device: "Go to devices"
+      to_device: "(to device)"
   device_categories:
     title_add_new: "Add New Device Category"
     message_device_not_exist: "Device Category not found!."
@@ -304,4 +325,11 @@ en:
         template_code: "Device Template Code"
         group_type: "Group Type"
         template_code: "Template Code"
-
+  permission:
+    not_permisison: "Don't have permission"
+  request_status:
+    cancelled: "Cancelled"
+    waiting_approve: "Waiting approve"
+    approved: "Approved"
+    waiting_done: "Waiting done"
+    done: "Done"

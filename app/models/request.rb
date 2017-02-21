@@ -1,5 +1,5 @@
 class Request < ApplicationRecord
-  attr_accessor :creater, :updater, :readonly, :assignee
+  attr_accessor :creater, :updater, :readonly, :assignee, :request_status_name
 
   belongs_to :request_type
   belongs_to :request_status
@@ -19,7 +19,8 @@ class Request < ApplicationRecord
   after_initialize :create_extend_data
   after_save :create_notification
 
-  scope :order_by, ->{order request_status_id: :asc, created_at: :desc, updated_at: :desc}
+  scope :order_by_time, ->{order created_at: :desc, updated_at: :desc}
+  scope :sort_by_status, ->{sort_by request_status_id}
   scope :of_actor, ->user_id do
     if user_id.present?
       where "id in (select r.id from requests as r
@@ -49,7 +50,7 @@ class Request < ApplicationRecord
   scope :request_of_below_staff, ->parent_path, current_id do
     where "for_user_id in (select u.id from users as u left join user_groups as
       ug on ug.user_id = u.id left join groups as g on g.id = ug.group_id where
-      g.parent_path LIKE ? && ug.is_default_group = true )", convert_like(parent_path)
+      g.parent_path LIKE ? and ug.is_default_group = true )", convert_like(parent_path)
   end
 
   scope :request_manage, ->parent_path, user do
@@ -58,9 +59,9 @@ class Request < ApplicationRecord
       when Settings.action.approve
         where "for_user_id in (select u.id from users as u left join user_groups as
           ug on ug.user_id = u.id left join groups as g on g.id = ug.group_id where
-          g.parent_path LIKE ? && ug.is_default_group = true)", convert_like(parent_path)
+          g.parent_path LIKE ? and ug.is_default_group = true)", convert_like(parent_path)
       when Settings.action.waiting_done
-        where "request_status_id >= ? or (request_status_id = ? && updated_by = ?)",
+        where "request_status_id >= ? or (request_status_id = ? and updated_by = ?)",
           Settings.request_status.approved, Settings.request_status.cancelled, user.id
       when Settings.action.done
         where request_status_id: [Settings.request_status.waiting_done, Settings.request_status.done]
@@ -75,7 +76,7 @@ class Request < ApplicationRecord
   end
 
   scope :request_manage_request_waiting_done, ->parent_path, user do
-    where "request_status_id >= ? or (request_status_id = ? && updated_by = ?)",
+    where "request_status_id >= ? or (request_status_id = ? and updated_by = ?)",
       Settings.request_status.approved, Settings.request_status.cancelled, user.id
   end
 
@@ -198,6 +199,7 @@ class Request < ApplicationRecord
     self.creater = User.find_by id: created_by
     self.updater = User.find_by id: updated_by
     self.assignee = User.find_by id: assignee_id if assignee_id.present?
+    self.request_status_name = get_request_status_name request_status_id
   end
 
   def create_history action
@@ -217,5 +219,20 @@ class Request < ApplicationRecord
     end
     create_notify updated_by, for_user_id,
       message, Rails.application.routes.url_helpers.requests_path
+  end
+
+  def get_request_status_name request_status_id
+    case request_status_id
+    when Settings.request_status.cancelled
+      I18n.t("request_status.cancelled")
+    when Settings.request_status.waiting_approve
+      I18n.t("request_status.waiting_approve")
+    when Settings.request_status.approved
+      I18n.t("request_status.approved")
+    when Settings.request_status.waiting_done
+      I18n.t("request_status.waiting_done")
+    when Settings.request_status.done
+      I18n.t("request_status.done")
+    end
   end
 end

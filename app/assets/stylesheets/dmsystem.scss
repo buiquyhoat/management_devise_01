@@ -1,7 +1,8 @@
 .container {
-  padding: 0px;
-  background: #F7F7F7;
+    width: 100%;
+    padding: 0;
 }
+
 body {
   font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
     font-size: 13px;
@@ -103,20 +104,24 @@ footer {
 .sidebar-footer a:hover {
   background: #425567;
 }
+.nav-md .container.body .right_col {
+  padding: 10px 20px 0;
+  margin-left: 230px;
+}
 .nav-md .container.body .col-md-3.left_col {
-    width: 230px;
-    padding: 0;
-    position: absolute;
-    display: -ms-flexbox;
-    display: flex;
-    z-index: 9999;
+  width: 230px;
+  padding: 0;
+  position: absolute;
+  display: -ms-flexbox;
+  display: flex;
+  z-index: 9999;
 }
 .nav_title {
-    width: 230px;
-    float: left;
-    background: #2A3F54;
-    border-radius: 0;
-    height: 57px;
+  width: 230px;
+  float: left;
+  background: #2A3F54;
+  border-radius: 0;
+  height: 57px;
 }
 a.user-profile {
   color: #5E6974 !important;
@@ -435,44 +440,44 @@ body .modal {
 ----------------------------------- */
 .icheckbox_flat-green,
 .iradio_flat-green {
-    display: inline-block;
-    *display: inline;
-    vertical-align: middle;
-    margin: 0;
-    padding: 0;
-    width: 20px;
-    height: 20px;
-    background: url(green.png) no-repeat;
-    border: none;
-    cursor: pointer;
+  display: inline-block;
+  *display: inline;
+  vertical-align: middle;
+  margin: 0;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  background: url(green.png) no-repeat;
+  border: none;
+  cursor: pointer;
 }
 
 .icheckbox_flat-green {
-    background-position: 0 0;
+  background-position: 0 0;
 }
 .icheckbox_flat-green.checked {
-    background-position: -22px 0;
+  background-position: -22px 0;
 }
 .icheckbox_flat-green.disabled {
-    background-position: -44px 0;
-    cursor: default;
+  background-position: -44px 0;
+  cursor: default;
 }
 .icheckbox_flat-green.checked.disabled {
-    background-position: -66px 0;
+  background-position: -66px 0;
 }
 
 .iradio_flat-green {
-    background-position: -88px 0;
+  background-position: -88px 0;
 }
 .iradio_flat-green.checked {
     background-position: -110px 0;
 }
 .iradio_flat-green.disabled {
-    background-position: -132px 0;
-    cursor: default;
+  background-position: -132px 0;
+  cursor: default;
 }
 .iradio_flat-green.checked.disabled {
-    background-position: -154px 0;
+  background-position: -154px 0;
 }
 .action {
   width: 300px;
@@ -1179,9 +1184,24 @@ div.box {
 .x_title h2 small {
   margin-left: 10px; }
 
+.x_title h3 {
+  margin: 5px 0 6px;
+  float: left;
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap; }
+
+.x_title h3 small {
+  margin-left: 10px; }
+
 .x_title span {
   color: #BDBDBD; }
-
+.x_title h3 a {
+  color: #4286f4;
+  font-style: italic;
+  font-size: 18px;
+}
 .x_content {
   padding: 0 5px 6px;
   position: relative;
@@ -1193,6 +1213,5 @@ div.box {
 .x_content h4 {
   font-size: 16px;
   font-weight: 500; }
-
 legend {
   padding-bottom: 7px; }

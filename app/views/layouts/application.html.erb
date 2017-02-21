@@ -10,13 +10,13 @@
     <%= render "layouts/shim" %>
   </head>
   <body class="nav-md">
-   <div class="container body col-lg-12">
+   <div class="container body">
       <div class="main_container">
-        <div class="col-lg-3 left_col" >
+        <div class="col-md-3 left_col" >
           <%= render "layouts/left_menu" %>
         </div>
         <%= render "layouts/header" %>
-        <div class="col-lg-9 right_col ">
+        <div class="right_col ">
           <% flash.each do |message_type, message| %>
             <%= content_tag :div, message,
               class: "alert alert-#{message_type}" %>
