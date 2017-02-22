@@ -108,6 +108,15 @@ $(document).ready( function() {
     }
   });
 
+  $('#show_form_language').on('click',function(){
+    if($('#form_language').css('display') === 'block'){
+      $('#form_language').slideUp();
+    }
+    else{
+      $('#form_language').slideDown();
+    }
+  });
+
   $('#notificationContainer li').click(function(){
     window.location.href = $(this).find('a').first().attr('href');
   });

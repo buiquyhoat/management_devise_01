@@ -71,12 +71,12 @@
           <li>
             <a>
               <i class="fa fa-sitemap"></i>
-              <%= t "menu.manager" %>
+              <%= t "menu.manage" %>
               <span class="fa"></span>
             </a>
             <ul class="nav child_menu">
               <% if current_user.can_manage_device %>
-                <li><%= link_to t("menu.manager_device"),  devices_path %></li>
+                <li><%= link_to t("menu.manage_device"),  devices_path %></li>
                 <li>
                   <%= link_to t("menu.device_history"), device_history_index_path %>
                 </li>
@@ -84,7 +84,7 @@
                 <li><%= link_to t("header.my_devices"), my_devices_path %></li>
               <% end %>
 
-              <li><%= link_to t("menu.manager_request"), requests_path %></li>
+              <li><%= link_to t("menu.manage_request"), requests_path %></li>
             </ul>
           </li>
         <% end %>

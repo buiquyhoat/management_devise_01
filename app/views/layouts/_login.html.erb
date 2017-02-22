@@ -8,7 +8,7 @@
     <div class="col-md-12 ">
       <%= form_for :session, url: login_path do |f| %>
         <%= f.email_field :email, class: "form-control",
-          placeholder: t("header.placeholder.password")  %>
+          placeholder: t("header.placeholder.email")  %>
         <%= f.password_field :password, class: "form-control",
           placeholder: t("header.placeholder.password") %>
         <%= f.label :remember_me, class: "checkbox inline" do %>

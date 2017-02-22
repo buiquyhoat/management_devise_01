@@ -1,0 +1,3 @@
+<%= form_tag(request_row_index_path, id: "language", method: :get, remote: true) do %>
+  <%= select_tag "locale", options_for_select([ "en", "jp" ], "en") %>
+<% end %>

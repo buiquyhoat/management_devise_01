@@ -1,8 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
-  before_action :setup_user_seting, :load_notification
-
+  before_action :setup_user_seting, :load_notification, :set_locale
   private
 
   def logged_in_user
@@ -54,6 +53,7 @@ class ApplicationController < ActionController::Base
   end
 
   def setup_user_seting
+    @languages ||= Settings.languages
     if logged_in?
       user_setting.present? ? update_init_settings : create_user_setting
       user_setting
@@ -86,5 +86,9 @@ class ApplicationController < ActionController::Base
     end
     user_setting.set_option
     user_setting.save
+  end
+
+  def set_locale
+    I18n.locale = session[:locale] || I18n.default_locale
   end
 end
