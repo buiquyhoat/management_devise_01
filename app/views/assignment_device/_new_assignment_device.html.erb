@@ -15,7 +15,7 @@
   </td>
   <td>
     <%= select_tag("", options_for_select(@support.device_can_assign
-      .collect{ |device| [device.production_name, device.id] }),
+      .collect{|device| [device.device_code, device.id]}),
       class: "device chosen-select") %>
   </td>
   <td class="width-3 padding-right-3">

@@ -10,15 +10,11 @@ class DeviceCategory < ApplicationRecord
   validates :template_code, uniqueness: {case_sensitive: false}
   validates :name, uniqueness: {case_sensitive: false}
 
-  after_initialize :create_extend_data
-
   scope :of_group, ->group_id do
     where device_group_id: group_id if group_id.present?
   end
 
-  private
-
-  def create_extend_data
+  def extend_dashboard_data
     self.device_total = devices.count
     self.device_using = devices.of_status(Settings.device_status.using).count
     self.device_avalible = devices.of_status(Settings.device_status.available).count

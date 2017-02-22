@@ -14,8 +14,13 @@
     <div class="input-field col s6">
       <%= f.label t "request.table.request_for" %>
       <% if @request.owner? @current_user %>
-        <%= f.collection_select :for_user_id, @support.below_staffs, :id, :name,
+        <% if @request.for_user_id == @current_user.id %>
+          <%= f.collection_select :for_user_id, @support.below_staffs, :id, :name,
+          {}, {class: "form-control", disabled: "disabled"} %>
+        <% else %>
+          <%= f.collection_select :for_user_id, @support.below_staffs, :id, :name,
           {}, {class: "form-control"} %>
+        <% end %>
       <% else %>
         <%= f.collection_select :for_user_id, @support.all_users, :id, :name,
           {}, {class: "form-control",disabled: "disabled"} %>

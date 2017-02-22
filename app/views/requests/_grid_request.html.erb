@@ -15,30 +15,8 @@
     </thead>
     <tbody>
       <% @requests.each do |request| %>
-        <tr class="<%= generate_tag_color request %>" >
-          <td><%= link_to request.title, request_path(request.id), remote: true,
-            data: {toggle: "modal", target: "#dms-popup", backdrop: "static"} %></td>
-          <td><%= request.description %></td>
-          <td><%= request.request_status_name %></td>
-          <td class="request_status action">
-            <%= render "action", request: request %>
-          </td>
-          <td><%= request.assignee.name if request.assignee.present? %></td>
-          <td><%= request.for_user.name if request.for_user.present? %></td>
-          <td><%= request.updater.name if request.updater.present? %></td>
-          <td><%= time_ago_in_words(request.created_at) %></td>
-          <td>
-            <% if request.show_assignment_request? @current_user %>
-              <%= link_to "",  new_assignment_path(request_id: request.id), remote: true,
-              class: "glyphicon glyphicon-plus",
-              data: {toggle: "modal", target: "#dms-popup"} %>
-            <% end %>
-            <% if request.allow_edit?(@current_user) %>
-              <%= link_to "",  edit_request_path(request), remote: true,
-                class: "glyphicon glyphicon-pencil dark",
-                data: {toggle: "modal", target: "#dms-popup"} %>
-            <% end %>
-          </td>
+        <tr id="<%= request.id %>" class="<%= generate_tag_color request %>" >
+          <%= render partial: "request_row", locals: {request: request} %>
         </tr>
       <% end %>
     </tbody>

@@ -1,8 +1,7 @@
 <div class="row">
-  <%= form_for request_status_path(request), remote: true,
-    html: {id: "form-submit-action"} do |f| %>
-    <%= f.hidden_field :request_status_id %>
-    <%= f.hidden_field :id %>
+ <%= form_tag(request_row_index_path, id: "form-submit-action"+ request.id.to_s, method: :get, remote: true) do %>
+    <%= hidden_field_tag "request_status_id", request.request_status_id %>
+    <%= hidden_field_tag "id", request.id %>
     <div class="btn-group done_center" data-toggle="buttons"
       onchange="update_request(this,<%= request.id %>,
         '<%= request_status_path(request) %>')">
