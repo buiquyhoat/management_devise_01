@@ -79,7 +79,10 @@ class DevicesController < ApplicationController
 
   def init_dropdown_add_new
     @device_categories = DeviceCategory.all
-    @device_status = DeviceStatus.not_in_ids Settings.device_status.using
+    list_excute = []
+    list_excute << Settings.device_status.using
+    list_excute << Settings.device_status.broken if @device.nil?
+    @device_status = DeviceStatus.not_in_ids list_excute
     @device_invoices = Invoice.all
   end
 
