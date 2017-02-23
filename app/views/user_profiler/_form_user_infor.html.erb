@@ -1,0 +1,49 @@
+<table id="table-show" class="table">
+  <tr>
+    <td class="width-30" rowspan="5">
+      <div class="profile_pic">
+        <% if @user.avatar? %>
+          <%= image_tag @user.avatar.url, id: "logo-icon" %>
+        <% else %>
+          <%= image_tag "default_avatar.png", id: "logo-icon" %>
+        <% end %>
+      </div>
+    </td>
+    <td colspan="2">
+      <h1><%= @user.name %></h1>
+    </td>
+  </tr>
+  <tr>
+    <td class="taR width-20">
+      <%= t "user_profile.label.email" %>
+    </td>
+     <th>
+      <label class="form-control"> <%= @user.email %></label>
+    </th>
+
+  </tr>
+  <tr>
+    <td class="taR width-20">
+      <%= t "user_profile.label.first_name" %>
+    </td>
+    <td>
+      <label class="form-control"> <%= @user.first_name %></label>
+    </td>
+  </tr>
+  <tr>
+    <td class="taR width-20">
+      <%= t "user_profile.label.last_name" %>
+    </td>
+    <td>
+      <label class="form-control"> <%= @user.last_name %></label>
+    </td>
+  </tr>
+  <tr>
+    <td class="taR width-20">
+      <%= t "user_profile.label.address" %>
+    </td>
+    <td>
+      <label class="form-control"> <%= @user.address %></label>
+    </td>
+  </tr>
+</table>

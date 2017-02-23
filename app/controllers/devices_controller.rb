@@ -14,6 +14,7 @@ class DevicesController < ApplicationController
       .return_date_sort_asc.includes(:device)
     @device_histories = DmsHistory.of_object @device.id, Settings.history_type.device
     @request = Request.find_by id: params[:request_id] if params[:request_id].present?
+    @user_profiler_id = params[:user_profiler_id]
     respond_to do |format|
       format.js
     end

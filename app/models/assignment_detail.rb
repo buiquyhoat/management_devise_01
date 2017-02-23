@@ -7,7 +7,7 @@ class AssignmentDetail < ApplicationRecord
   belongs_to :device
 
   delegate :assignee_name, :assignee_id,:assignee_email, :assignee_name,
-   to: :assignment, prefix: true, allow_nil: true
+   :created_at, to: :assignment, prefix: true, allow_nil: true
   delegate :device_code, :production_name, :device_category_name,
    to: :device, prefix: true, allow_nil: true
 
@@ -21,6 +21,10 @@ class AssignmentDetail < ApplicationRecord
         and assignments.assignee_id = #{assignee_id}")
       .where return_date: nil
     end
+  end
+
+  scope :by_device_return, -> do
+    where.not return_date: nil
   end
 
   scope :by_user,-> assignee_id do

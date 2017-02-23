@@ -41,6 +41,10 @@
       <%= link_to t("btn.back"), request_path(@request.id), remote: true,
         data:{target: "#dms-popup", backdrop: "static"}, class: "btn btn-default" %>
     <% end %>
+    <% if @user_profiler_id.present? %>
+      <%= link_to t("btn.back"), user_profiler_path(@user_profiler_id), remote: true,
+        data:{target: "#dms-popup", backdrop: "static"}, class: "btn btn-default" %>
+    <% end %>
     <button type="button" class="btn btn-default" data-dismiss="modal">
       <%= t "device_manager.button_close_text" %>
     </button>
