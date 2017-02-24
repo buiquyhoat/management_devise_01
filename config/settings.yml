@@ -100,3 +100,21 @@ boolean_params:
 languages:
   japan: "jp"
   english: "en"
+import_type:
+  device: "device"
+allowedExtension:
+  device: ["csv", "xls", "xlsx"]
+column_file:
+  import_device:
+    device_code: "device code"
+    invoice: "invoice"
+    production_name: "production name"
+    model_number: "model number"
+    serial_number: "serial number"
+    last_using_by: "last using order_by_unread_notification"
+    description: "description"
+import:
+  default_message:
+    assigment_description: "Create by auto import"
+  first_row: 1
+  start_row: 2

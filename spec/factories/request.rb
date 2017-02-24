@@ -14,9 +14,11 @@ FactoryGirl.define  do
   end
 
   factory :request_with_detail, class: Request do
-    before(:create, :build) do |request, evaluator|
-      request.for_user FactoryGirl.create(:user)
+    transient do
+      for_user_para {FactoryGirl.create(:user)}
     end
+
+    for_user {for_user_para}
 
     after(:create, :build) do |request, evaluator|
       request.request_details << FactoryGirl.create(:request_detail, request_para: request)

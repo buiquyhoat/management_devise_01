@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170209031347) do
+ActiveRecord::Schema.define(version: 20170224083331) do
 
   create_table "assignment_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "device_id",     null: false
@@ -94,18 +94,19 @@ ActiveRecord::Schema.define(version: 20170209031347) do
   end
 
   create_table "devices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "device_code",        null: false
-    t.string   "production_name",    null: false
-    t.string   "model_number",       null: false
-    t.string   "serial_number",      null: false
+    t.string   "device_code",                     null: false
+    t.string   "production_name"
+    t.string   "model_number"
+    t.string   "serial_number"
     t.integer  "created_by"
     t.integer  "updated_by"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.integer  "device_status_id",   null: false
-    t.integer  "device_category_id", null: false
-    t.integer  "invoice_id",         null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "device_status_id",                null: false
+    t.integer  "device_category_id",              null: false
+    t.integer  "invoice_id"
     t.string   "picture"
+    t.string   "description",        limit: 4000
     t.index ["device_category_id"], name: "index_devices_on_device_category_id", using: :btree
     t.index ["device_status_id"], name: "index_devices_on_device_status_id", using: :btree
     t.index ["invoice_id"], name: "index_devices_on_invoice_id", using: :btree

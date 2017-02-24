@@ -1,26 +1,19 @@
 class AssignmentsController < ApplicationController
   before_action :init_data
-  before_action :init_assignment, only: [:edit, :update, :show]
   before_action :init_request, only: :new
 
-  def index
-    get_assignments
-    @assignments.includes(:request)
-  end
-
   def new
-    @asignment = Assignment.new request_id: @request.id
+    @asignment = Assignment.new
     if @request.present?
+      @asignment.request_id = @request.id
       @asignment.assignee_id = @request.for_user_id
       @request.request_details.includes(:device_category).each do |detail|
         if detail.number.present? && detail.number > 0
           detail.number.times do |i|
-            @asignment.assignment_details.build device_category_id: detail.device_category.id,
-              device_category_group_id: detail.device_category.device_group.id
+            @asignment.assignment_details.build device_category_id: detail.device_category.id, device_category_group_id: detail.device_category.device_group.id
           end
         end
       end
-    else
     end
     respond_to do |format|
       format.js
@@ -36,26 +29,6 @@ class AssignmentsController < ApplicationController
     respond_js
   end
 
-  def edit
-    @assignment.assignment_details.includes(:device)
-    respond_js
-  end
-
-  def update
-    @assignment.update_attributes assign_params_edit
-    set_updated_by @assignment
-    respond_to do |format|
-      format.js
-        render "assignments/create"
-    end
-  end
-
-  def show
-    unless params[:from_app].present?
-      respond_js
-    end
-  end
-
   private
 
   def init_data
@@ -66,24 +39,6 @@ class AssignmentsController < ApplicationController
     params.require(:assignment).permit :request_id, :assignee_id, :description,
       assignment_details_attributes: [:id, :device_id, :device_category_id,
       :device_category_group_id]
-  end
-
-  def assign_params_edit
-    params.require(:assignment).permit :assignee_id, :description
-  end
-
-  def get_assignments
-    @assignments = Assignment.of_assignee(params[:assignee_id])
-      .of_created_by(params[:created_by])
-      .default_sort.paginate page: params[:page]
-  end
-
-  def init_assignment
-    @assignment = Assignment.find_by id: params[:id]
-    unless @assignment
-      flash[:danger] = t "assignment.message.assignee_not_exist"
-      redirect_to assignments_path
-    end
   end
 
   def init_request

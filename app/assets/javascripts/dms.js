@@ -359,3 +359,29 @@ function minmax(obj, min, max){
   $(obj).val('')
   $(obj).val(value)
 }
+
+function validateFiles(inputFile, allowedExtension) {
+  var maxExceededMessage = I18n.t("import.validate.max_length")
+  var extErrorMessage =  I18n.t("import.validate.file_type_Import_device",
+    {extension: allowedExtension.join()})
+
+  var extName;
+  var maxFileSize = $(inputFile).data('max-file-size');
+  var sizeExceeded = false;
+  var extError = false;
+
+  $.each(inputFile.files, function() {
+    if (this.size && maxFileSize && this.size > parseInt(maxFileSize)) {sizeExceeded=true;};
+    extName = this.name.split('.').pop();
+    if ($.inArray(extName, allowedExtension) == -1) {extError=true;};
+  });
+  if (sizeExceeded) {
+    window.alert(maxExceededMessage);
+    $(inputFile).val('');
+  };
+
+  if (extError) {
+    window.alert(extErrorMessage);
+    $(inputFile).val('');
+  };
+}
