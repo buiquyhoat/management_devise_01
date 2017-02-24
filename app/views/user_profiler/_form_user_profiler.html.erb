@@ -1,0 +1,35 @@
+<div>
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active">
+      <a href="#user-profile" aria-controls="user-profile"
+        role="tab" data-toggle="tab"><%= t "device_manager.tab.user_profile" %></a>
+    </li>
+    <li role="presentation">
+      <a href="#using-device" aria-controls="using-device"
+        role="tab" data-toggle="tab"><%= t "device_manager.tab.using_device" %></a>
+    </li>
+    <li role="presentation">
+      <a href="#using-history" aria-controls="using-history"
+        role="tab" data-toggle="tab">
+        <%= t "device_manager.tab.return_device" %>
+      </a>
+    </li>
+  </ul>
+  <div class="tab-content popup-max-height">
+    <div role="tabpanel" class="tab-pane active" id="user-profile">
+      <%= render "form_user_infor" %>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="using-device">
+      <%= render "form_device_using" %>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="using-history">
+      <%= render "form_device_return" %>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">
+      <%= t "device_manager.button_close_text" %>
+    </button>
+   </div>
+</div>

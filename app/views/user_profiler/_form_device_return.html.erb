@@ -1,0 +1,38 @@
+<table class="table table-hover" style="table-layout: fixed;">
+  <thead>
+    <tr>
+      <th class="width-30"><%= t "device_manager.table.header.device_code" %></th>
+      <th class="width-30"><%= t "device_manager.table.header.category" %></th>
+      <th class="width-30"><%= t "device_manager.table.header.using_from" %></th>
+      <th class="width-30"><%= t "device_manager.table.header.return_date" %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @device_returns.any? %>
+      <% @device_returns.each do |device| %>
+        <tr>
+          <td>
+            <%= link_to device.device_device_code,
+              device_path(device.device, user_profiler_id: @user.id), remote: true,
+              data:{target: "#dms-popup", backdrop: "static"} %>
+          </td>
+          <td>
+            <%= device.device_device_category_name %>
+          </td>
+          <td>
+            <%= l device.assignment_created_at, format: :date_format %>
+          </td>
+          <td>
+            <%= l device.return_date, format: :date_format %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="3" class="taC">
+          <%= t "device_manager.table.message.user_have_not_been_assignment" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

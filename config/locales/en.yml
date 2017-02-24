@@ -136,9 +136,11 @@ en:
         from_date: "From Date"
         to_date: "To Date"
         return_date: "Return Date"
+        using_from: "Start Using From"
       message:
         device_not_exist_using_history: "Device do not exist using history."
         device_not_exist_history: "Device do not exist history."
+        user_have_not_been_assignment: "User does not have any device."
     action_message:
       create_fail: "Create Failed!"
       update_success: "Update Success!"
@@ -148,6 +150,9 @@ en:
       device_history: "Device History"
       device_using_history: "Using History"
       device_invoice_history: "Invoice Infomation"
+      user_profile: "User Profiler"
+      using_device: "Using Device"
+      return_device: "Returned Device"
   request:
     title: "Manager Requests"
     update_success: "Update Success"
@@ -333,3 +338,9 @@ en:
     approved: "Approved"
     waiting_done: "Waiting done"
     done: "Done"
+  user_profile:
+    label:
+      first_name: "First name"
+      last_name: "Last Name"
+      email: "Email"
+      address: "Address"

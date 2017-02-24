@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   resources :user_groups
   resources :dashboard
   resources :device_categories
+  resources :user_profiler
 
   mount ActionCable.server => "/cable"
 end
