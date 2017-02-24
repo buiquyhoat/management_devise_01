@@ -310,8 +310,8 @@ en:
     device:
       chart_title: "To Devices"
       table:
-        summary_title: "Summary (Need Assignt, Available, Total)"
-        summary: "(%{assignment},%{available},%{total})"
+        summary_title: "Summary"
+        summary: "(need assignt: %{assignment}, available %{available}, total %{total})"
       chart_error: "Can't get chart"
       view: "view"
       name: "Name"

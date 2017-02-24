@@ -77,7 +77,7 @@ function update_request(button,request_id, url){
         }
         else
         {
-          $('#form-submit').submit();
+          $('#form-submit-action'+ request_id).submit()
         }
       },
       error: function (error_message){

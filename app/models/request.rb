@@ -171,9 +171,9 @@ class Request < ApplicationRecord
     staff = User.below_staff(user.default_parent_path, user.id).find_by id: created_by
     user.can_approve && (user.id == created_by || staff.present?) &&
     (request_status_id == Settings.request_status.waiting_approve ||
-    request_status_id == Settings.request_status.cancelled && created_by == user.id ||
-    request_status_id == Settings.request_status.approved && for_user_id == user.id
-    )
+    (request_status_id == Settings.request_status.cancelled && created_by == user.id) ||
+    (request_status_id == Settings.request_status.approved &&
+    (for_user_id == user.id || updated_by == user.id)))
   end
 
   def user_manager_bo_edit_request? user
@@ -237,6 +237,10 @@ class Request < ApplicationRecord
     end
     create_notify updated_by, for_user_id,
       message, Rails.application.routes.url_helpers.requests_path
+    if assignee_id.present?
+      create_notify updated_by, assignee_id,
+      message, Rails.application.routes.url_helpers.requests_path
+    end
   end
 
   def get_request_status_name request_status_id

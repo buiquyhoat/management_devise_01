@@ -22,8 +22,10 @@ class DashboardController < ApplicationController
   def load_device_dashboard isRemote
     if @current_user.can_manage_device
       @device_categories = DeviceCategory.all
-        .paginate(page: params[:page], per_page: Settings.paging.page_size_dashboard)
-        .sort_by {|obj| -obj.device_total}
+      @device_categories.each do |cat|
+        cat.extend_dashboard_data
+      end
+      @device_categories = @device_categories.sort_by {|obj| -obj.device_total}
         .sort_by {|obj| -obj.using_percent}
         .sort_by {|obj| -obj.device_assignment}
         .first(Settings.top_dashboard)

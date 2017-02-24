@@ -880,7 +880,7 @@ UserGroup.create!(
 UserGroup.create!(
   user_id: 10,
   group_id: 10,
-  is_default_group: true)
+  is_default_group: false)
  # extend change group default
  UserGroup.create!(
   user_id: 6,
@@ -889,7 +889,7 @@ UserGroup.create!(
 UserGroup.create!(
   user_id: 10,
   group_id: 9,
-  is_default_group: false)
+  is_default_group: true)
 UserGroup.create!(
   user_id: 11,
   group_id: 6,

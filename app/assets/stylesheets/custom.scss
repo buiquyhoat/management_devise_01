@@ -199,9 +199,26 @@ ul.verticle_bars li {
 }
 .w-37 {
   width:37%;
+  padding-left: 15%;
 }
 .canvas {
   height: 140px;
   width: 140px;
   margin: 15px 10px 10px 0
+}
+
+@media (min-width: 1200px) and (max-width: 1400px) {
+  .w-37 {
+    width: 55%;
+  }
+
+  .pull-right {
+    float: none !important;
+  }
+}
+
+@media (min-width: 1400px) and (max-width: 1600px) {
+  .w-37 {
+    width: 50%;
+  }
 }

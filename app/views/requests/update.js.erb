@@ -2,6 +2,10 @@
   $('#error').html('<%= j render "shared/error_messages", object: @request %>')
 <% else %>
   $('#dms-popup').modal('toggle');
-  $('#private_request').html("<%= j render partial: 'requests/grid_my_request' %>");
-  $('#another_request').html("<%= j render partial: 'requests/grid_request' %>");
+  <% if @request.for_user_id != @current_user.id %>
+    $('#private_request').html("<%= j render partial: 'requests/grid_my_request' %>");
+    $('#another_request').html("<%= j render partial: 'requests/grid_request' %>");
+  <% else %>
+    $('#'+ <%=@request.id%>).html('<%= j render "request_row/request_row" %>')
+  <% end %>
 <% end %>

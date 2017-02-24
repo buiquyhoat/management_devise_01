@@ -33,7 +33,7 @@
       <% @assignment.assignment_details.each do |detail| %>
         <tr>
           <td class="width-45"><%= detail.device.device_category.name %></td>
-          <td><%= detail.device.production_name %></td>
+          <td><%= detail.device.device_code %></td>
         </tr>
       <% end %>
     </tbody>
