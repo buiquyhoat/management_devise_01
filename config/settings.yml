@@ -93,3 +93,6 @@ dashboard:
 chart_type:
   request: "1"
   device: "2"
+boolean_params:
+  true: "1"
+  false: "0"

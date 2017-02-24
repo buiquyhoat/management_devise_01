@@ -34,7 +34,7 @@ class AssignmentDetail < ApplicationRecord
     end
   end
 
-  scope :return_date_sort_asc, ->{order return_date: :asc}
+  scope :return_date_sort_asc, ->{order return_date: :desc}
 
   private
 

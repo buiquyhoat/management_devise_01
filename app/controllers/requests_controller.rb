@@ -1,11 +1,15 @@
 class RequestsController < ApplicationController
   before_action :init_request, only: [:edit, :update, :show]
   before_action :init_dropdown, except: [:destroy, :update, :create]
-  before_action :logged_in_user
+  before_action :logged_in_user, :init_extend_data
 
   def index
-    get_requests
-    get_my_requests
+    load_request params[:manager_request]
+    if params[:isAjax].present? or params[:page].present?
+      respond_to do |format|
+        format.js
+      end
+    end
   end
 
   def new
@@ -21,11 +25,12 @@ class RequestsController < ApplicationController
       update_create_request @request
       if @request.save
         flash[:success] = t "action_message.create_success"
+        @manage_tag_selected = @current_user.id == @request.for_user_id ? false : true
+        load_request params[:manager_request]
       else
         flash[:danger] = t "action_message.create_fail"
       end
       format.js
-      render "requests/research"
     end
   end
 
@@ -44,10 +49,10 @@ class RequestsController < ApplicationController
         format.js
         if @request.errors.empty?
           flash.now[:success] = t "action_message.update_success"
+          load_request params[:manager_request]
         else
           flash[:danger] = t "action_message.update_fail"
         end
-        render "requests/research"
       end
     else
       flash[:danger] = t "request.update_conflict"
@@ -76,6 +81,11 @@ class RequestsController < ApplicationController
 
   private
 
+  def load_request manager_request
+    get_requests manager_request
+    get_my_requests manager_request
+  end
+
   def update_before_save
     @request = Request.new request_params unless @request
     @request.created_by = current_user.id unless @request.id
@@ -93,18 +103,20 @@ class RequestsController < ApplicationController
     params.require(:request).permit :request_status_id, :id
   end
 
-  def get_requests
+  def get_requests manager_request
+    page = manager_request == Settings.boolean_params.true ? params[:page] : 1
     @requests = Request.request_manage(@current_user.default_parent_path, @current_user)
-      .of_actor(params[:relative_id])
+      .request_not_self(@current_user).of_actor(params[:relative_id])
       .of_request_status(params[:request_status_id])
-      .order_by_time.paginate page: params[:page], per_page: config_page_size
+      .order_by_time.paginate page: page, per_page: config_page_size
   end
 
-  def get_my_requests
+  def get_my_requests manager_request
+    page = manager_request == Settings.boolean_params.false ? params[:page] : 1
     @my_requests = Request.of_for_user(@current_user.id, @current_user.default_parent_path, @current_user).order_by_time
       .of_actor(params[:relative_id])
-      .of_request_status(params[:request_status_id])
-      .order_by_time.paginate page: params[:page], per_page: config_page_size
+      .of_request_status(params[:request_status_id]).order_by_time
+      .paginate page: page, per_page: config_page_size
   end
 
   def init_dropdown
@@ -126,5 +138,9 @@ class RequestsController < ApplicationController
     else
       request.request_status_id = Settings.request_status.waiting_approve
     end
+  end
+
+  def init_extend_data
+    @manage_tag_selected = @current_user.can_manage_request
   end
 end

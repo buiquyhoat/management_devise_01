@@ -45,6 +45,7 @@ class Assignment < ApplicationRecord
 
   def update_device
     assignment_details.each do |detail|
+      detail.device.updated_by = created_by
       detail.device.device_status_id = Settings.device_status.using
       unless detail.device.save
         flash[:danger] = I18n.t("action_message.update_fail")
