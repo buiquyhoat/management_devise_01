@@ -1,0 +1,345 @@
+jp:
+  datetime:
+    distance_in_words:
+      x_days: "%{count} 日々"
+      about_x_hours: "約 %{count} 時間"
+  language_selected: "言語 %{language}"
+  time:
+    formats:
+      date_format: "%d-%m-%Y %H:%M:%S"
+  errors:
+    messages:
+      carrierwave_processing_error: "処理に失敗しました"
+      carrierwave_integrity_error: "は許可されたファイルタイプではありません"
+      carrierwave_download_error: "ダウンロードできませんでした"
+      extension_whitelist_error: "あなたのファイルタイプはアップロードできません。許可されるタイプは jpg, jpeg, gif, png"
+      extension_blacklist_error: "％{extension}ファイル、禁止されているタイプ：％{prohibited_types}をアップロードすることはできません"
+      content_type_whitelist_error: "％{content_type}個のファイルをアップロードすることはできません"
+      content_type_blacklist_error: "％{content_type}個のファイルをアップロードすることはできません"
+      rmagick_processing_error: "rmagickで操作できませんでした。多分画像ではありませんか？"
+      mini_magick_processing_error: "このファイルはイメージではありません"
+      min_size_error: "ファイルサイズは％{min_size}より大きくする必要があります"
+      max_size_error: "ファイルサイズは％{max_size}より小さくする必要があります"
+      first: "エラー：％{param1}"
+  title: "デバイス管理システム"
+  dms_app_title: "デバイス管理システム"
+  button_update_text: "更新"
+  user:
+    not_activated: "アカウントは有効化されていません。 電子メールでアクティベーションリンクを確認してください。"
+    forgot_password: "パスワードをお忘れですか"
+    require_logged: "ログインしてください。"
+    max_image_size: "5MB未満にする必要があります"
+  session:
+    invalid_user: "アカウントが有効になっていないか、存在しません"
+    invalid_login: "無効なメール/パスワードの組み合わせ"
+    remember_account: "このコンピュータで私を覚えている"
+    title: "ログイン"
+    login: "ログイン"
+    new_user: "新しいユーザー？"
+    signup: "今すぐサインアップ！"
+    log_out: "ログアウト"
+  home:
+    title: "ホーム"
+    signup_title: "今すぐサインアップ！"
+    content: "デバイス管理システム！"
+  help:
+    title: "助けて"
+  header:
+    dms_app: "デバイス管理システム"
+    users: "ユーザー"
+    profile: "プロフィール"
+    settings: "設定"
+    my_devices: "マイデバイス"
+    login: "ログイン"
+    remember_account: "私を覚えてますか"
+    placeholder:
+      email: "メールを入力してください"
+      password: "パスワードを入力してください"
+      remember_account: "このコンピュータで私を覚えている"
+    full_screen: "全画面表示"
+    lock: "ロック"
+  about:
+    title: "約"
+    framgia: "私たちはそれを素晴らしいものにする"
+  menu:
+    dashboard: "ダッシュボード"
+    home: "ホーム"
+    admin: "管理者"
+    manage: "管理"
+    manage_user: "ユーザーを管理する"
+    show_user: "ユーザーを表示"
+    create_user: "ユーザーの作成"
+    reset_password: "パスワードを再設定する"
+    manage_department: "部門管理"
+    show_deparment: "部署"
+    create_department: "新部門"
+    manage_request: "要求を管理する"
+    create_request: "新しいリクエスト"
+    update_request: "更新リクエスト"
+    search_request: "サーチ"
+    client: "クライアント"
+    welcome: "ようこそ,"
+    general: "一般"
+    manage_device: "デバイスの管理"
+    manage_assignment: "割り当てを管理する"
+    device_history: "履歴を使用するデバイス"
+    device_category: "デバイスカテゴリの管理"
+  nav:
+    user_profile: "プロフィール"
+    logout: "ログアウト"
+  device_manager:
+    title: "デバイス管理"
+    my_device_title: "マイデバイス"
+    new:
+      title: "新しいデバイスを作成する"
+    button_submit_text:
+      edit: "更新"
+      new: "新しく追加する"
+      save_change: "変更内容を保存"
+      return_device: "デバイスを返す"
+    button_close_text: "閉じる"
+    title_add_new: "新しいデバイスを追加する"
+    title_return: "返品デバイス"
+    delete_action:
+      success: "デバイスの削除を成功させる！"
+      fail: "デバイスの削除に失敗しました！"
+    message_delete_confirm: "％{device}を削除しますか？"
+    message_device_not_exist: "デバイスが見つかりません"
+    field_label:
+      device_status: "デバイスステータス"
+      device_category: "デバイスカテゴリ"
+      invoice: "請求書番号"
+      device_code: "デバイスコード"
+      production_name: "プロダクション名"
+      seria_number: "シリアルナンバー"
+      model: "モデル番号"
+      device_status: "デバイスステータス"
+      invoice_number: "請求書番号"
+      createed_by: "によって作成された"
+      created_date: "作成日"
+      now: "今"
+      using: "使用する"
+      key_search: "キー検索"
+      place_holder: "スタッフの電子メールまたはデバイスコードを入力し、Enterキーを押します。"
+      button_search: "サーチ"
+      button_clear: "検索をクリアする"
+      using_by: "〜によって使用: "
+      history_tooltip: "％{name}による検索履歴"
+      view_detail_device_tooltip: "詳細を表示％{名}"
+    table:
+      header:
+        production: "製造"
+        device_code: "デバイスコード"
+        model: "モデル"
+        status: "状態"
+        category: "デバイスタイプ"
+        invoice_number: "請求書番号"
+        action: "アクション"
+        description: "説明"
+        date_time: "日付時刻"
+        staff: "スタッフ"
+        from_date: "日付から"
+        to_date: "現在まで"
+        return_date: "返却日"
+      message:
+        device_not_exist_using_history: "履歴を使用してデバイスが存在しません。"
+        device_not_exist_history: "デバイスには履歴がありません。"
+    action_message:
+      create_fail: "作成に失敗しました！"
+      update_success: "アップデート成功！"
+      update_fail: "アップデートに失敗しました！"
+    tab:
+      device_infor: "デバイス情報"
+      device_history: "デバイス履歴"
+      device_using_history: "履歴の使用"
+      device_invoice_history: "請求書情報"
+  request:
+    title: "マネージャのリクエスト"
+    update_success: "更新の成功"
+    update_unsuccess: "更新が失敗しました"
+    update_conflict: "データが空であるか、別のメンバーによって更新された可能性があります"
+    tab:
+      request_info: "情報のリクエスト"
+      device_assignment: "デバイス割り当て"
+      my_title: "あなたのリクエスト"
+      another_request: "マネージャのリクエスト"
+    table:
+      title: "タイトル"
+      description: "説明"
+      request_type: "リクエストタイプ"
+      request_status: "リクエストステータス"
+      assignee: "に割り当てます"
+      created_by: "によって作成された"
+      updated_by: "更新者"
+      request_for: "のリクエスト"
+      for_user: "のリクエスト"
+      time_ago: "時間前"
+      request_action: "アクション"
+      check: "チェック"
+    action:
+      done: "完了"
+      cancel: "キャンセル"
+      send: "送信"
+      approve: "承認する"
+      waiting_done: "受信する"
+      re_approve: "再承認する"
+      re_back_waiting: "再待機する"
+      re_send: "再送信"
+    add_request_detail: "リクエストの詳細を追加"
+    confirm: "このデータは今削除されます！ 本気ですか？"
+    request_detail:
+      not_empty: "要求の詳細が必要です"
+  request_detail:
+    description: "説明"
+    device_category: "デバイスカテゴリ"
+    number: "数"
+    cant_delete: "要塞は要求の詳細を破壊する"
+    delete_success: "削除成功"
+    not_exist: "リクエストの詳細は存在しません"
+    device: "デバイス"
+  action_message:
+    create_success: "成功を作りなさい！"
+    create_fail: "作成に失敗しました！"
+    update_success: "アップデート成功！"
+    update_fail: "アップデートに失敗しました！"
+    result_not_match: "一致する結果はありません"
+    assignment_details_total_error: "エラー：1"
+    max_value: "許容最大値は％{value}です。"
+    min_value: "最小値の許容値は％{value}です。"
+  action:
+    close: "閉じる"
+    edit: "更新"
+    save: "変更内容を保存"
+    new: "新しく追加する"
+  request_manager:
+    title_add_new: "新しいリクエストを追加"
+    not_exist: "リクエストは存在しません"
+    search:
+      relative_to: "に関連して"
+      request_type: "リクエストタイプ"
+      request_status: "リクエストステータス"
+  assignment:
+    label:
+      request_title: "リクエストタイトル"
+      process_by: "処理者"
+      assignee: "スタッフ"
+      description: "説明"
+      request: "要求"
+      add_new_device: "新しいデバイスを追加する"
+      edit_assign_device: "割り当てデバイスの編集"
+      create_ticket_by: "チケットの作成者"
+      staff_name: "スタッフ名"
+      created_by: "によって作成された"
+      created_date: "作成日"
+      action: "行動の日付"
+      title_popup_view_assignment: "詳細割当デバイス"
+      device_id: "デバイスID"
+    table:
+      column_header:
+        device_category: "デバイスカテゴリ"
+        device: "デバイス"
+        group_device: "グループデバイス"
+    message:
+      device_duplicate: "割り当ての詳細が存在する必要があります"
+      assignee_not_exist: "割り当てチケットが存在しません"
+      assignment_detail_duplicate: "割り当ての詳細が重複している"
+    email:
+      header: "新しいデバイスが割り当てられました"
+      link_content: "リンクをたどって詳細を表示してください"
+      link_devices_manager_text: "デバイス管理システム"
+      request_done: "リクエスト：％{request_title}が完了しました"
+    choice_device: "デバイスを選択"
+  notification:
+    message:
+      notification_not_found: "通知が見つかりません"
+      single_device_assigned: "％{device}があなたに割り当てられました"
+      multil_device_assigned: "％{total_device}個のデバイスが割り当てられました"
+      request_message: "リクエスト％{request_title}は％{action}です"
+      request_message_update: "リクエスト％{request_title}は％{action}です。％{status}"
+    action:
+      updated: "かわった"
+      created: "作成した"
+    label:
+      header: "通知"
+      view_all: "すべての通知を表示"
+      from: "から: "
+      at: "で: "
+    table_header:
+      notification: "通知"
+    index:
+      label_sender: "送信者:"
+      label_created_from: "作成元："
+      label_created_to: "作成者:"
+      button_search: "通知を取得する"
+  history:
+    request: "リクエストは％{name}によって％{action}されています"
+    device: "デバイスは％{name}によって％{action}されています"
+  btn:
+    back: "バック"
+  user_setting:
+    title: "ユーザー設定"
+    label:
+      user_grroup: "ユーザーグループのデフォルト"
+    table:
+      header:
+        setting: "設定名"
+        action: "有効/無効"
+  return_device:
+    title: "返品デバイス"
+    message:
+      device_has_returned: "あなたのデバイスは返されました"
+    table:
+      header:
+        select_device: "デバイスの選択"
+  dashboard:
+    latest_request: "トップリクエスト"
+    hot_device_category: "上位のデバイスカテゴリ"
+    not_supply: "申し訳ありません - 供給しません"
+    request_overview: "リクエストの概要"
+    device_overview: "デバイスの概要"
+    device_summary_status: "状態"
+    request:
+      chart_title: "リクエストに"
+      check: "(今すぐチェック)"
+      chart: "チャート"
+      status: "状態"
+      summany: "概要"
+      chart_error: "チャートを取得できません"
+      go_to_request: "リクエストに移動"
+      to_request: "(要求する)"
+    device:
+      chart_title: "デバイスへ"
+      table:
+        summary_title: "概要"
+        summary: "(必要不可欠: %{assignment}, 利用可能な %{available}, 合計 %{total})"
+      chart_error: "チャートを取得できません"
+      view: "見る"
+      name: "名前"
+      check: "チェック"
+      status: "状態"
+      chart: "チャート"
+      summary: "概要"
+      go_to_device: "デバイスに移動"
+      to_device: "(デバイスへ)"
+  device_categories:
+    title_add_new: "新しいデバイスカテゴリを追加する"
+    message_device_not_exist: "デバイスカテゴリが見つかりません！"
+    field_label:
+      key_search: "デバイスグループタイプ"
+    table:
+      header:
+        name: "種別名"
+        template_code: "デバイステンプレートコード"
+        group_type: "グループタイプ"
+        template_code: "テンプレートコード"
+  permission:
+    not_permisison: "許可を得ていない"
+  request_status:
+    cancelled: "キャンセル"
+    waiting_approve: "承認待ち"
+    approved: "承認済み"
+    waiting_done: "待っている"
+    done: "完了"
+  language:
+    english: "英語"
+    japan: "日本語"

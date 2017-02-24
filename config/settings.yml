@@ -96,3 +96,6 @@ chart_type:
 boolean_params:
   true: "1"
   false: "0"
+languages:
+  japan: "jp"
+  english: "en"

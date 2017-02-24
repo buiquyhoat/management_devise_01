@@ -35,6 +35,18 @@
             <%= render "layouts/login" %>
           </li>
         <% end %>
+          <li class="line-height-55">
+              <button class="btn btn-default dropdown-toggle" type="button"
+                id="dropdownMenuLanguage" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="true">
+                <%= session[:language].present? ? session[:language] : t("select_language") %>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLanguage">
+                <li><%= link_to t("language.english"), changelanguage_path(language: Settings.languages.english) %></li>
+                <li><%= link_to t("language.japan"), changelanguage_path(language: Settings.languages.japan) %></li>
+              </ul>
+          </li>
       </ul>
     </nav>
   </div>

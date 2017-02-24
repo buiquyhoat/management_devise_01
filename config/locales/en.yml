@@ -1,4 +1,6 @@
 en:
+  language_selected: "Language %{language}"
+  select_language: "Select Language"
   time:
     formats:
       date_format: "%d-%m-%Y %H:%M:%S"
@@ -16,8 +18,8 @@ en:
       min_size_error: "File size should be greater than %{min_size}"
       max_size_error: "File size should be less than %{max_size}"
       first: "Errors: %{param1}"
-  title: "Devices manager system"
-  dms_app_title: "Devices Manage System"
+  title: "Device management system"
+  dms_app_title: "Device Management System"
   button_update_text: "Update"
   user:
     not_activated: "Account not activated. Check your email for the activation link."
@@ -58,32 +60,32 @@ en:
     framgia: "We make it anwsome"
   menu:
     dashboard: "Dashboard"
-    hone: "Home"
+    home: "Home"
     admin: "Admin"
-    manager: "Manager"
-    manager_user: "Manage User"
+    manage: "Manage"
+    manage_user: "Manage User"
     show_user: "Show Users"
     create_user: "Create User"
     reset_password: "Reset Password"
-    manager_department: "Manage Department"
+    manage_department: "Manage Department"
     show_deparment: "Departments"
     create_department: "New Department"
-    manager_request: "Manage Request"
+    manage_request: "Manage Request"
     create_request: "New Request"
     update_request: "Update Request"
     search_request: "Search"
     client: "Client"
     welcome: "Welcome,"
     general: "General"
-    manager_device: "Manage Device"
-    manager_assignment: "Manage Assignment"
+    manage_device: "Manage Device"
+    manage_assignment: "Manage Assignment"
     device_history: "Device Using History"
     device_category: "Device Categories Manage"
   nav:
     user_profile: "Profile"
     logout: "Log out"
   device_manager:
-    title: "Device Manager"
+    title: "Device Management"
     my_device_title: "My Devices"
     new:
       title: "Create New Device"
@@ -154,7 +156,7 @@ en:
       using_device: "Using Device"
       return_device: "Returned Device"
   request:
-    title: "Manager Requests"
+    title: "Manage Requests"
     update_success: "Update Success"
     update_unsuccess: "Update Unsuccess"
     update_conflict: "Maybe data is empty or updated by another member"
@@ -162,7 +164,7 @@ en:
       request_info: "Request Info"
       device_assignment: "Device Assignment"
       my_title: "Your requests"
-      another_request: "Manager Requests"
+      another_request: "Manage Requests"
     table:
       title: "Title"
       description: "Description"
@@ -348,3 +350,6 @@ en:
       address: "Address"
   import:
     label_h1: "Import"
+  language:
+    english: "English"
+    japan: "Japan"
