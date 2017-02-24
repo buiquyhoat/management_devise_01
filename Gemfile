@@ -33,6 +33,8 @@ gem "delayed_job"
 gem "delayed_job_active_record"
 gem "devise"
 gem "faker", "1.4.2"
+gem "roo"
+gem "activerecord-import"
 
 group :development, :test do
   gem "byebug", platform: :mri
