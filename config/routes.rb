@@ -40,6 +40,9 @@ Rails.application.routes.draw do
   resources :device_categories
   resources :user_profiler
   resources :request_row
+  resources :import
+  put "create", to: :create, controller: "import",
+    collection: {create: :put}
 
   mount ActionCable.server => "/cable"
 end

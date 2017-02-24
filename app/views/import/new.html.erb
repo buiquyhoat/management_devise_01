@@ -1,0 +1,6 @@
+<h2><%= t "import.label_h1" %></h2>
+
+<%= form_tag create_path, method: :put, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag t "import.label_h1" %>
+<% end %>

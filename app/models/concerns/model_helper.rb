@@ -23,4 +23,5 @@ module ModelHelper
   def create_hitory_for_update
     create_history Settings.action.updated
   end
+
 end

@@ -346,3 +346,5 @@ en:
       last_name: "Last Name"
       email: "Email"
       address: "Address"
+  import:
+    label_h1: "Import"
