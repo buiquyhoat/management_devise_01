@@ -726,6 +726,11 @@ body .modal {
   overflow-x: hidden;
   overflow-y: scroll;
 }
+.popup-details-max-height{
+  max-height: 300px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
 /** jQuery Smart Wizard  **/
 
 .fixed_height_320 {
@@ -1215,3 +1220,12 @@ div.box {
   font-weight: 500; }
 legend {
   padding-bottom: 7px; }
+
+.height-34 {
+  height: 34px !important;
+}
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

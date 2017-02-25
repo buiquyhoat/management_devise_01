@@ -12,7 +12,9 @@
       </td>
        <td>
         <label class="form-control">
-          <%= l @device.invoice.created_at, format: :date_format %>
+          <% if @device.invoice.present? %>
+            <%= l @device.invoice.created_at, format: :date_format %>
+          <% end %>
         </label>
       </td>
       <td class="width-20">

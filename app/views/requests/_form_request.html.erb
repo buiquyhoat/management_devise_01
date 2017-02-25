@@ -19,7 +19,7 @@
           {}, {class: "form-control", disabled: "disabled"} %>
         <% else %>
           <%= f.collection_select :for_user_id, @support.below_staffs, :id, :name,
-          {}, {class: "form-control"} %>
+          {}, {class: "chosen-select form-control"} %>
         <% end %>
       <% else %>
         <%= f.collection_select :for_user_id, @support.all_users, :id, :name,
@@ -30,7 +30,7 @@
       <div class="input-field col s6">
         <%= f.label t "request.table.assignee" %>
         <%= f.collection_select :assignee_id, @support.lst_assignee(@current_user, @request), :id,
-          :name, {include_blank: Settings.none}, {class: "form-control"} %>
+          :name, {include_blank: Settings.none}, {class: "chosen-select"} %>
       </div>
     <% end %>
     <% if @request.allow_change_status? @current_user %>
@@ -47,35 +47,36 @@
     </div>
 
     <input id="request_details" name="request_details" type="hidden" />
-
-    <table id="tbl_request_details" class="table table-hover">
-      <thead>
-        <tr>
-          <th><%= t "request_detail.description" %></th>
-          <th><%= t "request_detail.device_category" %></th>
-          <th><%= t "request_detail.number" %></th>
-          <th></th>
-        </tr>
-      </thead>
-
-      <tbody>
-         <%= f.fields_for :request_details do |request_detail| %>
+    <div class="popup-details-max-height">
+      <table id="tbl_request_details" class="table table-hover">
+        <thead>
           <tr>
-            <td> <%= request_detail.text_area :description, class: "form-control" %> </td>
-            <td> <%= request_detail.collection_select :device_category_id, @support.device_categories, :id, :name, {},
-              {class: "form-control"} %>
-            </td>
-            <td><%= request_detail.text_field :number, {class: "form-control", type: "number"} %></td>
-            <td>
-              <a class="glyphicon glyphicon-remove padding-top-component"
-                onclick="remove_request_detail(this, 'tbl_request_details', 'request','request_detail')">
-              </a>
-            </td>
+            <th><%= t "request_detail.description" %></th>
+            <th><%= t "request_detail.device_category" %></th>
+            <th><%= t "request_detail.number" %></th>
+            <th></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
 
+        <tbody>
+           <%= f.fields_for :request_details do |request_detail| %>
+            <tr>
+              <td> <%= request_detail.text_area :description, class: "height-34 form-control" %> </td>
+              <td>
+                <%= request_detail.collection_select :device_category_id, @support.device_categories, :id, :name, {},
+                {class: "form-control"} %>
+              </td>
+              <td><%= request_detail.text_field :number, {class: "form-control", type: "number"} %></td>
+              <td>
+                <a class="glyphicon glyphicon-remove padding-top-component"
+                  onclick="remove_request_detail(this, 'tbl_request_details', 'request','request_detail')">
+                </a>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-default" data-dismiss="modal">
         <%= t "action.close" %>

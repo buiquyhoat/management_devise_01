@@ -1,13 +1,13 @@
-<td><%= link_to request.title, request_path(request.id), remote: true,
+<td class= "truncate"><%= link_to request.title, request_path(request.id), remote: true,
   data: {toggle: "modal", target: "#dms-popup", backdrop: "static"} %></td>
-<td><%= request.description %></td>
+<td class= "truncate"><%= request.description %></td>
 <td><%= request.request_status_name %></td>
 <td class="request_status action">
   <%= render "action", request: request %>
 </td>
-<td><%= request.assignee.name if request.assignee.present? %></td>
-<td><%= request.for_user.name if request.for_user.present? %></td>
-<td><%= request.updater.name if request.updater.present? %></td>
+<td class= "truncate"><%= request.assignee.name if request.assignee.present? %></td>
+<td class= "truncate"><%= request.for_user.name if request.for_user.present? %></td>
+<td class= "truncate"><%= request.updater.name if request.updater.present? %></td>
 <td><%= time_ago_in_words request.created_at %></td>
 <td>
   <% if request.show_assignment_request? @current_user %>

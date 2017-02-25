@@ -1,58 +1,69 @@
 class ImportUser
-  attr_reader :params
 
   def initialize
   end
 
-  def import_user file
+  def import file
     spreadsheet = open_spreadsheet(file)
-    header = spreadsheet.row(Settings.import.first_row)
+    header = spreadsheet.row(1)
     clear_excel_data
-    (Settings.import.start_row..spreadsheet.last_row).each do |i|
-      company_admin_group = Group.find_by name: Settings.import.admin_group
-      if spreadsheet.row(i)[Settings.import.user.column.div_group_name].present?
-        div_group = Group.find_by name: spreadsheet.row(i)[Settings.import.user.column.div_group_name]
-        if div_group.nil? && company_admin_group.present?
-          div_group = create_group_from_excel spreadsheet.row(i)[Settings.import.user.column.div_group_name],
-            company_admin_group.id, company_admin_group.parent_path,
-            company_admin_group.company_id
-        end
-        if spreadsheet.row(i)[Settings.import.user.column.sec_group_name].present?
-          sec_group = Group.find_by name: spreadsheet.row(i)[Settings.import.user.column.sec_group_name],
-            closest_parent_id: div_group.id
-          if sec_group.nil?
-            sec_group = create_group_from_excel spreadsheet.row(i)[Settings.import.user.column.sec_group_name],
-              div_group.id, div_group.parent_path, div_group.company_id
+    Thread.new do
+      (2..spreadsheet.last_row).each do |i|
+        company_admin_group = Group.find_by id: 1
+        if spreadsheet.row(i)[9].present?
+          div_group = Group.find_by name: spreadsheet.row(i)[9]
+          if div_group.nil? && company_admin_group.present?
+            div_group = create_group_from_excel spreadsheet.row(i)[9], company_admin_group.id, company_admin_group.parent_path, company_admin_group.company_id
           end
-          if spreadsheet.row(i)[Settings.import.user.column.lead_group_name].present?
-            lead_group = Group.find_by name: spreadsheet.row(i)[Settings.import.user.column.lead_group_name],
-              closest_parent_id: sec_group.id
-            if lead_group.nil?
-              lead_group = create_group_from_excel spreadsheet.row(i)[Settings.import.user.column.lead_group_name],
-                sec_group.id, sec_group.parent_path, sec_group.company_id
+          if spreadsheet.row(i)[10].present?
+            sec_group = Group.find_by name: spreadsheet.row(i)[10], closest_parent_id: div_group.id
+            if sec_group.nil?
+              sec_group = create_group_from_excel spreadsheet.row(i)[10], div_group.id, div_group.parent_path, div_group.company_id
+            end
+            if spreadsheet.row(i)[11].present?
+              lead_group = Group.find_by name: spreadsheet.row(i)[11], closest_parent_id: sec_group.id
+              if lead_group.nil?
+                lead_group = create_group_from_excel spreadsheet.row(i)[11], sec_group.id, sec_group.parent_path, sec_group.company_id
+              end
             end
           end
         end
-      end
 
-      if spreadsheet.row(i)[Settings.import.user.column.user_name].present? &&
-        spreadsheet.row(i)[Settings.import.user.column.user_office_email].present?
-        new_user = User.find_by email: spreadsheet.row(i)[Settings.import.user.column.user_office_email]
-        if new_user.nil?
-          new_user = create_user_from_excel spreadsheet.row(i)[Settings.import.user.column.user_name],
-            spreadsheet.row(i)[Settings.import.user.column.user_office_email]
-          if new_user.id.present?
-            create_user_setting new_user.id
+        #create department
+        office = get_office spreadsheet.row(i)
+
+        # create user
+        create_user spreadsheet.row(i), div_group, sec_group, lead_group, office
+      end
+    end
+  end
+
+  def get_office row_sheet
+    if row_sheet[39].present?
+      office = Department.find_by name: row_sheet[39]
+      if office.nil?
+        office = Department.create(
+          name: row_sheet[39])
+      end
+    end
+    office
+  end
+
+  def create_user row_sheet, div_group, sec_group, lead_group, office
+    if row_sheet[6].present? && row_sheet[44].present? && office.present?
+      new_user = User.find_by email: row_sheet[44]
+      if new_user.nil?
+        new_user = create_user_from_excel row_sheet[6], row_sheet[44], office.id
+        if new_user.id.present?
+          create_user_setting new_user.id
+          group_id = div_group.id if div_group.present?
+          group_id = sec_group.id if sec_group.present?
+          group_id = lead_group.id if lead_group.present?
+          if row_sheet[13].present? && (row_sheet[13] == Settings.position.division_manager ||
+            row_sheet[13] == Settings.position.section_manager)
             group_id = div_group.id if div_group.present?
-            group_id = sec_group.id if sec_group.present?
-            group_id = lead_group.id if lead_group.present?
-            if spreadsheet.row(i)[Settings.import.user.column.position].present? &&
-              (spreadsheet.row(i)[Settings.import.user.column.position] == Settings.position.division_manager ||
-              spreadsheet.row(i)[Settings.import.user.column.position] == Settings.position.section_manager)
-              group_id = div_group.id if div_group.present?
-            end
-            create_user_group new_user.id, group_id
           end
+          create_user_group new_user.id, group_id
         end
       end
     end
@@ -82,13 +93,14 @@ class ImportUser
       user_settings_data: Settings.user_setting_default)
   end
 
-  def create_user_from_excel name, email
+  def create_user_from_excel name, email, office_id
     User.create(
       last_name: name,
       first_name: "",
       email: email,
       password: Settings.default_password,
       password_confirmation: Settings.default_password,
+      department_id: office_id,
       from_excel: true)
   end
 
@@ -112,6 +124,7 @@ class ImportUser
       group_type: 1,
       company_id: company_id,
       from_excel: 1)
+    # default permission -crud request
     create_permission_for_group_excel new_group.id, Settings.entry.request, Settings.action.create
     create_high_permission group_name, new_group.id, new_group.closest_parent_id
     new_group
@@ -158,7 +171,7 @@ class ImportUser
       when ".csv" then Roo::CSV.new(file.path)
       when ".xls" then Roo::Excel.new(file.path)
       when ".xlsx" then Roo::Excelx.new(file.path)
-      else raise t "import.unknow_file_type", filename: file.original_filename
+      else raise "Unknown file type: #{file.original_filename}"
     end
   end
 end

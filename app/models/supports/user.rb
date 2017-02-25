@@ -40,7 +40,8 @@ class Supports::User
   end
 
   def all_users
-    @all_users ||= User.all
+    $all_users ||= User.all
+    @all_users ||= $all_users
   end
 
   def derpartment_user department_id
@@ -49,17 +50,17 @@ class Supports::User
 
   def user_can_waitting_done
     @user_can_waitting_done ||= user_have_permission_default Settings.entry.request,
-      Settings.action.waiting_done
+      Settings.action.waiting_done, nil
   end
 
   def user_can_approve
     @user_can_approve ||= user_have_permission_default Settings.entry.request,
-      Settings.action.approve
+      Settings.action.approve, nil
   end
 
-  def user_can_done
+  def user_can_done for_user
     @user_can_done ||= user_have_permission_default Settings.entry.request,
-      Settings.action.done
+      Settings.action.done, for_user
   end
 
   def lst_request_status user, request
@@ -149,13 +150,17 @@ class Supports::User
     @device_categories_search ||= DeviceCategory.all
   end
 
+  # def current_permission user
+  #   @current_permission ||= user.current_permission
+  # end
+
   def lst_assignee user, request
     if request.id.present?
       case user.current_permission
       when Settings.action.approve
         user_can_waitting_done
       when Settings.action.waiting_done
-        user_can_done
+        user_can_done request.for_user
       end
     else
       user_can_waitting_done

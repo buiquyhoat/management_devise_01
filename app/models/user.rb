@@ -38,6 +38,12 @@ class User < ApplicationRecord
     convert_like(parent_path), user_id
   end
 
+  scope :manager_staff, ->parent_path do
+    where "id in (select u.id from users as u left join user_groups as ug on ug.user_id = u.id
+    left join groups as g on g.id = ug.group_id where ? LIKE g.parent_path+'%' and
+    ug.is_default_group = true)", parent_path
+  end
+
   class << self
 
     def convert_like param
@@ -95,17 +101,11 @@ class User < ApplicationRecord
     highest_permission Settings.entry.request, Settings.action.create
   end
 
-  def permission_default_group entry, action
-    user_group.each do |ug|
-      return true if (ug.group.highest_permission(entry, action) && ug.is_default_group)
-    end
-    false
-  end
-
   def can_manage_device
     highest_permission Settings.entry.device, Settings.action.create
   end
-  def can_manage_request
+
+  def have_request_action
     can_make_request
   end
   def can_approve

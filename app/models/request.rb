@@ -215,6 +215,20 @@ class Request < ApplicationRecord
     end
   end
 
+  def send_notify_list lst_users
+    if created_at == updated_at
+      message = I18n.t("notification.message.request_message",
+        request_title: title, action: I18n.t("notification.action.created"))
+    else
+      message = I18n.t("notification.message.request_message_update",
+        request_title: title, action: I18n.t("notification.action.updated"), status: request_status.name)
+    end
+    lst_users.each do |user|
+      create_notify updated_by, user.id,
+        message, Rails.application.routes.url_helpers.requests_path
+    end
+  end
+
   private
 
   def create_extend_data
@@ -240,12 +254,9 @@ class Request < ApplicationRecord
         request_title: title, action: I18n.t("notification.action.updated"), status: request_status.name)
     end
     create_notify updated_by, for_user_id,
-      message, Settings.notification.request_path
-    if assignee_id.present?
-      create_notify updated_by, assignee_id,
-      message, Settings.notification.request_path
-    end
+      message, Rails.application.routes.url_helpers.requests_path
   end
+
 
   def get_request_status_name request_status_id
     case request_status_id

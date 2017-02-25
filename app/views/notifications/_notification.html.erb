@@ -1,5 +1,5 @@
 <% if notification %>
-    <li class="<%= notification.checked? ? '' : 'un-read' %>">
+    <li class="<%= notification.checked? ? '' : 'un-read' %> truncate">
       <%= link_to notification.body, notification %>
       <span class="glyphicon
         <%= notification.checked? ? 'glyphicon-ok' : '' %> padding-left-1">
