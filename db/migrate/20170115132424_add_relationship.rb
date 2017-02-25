@@ -1,6 +1,5 @@
 class AddRelationship < ActiveRecord::Migration[5.0]
   def change
-    add_reference :user_roles, :user, foreign_key: true, null: false
     add_reference :requests, :request_type, foreign_key: true, null: false
     add_reference :requests, :request_status, foreign_key: true, null: false
     add_reference :request_details, :request, foreign_key: true, null: false

@@ -19,6 +19,10 @@ class Request < ApplicationRecord
   after_initialize :create_extend_data
   after_save :create_notification
 
+  scope :from_excel, -> do
+    where "id in (select r.id from requests as r left join users as u on r.for_user_id = u.id
+      where u.from_excel = true)"
+  end
   scope :order_by_time, ->{order created_at: :desc, updated_at: :desc}
   scope :sort_by_status, ->{sort_by request_status_id}
   scope :of_actor, ->user_id do

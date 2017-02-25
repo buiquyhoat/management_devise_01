@@ -71,19 +71,19 @@ class Supports::User
       when Settings.request_status.cancelled
         lst_request_status_manager_cancelled
       when Settings.request_status.approved
-        if request.for_user_id == user.id
-          lst_request_status_manager_approved
-        else
-          lst_request_status_manager_waiting_approve
-        end
-      else
+        lst_request_status_manager_approved
+      when Settings.request_status.waiting_approve
         lst_request_status_manager_waiting_approve
       end
     when Settings.action.waiting_done
       if request.request_status_id == Settings.request_status.cancelled
         lst_request_status_staff
       else
-        lst_request_status_bomanager_waiting_done
+        if request.for_user_id == user.id
+          lst_request_status_staff
+        else
+          lst_request_status_bomanager_waiting_done
+        end
       end
     end
   end

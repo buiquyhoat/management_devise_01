@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  attr_accessor :remember_token, :reset_token, :name, :default_parent_path
+  attr_accessor :remember_token, :reset_token, :name, :default_parent_path, :current_permission
 
   belongs_to :department, optional: true
 
@@ -14,7 +14,7 @@ class User < ApplicationRecord
     where department_id: department_id if department_id.present?
   end
 
-  validates :first_name, presence: true,
+  validates :first_name,
     length: {maximum: Settings.max_length_name}
   validates :last_name, presence: true,
     length: {maximum: Settings.max_length_name}
@@ -83,13 +83,6 @@ class User < ApplicationRecord
     false
   end
 
-  def current_permission
-    return Settings.action.approve if can_approve
-    return Settings.action.waiting_done if can_waiting_done
-    return Settings.action.done if can_done
-    return Settings.action.create if can_make_request
-  end
-
   def can_assign_to?
     can_approve || can_waiting_done
   end
@@ -112,7 +105,9 @@ class User < ApplicationRecord
   def can_manage_device
     highest_permission Settings.entry.device, Settings.action.create
   end
-
+  def can_manage_request
+    can_make_request
+  end
   def can_approve
     highest_permission Settings.entry.request, Settings.action.approve
   end
@@ -135,16 +130,23 @@ class User < ApplicationRecord
       if self.default_parent_path.nil? ||
         self.default_parent_path.length > ug.group.parent_path.length
         highest_group = ug.group
-        self.default_parent_path = ug.group.parent_path
+        self.default_parent_path = ug.group.parent_path if ug.group.parent_path.present?
       end
     end
     if highest_group.present?
-      self.default_parent_path += "/" + highest_group.id.to_s
+      self.default_parent_path = "" if self.default_parent_path.nil?
+      self.default_parent_path += "/" + highest_group.id.to_s if highest_group.id.present?
     end
-
   end
 
   private
+
+  def set_current_permission
+    return Settings.action.approve if can_approve
+    return Settings.action.waiting_done if can_waiting_done
+    return Settings.action.done if can_done
+    return Settings.action.create if can_make_request
+  end
 
   def downcase_email
     self.email = email.downcase
@@ -152,7 +154,8 @@ class User < ApplicationRecord
 
   def create_another
     get_default_parent_path
-    self.name = "#{first_name} #{last_name}"
+    self.name = first_name.present? ? "#{first_name} #{last_name}" : last_name
+    self.current_permission ||= set_current_permission
   end
 
   def avatar_size

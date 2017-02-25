@@ -118,3 +118,29 @@ import:
     assigment_description: "Create by auto import"
   first_row: 1
   start_row: 2
+  user:
+    column:
+      div_group_name: 9
+      sec_group_name: 10
+      lead_group_name: 11
+      user_name: 6
+      user_office_email: 44
+      office_name: 13
+  type:
+    user: "User"
+    device: "Device"
+  admin_group: "Admin"
+optional:
+  crud: "{\"Create\":true,\"Read\":true,\"Update\":true,\"Delete\":true}"
+  approve: "{\"Approve\":true}"
+  waiting_done: "{\"Waiting Done\":true}"
+  done: "{\"Done\":true}"
+special_group_name:
+  back_office_manage: "Back Office"
+  general_affairs: "General Affairs"
+position:
+  ga_office: "GA Officer"
+  division_manager: "Divison Manager"
+  section_manager: "Section Manager"
+default_password: "framgia"
+user_setting_default: "{\"send_mail_notification\":true,\"order_by_unread_notification\":true,\"quantity_load_notification\":30,\"page_size\":15}"

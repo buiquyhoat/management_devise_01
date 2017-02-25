@@ -6,7 +6,6 @@ class CreateDeviceGroups < ActiveRecord::Migration[5.0]
     t.integer :created_by
     t.integer :updated_by
     t.timestamps
-
     end
   end
 end
