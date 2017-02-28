@@ -136,6 +136,7 @@ ActiveRecord::Schema.define(version: 20170224083331) do
     t.string  "parent_path"
     t.integer "group_type"
     t.string  "image"
+    t.boolean "from_excel"
   end
 
   create_table "invoices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -160,6 +161,7 @@ ActiveRecord::Schema.define(version: 20170224083331) do
     t.string  "entry"
     t.string  "optional"
     t.integer "group_id"
+    t.boolean "from_excel"
     t.index ["group_id"], name: "index_permissions_on_group_id", using: :btree
   end
 
@@ -222,32 +224,13 @@ ActiveRecord::Schema.define(version: 20170224083331) do
     t.index ["returnee_id"], name: "fk_rails_8ef6b7f0dc", using: :btree
   end
 
-  create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "value",      null: false
-    t.string   "name"
-    t.integer  "created_by"
-    t.integer  "updated_by"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "user_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.boolean "is_default_group"
     t.integer "user_id"
     t.integer "group_id"
+    t.boolean "from_excel"
     t.index ["group_id"], name: "index_user_groups_on_group_id", using: :btree
     t.index ["user_id"], name: "index_user_groups_on_user_id", using: :btree
-  end
-
-  create_table "user_roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "created_by"
-    t.integer  "updated_by"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "user_id",    null: false
-    t.integer  "role_id",    null: false
-    t.index ["role_id"], name: "index_user_roles_on_role_id", using: :btree
-    t.index ["user_id"], name: "index_user_roles_on_user_id", using: :btree
   end
 
   create_table "user_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -255,11 +238,12 @@ ActiveRecord::Schema.define(version: 20170224083331) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.integer  "user_id",            null: false
+    t.boolean  "from_excel"
     t.index ["user_id"], name: "index_user_settings_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "first_name",      null: false
+    t.string   "first_name"
     t.string   "last_name",       null: false
     t.string   "email",           null: false
     t.string   "address"
@@ -272,6 +256,7 @@ ActiveRecord::Schema.define(version: 20170224083331) do
     t.integer  "department_id"
     t.string   "remember_digest"
     t.string   "avatar"
+    t.boolean  "from_excel"
     t.index ["department_id"], name: "index_users_on_department_id", using: :btree
   end
 
@@ -296,8 +281,6 @@ ActiveRecord::Schema.define(version: 20170224083331) do
   add_foreign_key "return_devices", "users", column: "returnee_id"
   add_foreign_key "user_groups", "groups"
   add_foreign_key "user_groups", "users"
-  add_foreign_key "user_roles", "roles"
-  add_foreign_key "user_roles", "users"
   add_foreign_key "user_settings", "users"
   add_foreign_key "users", "departments"
 end

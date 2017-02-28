@@ -10,14 +10,16 @@ class ImportController < ApplicationController
 
   def create
     begin
-      if params[:file].present?
-        if params[:type].present? &&  params[:type] == Settings.import_type.device
-          import_device_service = ImportDevice.new params, current_user.id
-          import_device_service.import_device
-        end
+      case params[:type]
+      when Settings.import.type.user
+        User.import params[:file]
+        flash[:success] = t "action_message.import_success"
+      when Settings.import.type.device
+        import_device_service = ImportDevice.new params, current_user.id
+        import_device_service.import_device
         flash[:success] = t "action_message.import_success"
       else
-        flash[:danger] = t "import.file_not_found"
+        flash[:danger] = t "import.file_type_not_support"
       end
     rescue Exception
       flash[:danger] = t "import.import_fail"

@@ -54,7 +54,7 @@ Department.create!(name: "Education",
 
 User.create!(first_name: "Xuan Dung",
   last_name: "Vu",
-  email: "vu.xuan.dung@framgia.com",
+  email: "vu.xuan.dung@test.com",
   address: "Framgia",
   password: "framgia",
   password_confirmation: "framgia",
@@ -62,7 +62,7 @@ User.create!(first_name: "Xuan Dung",
 
 User.create!(first_name: "Xuan Son",
   last_name: "Nguyen",
-  email: "nguyen.xuan.son@framgia.com",
+  email: "nguyen.xuan.son@test.com",
   address: "Framgia",
   password: "framgia",
   password_confirmation: "framgia",
@@ -70,7 +70,7 @@ User.create!(first_name: "Xuan Son",
 
 User.create!(first_name: "Ngoc Tuan",
   last_name: "Nguyen",
-  email: "nguyen.ngoc.tuan@framgia.com",
+  email: "nguyen.ngoc.tuan@test.com",
   address: "Framgia",
   password: "framgia",
   password_confirmation: "framgia",
@@ -78,7 +78,7 @@ User.create!(first_name: "Ngoc Tuan",
 
 User.create!(first_name: "Minh Ngoc",
   last_name: "Nguyen Thi",
-  email: "nguyen.thi.minh.ngoc@framgia.com",
+  email: "nguyen.thi.minh.ngoc@test.com",
   address: "Framgia",
   password: "framgia",
   password_confirmation: "framgia",
@@ -86,7 +86,7 @@ User.create!(first_name: "Minh Ngoc",
 
 User.create!(first_name: "Minh Thanh",
   last_name: "Ta",
-  email: "ta.minh.thanh@framgia.com",
+  email: "ta.minh.thanh@test.com",
   address: "Framgia",
   password: "framgia",
   password_confirmation: "framgia",
@@ -94,7 +94,7 @@ User.create!(first_name: "Minh Thanh",
 
 User.create!(first_name: "Nguyen Thi",
   last_name: "Thanh Ly",
-  email: "nguyen.thi.thanh.ly@framgia.com",
+  email: "nguyen.thi.thanh.ly@test.com",
   address: "Framgia",
   password: "framgia",
   password_confirmation: "framgia",
@@ -102,7 +102,7 @@ User.create!(first_name: "Nguyen Thi",
 
 User.create!(first_name: "Nguyen Long",
   last_name: "Tran",
-  email: "tran.nguyen.long@framgia.com",
+  email: "tran.nguyen.long@test.com",
   address: "Framgia",
   password: "framgia",
   password_confirmation: "framgia",
@@ -110,7 +110,7 @@ User.create!(first_name: "Nguyen Long",
 
 User.create!(first_name: "Hoang Vi",
   last_name: "Pham Thi",
-  email: "pham.thi.hoang.vi@framgia.com",
+  email: "pham.thi.hoang.vi@test.com",
   address: "Framgia",
   password: "framgia",
   password_confirmation: "framgia",
@@ -118,7 +118,7 @@ User.create!(first_name: "Hoang Vi",
 
 User.create!(first_name: "Hong Thuy",
   last_name: "Le Thi",
-  email: "le.thi.hong.thuy@framgia.com",
+  email: "le.thi.hong.thuy@test.com",
   address: "Framgia",
   password: "framgia",
   password_confirmation: "framgia",
@@ -126,7 +126,7 @@ User.create!(first_name: "Hong Thuy",
 
 User.create!(first_name: "Cong Chua",
   last_name: "Huy",
-  email: "huy.cong.chua@framgia.com",
+  email: "huy.cong.chua@test.com",
   address: "Framgia",
   password: "framgia",
   password_confirmation: "framgia",
@@ -134,7 +134,7 @@ User.create!(first_name: "Cong Chua",
 # extend
 User.create!(first_name: "Xuan Dat",
   last_name: "Tran",
-  email: "tran.xuan.dat@framgia.com",
+  email: "tran.xuan.dat@test.com",
   address: "Framgia",
   password: "framgia",
   password_confirmation: "framgia",
@@ -142,7 +142,7 @@ User.create!(first_name: "Xuan Dat",
 
 User.create!(first_name: "Anh Duong",
   last_name: "Le",
-  email: "le.anh.duong@framgia.com",
+  email: "le.anh.duong@test.com",
   address: "Framgia",
   password: "framgia",
   password_confirmation: "framgia",
@@ -150,73 +150,12 @@ User.create!(first_name: "Anh Duong",
 
 User.create!(first_name: "Vu Nguyen",
   last_name: "Le",
-  email: "le.vu.nguyen@framgia.com",
+  email: "le.vu.nguyen@test.com",
   address: "Framgia",
   password: "framgia",
   password_confirmation: "framgia",
   department_id: 3 )
 
-#Roles
-Role.create!(name: "admin",
-  value: 1,
-  created_by: 1,
-  updated_by: 1)
-Role.create!(name: "manager",
-  value: 2,
-  created_by: 1,
-  updated_by: 1)
-Role.create!(name: "Staff",
-  value: 3,
-  created_by: 1,
-  updated_by: 1)
-
-UserRole.create!(user_id: 1,
-  role_id: 1,
-  created_by: 1,
-  updated_by: 1)
-
-UserRole.create!(user_id: 1,
-  role_id: 1,
-  created_by: 1,
-  updated_by: 1)
-UserRole.create!(user_id: 2,
-  role_id: 2,
-  created_by: 1,
-  updated_by: 1)
-UserRole.create!(user_id: 2,
-  role_id: 3,
-  created_by: 1,
-  updated_by: 1)
-UserRole.create!(user_id: 3,
-  role_id: 2,
-  created_by: 1,
-  updated_by: 1)
-UserRole.create!(user_id: 3,
-  role_id: 3,
-  created_by: 1,
-  updated_by: 1)
-
-UserRole.create!(user_id: 5,
-  role_id: 2,
-  created_by: 1,
-  updated_by: 1)
-UserRole.create!(user_id: 6,
-  role_id: 3,
-  created_by: 1,
-  updated_by: 1)
-UserRole.create!(user_id: 7,
-  role_id: 3,
-  created_by: 1,
-  updated_by: 1)
-UserRole.create!(user_id: 8,
-  role_id: 3,
-  created_by: 1,
-  updated_by: 1)
-
-UserRole.create!(user_id: 9,
-  role_id: 3,
-  created_by: 1,
-  updated_by: 1)
 
 #device group
 DeviceGroup.create!(name: "thiết bị máy tính",

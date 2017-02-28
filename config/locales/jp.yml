@@ -343,6 +343,7 @@ jp:
     waiting_done: "待っている"
     done: "完了"
   import:
+    unknow_file_type: "%{file_name}不明なファイルタイプ"
     label_h1: "インポート"
     device: "インポートデバイス"
     user: "ユーザーのインポート"

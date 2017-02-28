@@ -42,51 +42,34 @@
         </li>
         <% if logged_in? %>
           <% if @current_user.is_admin %>
-            <li><a><i class="fa fa-bug"></i> <%= t "menu.admin" %>
+            <li><a><i class="fa fa-sitemap"></i> <%= t "menu.admin.title" %>
               <span class="fa"></span></a>
               <ul class="nav child_menu">
-                <li>
-                  <a><%= t "menu.maganer_user" %>
-                    <span class="fa"></span>
-                  </a>
-                  <ul class="nav child_menu">
-                    <li><%= link_to t("menu.show_user"), "#" %></li>
-                    <li><%= link_to t("menu.create_user"), "#" %></li>
-                    <li><%= link_to t("menu.reset_password"), "#" %></li>
-                  </ul>
-                </li>
-                <li>
-                  <a><%= t "menu.manager_department" %>
-                    <span class="fa"></span>
-                  </a>
-                  <ul class="nav child_menu">
-                    <li><%= link_to t("menu.show_user"), "#" %></li>
-                    <li><%= link_to t("menu.create_department"), "#" %></li>
-                  </ul>
-                </li>
+                <li><%= link_to t("menu.admin.import_data"),  import_index_path %></li>
                 <li><%= link_to t("menu.device_category"),  device_categories_path %></li>
               </ul>
             </li>
-          <% end %>
-          <li>
-            <a>
-              <i class="fa fa-sitemap"></i>
-              <%= t "menu.manage" %>
-              <span class="fa"></span>
-            </a>
-            <ul class="nav child_menu">
-              <% if current_user.can_manage_device %>
-                <li><%= link_to t("menu.manage_device"),  devices_path %></li>
-                <li>
-                  <%= link_to t("menu.device_history"), device_history_index_path %>
-                </li>
-              <% else %>
-                <li><%= link_to t("header.my_devices"), my_devices_path %></li>
-              <% end %>
+          <% else %>
+            <li>
+              <a>
+                <i class="fa fa-sitemap"></i>
+                <%= t "menu.manage" %>
+                <span class="fa"></span>
+              </a>
+              <ul class="nav child_menu">
+                <% if current_user.can_manage_device %>
+                  <li><%= link_to t("menu.manage_device"),  devices_path %></li>
+                  <li>
+                    <%= link_to t("menu.device_history"), device_history_index_path %>
+                  </li>
+                <% else %>
+                  <li><%= link_to t("header.my_devices"), my_devices_path %></li>
+                <% end %>
 
-              <li><%= link_to t("menu.manage_request"), requests_path %></li>
-            </ul>
-          </li>
+                <li><%= link_to t("menu.manage_request"), requests_path %></li>
+              </ul>
+            </li>
+          <% end %>
         <% end %>
     </div>
   </div>

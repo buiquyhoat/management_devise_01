@@ -81,6 +81,9 @@ en:
     manage_assignment: "Manage Assignment"
     device_history: "Device Using History"
     device_category: "Device Categories Manage"
+    admin:
+      title: "Admin"
+      import_data: "Import User-Device"
   nav:
     user_profile: "Profile"
     logout: "Log out"
@@ -296,6 +299,8 @@ en:
       header:
         select_device: "Select Device"
   dashboard:
+    admin_manage: "Manage User-Device"
+    import: "Import Data"
     latest_request: "Top Request"
     hot_device_category: "Top Device Category"
     not_supply: "Sorry- not supply"
@@ -351,6 +356,7 @@ en:
       email: "Email"
       address: "Address"
   import:
+    unknow_file_type: "Unknown file type %{file_name}"
     label_h1: "Import"
     device: "Import Device"
     user: "Import User"

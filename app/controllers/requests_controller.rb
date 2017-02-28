@@ -1,8 +1,7 @@
 class RequestsController < ApplicationController
   before_action :init_request, only: [:edit, :update, :show]
-  before_action :init_dropdown, except: [:destroy, :update, :create]
+  before_action :init_support
   before_action :logged_in_user, :init_extend_data
-
   def index
     load_request params[:manager_request]
     if params[:isAjax].present? or params[:page].present?
@@ -119,8 +118,8 @@ class RequestsController < ApplicationController
       .paginate page: page, per_page: config_page_size
   end
 
-  def init_dropdown
-    @support = Supports::User.new current_user
+  def init_support
+    @support ||= Supports::User.new current_user
   end
 
   def init_request
