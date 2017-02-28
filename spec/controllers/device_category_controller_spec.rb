@@ -13,7 +13,7 @@ RSpec.describe DeviceCategoriesController, type: :controller do
 
   before {log_in current_user}
 
-  context "GET #index wrong permission" do
+  describe "GET #index wrong permission" do
     before {log_in wrong_user}
     it "user do not permission should go to home" do
       get :index
@@ -21,7 +21,7 @@ RSpec.describe DeviceCategoriesController, type: :controller do
     end
   end
 
-  context "GET #index" do
+  describe "GET #index" do
     it "render index" do
       get :index
       expect(response).to render_template "index"
