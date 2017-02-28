@@ -30,6 +30,7 @@ device_code:
   append_character: "0"
 notification:
   max_display: 20
+  request_path: "/requests"
 email:
   parameter:
     from_email: "email"

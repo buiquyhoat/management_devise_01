@@ -15,9 +15,8 @@ class Device < ApplicationRecord
 
   mount_uploader :picture, AvatarUploader
 
-  validates :device_code, :production_name, :model_number, :serial_number, presence: true
+  validates :device_code, presence: true
   validates :device_code, uniqueness: {case_sensitive: false}
-  validates :production_name, uniqueness: {case_sensitive: false}
 
   scope :find_assigne_device, ->(user_id){where "id in (select d.id from
     devices as d join assignment_details asd on d.id = asd.device_id

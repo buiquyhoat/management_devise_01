@@ -10,11 +10,20 @@ RSpec.describe DeviceCategory, type: :model do
   end
 
   context "validate uniqueness" do
-    let(:device_category) {FactoryGirl.build :invalid_category_group}
+    let!(:device_category) {FactoryGirl.build :invalid_category_group}
     subject {device_category}
-
     it {should validate_uniqueness_of(:template_code).case_insensitive}
     it {should validate_uniqueness_of(:name).case_insensitive}
+  end
+
+  describe "#extend_dashboard_data" do
+    let(:device_category) {FactoryGirl.create :device_category}
+    subject {device_category}
+
+    it {
+      subject.extend_dashboard_data
+      expect(subject.device_total) != nil
+    }
   end
 end
 
