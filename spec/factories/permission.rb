@@ -6,7 +6,7 @@ FactoryGirl.define  do
     end
 
     entry {entry_name}
-    optional {"{\"Create\":false,\"Read\":false,\"Update\":false,\"Delete\":false,\"Approve\":false}"}
+    optional {"{\"Create\":true,\"Read\":true,\"Update\":true,\"Delete\":true,\"Approve\":true}"}
     group {group_para}
   end
 end

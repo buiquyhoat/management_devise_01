@@ -22,7 +22,7 @@
             <td><%= device.model_number %></td>
             <td><%= device.device_status.name %></td>
             <td><%= device.device_category.name %></td>
-            <td><%= device.invoice.invoice_number %></td>
+            <td><%= device.invoice_invoice_number %></td>
             <td>
               <% if current_user.can_manage_device %>
                 <%= link_to "", edit_device_path(device), remote: true,

@@ -206,6 +206,8 @@ jp:
     assignment_details_total_error: "エラー：1"
     max_value: "許容最大値は％{value}です。"
     min_value: "最小値の許容値は％{value}です。"
+    import_success: "輸入成功"
+    import_fail: "インポートに失敗しました！"
   action:
     close: "閉じる"
     edit: "更新"
@@ -340,6 +342,14 @@ jp:
     approved: "承認済み"
     waiting_done: "待っている"
     done: "完了"
+  import:
+    label_h1: "インポート"
+    device: "インポートデバイス"
+    user: "ユーザーのインポート"
+    file_not_found: "ファイルのインポートが見つかりません。"
+    validate:
+      max_length: "このファイルは、許可されている最大ファイルサイズ（5 MB）を超えています"
+      file_type_Import_device: "拡張子が％{extension}の画像ファイルのみが許可されます"
   language:
     english: "英語"
     japan: "日本語"

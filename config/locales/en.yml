@@ -208,6 +208,8 @@ en:
     assignment_details_total_error: "Error: 1"
     max_value: "Max value allow is %{value}"
     min_value: "Min value allow is %{value}"
+    import_success: "Import Success"
+    import_fail: "Import Failed!."
   action:
     close: "Close"
     edit: "Update"
@@ -350,6 +352,12 @@ en:
       address: "Address"
   import:
     label_h1: "Import"
+    device: "Import Device"
+    user: "Import User"
+    file_not_found: "File Import not found."
+    validate:
+      max_length: "This file exceeds the maximum allowed file size (5 MB)"
+      file_type_Import_device: "Only image file with extension: %{extension} is allowed"
   language:
     english: "English"
     japan: "Japan"

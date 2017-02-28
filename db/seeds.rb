@@ -954,46 +954,6 @@ UserGroup.create!(
   is_default_group: false)
 
 
-20.times do |n|
-  Device.create!(
-    device_code: "device_#{n+1}",
-    production_name: "production_name_#{n+1}",
-    model_number: "model_number_#{n+1}",
-    serial_number: "serial_number_#{n+1}",
-    created_by: 8,
-    updated_by: 8,
-    device_status_id: 2,
-    device_category_id: 1,
-    invoice_id: 1)
-end
-
-20.times do |n|
-  Device.create!(
-    device_code: "device_2#{n+1}",
-    production_name: "production_name_2#{n+1}",
-    model_number: "model_number_2#{n+1}",
-    serial_number: "serial_number_2#{n+1}",
-    created_by: 8,
-    updated_by: 8,
-    device_status_id: 2,
-    device_category_id: 2,
-    invoice_id: 1)
-end
-
-
-20.times do |n|
-  Device.create!(
-    device_code: "device_3#{n+1}",
-    production_name: "production_name_3#{n+1}",
-    model_number: "model_number_3#{n+1}",
-    serial_number: "serial_number_3#{n+1}",
-    created_by: 8,
-    updated_by: 8,
-    device_status_id: 2,
-    device_category_id: 3,
-    invoice_id: 1)
-end
-
 5.times do |n|
   Request.create!(
     title: "request_title_#{n+1} for Huy By Dung",
