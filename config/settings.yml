@@ -111,7 +111,7 @@ column_file:
     production_name: "production name"
     model_number: "model number"
     serial_number: "serial number"
-    last_using_by: "last using order_by_unread_notification"
+    last_using_by: "last using by"
     description: "description"
 import:
   default_message:

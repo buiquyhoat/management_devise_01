@@ -22,7 +22,7 @@ class ImportController < ApplicationController
         flash[:danger] = t "import.file_type_not_support"
       end
     rescue Exception
-      flash[:danger] = t "import.import_fail"
+      flash[:danger] = t "action_message.import_fail"
     end
     redirect_to new_import_url
   end

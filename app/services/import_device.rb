@@ -16,8 +16,9 @@ class ImportDevice
   end
 
   def import_device
+
     spreadsheet = open_spreadsheet @params[:file]
-    if spreadsheet.present?
+    if spreadsheet
       header = spreadsheet.row(Settings.import.first_row)
       (Settings.import.start_row..spreadsheet.last_row).each do |i|
         row = Hash[[header, spreadsheet.row(i)].transpose]
@@ -69,7 +70,6 @@ class ImportDevice
     imported_device = @list_import_device.detect{|w| w[:device_code] == device_code}
     exist_device.nil? && imported_device.nil?
   end
-
   def init_device row, device_category, device_code
     device_code ||= row[Settings.column_file.import_device.device_code]
     if device_code.present?
@@ -211,20 +211,23 @@ class ImportDevice
         assigment = init_assignment user.id
         imported_devices =  @list_assigment.select {|x| x[:email].eql? user.email}
           .map {|x| x[:device_code] }
-        devices = Device.find_by device_code: imported_devices
-        list_device.assignment_details.create device: devices
+        devices = Device.where device_code: imported_devices
+        devices.each do |device|
+          assigment.assignment_details.build device_id: device.id
+        end
+        assigment.save
       end
     end
   end
 
   def get_list_user
     @list_email = @list_assigment.uniq {|e| e[:email]}.map {|x| x[:email]}
-    user_dms = User.find_by email: @list_email
+    user_dms = User.where email: @list_email
   end
 
   def init_assignment user_id
     assigment = Assignment.find_by assignee_id: user_id, request_id: nil
-    assigment ||= Assignment.create assignee_id: user_id,
+    assigment ||= Assignment.new assignee_id: user_id,
       description: Settings.import.default_message.assigment_description,
       created_by: @current_user_id,
       updated_by: @current_user_id
