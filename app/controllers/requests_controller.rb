@@ -1,6 +1,6 @@
 class RequestsController < ApplicationController
   before_action :init_request, only: [:edit, :update, :show]
-  before_action :init_support
+  before_action :init_support, expect: [:destroy, :show]
   before_action :logged_in_user, :init_extend_data
   def index
     load_request params[:manager_request]
@@ -24,6 +24,7 @@ class RequestsController < ApplicationController
       update_create_request @request
       if @request.save
         flash[:success] = t "action_message.create_success"
+        send_notifycation @request
         @manage_tag_selected = @current_user.id == @request.for_user_id ? false : true
         load_request params[:manager_request]
       else
@@ -48,6 +49,7 @@ class RequestsController < ApplicationController
         format.js
         if @request.errors.empty?
           flash.now[:success] = t "action_message.update_success"
+          send_notifycation @request
           load_request params[:manager_request]
         else
           flash[:danger] = t "action_message.update_fail"
@@ -79,6 +81,19 @@ class RequestsController < ApplicationController
   def destroy; end
 
   private
+
+  def send_notifycation request
+    case request.request_status_id
+    when Settings.request_status.waiting_approve
+      users = user_can_approve
+      users = users.select {|u| @current_user.default_parent_path.index(u.default_parent_path) == 0}
+      request.send_notify_list users
+    when Settings.request_status.approved
+      request.send_notify_list user_can_waiting_done
+    when Settings.request_status.waiting_done
+      request.send_notify_list user_can_done_request
+    end
+  end
 
   def load_request manager_request
     get_requests manager_request

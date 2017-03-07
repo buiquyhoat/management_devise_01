@@ -1,10 +1,10 @@
 <div>
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active">
+    <li role="presentation">
       <a href="#user-profile" aria-controls="user-profile"
         role="tab" data-toggle="tab"><%= t "device_manager.tab.user_profile" %></a>
     </li>
-    <li role="presentation">
+    <li role="presentation" class="active">
       <a href="#using-device" aria-controls="using-device"
         role="tab" data-toggle="tab"><%= t "device_manager.tab.using_device" %></a>
     </li>
@@ -16,10 +16,10 @@
     </li>
   </ul>
   <div class="tab-content popup-max-height">
-    <div role="tabpanel" class="tab-pane active" id="user-profile">
+    <div role="tabpanel" class="tab-pane" id="user-profile">
       <%= render "form_user_infor" %>
     </div>
-    <div role="tabpanel" class="tab-pane" id="using-device">
+    <div role="tabpanel" class="tab-pane active" id="using-device">
       <%= render "form_device_using" %>
     </div>
     <div role="tabpanel" class="tab-pane" id="using-history">

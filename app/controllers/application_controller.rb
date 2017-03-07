@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
+  include ApplicationHelper
   before_action :setup_user_seting, :load_notification, :set_locale
   private
 
@@ -42,7 +43,7 @@ class ApplicationController < ActionController::Base
     if user_setting.present?
       setting_page_size = user_setting.optional_hash[Settings.user_setting.page_size]
         if setting_page_size.to_i <  Settings.paging.min_page_size
-          page_size = Settings.paging.page_size
+          page_size = Settings.paging.min_page_size
         elsif setting_page_size.to_i >  Settings.paging.max_page_size
           page_size = Settings.paging.max_page_size
         else

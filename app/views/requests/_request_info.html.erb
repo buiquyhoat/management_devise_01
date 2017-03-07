@@ -18,19 +18,19 @@
 
 <div class="input-field col s6">
   <%= label_tag t "request.table.request_for", {class: "form-control"} %>
-  <%= text_field_tag @request.for_user.name, @request.for_user.name,
+  <%= text_field_tag @request.for_user.present? ? @request.for_user.name : "" , @request.for_user.present? ? @request.for_user.name : "",
     {class: "form-control", disabled: "disabled"} %>
 </div>
 
 <div class="input-field col s6">
   <%= label_tag t "request.table.created_by", {class: "form-control"} %>
-  <%= text_field_tag @request.creater.name, @request.creater.name,
+  <%= text_field_tag @request.creater.present? ? @request.creater.name : "" , @request.creater.present? ? @request.creater.name : "" ,
     {class: "form-control", disabled: "disabled"} %>
 </div>
 
 <div class="input-field col s6">
   <%= label_tag t "request.table.updated_by", {class: "form-control"} %>
-  <%= text_field_tag @request.updater.name, @request.updater.name,
+  <%= text_field_tag @request.updater.present? ? @request.updater.name : "", @request.updater.present? ? @request.updater.name : "",
     {class: "form-control", disabled: "disabled"} %>
 </div>
 

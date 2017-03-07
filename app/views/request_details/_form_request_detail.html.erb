@@ -1,6 +1,6 @@
 <tr>
   <td><%= text_area :request_detail, :description,
-    class: "form-control request_detail_description" %></td>
+    class: "form-control request_detail_description height-34" %></td>
   <td>
     <%= select_tag("", options_for_select(@support.device_categories
       .collect{|category| [category.name, category.id]}),

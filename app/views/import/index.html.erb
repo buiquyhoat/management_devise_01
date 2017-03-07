@@ -1,6 +1,35 @@
-<h2><%= t "import.label_h1" %></h2>
-<%= form_tag create_path, method: :put, multipart: true do %>
-  <%= hidden_field_tag "type", Settings.import.type.user %>
-  <%= file_field_tag :file %>
-  <%= submit_tag t "import.label_h1" %>
+<%= form_tag create_path(type: Settings.import.type.device), method: :put, multipart: true do %>
+  <div class="row">
+    <div class="col-lg-12">
+      <h3><%= t "import.device" %></h3>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-lg-3">
+      <%= file_field_tag :file, onchange: "validateFiles(this, #{Settings.allowedExtension.device});",
+        data: {max_file_size: 5.megabytes} %>
+    </div>
+    <div class="col-lg-2">
+      <button type="submit" class="btn btn-primary">
+      <%= t "import.device" %></button>
+    </div>
+  </div>
+<% end %>
+<%= form_tag create_path(type: Settings.import.type.user), method: :put, multipart: true, remote: true do %>
+  <div class="row">
+    <div class="col-lg-12">
+      <h3><%= t "import.user" %></h3>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-lg-3">
+      <%= file_field_tag :file %>
+    </div>
+    <div class="col-lg-2">
+      <button type="submit" class="btn btn-primary">
+      <%= t "import.user" %></button>
+    </div>
+  </div>
 <% end %>

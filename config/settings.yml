@@ -76,7 +76,7 @@ user_setting:
     quantity_load_notification: "onblur=\"minmax(this, 5, 30)\""
 paging:
   page_size: 15
-  min_page_size: 10
+  min_page_size: 5
   max_page_size: 30
   page_size_dashboard: 6
 top_dashboard: 5
@@ -100,8 +100,6 @@ boolean_params:
 languages:
   japan: "jp"
   english: "en"
-import_type:
-  device: "device"
 allowedExtension:
   device: ["csv", "xls", "xlsx"]
 column_file:

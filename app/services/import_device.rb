@@ -73,10 +73,7 @@ class ImportDevice
   def init_device row, device_category, device_code
     device_code ||= row[Settings.column_file.import_device.device_code]
     if device_code.present?
-      device_status = Settings.device_status.using
-      unless row[Settings.column_file.import_device.last_using_by].present?
-        device_status = Settings.device_status.available
-      end
+      device_status = Settings.device_status.available
       invoice = init_invoice(row[Settings.column_file.import_device.invoice])
       if invoice.present?
         invoice_id = invoice.id
@@ -172,7 +169,7 @@ class ImportDevice
     device_category = @list_device_category.detect{|w| w[:template_code] == template_code}
     device_category ||= @list_import_device_category.detect{|w| w[:template_code] == template_code}
     unless device_category.present?
-      device_category = DeviceCategory.create name: "import_category_#{template_code}",
+      device_category = DeviceCategory.create name: "category_#{template_code}",
         template_code: template_code,
         created_by: @current_user_id,
         updated_by: @current_user_id,

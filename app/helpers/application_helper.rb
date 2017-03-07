@@ -23,11 +23,62 @@ module ApplicationHelper
     users
   end
 
-  def user_have_permission_default entry, action
+  def user_can_approve
+    if $user_can_approve.nil?
+      users = []
+      User.all.each do |u|
+        if u.permission_default_group Settings.entry.request, Settings.action.approve
+          users << u
+        end
+      end
+      $user_can_approve = users
+    end
+    $user_can_approve
+  end
+
+  def user_can_done_request
+    if $user_can_done.nil?
+      users = []
+      User.all.each do |u|
+        if u.permission_default_group Settings.entry.request, Settings.action.done
+          users << u
+        end
+      end
+      $user_can_done = users
+    end
+    $user_can_done
+  end
+
+  def user_can_waiting_done
+    if $user_can_waiting_done.nil?
+      users = []
+      User.all.each do |u|
+        if u.permission_default_group Settings.entry.request, Settings.action.waiting_done
+          users << u
+        end
+      end
+      $user_can_waiting_done = users
+    end
+    $user_can_waiting_done
+  end
+
+  def user_have_permission_default entry, action, user
     users = []
-    User.all.each do |u|
-      if u.permission_default_group entry, action
-        users << u
+    if entry == Settings.entry.request
+      case action
+      when Settings.action.approve
+        users = user_can_approve
+      when Settings.action.waiting_done
+        users = user_can_waiting_done
+      when Settings.action.done
+        users = user_can_done_request
+        users = users.select { |item| item.department_id == user.department_id} if user.present?
+      end
+    else
+      User.all.each do |u|
+        if u.permission_default_group entry, action
+          users << u
+        end
       end
     end
     users

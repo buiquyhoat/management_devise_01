@@ -13,14 +13,14 @@ jp:
       carrierwave_integrity_error: "は許可されたファイルタイプではありません"
       carrierwave_download_error: "ダウンロードできませんでした"
       extension_whitelist_error: "あなたのファイルタイプはアップロードできません。許可されるタイプは jpg, jpeg, gif, png"
-      extension_blacklist_error: "％{extension}ファイル、禁止されているタイプ：％{prohibited_types}をアップロードすることはできません"
-      content_type_whitelist_error: "％{content_type}個のファイルをアップロードすることはできません"
-      content_type_blacklist_error: "％{content_type}個のファイルをアップロードすることはできません"
+      extension_blacklist_error: "%{extension}ファイル、禁止されているタイプ：%{prohibited_types}をアップロードすることはできません"
+      content_type_whitelist_error: "%{content_type}個のファイルをアップロードすることはできません"
+      content_type_blacklist_error: "%{content_type}個のファイルをアップロードすることはできません"
       rmagick_processing_error: "rmagickで操作できませんでした。多分画像ではありませんか？"
       mini_magick_processing_error: "このファイルはイメージではありません"
-      min_size_error: "ファイルサイズは％{min_size}より大きくする必要があります"
-      max_size_error: "ファイルサイズは％{max_size}より小さくする必要があります"
-      first: "エラー：％{param1}"
+      min_size_error: "ファイルサイズは%{min_size}より大きくする必要があります"
+      max_size_error: "ファイルサイズは%{max_size}より小さくする必要があります"
+      first: "エラー：%{param1}"
   title: "デバイス管理システム"
   dms_app_title: "デバイス管理システム"
   button_update_text: "更新"
@@ -64,7 +64,9 @@ jp:
   menu:
     dashboard: "ダッシュボード"
     home: "ホーム"
-    admin: "管理者"
+    admin:
+      title: "管理者"
+      import_data: "データのインポート"
     manage: "管理"
     manage_user: "ユーザーを管理する"
     show_user: "ユーザーを表示"
@@ -103,7 +105,7 @@ jp:
     delete_action:
       success: "デバイスの削除を成功させる！"
       fail: "デバイスの削除に失敗しました！"
-    message_delete_confirm: "％{device}を削除しますか？"
+    message_delete_confirm: "%{device}を削除しますか？"
     message_device_not_exist: "デバイスが見つかりません"
     field_label:
       device_status: "デバイスステータス"
@@ -124,7 +126,7 @@ jp:
       button_search: "サーチ"
       button_clear: "検索をクリアする"
       using_by: "〜によって使用: "
-      history_tooltip: "％{name}による検索履歴"
+      history_tooltip: "%{name}による検索履歴"
       view_detail_device_tooltip: "詳細を表示％{名}"
     table:
       header:
@@ -204,8 +206,8 @@ jp:
     update_fail: "アップデートに失敗しました！"
     result_not_match: "一致する結果はありません"
     assignment_details_total_error: "エラー：1"
-    max_value: "許容最大値は％{value}です。"
-    min_value: "最小値の許容値は％{value}です。"
+    max_value: "許容最大値は%{value}です。"
+    min_value: "最小値の許容値は%{value}です。"
     import_success: "輸入成功"
     import_fail: "インポートに失敗しました！"
   action:
@@ -249,15 +251,15 @@ jp:
       header: "新しいデバイスが割り当てられました"
       link_content: "リンクをたどって詳細を表示してください"
       link_devices_manager_text: "デバイス管理システム"
-      request_done: "リクエスト：％{request_title}が完了しました"
+      request_done: "リクエスト：%{request_title}が完了しました"
     choice_device: "デバイスを選択"
   notification:
     message:
       notification_not_found: "通知が見つかりません"
       single_device_assigned: "％{device}があなたに割り当てられました"
       multil_device_assigned: "％{total_device}個のデバイスが割り当てられました"
-      request_message: "リクエスト％{request_title}は％{action}です"
-      request_message_update: "リクエスト％{request_title}は％{action}です。％{status}"
+      request_message: "リクエスト％{request_title}は%{action}です"
+      request_message_update: "リクエスト%{request_title}は%{action}です。%{status}"
     action:
       updated: "かわった"
       created: "作成した"
@@ -274,8 +276,8 @@ jp:
       label_created_to: "作成者:"
       button_search: "通知を取得する"
   history:
-    request: "リクエストは％{name}によって％{action}されています"
-    device: "デバイスは％{name}によって％{action}されています"
+    request: "リクエストは%{name}によって%{action}されています"
+    device: "デバイスは%{name}によって%{action}されています"
   btn:
     back: "バック"
   user_setting:
