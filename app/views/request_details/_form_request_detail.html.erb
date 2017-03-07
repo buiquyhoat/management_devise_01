@@ -7,7 +7,7 @@
       class: "form-control chosen-select device-caterory") %>
   </td>
   <td>
-    <%= text_field :request_detail, :number, {class: "form-control request_detail_number", type: "number"} %>
+    <%= text_field :request_detail, :number, class: "form-control request_detail_number", type: "number", min: "1" %>
   </td>
   <td>
      <a class="glyphicon glyphicon-remove padding-top-component"
