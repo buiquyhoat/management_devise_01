@@ -100,7 +100,7 @@ jp:
       save_change: "変更内容を保存"
       return_device: "デバイスを返す"
     button_close_text: "閉じる"
-    title_add_new: "新しいデバイスを追加する"
+    title_add_new: "新しいリクエスト"
     title_return: "返品デバイス"
     delete_action:
       success: "デバイスの削除を成功させる！"

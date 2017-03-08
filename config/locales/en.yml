@@ -219,7 +219,7 @@ en:
     save: "Save Changes"
     new: "Add New"
   request_manager:
-    title_add_new: "Add New Request"
+    title_add_new: "New Request"
     not_exist: "Request is not exists"
     search:
       relative_to: "Relative To"
@@ -367,3 +367,4 @@ en:
   language:
     english: "English"
     japan: "Japan"
+  notification_alert: "To_Date must be greater than From_Date !!!"
