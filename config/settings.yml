@@ -72,8 +72,8 @@ user_setting:
   quantity_load_notification: "quantity_load_notification"
   setting_type:
     default: "type=\"text\""
-    page_size: "onblur=\"minmax(this, 5, 30)\""
-    quantity_load_notification: "onblur=\"minmax(this, 5, 30)\""
+    page_size: "onchange=\"minmax(this, 5, 30)\""
+    quantity_load_notification: "onchange=\"minmax(this, 5, 30)\""
 paging:
   page_size: 15
   min_page_size: 5
@@ -102,6 +102,7 @@ languages:
   english: "en"
 allowedExtension:
   device: ["csv", "xls", "xlsx"]
+allowedFileSize: 10
 column_file:
   import_device:
     device_code: "device code"
