@@ -139,6 +139,19 @@ $(document).ajaxStop(function(){
 function changeSearchForm(){
   $('#form-submit').submit();
 };
+
+function changeSearchForm_noti(){
+
+  var from_date = $('#from_date').val();
+  var to_date = $('#to_date').val();
+  
+  if( from_date != "" && to_date != "" && from_date > to_date){
+    window.alert(I18n.t('notification_alert'));
+    return false;
+  }
+  $('#form-submit').submit();
+};
+
 function groupChange(url, source_dropdow_id, target_dropdow_id) {
   var source_id = $('#'+source_dropdow_id).val()
   $.ajax({

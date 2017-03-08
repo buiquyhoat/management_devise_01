@@ -207,6 +207,21 @@ ul.verticle_bars li {
   margin: 15px 10px 10px 0
 }
 
+@media (min-width: 768px) {
+  .modal-content {
+    margin: 0 9%;
+  }
+  a.glyphicon.glyphicon-pencil.dark {
+    margin-left: -10px;
+  }
+  .request-action {
+    min-width: 15%;
+  }
+  input#device_picture {
+    margin-left: 5%;
+  }
+}
+
 @media (min-width: 1200px) and (max-width: 1400px) {
   .w-37 {
     width: 55%;
