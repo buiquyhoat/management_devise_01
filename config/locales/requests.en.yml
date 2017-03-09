@@ -1,0 +1,7 @@
+en:
+  requests:
+    device_assignment:
+      id: "ID"
+      product_name: "Product Name"
+      device_code: "Device Code"
+      image: "Image"
