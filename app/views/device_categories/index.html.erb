@@ -1,12 +1,12 @@
 <div class="row">
   <%= search_form_for @search, id: "form-submit" do |f| %>
     <div class="row padding-left-1">
-      <div class="col-lg-2 text-right">
+      <div class="col-lg-3">
         <label class="form-control"><%= t "device_categories.field_label.key_search" %></label>
       </div>
       <div class="col-lg-4">
         <%= f.collection_select :device_group_id_eq, @support.device_group_categories, :id, :name,
-          {}, {class: "form-control", onChange: "changeSearchForm()"} %>
+          {include_blank: t(".all")}, {class: "form-control", onChange: "changeSearchForm()"} %>
       </div>
     </div>
   <% end %>
@@ -18,3 +18,4 @@
 </div>
 <br />
 <%= render "grid_device_categories" %>
+<%= paginate @list_categories %>

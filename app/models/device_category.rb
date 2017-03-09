@@ -7,12 +7,14 @@ class DeviceCategory < ApplicationRecord
 
   delegate :name, to: :device_group, prefix: true, allow_nil: true
 
-  validates :template_code, uniqueness: {case_sensitive: false}
-  validates :name, uniqueness: {case_sensitive: false}
+  validates :template_code, presence: true, uniqueness: {case_sensitive: false}
+  validates :name, presence: true, uniqueness: {case_sensitive: false}
 
   scope :of_group, ->group_id do
     where device_group_id: group_id if group_id.present?
   end
+
+  paginates_per Settings.device_categories_per_page
 
   def extend_dashboard_data
     self.device_total = devices.count

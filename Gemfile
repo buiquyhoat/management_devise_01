@@ -35,6 +35,7 @@ gem "devise"
 gem "faker", "1.4.2"
 gem "roo"
 gem "activerecord-import"
+gem "kaminari"
 
 group :development, :test do
   gem "byebug", platform: :mri

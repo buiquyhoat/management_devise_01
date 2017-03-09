@@ -7,10 +7,10 @@ class DeviceCategoriesController < ApplicationController
   def index
     @search = DeviceCategory.search(params[:q])
     @search.sorts = ["name"]
-    @list_categories = @search.result
-      .paginate page: params[:page], per_page: config_page_size
+    @list_categories_size = @search.result.size
+    @list_categories = @search.result.page params[:page]
   end
-
+  
   def new
     @device_category = DeviceCategory.new
     respond_to do |format|

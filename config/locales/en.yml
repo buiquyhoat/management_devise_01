@@ -341,6 +341,9 @@ en:
         template_code: "Device Template Code"
         group_type: "Group Type"
         template_code: "Template Code"
+    grid_device_categories:
+      find: "Found "
+      matched: " records matched"
   permission:
     not_permisison: "Don't have permission"
   request_status:
