@@ -336,6 +336,9 @@ jp:
         template_code: "デバイステンプレートコード"
         group_type: "グループタイプ"
         template_code: "テンプレートコード"
+    grid_device_categories:
+      find: "見つかった "
+      matched: " 一致するレコード"
   permission:
     not_permisison: "許可を得ていない"
   request_status:
@@ -356,3 +359,12 @@ jp:
   language:
     english: "英語"
     japan: "日本語"
+  activerecord:
+    errors:
+      models:
+        device_category:
+          attributes:
+            name:
+              blank: "空白にすることはできません"
+            template_code:
+              blank: "空白にすることはできません"

@@ -1,4 +1,7 @@
 <% if @list_categories.any? %>
+  <h5 class="list-category-size">
+    <%= t ".find" %><%= @list_categories_size %><%= t ".matched" %>
+  </h5>
   <table class="table table-hover" style="table-layout: fixed;">
     <thead>
       <tr>
@@ -22,5 +25,4 @@
       <% end %>
     </tbody>
   </table>
-  <%= will_paginate @list_categories %>
 <% end %>

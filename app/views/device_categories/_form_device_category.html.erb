@@ -8,11 +8,11 @@
   </div>
   <div class="input-field col s6">
     <%= f.label t "device_categories.table.header.name" %>
-    <%= f.text_field :name, class: "form-control" %>
+    <%= f.text_field :name, class: "form-control", required: true %>
   </div>
   <div class="input-field col s6">
     <%= f.label t "device_categories.table.header.template_code" %>
-    <%= f.text_field :template_code, class: "form-control" %>
+    <%= f.text_field :template_code, class: "form-control", required: true %>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal">
