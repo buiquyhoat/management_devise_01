@@ -1,4 +1,3 @@
-
 (function($,sr){
   // debouncing function from John Hann
   // http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
@@ -141,10 +140,9 @@ function changeSearchForm(){
 };
 
 function changeSearchForm_noti(){
-
   var from_date = $('#from_date').val();
   var to_date = $('#to_date').val();
-  
+
   if( from_date != "" && to_date != "" && from_date > to_date){
     window.alert(I18n.t('notification_alert'));
     return false;

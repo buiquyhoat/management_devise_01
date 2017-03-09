@@ -24,7 +24,7 @@
   </div>
   <% if @current_user.can_make_request %>
     <div class="row">
-      <%= link_to t("request_manager.title_add_new"),  requests_new_path,
+      <%= link_to t("request_manager.title_add_new"), requests_new_path,
         class: "btn btn-primary", remote: true, data: {toggle: "modal",
         target: "#dms-popup"} %>
     </div>

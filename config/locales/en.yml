@@ -1,4 +1,5 @@
 en:
+  created_at: "Created At"
   language_selected: "Language %{language}"
   select_language: "Select Language"
   time:
@@ -103,7 +104,7 @@ en:
     delete_action:
       success: "Delete Device Sucess!"
       fail: "Delete Device Failed!"
-    message_delete_confirm: "Do you want to delete %{device}"
+    message_delete_confirm: "Do you want to delete %{device}?"
     message_device_not_exist: "Device not found"
     field_label:
       device_status: "Device Status"

@@ -12,6 +12,10 @@
   text-align: center;
 }
 
+textarea {
+  resize: vertical;
+}
+
 td{
   max-width:1px;
   text-overflow:ellipses;

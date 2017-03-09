@@ -1,23 +1,23 @@
 <div class="row">
- <%= form_tag(request_row_index_path, id: "form-submit-action"+ request.id.to_s, method: :get, remote: true) do %>
+  <%= form_tag(request_row_index_path, id: "form-submit-action"+ request.id.to_s, method: :get, remote: true) do %>
     <%= hidden_field_tag "request_status_id", request.request_status_id %>
     <%= hidden_field_tag "id", request.id %>
     <div class="btn-group done_center" data-toggle="buttons"
       onchange="update_request(this,<%= request.id %>,
-        '<%= request_status_path(request) %>')">
+      '<%= request_status_path(request) %>')">
       <% if request.show_cancel_request? @current_user %>
-          <label class="btn btn-default">
-            <%= radio_button("post", "options #{request.id}",
-              Settings.request_status.cancelled) %>
-            <%= t "request.action.cancel" %>
-          </label>
+        <label class="btn btn-default">
+          <%= radio_button("post", "options #{request.id}",
+            Settings.request_status.cancelled) %>
+          <%= t "request.action.cancel" %>
+        </label>
       <% end %>
       <% if request.show_reupdate? @current_user %>
-          <label class="btn btn-default %>">
-            <%= radio_button("post", "options #{request.id}",
-              request.status_reupdate(current_user)) %>
-            <%= request.title_update current_user %>
-          </label>
+        <label class="btn btn-default %>">
+          <%= radio_button("post", "options #{request.id}",
+            request.status_reupdate(current_user)) %>
+          <%= request.title_update current_user %>
+        </label>
       <% end %>
       <% if request.show_revert_waiting? @current_user %>
         <label class="btn btn-default %>">
@@ -41,5 +41,5 @@
         </label>
       <% end %>
     </div>
-    <%end %>
+  <% end %>
 </div>

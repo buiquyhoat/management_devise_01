@@ -1,4 +1,5 @@
 jp:
+  created_at: "〜で作成された"
   datetime:
     distance_in_words:
       x_days: "%{count} 日々"
@@ -7,6 +8,7 @@ jp:
   time:
     formats:
       date_format: "%d-%m-%Y %H:%M:%S"
+      long: "%m-%d-%Y %H:%M"
   errors:
     messages:
       carrierwave_processing_error: "処理に失敗しました"

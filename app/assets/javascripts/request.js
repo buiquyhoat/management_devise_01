@@ -51,7 +51,7 @@ function remove_request_detail(button, table_name, parent_model, model){
       });
     }
     else{
-        return false;
+      return false;
     }
   }
   else

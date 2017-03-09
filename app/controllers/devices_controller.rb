@@ -27,6 +27,12 @@ class DevicesController < ApplicationController
     end
   end
 
+  def edit
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def create
     @device = Device.new device_params
     set_created_by @device
@@ -40,11 +46,6 @@ class DevicesController < ApplicationController
     end
   end
 
-  def edit
-    respond_to do |format|
-      format.js
-    end
-  end
 
   def update
     set_updated_by @device
@@ -58,7 +59,7 @@ class DevicesController < ApplicationController
   def destroy
     @device.destroy ? flash[:success] = t("device_manager.delete_action.success") :
       flash[:danger] = t("device_manager.delete_action.fail")
-    redirect_to devices_path
+    redirect_to devices_url
   end
 
   private
@@ -67,7 +68,7 @@ class DevicesController < ApplicationController
     @device = Device.find_by id: params[:id]
     unless @device
       flash[:danger] = t "device_manager.message_device_not_exist"
-      redirect_to devices_path
+      redirect_to devices_url
     end
     @support = Supports::User.new current_user
   end
@@ -102,7 +103,7 @@ class DevicesController < ApplicationController
   end
 
   def get_devices
-    @devices = Device.includes(:device_category)
+    @devices = Device.order(created_at: :desc).includes(:device_category)
       .includes(:device_status)
       .includes(:invoice)
       .of_category(params[:category_id])
