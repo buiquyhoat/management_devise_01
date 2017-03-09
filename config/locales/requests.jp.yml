@@ -1,0 +1,7 @@
+jp:
+  requests:
+    device_assignment:
+      id: "ID"
+      product_name: "商品名"
+      device_code: "デバイスコード"
+      image: "画像"
