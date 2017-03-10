@@ -1,21 +1,20 @@
 <% if @requests.any? %>
-  <table class="table table-hover">
+  <table class="table table-hover table-striped">
     <thead>
       <tr>
-        <th class= "truncate"><%= t "request.table.title" %></th>
-        <th class= "truncate"><%= t "request.table.description" %></th>
+        <th class="truncate"><%= t "request.table.title" %></th>
         <th><%= t "request.table.request_status" %></th>
         <th class="request-action"><%= t "request.table.request_action" %></th>
-        <th class= "truncate"><%= t "request.table.assignee" %></th>
-        <th class= "truncate"><%= t "request.table.for_user" %></th>
-        <th class= "truncate"><%= t "request.table.updated_by" %></th>
-        <th><%= t "request.table.time_ago" %></th>
+        <th class="truncate"><%= t "request.table.assignee" %></th>
+        <th class="truncate"><%= t "request.table.for_user" %></th>
+        <th class="truncate"><%= t "request.table.updated_by" %></th>
+        <th><%= t "created_at" %></th>
         <th></th>
       </tr>
     </thead>
     <tbody>
       <% @requests.each do |request| %>
-        <tr id="<%= request.id %>" class="<%= generate_tag_color request %>" >
+        <tr id="<%= request.id %>" data-toggle="tooltip" title="<%= request.description %>">
           <%= render partial: "request_row", locals: {request: request} %>
         </tr>
       <% end %>
