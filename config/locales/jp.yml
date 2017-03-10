@@ -354,7 +354,8 @@ jp:
     user: "ユーザーのインポート"
     file_not_found: "ファイルのインポートが見つかりません。"
     validate:
-      max_length: "このファイルは、許可されている最大ファイルサイズ（5 MB）を超えています"
+      choose_file: "アップロードするファイルを選択してください"
+      max_length: "このファイルは、許可されている最大ファイルサイズ（10 Megabytes）を超えています"
       file_type_Import_device: "拡張子が％{extension}の画像ファイルのみが許可されます"
   language:
     english: "英語"

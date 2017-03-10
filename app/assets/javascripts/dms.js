@@ -398,3 +398,9 @@ function validateFiles(inputFile, allowedExtension) {
     $(inputFile).val('');
   };
 }
+
+function validateChooseFile() {
+  if (document.getElementById("file").files.length === 0) {
+    window.alert(I18n.t("import.validate.choose_file"));
+  }
+}
