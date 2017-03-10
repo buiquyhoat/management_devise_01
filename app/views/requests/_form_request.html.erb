@@ -23,7 +23,7 @@
         <% end %>
       <% else %>
         <%= f.collection_select :for_user_id, @support.all_users, :id, :name,
-          {}, {class: "form-control",disabled: "disabled"} %>
+          {}, {class: "form-control", disabled: "disabled"} %>
       <% end %>
     </div>
     <% if @current_user.can_assign_to? %>

@@ -8,7 +8,7 @@
       </div>
       <div class="col-lg-10">
         <%= select_tag( :status_id, options_for_select(@device_status
-          .collect{|device_status|[device_status.name, device_status.id]},
+          .collect{|device_status| [device_status.name, device_status.id]},
           params[:status_id]), include_blank: Settings.all,
           class: "chosen-select", onChange: "changeSearchForm()") %>
       </div>
@@ -20,7 +20,7 @@
       </div>
       <div class="col-lg-10">
         <%= select_tag( :category_id, options_for_select(@device_categories
-          .collect{|device_category|[device_category.name, device_category.id]},
+          .collect{|device_category| [device_category.name, device_category.id]},
           params[:category_id]), include_blank: Settings.all,
           class: "chosen-select", onChange: "changeSearchForm()") %>
       </div>

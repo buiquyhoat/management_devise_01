@@ -10,7 +10,7 @@
     <%= render "layouts/shim" %>
   </head>
   <body class="nav-md">
-   <div class="container body">
+    <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col" >
           <%= render "layouts/left_menu" %>
@@ -18,26 +18,27 @@
         <%= render "layouts/header" %>
         <div class="right_col ">
           <% flash.each do |message_type, message| %>
-            <%= content_tag :div, message,
-              class: "alert alert-#{message_type}" %>
+            <%= content_tag :div, message, class: "alert alert-#{message_type}" %>
           <% end %>
           <%= yield %>
         </div>
       </div>
     </div>
-  </body>
-<div class="modal fade" id="dms-popup" tabindex="-1" role="dialog"
-  aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content ">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"
-          aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="header"></h4>
-      </div>
-      <div class="modal-body">
+
+    <div class="modal fade" id="dms-popup" tabindex="-1" role="dialog"
+      aria-labelledby="myModalLabel">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content ">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"
+              aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="header"></h4>
+          </div>
+          <div class="modal-body">
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+
+  </body>
 </html>

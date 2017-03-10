@@ -6,27 +6,20 @@
         <%= t "request_manager.search.relative_to" %>
       </div>
       <div class="col-lg-3 text-center">
-        <%= select_tag( :relative_id, options_for_select(@support.below_staffs
-          .collect{ |staff| [staff.name, staff.id]},
+        <%= select_tag(:relative_id, options_for_select(@support.below_staffs
+          .collect{|staff| [staff.name, staff.id]},
           params[:relative_id]), include_blank: Settings.all,
-          class: "form-control", onChange: "changeSearchForm()") %>
+          class: "form-control chosen-select", onChange: "changeSearchForm()") %>
       </div>
       <div class="col-lg-1 text-center">
         <%= t "request_manager.search.request_status" %>
       </div>
       <div class="col-lg-3 text-center">
-        <%= select_tag( :request_status_id, options_for_select(@support.request_statuses_search
-          .collect{ |request_status| [request_status.name, request_status.id]},
+        <%= select_tag(:request_status_id, options_for_select(@support.request_statuses_search
+          .collect{|request_status| [request_status.name, request_status.id]},
           params[:request_status_id]), include_blank: Settings.all,
-          class: "form-control", onChange: "changeSearchForm()") %>
+          class: "form-control request-status", onChange: "changeSearchForm()") %>
       </div>
     <% end %>
   </div>
-  <% if @current_user.can_make_request %>
-    <div class="row">
-      <%= link_to t("request_manager.title_add_new"), requests_new_path,
-        class: "btn btn-primary", remote: true, data: {toggle: "modal",
-        target: "#dms-popup"} %>
-    </div>
-  <% end %>
 </div>
