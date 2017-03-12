@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   put "update", to: :update, controller: "return_devices",
    collection: {update: :put}
   get "/dashboard_chart", to: "dashboard#request_chart"
+  get "to_xls/index"
 
   resources :users
   resources :devices

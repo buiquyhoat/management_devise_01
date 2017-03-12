@@ -373,3 +373,7 @@ en:
     english: "English"
     japan: "Japan"
   notification_alert: "To_Date must be greater than From_Date !!!"
+  export:
+    button_download: "Download Result"
+    file_name: "Device-"
+    extension: ".xls"
