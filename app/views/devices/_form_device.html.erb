@@ -8,14 +8,14 @@
         <div class="padding-left-3">
           <div class="row taC">
             <% if @device.picture? %>
-              <%= image_tag @device.picture.url, id: "logo-icon" %>
+              <%= image_tag @device.picture.url, id: "logo-icon", class: "image-preview" %>
             <% else %>
-              <%= image_tag "default_device.png", id: "logo-icon" %>
+              <%= image_tag "default_device.png", id: "logo-icon", class: "image-preview" %>
             <% end %>
           </div>
           <br/ >
           <div class="row input-field col s6">
-            <%=f.file_field :picture, class:"upload-image" %>
+            <%=f.file_field :picture, class:"upload-image file-image" %>
           </div>
         </div>
       </td>
