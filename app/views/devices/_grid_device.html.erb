@@ -29,7 +29,7 @@
                 class: "glyphicon glyphicon-pencil btn btn-warning",
                 data: {toggle: "modal", target: "#dms-popup", backdrop: "static"} %>
               <%= unless device.device_status_id == Settings.device_status.using
-                link_to "", device, method: :delete, remote: true,
+                link_to "", device, method: :delete,
                   data: {confirm: t("device_manager.message_delete_confirm",
                   device: device.production_name)},
                   class: "glyphicon glyphicon-remove btn btn-danger"
