@@ -2,6 +2,7 @@ class RequestsController < ApplicationController
   before_action :init_request, only: [:edit, :update, :show]
   before_action :init_support, expect: [:destroy, :show]
   before_action :logged_in_user, :init_extend_data
+
   def index
     load_request params[:manager_request]
     if params[:isAjax].present? or params[:page].present?
