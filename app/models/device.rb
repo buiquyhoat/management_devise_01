@@ -17,7 +17,7 @@ class Device < ApplicationRecord
 
   validates :device_code, presence: true, uniqueness: {case_sensitive: false}
   validates :production_name, presence: true 
-  validates :serial_number, presence: true, uniqueness: {case_sensitive: false}
+  validates :serial_number, presence: true
   validates :model_number, presence: true
 
   scope :find_assigne_device, ->(user_id){where "id in (select d.id from
@@ -35,6 +35,10 @@ class Device < ApplicationRecord
   end
 
   scope :can_assign, -> {where device_status_id: Settings.device_status.available}
+
+  scope :load_devices_with_empty_code, -> {
+    where printed_code: nil
+  }
 
   private
 
