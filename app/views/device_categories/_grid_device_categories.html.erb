@@ -1,6 +1,8 @@
 <% if @list_categories.any? %>
   <h5 class="list-category-size">
-    <%= t ".find" %><%= @list_categories_size %><%= t ".matched" %>
+    <%= t ".find" %>
+    <span class="size-result"><%= @list_categories_size %></span>
+    <%= t ".matched" %>
   </h5>
   <table class="table table-hover" style="table-layout: fixed;">
     <thead>

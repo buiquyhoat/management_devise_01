@@ -12,9 +12,11 @@
   <% end %>
   <br/>
   <div class="row margin-left-1">
-    <%= link_to t("device_categories.title_add_new"), new_device_category_path, class: "btn btn-primary",
-      remote: true, data:{toggle: "modal", target: "#dms-popup", backdrop: "static"} %>
-    <%= link_to t("export.button_download"), to_xls_index_path(params.merge(format: "xls").permit!), class: "btn btn-primary" %>
+    <%= link_to new_device_category_path, class: "btn btn-primary",
+      remote: true, data:{toggle: "modal", target: "#dms-popup", backdrop: "static"} do %>
+      <%= t "device_categories.title_add_new" %>
+    <% end %>
+    <%= link_to t("export.button_download"), exports_path(params.merge(format: :xlsx).permit!), class: "btn btn-primary" %>
   </div>
 </div>
 <br />

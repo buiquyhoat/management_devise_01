@@ -145,3 +145,6 @@ default_password: "framgia"
 user_setting_default: "{\"send_mail_notification\":true,\"order_by_unread_notification\":true,\"quantity_load_notification\":30,\"page_size\":15}"
 device_categories_per_page: 15
 time_format: "%Y%m%d%H%M%S"
+size_text: 12
+size_header: 26
+size_date_export: 15
