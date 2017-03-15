@@ -36,6 +36,7 @@ gem "faker", "1.4.2"
 gem "roo"
 gem "activerecord-import"
 gem "kaminari"
+gem "to_xls-rails"
 
 group :development, :test do
   gem "byebug", platform: :mri
