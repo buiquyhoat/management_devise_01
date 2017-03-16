@@ -363,9 +363,9 @@ jp:
     english: "英語"
     japan: "日本語"
   export:
-    button_download: "ダウンロード"
-    file_name: "Device-"
-    extension: ".xls"
+    button_download: "エクセルにエクスポートする"
+    file_name: "Device categories-"
+    extension: ".xlsx"
   activerecord:
     errors:
       models:

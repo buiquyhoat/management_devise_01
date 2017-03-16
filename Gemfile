@@ -7,7 +7,6 @@ end
 
 gem "bcrypt", "3.1.11"
 gem "rails", "~> 5.0.1"
-gem "mysql2", ">= 0.3.18", "< 0.5"
 gem "puma", "~> 3.0"
 gem "sass-rails", "~> 5.0"
 gem "uglifier", ">= 1.3.0"
@@ -36,13 +35,17 @@ gem "faker", "1.4.2"
 gem "roo"
 gem "activerecord-import"
 gem "kaminari"
-gem "to_xls-rails"
+gem "rubyzip", "~> 1.1.0"
+gem "axlsx", "2.1.0.pre"
+gem "axlsx_rails"
+gem "font-awesome-sass", "~> 4.7.0"
 
 group :development, :test do
   gem "byebug", platform: :mri
 end
 
 group :development do
+  gem "mysql2", ">= 0.3.18", "< 0.5"
   gem "web-console", ">= 3.3.0"
   gem "listen", "~> 3.0.5"
   gem "spring"

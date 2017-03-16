@@ -1,0 +1,37 @@
+wb = xlsx_package.workbook
+
+wb.styles do |style|
+  date_cell = style.add_style(format_code: "dd-mm-yyyy",
+    border: {style: :thin, color: "000000"}, sz: Settings.size_text, font_name: "Times New Roman",  alignment: {horizontal: :center})
+
+  text_cell = style.add_style(border: {style: :thin, color: "000000"},
+    sz: Settings.size_text, font_name: "Times New Roman", alignment: {horizontal: :left})
+
+  style_header = style.add_style(sz: Settings.size_header,
+    font_name: "Times New Roman", alignment: {horizontal: :center, vertical: :center})
+
+  style_date = style.add_style(sz: Settings.size_date_export,
+    font_name: "Times New Roman", alignment: {horizontal: :center})
+
+  style_title = style.add_style(border: {style: :thin, color: "000000"},
+    b: true, sz: Settings.size_text, font_name: "Times New Roman", bg_color: "004586", alignment: {horizontal: :center})
+
+  wb.add_worksheet(name: "Products") do |sheet|
+    sheet.add_row ["Device Category List", "", ""],
+      style: style_header
+    sheet.merge_cells("A1:D3")
+    sheet.add_row ["", "", ""]
+    sheet.add_row ["", "", ""]
+
+    sheet.add_row ["Export date: #{Time.now.strftime('%d-%m-%Y')}", "", ""], style: style_date
+    sheet.merge_cells("A4:D4")
+
+    sheet.add_row ["", "", ""]
+    sheet.add_row ["Name", "Template Code", "Group Device", "Created At"],
+      style: style_title
+    @export_result.each do |device_category|
+      sheet.add_row [device_category.name, device_category.template_code, device_category.device_group.name, device_category.created_at],
+        style: [text_cell, text_cell, text_cell, date_cell]
+    end
+  end
+end

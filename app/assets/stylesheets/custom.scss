@@ -269,8 +269,14 @@ ul.verticle_bars li {
   cursor: not-allowed;
 }
 h5.list-category-size {
-  background: pink;
   padding: 12px;
+  font-style: italic;
+  font-size: 14px;
+  color: #08298A;
+}
+span.size-result {
+  font-weight: bold;
+  font-style: initial;
 }
 ::-webkit-scrollbar {
   width: 12px;
