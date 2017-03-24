@@ -148,3 +148,4 @@ time_format: "%Y%m%d%H%M%S"
 size_text: 12
 size_header: 26
 size_date_export: 15
+batch_size: 100

@@ -101,6 +101,7 @@ en:
     button_close_text: "Close"
     title_add_new: "Add New Device"
     title_return: "Return Device"
+    title_update_code: "Update Printed Code"
     delete_action:
       success: "Delete Device Sucess!"
       fail: "Delete Device Failed!"
@@ -214,6 +215,7 @@ en:
     min_value: "Min value allow is %{value}"
     import_success: "Import Success"
     import_fail: "Import Failed!."
+    nothing_to_update: "Nothing to update"
   action:
     close: "Close"
     edit: "Update"

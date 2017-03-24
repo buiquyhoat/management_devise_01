@@ -104,6 +104,7 @@ jp:
     button_close_text: "閉じる"
     title_add_new: "新しいリクエスト"
     title_return: "返品デバイス"
+    title_update_code: "印刷されたコードを更新する"
     delete_action:
       success: "デバイスの削除を成功させる！"
       fail: "デバイスの削除に失敗しました！"
@@ -212,6 +213,7 @@ jp:
     min_value: "最小値の許容値は%{value}です。"
     import_success: "輸入成功"
     import_fail: "インポートに失敗しました！"
+    nothing_to_update: "更新するものはありません"
   action:
     close: "閉じる"
     edit: "更新"

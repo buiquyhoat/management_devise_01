@@ -42,8 +42,12 @@ Rails.application.routes.draw do
   resources :set_language
   resources :import
   resources :exports
+  resources :printed_codes do
+    patch :update, on: :collection
+  end
 
   put "create", to: :create, controller: "import",
     collection: {create: :put}
   mount ActionCable.server => "/cable"
+  resources :export
 end
