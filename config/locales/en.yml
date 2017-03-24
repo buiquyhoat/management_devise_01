@@ -128,6 +128,7 @@ en:
       using_by: "Using By: "
       history_tooltip: "Search History with %{name}"
       view_detail_device_tooltip: "View Detail %{name}"
+      bought_date: "Bought Date"
     table:
       header:
         production: "Production"
@@ -379,3 +380,9 @@ en:
     button_download: "Export Excel"
     file_name: "Device categories-"
     extension: ".xlsx"
+  devices:
+    form_device:
+      barcode: "Barcode"
+      qrcode: "Qrcode"
+      print_type: "Please choose type print code ?"
+      print: "Print"

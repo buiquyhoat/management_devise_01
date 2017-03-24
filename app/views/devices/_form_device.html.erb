@@ -19,8 +19,8 @@
           </div>
         </div>
       </td>
-      <td class="over-follow-visible">
-        <div class="input-field col s6">
+      <td class="over-follow-visible two-items">
+        <div class="input-field col s6 device-left">
           <%= f.label t "device_manager.field_label.device_status" %>
           <% if @device.device_status_id == Settings.device_status.using %>
             <%= hidden_field_tag :device_status_id, @device.device_status_id %>
@@ -30,24 +30,32 @@
               {class: "form-control"} %>
           <% end %>
         </div>
+        <div class="input-field col s6 device-right">
+          <%= f.label t "device_manager.field_label.bought_date" %>
+          <%= f.text_field :bought_date, data: {provide: "datepicker"}, class: "form-control" %>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="over-follow-visible">
-        <div class="input-field col s6">
+        <div class="input-field col s6 device-left">
           <%= f.label t "device_manager.field_label.device_category" %>
           <%= f.collection_select :device_category_id, @device_categories, :id, :name,
             {}, {class: "chosen-select form-control device-category",
             onchange: "getDeviceCode('" + device_code_show_path + "')"} %>
+        </div>
+        <div class="input-field col s6 invoice-number">
+          <%= f.label t "device_manager.field_label.invoice" %>
+          <%= f.collection_select :invoice_id, @device_invoices, :id, :invoice_number,
+            {}, class: "chosen-select form-control" %>
         </div>
       </td>
     </tr>
     <tr>
       <td class="over-follow-visible">
         <div class="input-field col s6">
-          <%= f.label t "device_manager.field_label.invoice" %>
-          <%= f.collection_select :invoice_id, @device_invoices, :id, :invoice_number,
-            {}, class: "chosen-select form-control" %>
+          <%= f.label :original_price %>
+          <%= f.number_field :original_price, class: "form-control original-price" %>
         </div>
       </td>
     </tr>
@@ -69,17 +77,41 @@
     </tr>
     <tr>
       <td colspan="2">
-        <div class="input-field col s6">
+        <div class="input-field col s6 device-left">
           <%= f.label :serial_number %>
           <%= f.text_field :serial_number, class: "form-control" %>
+        </div>
+        <div class="input-field col s6 model-number">
+          <%= f.label :model_number %>
+          <%= f.text_field :model_number, class: "form-control" %>
         </div>
       </td>
     </tr>
     <tr>
       <td colspan="2">
-        <div class="input-field col s6">
-          <%= f.label :model_number %>
-          <%= f.text_field :model_number, class: "form-control" %>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-12 radio_choose">
+                <p><%= t ".print_type" %></p>
+                <%= radio_button_tag "printed_code", "barcode", checked: true %><%= t ".barcode" %>
+                <%= radio_button_tag "printed_code", "qrcode", class: "radio-btn" %><%= t ".qrcode" %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="line-print">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row print-code">
+              <div class="col-md-9">
+                <%= f.text_field :printed_code, class: "form-control" %>
+              </div>
+              <div class="col-md-3">
+                <%= button_tag t(".print"), class: "btn-success btn-print" %>
+              </div>
+            </div>
+          </div>
         </div>
       </td>
     </tr>

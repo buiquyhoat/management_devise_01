@@ -301,3 +301,46 @@ span.size-result {
   text-align: center;
   text-align-last: center;
 }
+
+.input-field.col.s6.device-left {
+  width: 45%;
+  margin-bottom: -8%;
+}
+
+.input-field.col.s6.device-right {
+  width: 45%;
+  float: right;
+  transform: translateY(-33%);
+}
+
+.input-field.col.s6.invoice-number {
+  width: 45%;
+  float: right;
+  transform: translateY(-20%);
+}
+
+.input-field.col.s6.model-number {
+  width: 45%;
+  float: right;
+}
+
+.col-md-6.printed-code {
+  transform: translateX(-11%);
+}
+
+.col-md-6.radio_choose {
+  padding-top: 7%;
+}
+
+hr.line-print {
+  width: 46%;
+  margin-left: 0%;
+}
+
+input#printed_code_qrcode {
+  margin-left: 11%;
+}
+
+button.btn-success.btn-print {
+  padding: 5px 10px;
+}
