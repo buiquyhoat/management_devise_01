@@ -90,7 +90,8 @@ class DevicesController < ApplicationController
 
   def device_params
     params.require(:device).permit :device_code, :production_name, :model_number,
-      :device_status_id, :device_category_id, :invoice_id, :serial_number, :picture
+      :device_status_id, :device_category_id, :invoice_id, :serial_number, :picture,
+      :bought_date, :original_price
   end
 
   def set_created_by device

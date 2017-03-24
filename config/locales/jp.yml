@@ -131,6 +131,7 @@ jp:
       using_by: "〜によって使用: "
       history_tooltip: "%{name}による検索履歴"
       view_detail_device_tooltip: "詳細を表示％{名}"
+      bought_date: "購入日"
     table:
       header:
         production: "製造"
@@ -377,3 +378,9 @@ jp:
               blank: "空白にすることはできません"
             template_code:
               blank: "空白にすることはできません"
+  devices:
+    form_device:
+      barcode: "バーコード"
+      qrcode: "QRコード"
+      print_type: "タイプコードを選択してください。? "
+      print: "印刷する"
