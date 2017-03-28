@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170323073457) do
+ActiveRecord::Schema.define(version: 20170323073459) do
 
   create_table "assignment_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "device_id",     null: false
@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(version: 20170323073457) do
     t.float    "original_price",     limit: 24,   default: 0.0
     t.date     "bought_date",                     default: '2017-01-01'
     t.string   "printed_code"
+    t.boolean  "is_barcode",                      default: true
     t.index ["device_category_id"], name: "index_devices_on_device_category_id", using: :btree
     t.index ["device_status_id"], name: "index_devices_on_device_status_id", using: :btree
     t.index ["invoice_id"], name: "index_devices_on_invoice_id", using: :btree

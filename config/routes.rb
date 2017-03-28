@@ -46,6 +46,10 @@ Rails.application.routes.draw do
     patch :update, on: :collection
   end
 
+  namespace :api do
+    resources :devices, only: :index
+  end
+
   put "create", to: :create, controller: "import",
     collection: {create: :put}
   mount ActionCable.server => "/cable"

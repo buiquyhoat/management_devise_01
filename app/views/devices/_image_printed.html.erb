@@ -1,0 +1,8 @@
+<div class="row" id="image-printed-code">
+  <div class="col-md-8">
+    <%= image_tag "barcode_#{printed_code}.png", class: "img-responsive" %>
+  </div>
+  <div class="col-md-4">
+    <%= link_to t(".print"), "#", class: "btn btn-success btn-print" %>
+  </div>
+</div>

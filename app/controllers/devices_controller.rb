@@ -4,6 +4,7 @@ class DevicesController < ApplicationController
   before_action :init_dropdown_add_new, only: [:new, :edit]
   before_action :logged_in_user
   before_action :check_permision, except: :show
+  before_action :set_is_barcode, only: :create
 
   def index
     get_devices
@@ -91,7 +92,7 @@ class DevicesController < ApplicationController
   def device_params
     params.require(:device).permit :device_code, :production_name, :model_number,
       :device_status_id, :device_category_id, :invoice_id, :serial_number, :picture,
-      :bought_date, :original_price
+      :bought_date, :original_price, :printed_code, :is_barcode
   end
 
   def set_created_by device
@@ -115,6 +116,14 @@ class DevicesController < ApplicationController
   def check_permision
     unless current_user.can_manage_device
       redirect_to root_url
+    end
+  end
+
+  def set_is_barcode
+    if params[:printed_code] == "barcode"
+      params[:device][:is_barcode] = true
+    else
+      params[:device][:is_barcode] = false
     end
   end
 end

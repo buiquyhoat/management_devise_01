@@ -129,6 +129,9 @@ en:
       history_tooltip: "Search History with %{name}"
       view_detail_device_tooltip: "View Detail %{name}"
       bought_date: "Bought Date"
+      original_price: "Orginal Price"
+      printed_code: "Printed Code"
+      selected_type: "Selected Type"
     table:
       header:
         production: "Production"
@@ -385,4 +388,6 @@ en:
       barcode: "Barcode"
       qrcode: "Qrcode"
       print_type: "Please choose type print code ?"
+      generate: "Generate"
+    image_printed:
       print: "Print"

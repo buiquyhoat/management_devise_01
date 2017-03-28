@@ -149,3 +149,6 @@ size_text: 12
 size_header: 26
 size_date_export: 15
 batch_size: 100
+image: "barcode.png"
+year_default: "20170-01-01"
+price_default: 0.0

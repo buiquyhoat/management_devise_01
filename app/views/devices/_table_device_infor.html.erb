@@ -1,6 +1,6 @@
-<table id="table-show" class="table">
+<table id="table-show" class="table tbl-show">
   <tr>
-    <td class="width-30" rowspan="7">
+    <td class="width-30" rowspan="11">
       <div class="profile_pic">
         <% if @device.picture? %>
           <%= image_tag @device.picture.url, id: "logo-icon" %>
@@ -59,6 +59,60 @@
     </td>
     <td>
     <label class="form-control"> </label>
+    </td>
+  </tr>
+  <tr>
+    <td class="taR">
+      <%= t "device_manager.field_label.original_price" %>
+    </td>
+    <td>
+      <label class="form-control"><%= @device.original_price %></label>
+    </td>
+  </tr>
+  <tr>
+    <td class="taR">
+      <%= t "device_manager.field_label.bought_date" %>
+    </td>
+    <td>
+      <label class="form-control"><%= @device.bought_date %></label>
+    </td>
+  </tr>
+  <tr>
+    <td class="taR">
+      <%= t "device_manager.field_label.printed_code" %>
+    </td>
+    <td>
+      <label class="form-control"><%= @device.printed_code %></label>
+    </td>
+  </tr>
+  <tr>
+    <td class="taR">
+      <%= t "device_manager.field_label.selected_type" %>
+    </td>
+    <td>
+      <% if @device.is_barcode? %>
+        <div class="col-md-6">
+          <label class="form-control show-type-printed-code">
+            <%= radio_button_tag "printed_code_show", "barcode", checked: true %>
+              <%= t ".barcode" %>
+          </label>
+        </div>
+        <div class="col-md-6">
+          <%= image_tag "barcode_#{@device.printed_code}.png",
+            class: "img-responsive" %>
+        </div>
+      <% else %>
+        <div class="col-md-6">
+          <label class="form-control show-type-printed-code">
+            <%= radio_button_tag "printed_code_show", "qrcode",
+              class: "radio-btn", checked: true  %><%= t ".qrcode" %>
+          </label>
+        </div>
+        <div class="col-md-6">
+          <%= image_tag "barcode_#{@device.printed_code}.png",
+            class: "img-responsive" %>
+        </div>
+      <% end %>
     </td>
   </tr>
 </table>

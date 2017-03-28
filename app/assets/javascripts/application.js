@@ -27,3 +27,56 @@
 
 I18n.defaultLocale = I18n.default_locale ;
 I18n.locale = I18n.locale;
+
+$(document).ready(function() {
+  $('body').on('change', 'input[type=radio][name=printed_code]', function() {
+    var bought_date = "";
+
+    if($('#device_bought_date').val() == "2017-01-01"){
+      bought_date = $('#device_bought_date').val().split('-').join("");
+    }else{
+      bought_date = $('#device_bought_date').val().split('/').join("");
+    }
+
+    var orginal_price = parseInt($('#device_original_price').val());
+    var device_code = $('#device_device_code').val();
+
+    var printed_code = device_code + '|' + bought_date + '|' + orginal_price;
+    $('#tr-printed-code').show();
+    $('#device_printed_code').val(printed_code);
+  });
+
+  $('body').on('click', '.btn-generate', function() {
+    var printed_code = $('#device_printed_code').val();
+    load_printed_code(printed_code);
+  });
+
+  $('body').on('click', 'input[type=radio][name=printed_code_show]', function() {
+    return false;
+  });
+
+  function load_printed_code(printed_code){
+    if($('#image-printed-code') !== null) $('#image-printed-code').remove();
+
+    var type_printed_code = $('input[type=radio][name=printed_code]').val();
+    var url = '';
+
+    if(type_printed_code == 'barcode'){
+      url = '/api/devices/';
+    }else if (type_printed_code == 'qrcode'){
+      url = '/api/devices/';
+    }
+
+    $.ajax({
+      url: url,
+      data: {
+        printed_code: printed_code
+      },
+      method: "GET",
+      success: function(result){
+        $('#div-printed-code').css('display', 'block');
+        $('#div-printed-code').append(result);
+      }
+    });
+  }
+});

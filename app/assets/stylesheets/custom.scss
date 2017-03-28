@@ -344,3 +344,26 @@ input#printed_code_qrcode {
 button.btn-success.btn-print {
   padding: 5px 10px;
 }
+
+#tr-printed-code {
+  display: none;
+}
+
+#div-printed-code {
+  display: none;
+}
+
+label.form-control.show-type-printed-code {
+  position: relative;
+}
+
+.div-type {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(128, 128, 128, 0.22);
+}
+
+

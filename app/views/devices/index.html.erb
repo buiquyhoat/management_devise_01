@@ -45,10 +45,10 @@
 <% if current_user.can_manage_device %>
   <div class="row margin-left-0">
     <div class="btn-left pull-left">
-      <%= link_to t("device_manager.title_add_new"), new_device_path, class: "btn btn-primary",
-      remote: true, data:{toggle: "modal", target: "#dms-popup", backdrop: "static"} %>
-      <%= link_to t("device_manager.title_return"), return_devices_path, remote: true,
-       class: "btn btn-primary", data:{toggle: "modal", target: "#dms-popup", backdrop: "static"} %>
+      <%= link_to t("device_manager.title_add_new"), new_device_path, class: "btn btn-primary", remote: true, data: {toggle: "modal", target: "#dms-popup", backdrop: "static"} %>
+      <%= link_to t("device_manager.title_return"), return_devices_path,
+        remote: true,class: "btn btn-primary",
+        data: {toggle: "modal", target: "#dms-popup", backdrop: "static"} %>
     </div>
     <div class="btn-right text-right">
       <%= link_to t("device_manager.title_update_code"), printed_codes_path, method: :patch, class: "btn btn-primary" %>

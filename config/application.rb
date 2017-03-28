@@ -1,6 +1,13 @@
 require_relative "boot"
 
 require "rails/all"
+require "barby"
+require "chunky_png"
+require "barby/barcode/ean_13"
+require "barby/barcode/code_128"
+require "barby/outputter/ascii_outputter"
+require "barby/outputter/html_outputter"
+require "barby/outputter/png_outputter"
 
 Bundler.require(*Rails.groups)
 

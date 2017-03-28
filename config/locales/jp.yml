@@ -132,6 +132,9 @@ jp:
       history_tooltip: "%{name}による検索履歴"
       view_detail_device_tooltip: "詳細を表示％{名}"
       bought_date: "購入日"
+      original_price: "元値"
+      printed_code: "印刷されたコード"
+      selected_type: "選択されたタイプ"
     table:
       header:
         production: "製造"
@@ -383,4 +386,6 @@ jp:
       barcode: "バーコード"
       qrcode: "QRコード"
       print_type: "タイプコードを選択してください。? "
+      generate: "生成する"
+    image_printed:
       print: "印刷する"
